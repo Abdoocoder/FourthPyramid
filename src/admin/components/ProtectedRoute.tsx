@@ -15,7 +15,13 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
   if (!isSignedIn) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-container-low p-4">
-        <SignIn routing="hash" signUpUrl="/admin/sign-up" />
+        <SignIn
+          routing="path"
+          path="/admin"
+          signUpUrl="/admin/sign-up"
+          afterSignInUrl="/admin"
+          afterSignUpUrl="/admin"
+        />
       </div>
     );
   }
