@@ -6,7 +6,7 @@ export function localized<T extends Record<string, unknown>>(
 ): string {
   const isAr = i18n.language.startsWith("ar");
   const arKey = `${fieldEn}_ar`;
-  if (isAr && typeof item[arKey] === "string") {
+  if (isAr && typeof item[arKey] === "string" && (item[arKey] as string).length > 0) {
     return item[arKey] as string;
   }
   return (item[fieldEn] as string) ?? "";
