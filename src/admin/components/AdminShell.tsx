@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { ClerkProvider } from "@clerk/clerk-react";
+import { ClerkProvider, useAuth } from "@clerk/clerk-react";
+import { ConvexProviderWithClerk } from "convex/react-clerk";
+import { ConvexReactClient } from "convex/react";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AdminLayout } from "./AdminLayout";
 
@@ -12,6 +14,12 @@ const AdminQuotesPage = lazy(() => import("../pages/AdminQuotesPage").then((m) =
 const AdminImagesPage = lazy(() => import("../pages/AdminImagesPage").then((m) => ({ default: m.AdminImagesPage })));
 
 const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const convexUrl = import.meta.env.VITE_CONVEX_URL;
+
+if (!clerkKey) throw new Error("VITE_CLERK_PUBLISHABLE_KEY is not set — admin panel cannot load.");
+if (!convexUrl) throw new Error("VITE_CONVEX_URL is not set — admin panel cannot load.");
+
+const adminConvexClient = new ConvexReactClient(convexUrl);
 
 function AdminRoutes() {
   return (
@@ -29,20 +37,22 @@ function AdminRoutes() {
   );
 }
 
+function AuthenticatedAdmin() {
+  return (
+    <ConvexProviderWithClerk client={adminConvexClient} useAuth={useAuth}>
+      <ProtectedRoute>
+        <AdminLayout>
+          <AdminRoutes />
+        </AdminLayout>
+      </ProtectedRoute>
+    </ConvexProviderWithClerk>
+  );
+}
+
 export default function AdminShell() {
-  const content = (
-    <AdminLayout>
-      <AdminRoutes />
-    </AdminLayout>
-  );
-
-  const wrapped = clerkKey ? (
+  return (
     <ClerkProvider publishableKey={clerkKey}>
-      <ProtectedRoute>{content}</ProtectedRoute>
+      <AuthenticatedAdmin />
     </ClerkProvider>
-  ) : (
-    <ProtectedRoute>{content}</ProtectedRoute>
   );
-
-  return wrapped;
 }

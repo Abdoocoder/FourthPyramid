@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
+import { requireAdmin } from "./lib/requireAdmin";
 
 export const list = query({
   args: { status: v.optional(v.union(v.literal("pending"), v.literal("contacted"), v.literal("closed"))) },
@@ -39,6 +40,7 @@ export const updateStatus = mutation({
     status: v.union(v.literal("pending"), v.literal("contacted"), v.literal("closed")),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.patch(args.id, { status: args.status });
   },
 });

@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
+import { requireAdmin } from "./lib/requireAdmin";
 
 const contentBlockSchema = v.object({
   type: v.string(),
@@ -34,6 +35,7 @@ export const upsert = mutation({
     blocks_ar: v.optional(v.array(contentBlockSchema)),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     const { id, ...data } = args;
     const payload = { ...data, updatedAt: Date.now() };
     if (id) {
@@ -47,6 +49,7 @@ export const upsert = mutation({
 export const remove = mutation({
   args: { id: v.id("pages") },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     await ctx.db.delete(args.id);
   },
 });

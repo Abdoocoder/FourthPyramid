@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
+import { requireAdmin } from "./lib/requireAdmin";
 
 export const getByClerkId = query({
   args: { clerkId: v.string() },
@@ -19,6 +20,7 @@ export const create = mutation({
     role: v.union(v.literal("admin"), v.literal("superadmin")),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     return await ctx.db.insert("admins", args);
   },
 });
@@ -26,6 +28,8 @@ export const create = mutation({
 export const list = query({
   args: {},
   handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Unauthenticated");
     return await ctx.db.query("admins").collect();
   },
 });
