@@ -105,8 +105,13 @@ Convex production URL and Clerk publishable key are set as Vercel environment va
 
 ## Design System
 
-- **Primary**: `#004ccd` (blue)
-- **Tertiary / CTA**: `#c84000` (orange)
+- **Primary / Logo Dark Blue**: `#2F5FA7` — buttons, headings, hero
+- **Secondary / Logo Light Blue**: `#5A8EDB` — links, secondary buttons
+- **Tertiary / CTA**: `#c84000` (orange) — call-to-action accents
+- **Surface**: `#FFFFFF` — clean white background
+- **Text**: `#1E1E1E` — body and headings
+- **Muted**: `#7A7A7A` — secondary text, borders, outlines
+- **Utility tokens**: `pyramid-blue-dark`, `pyramid-blue-light`, `pyramid-gray`
 - **Fonts**: Inter (headlines), IBM Plex Sans (body), IBM Plex Mono (data)
 - **Easing**: Custom cubic-bezier curves (expo-out, strong-out)
 - **Dark mode**: Inverted MD3 palette via `prefers-color-scheme: dark`
