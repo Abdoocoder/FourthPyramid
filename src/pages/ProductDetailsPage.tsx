@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,6 +18,7 @@ import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
+import { useScrollReveal } from "../lib/animations";
 
 function ProductImage({ src, alt, className }: { src: string | undefined; alt: string; className?: string }) {
   if (!src) {
@@ -39,6 +41,8 @@ export function ProductDetailsPage() {
   const { t } = useTranslation();
   const { slug } = useParams();
   const product = useQuery(api.products.getBySlug, { slug: slug ?? "" });
+  const contentRef = useRef<HTMLDivElement>(null);
+  useScrollReveal(contentRef, ".pd-reveal", 0.1);
 
   if (product === undefined) {
     return (
@@ -84,8 +88,8 @@ export function ProductDetailsPage() {
   }));
 
   return (
-    <div className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
-      <div className="md:col-span-12 flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6 flex-wrap">
+    <div ref={contentRef} className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+      <div className="pd-reveal md:col-span-12 flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6 flex-wrap">
         <Link to="/products" className="hover:text-primary transition-colors">{t("nav.products")}</Link>
         <span className="text-outline-variant">/</span>
         <Link to={`/products?category=${product.categorySlug}`} className="hover:text-primary transition-colors">
@@ -95,7 +99,7 @@ export function ProductDetailsPage() {
         <span className="text-on-surface font-semibold">{localized(product, "name")}</span>
       </div>
 
-      <div className="md:col-span-7 flex flex-col gap-4">
+      <div className="pd-reveal md:col-span-7 flex flex-col gap-4">
         <div className="bg-surface-container-lowest border border-outline-variant rounded-xl relative overflow-hidden">
           <ProductImage
             src={cldTransform(product.images?.[0], "w_800,q_auto,f_auto")}
@@ -121,7 +125,7 @@ export function ProductDetailsPage() {
         </div>
       </div>
 
-      <div className="md:col-span-5 flex flex-col gap-8">
+      <div className="pd-reveal md:col-span-5 flex flex-col gap-8">
         <div className="flex flex-col gap-4 border-b border-outline-variant pb-6">
           <div className="flex gap-2">
             <Badge variant="primary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
@@ -160,7 +164,7 @@ export function ProductDetailsPage() {
         </div>
       </div>
 
-      <div className="md:col-span-12 mt-section-gap">
+      <div className="pd-reveal md:col-span-12 mt-section-gap">
         <h2 className="font-headline-md text-headline-md text-on-background mb-8 border-b border-outline-variant pb-4">
           {t("productDetails.technicalSpecs")}
         </h2>

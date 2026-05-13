@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { CheckCircle, FlaskConical, Gauge, Wind, Settings } from "lucide-react";
 import { Button } from "../components/ui/Button";
+import { useScrollReveal } from "../lib/animations";
 
 const metricsData = [
   { value: "1998", key: "established" },
@@ -34,25 +36,34 @@ const qualityPoints = [
 
 export function AboutPage() {
   const { t } = useTranslation();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const metricsRef = useRef<HTMLDivElement>(null);
+  const capabilitiesRef = useRef<HTMLDivElement>(null);
+  const qualityRef = useRef<HTMLDivElement>(null);
+
+  useScrollReveal(heroRef, ".reveal", 0.15);
+  useScrollReveal(metricsRef, ".metric-box", 0.12);
+  useScrollReveal(capabilitiesRef, ".cap-box", 0.14);
+  useScrollReveal(qualityRef, ".reveal", 0.14);
 
   return (
     <>
       <section className="relative min-h-[450px] flex items-center border-b border-outline-variant">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80&auto=format')] bg-cover bg-center opacity-15" />
         <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="max-w-2xl bg-surface/90 backdrop-blur-sm p-8 border border-outline-variant rounded-xl">
-            <span className="font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.heroEyebrow")}</span>
-            <h1 className="font-display-lg text-[clamp(2rem,5vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
+          <div ref={heroRef} className="max-w-2xl bg-surface/90 backdrop-blur-sm p-8 border border-outline-variant rounded-xl">
+            <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.heroEyebrow")}</span>
+            <h1 className="reveal font-display-lg text-[clamp(2rem,5vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
               {t("about.heroTitle")}
             </h1>
-            <p className="font-body-lg text-body-lg text-on-surface-variant">
+            <p className="reveal font-body-lg text-body-lg text-on-surface-variant">
               {t("about.heroDesc")}
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter">
+      <section ref={metricsRef} className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter">
         <div className="md:col-span-4">
           <h2 className="font-headline-md text-headline-md text-on-surface sticky top-32">{t("about.introTitle")}</h2>
         </div>
@@ -62,7 +73,7 @@ export function AboutPage() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
             {metricsData.map((m) => (
-              <div key={m.key} className="p-6 border border-outline-variant rounded-xl bg-surface">
+              <div key={m.key} className="metric-box p-6 border border-outline-variant rounded-xl bg-surface">
                 <span className="font-display-lg text-3xl text-primary block mb-2">{m.value}</span>
                 <span className="font-data-mono text-data-mono text-on-surface-variant uppercase">{t(`about.${m.key}`)}</span>
               </div>
@@ -71,7 +82,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="py-section-gap bg-surface-container-low border-y border-outline-variant">
+      <section ref={capabilitiesRef} className="py-section-gap bg-surface-container-low border-y border-outline-variant">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="mb-12">
             <span className="font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.capabilitiesEyebrow")}</span>
@@ -79,7 +90,7 @@ export function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
             {capabilitiesData.map((cap) => (
-              <div key={cap.titleKey} className={`${cap.span} border border-outline-variant rounded-xl bg-surface p-8 flex flex-col justify-between group hover:shadow-card-hover transition-shadow duration-300`}>
+              <div key={cap.titleKey} className={`cap-box ${cap.span} border border-outline-variant rounded-xl bg-surface p-8 flex flex-col justify-between group hover:shadow-card-hover transition-shadow duration-300`}>
                 <div>
                   <div className="mb-4">{cap.icon}</div>
                   <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t(`about.${cap.titleKey}`)}</h3>
@@ -96,15 +107,15 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
-        <div className="h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest">
+      <section ref={qualityRef} className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+        <div className="reveal h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest">
           <img
           className="w-full h-full object-cover mix-blend-multiply opacity-70"
           src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80&auto=format"
             alt="Quality control laboratory"
           />
         </div>
-        <div className="space-y-6 md:pl-8">
+        <div className="reveal space-y-6 md:pl-8">
           <span className="font-data-mono text-data-mono text-tertiary uppercase tracking-widest block">{t("about.qualityEyebrow")}</span>
           <h2 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface leading-[1.1]">{t("about.qualityTitle")}</h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant">

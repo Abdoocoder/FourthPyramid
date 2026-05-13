@@ -8,6 +8,7 @@ import { api } from "@convex/_generated/api";
 import { localized } from "../lib/localized";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useScrollReveal } from "../lib/animations";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,22 +31,6 @@ const partners = [
   "PET Certified", "Food Grade", "UV Stabilized", "Recycling Partner",
 ];
 
-function useEntryAnimation(ref: React.RefObject<HTMLDivElement | null>, selector: string, stagger = 0.15) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const targets = el.querySelectorAll(selector);
-    if (!targets.length) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(targets, { opacity: 0, y: 50 }, {
-        opacity: 1, y: 0, duration: 0.8, stagger, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 85%" },
-      });
-    }, el);
-    return () => ctx.revert();
-  }, [ref, selector, stagger]);
-}
-
 function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
   useEffect(() => {
     const el = ref.current;
@@ -65,14 +50,29 @@ export function HomePage() {
   const { t } = useTranslation();
   const cats = useQuery(api.categories.list);
 
+  const heroContentRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<HTMLDivElement>(null);
   const capabilitiesRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  useEntryAnimation(metricsRef, ".metric-card", 0.15);
-  useEntryAnimation(capabilitiesRef, ".cap-card", 0.1);
-  useEntryAnimation(ctaRef, ".cta-item", 0.2);
+  useEffect(() => {
+    const el = heroContentRef.current;
+    if (!el) return;
+    const items = [el.querySelector("h1"), el.querySelector("p"), el.querySelector(".hero-cta")];
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        items.filter(Boolean),
+        { opacity: 0, y: 52 },
+        { opacity: 1, y: 0, duration: 0.9, stagger: 0.18, ease: "power3.out", delay: 0.15 }
+      );
+    }, el);
+    return () => ctx.revert();
+  }, []);
+
+  useScrollReveal(metricsRef, ".metric-card", 0.15);
+  useScrollReveal(capabilitiesRef, ".cap-card", 0.1);
+  useScrollReveal(ctaRef, ".cta-item", 0.2);
   useMarquee(marqueeRef);
 
   return (
@@ -87,7 +87,7 @@ export function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-on-background/60 via-on-background/40 to-on-background" />
         </div>
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-24 md:py-0 text-center">
+        <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-24 md:py-0 text-center">
           <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6 max-w-5xl mx-auto">
             {t("home.heroTitle") + " "}
             <span
@@ -100,7 +100,7 @@ export function HomePage() {
           <p className="font-body-lg text-body-lg text-inverse-on-surface/70 max-w-2xl mx-auto mb-12 leading-relaxed">
             {t("home.heroDesc")}
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="px-10 py-4">
               {t("home.requestQuote")} <ArrowRight className="w-4 h-4" />
             </Button>
