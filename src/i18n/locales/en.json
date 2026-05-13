@@ -235,7 +235,8 @@
     "contentBlocks": "Content Blocks",
     "addBlock": "Add Block",
     "savePage": "Save Page",
-    "selectPageHint": "Select a page from the sidebar to edit its content"
+    "selectPageHint": "Select a page from the sidebar to edit its content",
+    "saveError": "Failed to save. Please try again."
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

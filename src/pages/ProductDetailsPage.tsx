@@ -121,7 +121,7 @@ export function ProductDetailsPage() {
             <FileText className="w-4 h-4" />
             {t("productDetails.requestBulkQuote")}
           </Button>
-          <Button variant="secondary" size="md" className="w-full justify-center">
+          <Button variant="secondary" size="md" className="w-full justify-center" disabled aria-disabled="true">
             <Download className="w-4 h-4" />
             {t("productDetails.downloadSpecSheet")}
           </Button>

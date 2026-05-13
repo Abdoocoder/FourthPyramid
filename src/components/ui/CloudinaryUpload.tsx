@@ -67,6 +67,7 @@ export function CloudinaryUpload({ onUpload, disabled }: CloudinaryUploadProps) 
       type="button"
       onClick={openWidget}
       disabled={disabled}
+      aria-label="Upload image"
       className="w-28 h-28 rounded-lg border-2 border-dashed border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors disabled:opacity-50"
     >
       {disabled ? <Loader className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}

@@ -28,6 +28,7 @@ export function AdminProductFormPage() {
   const updateProduct = useMutation(api.products.update);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -152,8 +153,8 @@ export function AdminProductFormPage() {
         await createProduct(payload);
       }
       navigate("/admin/products");
-    } catch (err) {
-      console.error("Save failed", err);
+    } catch {
+      setError(t("admin.saveError"));
     } finally {
       setSaving(false);
     }
@@ -246,6 +247,11 @@ export function AdminProductFormPage() {
           </div>
         </section>
 
+        {error && (
+          <div className="bg-error-container text-on-error-container px-6 py-3 rounded-lg font-body-sm text-body-sm">
+            {error}
+          </div>
+        )}
         <div className="flex items-center gap-4 pt-4 border-t border-outline-variant">
           <Button type="submit" disabled={saving}>
             {saving ? <Loader className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
