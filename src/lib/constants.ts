@@ -1,0 +1,156 @@
+export const siteConfig = {
+  name: "Fourth Pyramid",
+  tagline: "Fourth Pyramid Plastic Industries",
+  description: "High-quality plastic containers, bottles, and custom molds for industrial and commercial sectors.",
+  email: "info@fourthpyramid.com",
+  phone: "+962 6 000 0000",
+  whatsapp: "+962 6 000 0000",
+  address: "Amman, Jordan",
+  copyright: `© ${new Date().getFullYear()} Fourth Pyramid Plastic Industries. All rights reserved.`,
+};
+
+export const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  { label: "Industries", href: "/industries" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+export const products = [
+  {
+    id: "1",
+    name: "5L Chemical Jerrycan",
+    slug: "5l-chemical-jerrycan",
+    description: "Engineered for high-performance chemical storage and transport. Manufactured from premium HDPE offering superior impact resistance and chemical compatibility.",
+    images: [
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&q=80&auto=format",
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&q=80&auto=format",
+    ],
+    category: "Industrial Containers",
+    categorySlug: "industrial-containers",
+    specs: {
+      capacity: "5000 ml (5 Liter)",
+      material: "High-Density Polyethylene (HDPE)",
+      dimensions: "190 x 140 x 285 mm",
+      weight: "250g ± 10g",
+      closureType: "DIN 45 Tamper-Evident Screw Cap",
+      unCertification: "3H1/Y1.9/150",
+      colorsAvailable: "White, Blue, Custom",
+      palletQuantity: "120 Units / Pallet",
+    },
+    useCases: ["Agrochemicals", "Industrial Detergents", "Lubricants"],
+    certifications: ["Industrial Grade", "UN Certified"],
+    featured: true,
+  },
+  {
+    id: "2",
+    name: "1L Beverage Bottle",
+    slug: "1l-beverage-bottle",
+    description: "Lightweight PET bottle optimized for beverage packaging. Crystal clear material with consistent wall thickness for reliable performance.",
+    images: [
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&q=80&auto=format",
+    ],
+    category: "Commercial Bottles",
+    categorySlug: "commercial-bottles",
+    specs: {
+      capacity: "1000 ml (1 Liter)",
+      material: "PET",
+      dimensions: "85 x 85 x 240 mm",
+      weight: "35g ± 2g",
+      closureType: "28mm PCO 1881 Screw Cap",
+      unCertification: "N/A",
+      colorsAvailable: "Clear, Custom",
+      palletQuantity: "500 Units / Pallet",
+    },
+    useCases: ["Beverages", "Water", "Juices"],
+    certifications: ["Food Grade"],
+    featured: true,
+  },
+  {
+    id: "3",
+    name: "20L Storage Container",
+    slug: "20l-storage-container",
+    description: "Heavy-duty HDPE storage container designed for bulk liquid storage and transport. Features reinforced ribbed walls for stacking strength.",
+    images: [
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&q=80&auto=format",
+    ],
+    category: "Industrial Containers",
+    categorySlug: "industrial-containers",
+    specs: {
+      capacity: "20000 ml (20 Liter)",
+      material: "High-Density Polyethylene (HDPE)",
+      dimensions: "290 x 240 x 380 mm",
+      weight: "850g ± 20g",
+      closureType: "70mm Wide Mouth Cap",
+      unCertification: "N/A",
+      colorsAvailable: "Blue, White, Custom",
+      palletQuantity: "48 Units / Pallet",
+    },
+    useCases: ["Bulk Storage", "Water Storage", "Industrial Fluids"],
+    certifications: ["Heavy Duty"],
+    featured: true,
+  },
+  {
+    id: "4",
+    name: "500ml Boston Round Bottle",
+    slug: "500ml-boston-round-bottle",
+    description: "Classic Boston round design in durable HDPE. Ideal for laboratory chemicals, cosmetics, and specialty liquids.",
+    images: [
+      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&q=80&auto=format",
+    ],
+    category: "Commercial Bottles",
+    categorySlug: "commercial-bottles",
+    specs: {
+      capacity: "500 ml",
+      material: "HDPE",
+      dimensions: "65 x 65 x 180 mm",
+      weight: "25g ± 2g",
+      closureType: "24mm Cap",
+      unCertification: "N/A",
+      colorsAvailable: "White, Natural, Custom",
+      palletQuantity: "800 Units / Pallet",
+    },
+    useCases: ["Laboratory Chemicals", "Cosmetics", "Essential Oils"],
+    certifications: ["Food Grade"],
+    featured: false,
+  },
+];
+
+export const categories = [
+  { name: "Commercial Bottles", slug: "commercial-bottles", description: "PET and HDPE bottles for beverages, cosmetics, and household products.", icon: "bottle" },
+  { name: "Industrial Containers", slug: "industrial-containers", description: "Heavy-duty storage solutions designed for stacking and logistics.", icon: "container" },
+  { name: "Chemical Containers", slug: "chemical-containers", description: "UN-approved, chemically resistant packaging for hazardous materials.", icon: "chemical" },
+  { name: "Jerrycans", slug: "jerrycans", description: "Durable, high-capacity liquid transport containers with secure closures.", icon: "jerrycan" },
+];
+
+export const industries = [
+  {
+    title: "Detergents & Cleaners",
+    eyebrow: "Chemical Resistance",
+    description: "Our HDPE and PET packaging solutions are specifically engineered to withstand aggressive chemical compounds while preventing leaching. We prioritize structural integrity and leak-proof closures for consumer safety and brand reliability.",
+    image: "https://images.unsplash.com/photo-1581092335871-4c2c5d0a1b3e?w=600&q=80&auto=format",
+    imageFirst: false,
+  },
+  {
+    title: "Industrial Chemicals",
+    eyebrow: "UN Certified",
+    description: "Heavy-duty transport and storage require uncompromising strength. We manufacture UN-certified jerrycans, drums, and IBC components designed for extreme environments, ensuring secure transit for hazardous materials.",
+    image: "https://images.unsplash.com/photo-1581092335871-4c2c5d0a1b3e?w=600&q=80&auto=format",
+    imageFirst: true,
+  },
+  {
+    title: "Food & Beverage",
+    eyebrow: "FDA Approved",
+    description: "Maintaining freshness and extending shelf-life requires precision barriers. Our food-grade packaging utilizes advanced multi-layer technologies to protect against oxygen and moisture ingress while maintaining strict hygiene standards.",
+    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&q=80&auto=format",
+    imageFirst: false,
+  },
+  {
+    title: "Agriculture",
+    eyebrow: "UV Stabilized",
+    description: "Built to endure harsh UV exposure and extreme weather. From heavy-duty crates to irrigation components, our agricultural plastics are formulated for longevity, providing reliable performance season after season.",
+    image: "https://images.unsplash.com/photo-1581092335871-4c2c5d0a1b3e?w=600&q=80&auto=format",
+    imageFirst: true,
+  },
+];

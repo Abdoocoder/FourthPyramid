@@ -1,0 +1,121 @@
+import { useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { Globe, CheckCircle, ArrowRight } from "lucide-react";
+import { Button } from "../components/ui/Button";
+import { Input, Textarea, Select } from "../components/ui/Input";
+import { useMutation } from "convex/react";
+import { api } from "@convex/_generated/api";
+
+export function RequestQuotePage() {
+  const { t } = useTranslation();
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const createQuote = useMutation(api.quotes.create);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const form = e.currentTarget as HTMLFormElement;
+    const data = new FormData(form);
+    try {
+      await createQuote({
+        companyName: data.get("companyName") as string,
+        contactName: data.get("contactName") as string,
+        email: data.get("email") as string,
+        phone: data.get("phone") as string,
+        productType: data.get("productType") as string,
+        quantity: data.get("quantity") as string || "",
+        message: data.get("message") as string || "",
+      });
+      setSubmitted(true);
+    } catch {
+      setError(t("quote.error"));
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-section-gap">
+        <div className="max-w-xl mx-auto text-center">
+          <div className="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-8 h-8" />
+          </div>
+          <h1 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface mb-4 leading-[1.1]">
+            {t("quote.submittedTitle")}
+          </h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
+            {t("quote.submittedDesc")}
+          </p>
+          <Button as="a" href="/" variant="primary">
+            {t("quote.returnHome")}
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+        <div className="md:col-span-5 md:sticky md:top-32 pr-0 md:pr-8 mb-12 md:mb-0">
+          <h1 className="font-display-lg text-[clamp(1.6rem,4vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
+            {t("quote.pageTitle")}
+          </h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant mb-10">
+            {t("quote.pageDesc")}
+          </p>
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 bg-surface-container p-4 rounded-xl border border-outline-variant/50">
+              <Globe className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("quote.globalExportTitle")}</p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant">{t("quote.globalExportDesc")}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-surface-container p-4 rounded-xl border border-outline-variant/50">
+              <CheckCircle className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("quote.leaderTitle")}</p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant">{t("quote.leaderDesc")}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="md:col-span-7 bg-surface p-6 md:p-10 rounded-xl border border-outline-variant shadow-sm">
+          {error && (
+            <div className="mb-4 p-3 rounded-lg bg-error-container text-on-error-container text-sm font-body-sm">
+              {error}
+            </div>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Input label={t("quote.companyName")} id="companyName" placeholder={t("quote.companyNamePlaceholder")} required />
+              <Input label={t("quote.contactName")} id="contactName" placeholder={t("quote.contactNamePlaceholder")} required />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Input label={t("quote.businessEmail")} id="email" type="email" placeholder={t("quote.businessEmailPlaceholder")} required />
+              <Input label={t("quote.phoneNumber")} id="phone" type="tel" placeholder={t("quote.phoneNumberPlaceholder")} required />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Select label={t("quote.productType")} id="productType" required>
+                <option disabled selected value="">{t("quote.productTypePlaceholder")}</option>
+                <option value="injection">{t("quote.productOptionInjection")}</option>
+                <option value="blow">{t("quote.productOptionBlow")}</option>
+                <option value="extrusion">{t("quote.productOptionExtrusion")}</option>
+                <option value="custom">{t("quote.productOptionCustom")}</option>
+              </Select>
+              <Input label={t("quote.estimatedQuantity")} id="quantity" placeholder={t("quote.estimatedQuantityPlaceholder")} />
+            </div>
+            <Textarea label={t("quote.projectDetails")} id="message" placeholder={t("quote.projectDetailsPlaceholder")} />
+            <div className="pt-4 border-t border-outline-variant">
+              <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center">
+                {t("quote.submitButton")} <ArrowRight className="w-4 h-4" />
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}

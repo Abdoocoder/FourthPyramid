@@ -1,0 +1,135 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Search, ShoppingCart } from "lucide-react";
+import { Card } from "../components/ui/Card";
+import { Badge } from "../components/ui/Badge";
+import { Button } from "../components/ui/Button";
+import { useQuery } from "convex/react";
+import { api } from "@convex/_generated/api";
+import { localized, localizedArray, localizedSpecs } from "../lib/localized";
+
+export function ProductsPage() {
+  const { t } = useTranslation();
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const productsData = useQuery(api.products.list, {
+    searchQuery: searchQuery || undefined,
+    categorySlug: activeCategory !== "all" ? activeCategory : undefined,
+  });
+  const categoriesData = useQuery(api.categories.list);
+
+  const filtered = productsData ?? [];
+
+  return (
+    <>
+      <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-section-gap flex flex-col gap-8">
+        <div className="flex flex-col gap-4 max-w-2xl">
+          <h1 className="font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-background leading-[1.1]">
+            {t("products.pageTitle")}
+          </h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant">
+            {t("products.pageDesc")}
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6">
+          <div className="relative max-w-md w-full">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search className="w-5 h-5 text-on-surface-variant" />
+            </div>
+            <input
+              type="text"
+              placeholder={t("products.searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-xl bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-body-sm transition-shadow"
+            />
+          </div>
+
+          <div className="flex overflow-x-auto pb-2 gap-3">
+            <button
+              onClick={() => setActiveCategory("all")}
+              className={`flex-shrink-0 px-4 py-2 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+                activeCategory === "all"
+                  ? "bg-primary text-on-primary"
+                  : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
+              }`}
+            >
+              {t("products.allProducts")}
+            </button>
+            {(categoriesData ?? []).map((cat) => (
+              <button
+                key={cat.slug}
+                onClick={() => setActiveCategory(cat.slug)}
+                className={`flex-shrink-0 px-4 py-2 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+                  activeCategory === cat.slug
+                    ? "bg-primary text-on-primary"
+                    : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
+                }`}
+              >
+                {localized(cat, "name")}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+          {filtered.length === 0 && productsData === undefined && (
+            <div className="col-span-full py-20 text-center">
+              <div className="animate-pulse text-on-surface-variant font-body-lg">{t("products.loading")}</div>
+            </div>
+          )}
+          {filtered.length === 0 && productsData !== undefined && (
+            <div className="col-span-full py-20 text-center">
+              <p className="font-body-lg text-body-lg text-on-surface-variant">{t("products.noResults")}</p>
+            </div>
+          )}
+          {filtered.map((product) => (
+            <Card key={product._id} hover={false} className="stagger-item flex flex-col overflow-hidden group">
+              <Link to={`/products/${product.slug}`} className="aspect-[4/3] bg-surface-container-highest relative overflow-hidden block">
+                <img
+                  src={product.images[0]}
+                  alt={localized(product, "name")}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute top-2 left-2">
+                  <Badge variant="secondary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
+                </div>
+              </Link>
+              <div className="p-6 flex flex-col flex-grow justify-between gap-6">
+                <div className="flex flex-col gap-2">
+                  <Link to={`/products/${product.slug}`}>
+                    <h3 className="font-headline-md text-xl text-on-background hover:text-primary transition-colors">
+                      {localized(product, "name")}
+                    </h3>
+                  </Link>
+                  <div className="flex flex-col gap-1 mt-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.capacity")}</span>
+                      <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).capacity}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.material")}</span>
+                      <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).material}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.usage")}</span>
+                      <span className="font-body-sm text-body-sm text-on-background">{localizedArray(product.useCases, product.useCases_ar)[0]}</span>
+                    </div>
+                  </div>
+                </div>
+                <Button as="a" href={`/products/${product.slug}`} variant="tertiary" size="md" className="w-full">
+                  <ShoppingCart className="w-4 h-4" />
+                  {t("products.requestQuote")}
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

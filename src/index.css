@@ -1,0 +1,288 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #004ccd;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #dbe1ff;
+  --color-on-primary-container: #00174c;
+  --color-primary-fixed: #dbe1ff;
+  --color-primary-fixed-dim: #b4c5ff;
+  --color-on-primary-fixed: #00174c;
+  --color-on-primary-fixed-variant: #003da9;
+  --color-inverse-primary: #b4c5ff;
+
+  --color-secondary: #0050cc;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #dae1ff;
+  --color-on-secondary-container: #001849;
+  --color-secondary-fixed: #dae1ff;
+  --color-secondary-fixed-dim: #b3c5ff;
+  --color-on-secondary-fixed: #001849;
+  --color-on-secondary-fixed-variant: #003fa4;
+
+  --color-tertiary: #9e3100;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #c84000;
+  --color-on-tertiary-container: #fff1ed;
+  --color-tertiary-fixed: #ffdbd0;
+  --color-tertiary-fixed-dim: #ffb59d;
+  --color-on-tertiary-fixed: #390c00;
+  --color-on-tertiary-fixed-variant: #832700;
+
+  --color-background: #faf8ff;
+  --color-on-background: #191b24;
+
+  --color-surface: #faf8ff;
+  --color-on-surface: #191b24;
+  --color-on-surface-variant: #424656;
+  --color-surface-dim: #d8d9e6;
+  --color-surface-bright: #faf8ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f3ff;
+  --color-surface-container: #ecedfa;
+  --color-surface-container-high: #e7e7f4;
+  --color-surface-container-highest: #e1e1ee;
+  --color-surface-tint: #0052dd;
+  --color-surface-variant: #e1e1ee;
+
+  --color-inverse-surface: #2e303a;
+  --color-inverse-on-surface: #eff0fd;
+
+  --color-outline: #737687;
+  --color-outline-variant: #c3c6d8;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --font-display-lg: Inter, system-ui, sans-serif;
+  --font-headline-md: Inter, system-ui, sans-serif;
+  --font-button-label: Inter, system-ui, sans-serif;
+  --font-body-lg: IBM Plex Sans, system-ui, sans-serif;
+  --font-body-sm: IBM Plex Sans, system-ui, sans-serif;
+  --font-data-mono: IBM Plex Mono, ui-monospace, monospace;
+
+  --spacing-margin-mobile: 1rem;
+  --spacing-margin-desktop: 2rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-container-max: 1280px;
+  --spacing-section-gap: 5rem;
+
+  --shadow-card-hover: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body-lg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 0.5rem;
+  font-family: var(--font-body-sm);
+  font-size: 0.875rem;
+  outline: 3px solid var(--color-primary);
+  transition: top 200ms var(--ease-out-strong);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:active,
+[role="button"]:active,
+a:active {
+  transform: scale(0.97);
+  transition: transform 120ms var(--ease-out-strong);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    transition: transform 200ms var(--ease-out-strong);
+  }
+}
+
+.stagger-item {
+  opacity: 0;
+  animation: staggerFadeIn 400ms var(--ease-out-strong) forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0ms; }
+.stagger-item:nth-child(2) { animation-delay: 60ms; }
+.stagger-item:nth-child(3) { animation-delay: 120ms; }
+.stagger-item:nth-child(4) { animation-delay: 180ms; }
+.stagger-item:nth-child(5) { animation-delay: 240ms; }
+.stagger-item:nth-child(6) { animation-delay: 300ms; }
+.stagger-item:nth-child(7) { animation-delay: 360ms; }
+.stagger-item:nth-child(8) { animation-delay: 420ms; }
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #b4c5ff;
+    --color-on-primary: #00174c;
+    --color-primary-container: #003da9;
+    --color-on-primary-container: #dbe1ff;
+    --color-primary-fixed: #dbe1ff;
+    --color-primary-fixed-dim: #b4c5ff;
+    --color-on-primary-fixed: #00174c;
+    --color-on-primary-fixed-variant: #003da9;
+    --color-inverse-primary: #004ccd;
+
+    --color-secondary: #b3c5ff;
+    --color-on-secondary: #001849;
+    --color-secondary-container: #003fa4;
+    --color-on-secondary-container: #dae1ff;
+
+    --color-tertiary: #ffb59d;
+    --color-on-tertiary: #390c00;
+    --color-tertiary-container: #832700;
+    --color-on-tertiary-container: #ffdbd0;
+
+    --color-background: #111318;
+    --color-on-background: #e2e2ec;
+
+    --color-surface: #111318;
+    --color-on-surface: #e2e2ec;
+    --color-on-surface-variant: #c4c6d0;
+    --color-surface-dim: #0d0f14;
+    --color-surface-bright: #373942;
+    --color-surface-container-lowest: #08080c;
+    --color-surface-container-low: #191b22;
+    --color-surface-container: #1d1f27;
+    --color-surface-container-high: #282a32;
+    --color-surface-container-highest: #33353d;
+    --color-surface-tint: #b4c5ff;
+    --color-surface-variant: #33353d;
+
+    --color-inverse-surface: #e2e2ec;
+    --color-inverse-on-surface: #111318;
+
+    --color-outline: #8e909b;
+    --color-outline-variant: #33353d;
+
+    --color-error: #ffb4ab;
+    --color-on-error: #690005;
+    --color-error-container: #93000a;
+    --color-on-error-container: #ffdad6;
+  }
+
+  body {
+    color-scheme: dark;
+  }
+
+  img {
+    opacity: 0.9;
+  }
+}
+
+[dir="rtl"] .divide-x > :not([hidden]) ~ :not([hidden]) {
+  border-right-width: 0;
+  border-left-width: 1px;
+}
+
+[dir="rtl"] .sm\:border-r {
+  border-right-width: 0;
+  border-left-width: 1px;
+}
+
+[dir="rtl"] .border-r-2 {
+  border-right-width: 0;
+  border-left-width: 2px;
+}
+
+[dir="rtl"] .md\:pl-8 {
+  padding-left: 0;
+  padding-right: 2rem;
+}
+
+[dir="rtl"] .md\:pr-8 {
+  padding-right: 0;
+  padding-left: 2rem;
+}
+
+[dir="rtl"] .md\:pr-0 {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+[dir="rtl"] .order-1 { order: 2; }
+[dir="rtl"] .order-2 { order: 1; }
+[dir="rtl"] .md\:order-1 { order: 2; }
+[dir="rtl"] .md\:order-2 { order: 1; }
+
+[dir="rtl"] .pl-10 { padding-left: 0; padding-right: 2.5rem; }
+[dir="rtl"] .pl-3 { padding-left: 0; padding-right: 0.75rem; }
+[dir="rtl"] .left-0 { left: auto; right: 0; }
+[dir="rtl"] .left-2 { left: auto; right: 0.5rem; }
+[dir="rtl"] .left-4 { left: auto; right: 1rem; }
+[dir="rtl"] .-left-4 { left: auto; right: -1rem; }
+[dir="rtl"] .left-3 { left: auto; right: 0.75rem; }
+[dir="rtl"] .right-0 { right: auto; left: 0; }
+
+[dir="rtl"] .text-left { text-align: right; }
+[dir="rtl"] .text-right { text-align: left; }
+[dir="rtl"] .sm\:text-left { text-align: right; }
