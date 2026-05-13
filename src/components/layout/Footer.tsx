@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Factory, Phone, Mail, MapPin, ArrowUp, ShieldCheck } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowUp, ShieldCheck } from "lucide-react";
 import { navLinks, siteConfig } from "../../lib/constants";
 
 function BackToTop() {
@@ -26,9 +26,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-gutter">
             <div className="md:col-span-4 flex flex-col gap-5">
               <Link to="/" aria-label="Home" className="flex items-center gap-2.5 text-on-surface">
-                <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
-                  <Factory className="w-5 h-5 text-on-primary" />
-                </div>
+                <img src="/logo.svg" alt="Fourth Pyramid" className="h-9 w-auto" />
                 <span className="font-headline-md text-headline-md font-bold tracking-tight">{siteConfig.name}</span>
               </Link>
               <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">

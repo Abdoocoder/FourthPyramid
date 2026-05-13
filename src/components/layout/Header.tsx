@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Factory, Globe } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { navLinks, siteConfig } from "../../lib/constants";
 import { Button } from "../ui/Button";
 
@@ -39,10 +39,8 @@ export function Header() {
     <header className="bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant">
       <div className="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
         <Link to="/" aria-label="Home" className="flex items-center gap-2.5 text-on-surface hover:text-primary transition-colors duration-200">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <Factory className="w-4 h-4 text-on-primary" />
-          </div>
-          <span className="font-headline-md text-headline-md tracking-tight font-bold">{siteConfig.name}</span>
+          <img src="/logo.svg" alt="Fourth Pyramid" className="h-9 w-auto" />
+          <span className="font-headline-md text-headline-md tracking-tight font-bold hidden sm:inline">{siteConfig.name}</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">

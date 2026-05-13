@@ -2,7 +2,7 @@ import { useState, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser, SignOutButton } from "@clerk/clerk-react";
-import { LayoutDashboard, Package, MessageSquare, Image, FileText, LogOut, Factory, Menu, X } from "lucide-react";
+import { LayoutDashboard, Package, MessageSquare, Image, FileText, LogOut, Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "dashboard", href: "/admin", icon: LayoutDashboard },
@@ -44,7 +44,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             className="flex items-center gap-2 text-on-surface hover:text-primary transition-colors duration-200"
             onClick={() => setSidebarOpen(false)}
           >
-            <Factory className="w-5 h-5" />
+            <img src="/logo.svg" alt="Fourth Pyramid" className="h-7 w-auto" />
             <span className="font-headline-md text-lg font-semibold">{t("admin.title")}</span>
           </Link>
           <button
