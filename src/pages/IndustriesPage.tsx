@@ -32,6 +32,9 @@ export function IndustriesPage() {
 
       {industries.map((ind, i) => {
         const imgUrl = industryImages[i] ?? ind.image;
+        const title = t(`industries.items.${i}.title`);
+        const eyebrow = t(`industries.items.${i}.eyebrow`);
+        const description = t(`industries.items.${i}.description`);
         return (
         <section
           key={ind.title}
@@ -45,36 +48,36 @@ export function IndustriesPage() {
                     <div className="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container border border-outline-variant relative">
                       <img
                         src={imgUrl}
-                        alt={ind.title}
+                        alt={title}
                         className="w-full h-full object-cover mix-blend-multiply opacity-85"
                         loading="lazy"
                       />
                     </div>
                   </div>
                   <div className="md:col-span-5 md:pl-8">
-                    <Badge variant="primary" className="mb-4">{ind.eyebrow}</Badge>
-                    <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{ind.title}</h2>
-                    <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{ind.description}</p>
+                    <Badge variant="primary" className="mb-4">{eyebrow}</Badge>
+                    <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
+                    <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                     <Button as="a" href="/products" variant="tertiary">
-                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 ml-1" />
+                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:mr-1 ltr:ml-1" />
                     </Button>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="md:col-span-5 order-2 md:order-1">
-                    <Badge variant="primary" className="mb-4">{ind.eyebrow}</Badge>
-                    <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{ind.title}</h2>
-                    <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{ind.description}</p>
+                    <Badge variant="primary" className="mb-4">{eyebrow}</Badge>
+                    <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
+                    <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                     <Button as="a" href="/products" variant="tertiary">
-                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 ml-1" />
+                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:mr-1 ltr:ml-1" />
                     </Button>
                   </div>
                   <div className="md:col-span-7 order-1 md:order-2 mb-8 md:mb-0">
                     <div className="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container border border-outline-variant relative">
                       <img
                         src={imgUrl}
-                        alt={ind.title}
+                        alt={title}
                         className="w-full h-full object-cover mix-blend-multiply opacity-85"
                         loading="lazy"
                       />

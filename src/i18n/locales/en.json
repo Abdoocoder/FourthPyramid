@@ -106,7 +106,29 @@
     "viewProducts": "View Products",
     "ctaTitle": "Ready to scale your production?",
     "ctaDesc": "Partner with Fourth Pyramid for enterprise-grade plastic manufacturing that meets your exacting specifications and volume requirements.",
-    "ctaButton": "Request a Custom Quote"
+    "ctaButton": "Request a Custom Quote",
+    "items": [
+      {
+        "title": "Detergents & Cleaners",
+        "eyebrow": "Chemical Resistance",
+        "description": "Our HDPE and PET packaging solutions are specifically engineered to withstand aggressive chemical compounds while preventing leaching. We prioritize structural integrity and leak-proof closures for consumer safety and brand reliability."
+      },
+      {
+        "title": "Industrial Chemicals",
+        "eyebrow": "UN Certified",
+        "description": "Heavy-duty transport and storage require uncompromising strength. We manufacture UN-certified jerrycans, drums, and IBC components designed for extreme environments, ensuring secure transit for hazardous materials."
+      },
+      {
+        "title": "Food & Beverage",
+        "eyebrow": "FDA Approved",
+        "description": "Maintaining freshness and extending shelf-life requires precision barriers. Our food-grade packaging utilizes advanced multi-layer technologies to protect against oxygen and moisture ingress while maintaining strict hygiene standards."
+      },
+      {
+        "title": "Agriculture",
+        "eyebrow": "UV Stabilized",
+        "description": "Built to endure harsh UV exposure and extreme weather. From heavy-duty crates to irrigation components, our agricultural plastics are formulated for longevity, providing reliable performance season after season."
+      }
+    ]
   },
   "quote": {
     "pageTitle": "Get a Customized Quotation",
