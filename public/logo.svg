@@ -1,132 +1,112 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     viewBox="0 0 800 800" width="800" height="800"
-     shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-     image-rendering="optimizeQuality" color-rendering="optimizeQuality">
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 820"
+     width="800" height="820" shape-rendering="geometricPrecision">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#e8ecf0;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#d0d8e0;stop-opacity:1"/>
+    <linearGradient id="f1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ecde8"/>
+      <stop offset="100%" stop-color="#3a7ab8"/>
     </linearGradient>
-    <linearGradient id="tier1FaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#7ab3d4"/>
-      <stop offset="50%" style="stop-color:#4a86b8"/>
-      <stop offset="100%" style="stop-color:#2c6494"/>
+    <linearGradient id="f2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8ac0e0"/>
+      <stop offset="100%" stop-color="#3574b0"/>
     </linearGradient>
-    <linearGradient id="tier2FaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8ec0de"/>
-      <stop offset="50%" style="stop-color:#5a96c8"/>
-      <stop offset="100%" style="stop-color:#3574a8"/>
+    <linearGradient id="f3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78b8dc"/>
+      <stop offset="100%" stop-color="#2e6ca8"/>
     </linearGradient>
-    <linearGradient id="tier3FaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#9ccce6"/>
-      <stop offset="50%" style="stop-color:#66a2cc"/>
-      <stop offset="100%" style="stop-color:#4080b0"/>
+    <linearGradient id="f4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ab0d8"/>
+      <stop offset="100%" stop-color="#2a64a0"/>
     </linearGradient>
-    <linearGradient id="tier4FaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#aad8f0"/>
-      <stop offset="50%" style="stop-color:#70b0de"/>
-      <stop offset="100%" style="stop-color:#4a8ec0"/>
+    <linearGradient id="r1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3f60"/>
+      <stop offset="100%" stop-color="#0e2438"/>
     </linearGradient>
-    <linearGradient id="tier1RightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#2a5a80"/>
-      <stop offset="100%" style="stop-color:#1a3a54"/>
+    <linearGradient id="r2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3f60"/>
+      <stop offset="100%" stop-color="#0e2438"/>
     </linearGradient>
-    <linearGradient id="tier2RightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#2a5a80"/>
-      <stop offset="100%" style="stop-color:#1e4060"/>
+    <linearGradient id="r3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#203a5a"/>
+      <stop offset="100%" stop-color="#102030"/>
     </linearGradient>
-    <linearGradient id="tier3RightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#304060"/>
-      <stop offset="100%" style="stop-color:#203050"/>
+    <linearGradient id="r4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3858"/>
+      <stop offset="100%" stop-color="#0e1e30"/>
     </linearGradient>
-    <linearGradient id="tier4RightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#354565"/>
-      <stop offset="100%" style="stop-color:#253555"/>
+    <linearGradient id="sep" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c8d4de"/>
+      <stop offset="40%" stop-color="#e8eef4"/>
+      <stop offset="100%" stop-color="#8898a8"/>
     </linearGradient>
-    <linearGradient id="sepGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#b0b8c4"/>
-      <stop offset="40%" style="stop-color:#d8dfe6"/>
-      <stop offset="100%" style="stop-color:#909aa4"/>
+    <linearGradient id="sepr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6878888"/>
+      <stop offset="100%" stop-color="#3a4858"/>
     </linearGradient>
-    <radialGradient id="circleGrad" cx="40%" cy="35%" r="60%">
-      <stop offset="0%" style="stop-color:#ffffff"/>
-      <stop offset="70%" style="stop-color:#f0f2f5"/>
-      <stop offset="100%" style="stop-color:#dde2e8"/>
+    <radialGradient id="circ" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="80%" stop-color="#eef0f4"/>
+      <stop offset="100%" stop-color="#d8dce4"/>
     </radialGradient>
-    <linearGradient id="circleBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8090a0"/>
-      <stop offset="50%" style="stop-color:#404c58"/>
-      <stop offset="100%" style="stop-color:#8090a0"/>
+    <linearGradient id="circBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#708090"/>
+      <stop offset="50%" stop-color="#303c48"/>
+      <stop offset="100%" stop-color="#708090"/>
     </linearGradient>
-    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
-      <feOffset dx="3" dy="6" result="offsetBlur"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.3"/>
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="circleGlow" x="-10%" y="-10%" width="120%" height="120%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
-      <feOffset dx="0" dy="4" result="offsetBlur"/>
-      <feComponentTransfer>
-        <feFuncA type="linear" slope="0.25"/>
-      </feComponentTransfer>
-      <feMerge>
-        <feMergeNode/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <linearGradient id="fppiGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#5a8ab0"/>
-      <stop offset="50%" style="stop-color:#3a6a90"/>
-      <stop offset="100%" style="stop-color:#6090b8"/>
+    <linearGradient id="fppi" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a8ab8"/>
+      <stop offset="50%" stop-color="#3a6898"/>
+      <stop offset="100%" stop-color="#5888b4"/>
     </linearGradient>
-    <radialGradient id="pyramidShadow" cx="50%" cy="100%" r="50%">
-      <stop offset="0%" style="stop-color:#909aa8;stop-opacity:0.4"/>
-      <stop offset="100%" style="stop-color:#909aa8;stop-opacity:0"/>
-    </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
-      <stop offset="60%" style="stop-color:#ffffff;stop-opacity:0"/>
-      <stop offset="100%" style="stop-color:#c0c8d4;stop-opacity:0.3"/>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="3" dy="8"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cshadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7"/>
+      <feOffset dx="0" dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.28"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="gnd" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#6070808" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#607080" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <rect width="800" height="800" fill="url(#bgGrad)" rx="0"/>
-  <rect width="800" height="800" fill="url(#vignette)"/>
-
-  <g id="pyramid" filter="url(#dropShadow)">
-    <polygon points="460,128  408,190  512,190" fill="url(#tier1FaceGrad)" stroke="none"/>
-    <polygon points="460,128  512,190  524,190  468,128" fill="url(#tier1RightGrad)" opacity="0.9"/>
-    <polygon points="400,198  520,198  534,206  388,206" fill="url(#sepGrad)"/>
-    <polygon points="388,206  350,270  536,270  520,206" fill="url(#tier2FaceGrad)"/>
-    <polygon points="520,206  536,270  554,270  538,206" fill="url(#tier2RightGrad)" opacity="0.88"/>
-    <polygon points="340,278  542,278  560,288  322,288" fill="url(#sepGrad)"/>
-    <polygon points="322,288  278,362  558,362  542,288" fill="url(#tier3FaceGrad)"/>
-    <polygon points="542,288  558,362  580,362  562,288" fill="url(#tier3RightGrad)" opacity="0.85"/>
-    <polygon points="268,372  566,372  590,384  244,384" fill="url(#sepGrad)"/>
-    <polygon points="244,384  192,466  574,466  566,384" fill="url(#tier4FaceGrad)"/>
-    <polygon points="566,384  574,466  606,466  596,384" fill="url(#tier4RightGrad)" opacity="0.82"/>
-    <line x1="192" y1="466" x2="606" y2="466" stroke="#8090a0" stroke-width="1.5" opacity="0.5"/>
+  <g id="pyramid" filter="url(#shadow)">
+    <polygon points="448,132 410,204 480,204" fill="url(#f1)"/>
+    <polygon points="448,132 480,204 522,190 490,118" fill="url(#r1)"/>
+    <polygon points="394,204 480,204 498,218 394,218" fill="url(#sep)"/>
+    <polygon points="480,204 522,190 540,204 498,218" fill="#4a5a6a" opacity="0.85"/>
+    <polygon points="394,218 348,292 542,292 498,218" fill="url(#f2)"/>
+    <polygon points="498,218 542,292 584,278 540,204" fill="url(#r2)"/>
+    <polygon points="330,292 542,292 562,306 330,306" fill="url(#sep)"/>
+    <polygon points="542,292 584,278 604,292 562,306" fill="#4a5a6a" opacity="0.85"/>
+    <polygon points="330,306 282,374 584,374 562,306" fill="url(#f3)"/>
+    <polygon points="562,306 584,374 626,360 604,292" fill="url(#r3)"/>
+    <polygon points="262,374 584,374 606,390 262,390" fill="url(#sep)"/>
+    <polygon points="584,374 626,360 648,374 606,390" fill="#4a5a6a" opacity="0.85"/>
+    <polygon points="262,390 210,462 628,462 606,390" fill="url(#f4)"/>
+    <polygon points="606,390 628,462 670,448 648,374" fill="url(#r4)"/>
+    <line x1="210" y1="462" x2="628" y2="462" stroke="#5a7090" stroke-width="1.5" opacity="0.5"/>
+    <line x1="628" y1="462" x2="670" y2="448" stroke="#3a4858" stroke-width="1.5" opacity="0.5"/>
   </g>
 
-  <ellipse cx="400" cy="472" rx="220" ry="12" fill="url(#pyramidShadow)"/>
+  <ellipse cx="430" cy="470" rx="235" ry="14" fill="url(#gnd)"/>
 
-  <g id="badge" filter="url(#circleGlow)" transform="translate(270, 280)">
-    <circle cx="0" cy="0" r="98" fill="url(#circleBorderGrad)"/>
-    <circle cx="0" cy="0" r="88" fill="url(#circleGrad)"/>
-    <circle cx="0" cy="0" r="84" fill="none" stroke="#c0c8d4" stroke-width="1.5"/>
-    <text x="-8" y="28" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" fill="#2a3a48" text-anchor="middle" letter-spacing="-2">P</text>
-    <text x="28" y="-18" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="600" fill="#3a5068" text-anchor="middle">S</text>
+  <g id="badge" filter="url(#cshadow)">
+    <circle cx="288" cy="298" r="100" fill="url(#circBorder)"/>
+    <circle cx="288" cy="298" r="90" fill="url(#circ)"/>
+    <circle cx="288" cy="298" r="85" fill="none" stroke="#c8cdd6" stroke-width="1.5"/>
+    <text x="282" y="332" font-family="Georgia,'Times New Roman',serif" font-size="96" font-weight="700" fill="#1e2c3c" text-anchor="middle">P</text>
+    <text x="326" y="262" font-family="Georgia,'Times New Roman',serif" font-size="44" font-weight="600" fill="#2a4060" text-anchor="middle">S</text>
   </g>
 
-  <text x="400" y="548" font-family="'Arial', 'Tahoma', sans-serif" font-size="26" font-weight="400" fill="#2a3040" text-anchor="middle" direction="rtl" unicode-bidi="bidi-override" letter-spacing="0.5">شركـــة الهرم الرابع للصناعات البلاستيكية</text>
-  <line x1="200" y1="566" x2="600" y2="566" stroke="#9098a8" stroke-width="0.8" opacity="0.6"/>
-  <text x="400" y="598" font-family="'Arial', 'Helvetica Neue', sans-serif" font-size="22" font-weight="700" fill="#1e2a36" text-anchor="middle" letter-spacing="0.8">Fourth Pyramid Plastic Industries Co.</text>
-  <line x1="240" y1="616" x2="560" y2="616" stroke="#9098a8" stroke-width="0.8" opacity="0.5"/>
-  <text x="400" y="694" font-family="'Palatino Linotype', 'Palatino', 'Book Antiqua', Georgia, serif" font-size="68" font-weight="400" fill="url(#fppiGrad)" text-anchor="middle" letter-spacing="8" style="font-style: italic;">F.P.P.I</text>
+  <text x="420" y="558" font-family="'Arial','Tahoma',sans-serif" font-size="25" font-weight="400" fill="#1a2535" text-anchor="middle" direction="rtl">شركـــة الهرم الرابع للصناعات البلاستيكية</text>
+  <line x1="190" y1="576" x2="650" y2="576" stroke="#7a8898" stroke-width="0.8" opacity="0.55"/>
+  <text x="420" y="608" font-family="'Arial','Helvetica Neue',sans-serif" font-size="21.5" font-weight="700" fill="#111e2c" text-anchor="middle" letter-spacing="0.6">Fourth Pyramid Plastic Industries Co.</text>
+  <line x1="240" y1="626" x2="600" y2="626" stroke="#7a8898" stroke-width="0.8" opacity="0.45"/>
+  <text x="420" y="716" font-family="'Palatino Linotype','Palatino','Book Antiqua',Georgia,serif" font-size="72" font-weight="400" fill="url(#fppi)" text-anchor="middle" letter-spacing="6" font-style="italic">F.P.P.I</text>
 </svg>
