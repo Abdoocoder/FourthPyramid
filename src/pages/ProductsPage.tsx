@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, ImageOff } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
@@ -93,12 +93,18 @@ export function ProductsPage() {
           {filtered.map((product) => (
             <Card key={product._id} hover={false} className="stagger-item flex flex-col overflow-hidden group">
               <Link to={`/products/${product.slug}`} className="aspect-[4/3] bg-surface-container-highest relative overflow-hidden block">
-                <img
-                  src={cldTransform(product.images?.[0], "w_400,q_auto,f_auto")}
-                  alt={localized(product, "name")}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
-                  loading="lazy"
-                />
+                {product.images?.[0] ? (
+                  <img
+                    src={cldTransform(product.images[0], "w_400,q_auto,f_auto")}
+                    alt={localized(product, "name")}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-surface-container-highest">
+                    <ImageOff className="w-8 h-8 text-outline opacity-30" />
+                  </div>
+                )}
                 <div className="absolute top-2 left-2">
                   <Badge variant="secondary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
                 </div>

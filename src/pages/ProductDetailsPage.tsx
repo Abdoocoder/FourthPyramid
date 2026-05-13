@@ -8,6 +8,7 @@ import {
   Sparkles,
   Fuel,
   Verified,
+  ImageOff,
 } from "lucide-react";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
@@ -16,6 +17,17 @@ import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
+
+function ProductImage({ src, alt, className }: { src: string | undefined; alt: string; className?: string }) {
+  if (!src) {
+    return (
+      <div className={`bg-surface-container-highest flex items-center justify-center ${className ?? ""}`}>
+        <ImageOff className="w-12 h-12 text-outline opacity-40" />
+      </div>
+    );
+  }
+  return <img src={src} alt={alt} className={className ?? ""} />;
+}
 
 const useCaseIcons: Record<string, React.ReactNode> = {
   Agrochemicals: <FlaskConical className="w-[18px] h-[18px] text-secondary" />,
@@ -67,7 +79,7 @@ export function ProductDetailsPage() {
 
       <div className="md:col-span-7 flex flex-col gap-4">
         <div className="bg-surface-container-lowest border border-outline-variant rounded-xl relative overflow-hidden">
-          <img
+          <ProductImage
             src={cldTransform(product.images?.[0], "w_800,q_auto,f_auto")}
             alt={localized(product, "name")}
             className="w-full aspect-[4/3] object-cover"
@@ -78,14 +90,16 @@ export function ProductDetailsPage() {
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
-          {product.images.slice(0, 3).map((img, i) => (
+          {product.images && product.images.slice(0, 3).map((img, i) => (
             <div key={i} className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden cursor-pointer">
-              <img src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")} alt={`${localized(product, "name")} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+              <ProductImage src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")} alt={`${localized(product, "name")} ${i + 1}`} className="w-full h-full object-cover" />
             </div>
           ))}
-          <div className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden cursor-pointer flex items-center justify-center bg-surface-container-high">
-            <FileText className="w-8 h-8 text-outline" />
-          </div>
+          {(!product.images || product.images.length === 0) && (
+            <div className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden flex items-center justify-center bg-surface-container-high">
+              <FileText className="w-8 h-8 text-outline" />
+            </div>
+          )}
         </div>
       </div>
 
