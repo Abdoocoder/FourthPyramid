@@ -1,12 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Save, Upload, X, Loader } from "lucide-react";
+import { ArrowLeft, Save, X, Loader } from "lucide-react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
 import type { Id } from "@convex/_generated/dataModel";
 import { Button } from "../../components/ui/Button";
 import { Input, Textarea, Select } from "../../components/ui/Input";
+import { CloudinaryUpload } from "../../components/ui/CloudinaryUpload";
 
 const specKeys = ["capacity", "material", "dimensions", "weight", "closureType", "unCertification", "colorsAvailable", "palletQuantity"] as const;
 
@@ -25,10 +26,6 @@ export function AdminProductFormPage() {
   const categoriesData = useQuery(api.categories.list);
   const createProduct = useMutation(api.products.create);
   const updateProduct = useMutation(api.products.update);
-  const generateUploadUrl = useMutation(api.images.generateUploadUrl);
-  const storeImage = useMutation(api.images.storeImage);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -101,22 +98,10 @@ export function AdminProductFormPage() {
   const update = (key: string, value: string | boolean | string[]) =>
     setForm((f) => ({ ...f, [key]: value }));
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleUpload = async (url: string) => {
     setUploading(true);
-    try {
-      const uploadUrl = await generateUploadUrl();
-      const result = await fetch(uploadUrl, { method: "POST", body: file });
-      const { storageId } = await result.json();
-      const url = await storeImage({ storageId });
-      if (url) update("images", [...form.images, url]);
-    } catch (err) {
-      console.error("Upload failed", err);
-    } finally {
-      setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    }
+    update("images", [...form.images, url]);
+    setUploading(false);
   };
 
   const removeImage = (idx: number) =>
@@ -236,10 +221,7 @@ export function AdminProductFormPage() {
                 </button>
               </div>
             ))}
-            <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploading} className="w-28 h-28 rounded-lg border-2 border-dashed border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
-              {uploading ? <Loader className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
-            </button>
-            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+            <CloudinaryUpload onUpload={handleUpload} disabled={uploading} />
           </div>
         </section>
 
