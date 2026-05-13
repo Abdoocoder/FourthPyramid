@@ -39,9 +39,9 @@ export function DashboardPage() {
       </div>
 
       <div className="bg-surface border border-outline-variant rounded-xl p-6">
-        <h2 className="font-headline-md text-xl text-on-surface mb-4">Recent Activity</h2>
+        <h2 className="font-headline-md text-xl text-on-surface mb-4">{t("admin.recentActivity")}</h2>
         <p className="font-body-sm text-body-sm text-on-surface-variant">
-          {productsData === undefined ? t("productDetails.loading") : "Dashboard connected to live Convex data."}
+          {productsData === undefined ? t("productDetails.loading") : t("admin.connected")}
         </p>
       </div>
     </div>

@@ -74,7 +74,7 @@ export function AdminQuotesPage() {
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.view")}>
+                  <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.view")} aria-label={t("admin.view")}>
                     <Eye className="w-4 h-4" />
                   </button>
                 </td>

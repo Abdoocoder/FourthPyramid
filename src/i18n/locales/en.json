@@ -241,6 +241,9 @@
     "noProducts": "No products yet. Add your first product.",
     "noQuotes": "No quotes received yet.",
     "totalQuotes": "Total Quotes",
+    "recentActivity": "Recent Activity",
+    "connected": "Dashboard connected to live Convex data.",
+    "galleryImage": "Gallery image {{index}}",
     "saveError": "Failed to save. Please try again.",
     "pasteImageUrl": "Paste image URL..."
   },

@@ -62,10 +62,10 @@ export function AdminProductsPage() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
-                    <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
+                    <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.edit")} aria-label={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
                       <Edit className="w-4 h-4" />
                     </button>
-                    <button className="p-2.5 text-on-surface-variant hover:text-error transition-colors rounded-lg" title={t("admin.delete")}>
+                    <button className="p-2.5 text-on-surface-variant hover:text-error transition-colors rounded-lg" title={t("admin.delete")} aria-label={t("admin.delete")}>
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>

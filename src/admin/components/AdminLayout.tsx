@@ -66,7 +66,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 onClick={() => setSidebarOpen(false)}
                 className={`flex items-center gap-3 px-6 py-3 font-body-sm text-body-sm transition-colors duration-150 ${
                   active
-                    ? "bg-primary-container text-on-primary-container font-semibold border-r-2 border-primary"
+                    ? "bg-primary-container text-on-primary-container font-semibold"
                     : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
                 }`}
               >
