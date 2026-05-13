@@ -244,6 +244,7 @@
     "recentActivity": "Recent Activity",
     "connected": "Dashboard connected to live Convex data.",
     "galleryImage": "Gallery image {{index}}",
+    "noImages": "No images uploaded yet.",
     "saveError": "Failed to save. Please try again.",
     "pasteImageUrl": "Paste image URL..."
   },

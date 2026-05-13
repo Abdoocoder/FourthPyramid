@@ -244,6 +244,7 @@
     "recentActivity": "آخر النشاطات",
     "connected": "لوحة التحكم متصلة ببيانات Convex المباشرة.",
     "galleryImage": "صورة المعرض {{index}}",
+    "noImages": "لم يتم رفع أي صور بعد.",
     "saveError": "فشل الحفظ. حاول مرة أخرى.",
     "pasteImageUrl": "الصق رابط الصورة..."
   },

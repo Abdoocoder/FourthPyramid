@@ -11,6 +11,7 @@
 import type * as admins from "../admins.js";
 import type * as categories from "../categories.js";
 import type * as contacts from "../contacts.js";
+import type * as gallery from "../gallery.js";
 import type * as images from "../images.js";
 import type * as migrate_ar from "../migrate_ar.js";
 import type * as pages from "../pages.js";
@@ -28,6 +29,7 @@ declare const fullApi: ApiFromModules<{
   admins: typeof admins;
   categories: typeof categories;
   contacts: typeof contacts;
+  gallery: typeof gallery;
   images: typeof images;
   migrate_ar: typeof migrate_ar;
   pages: typeof pages;

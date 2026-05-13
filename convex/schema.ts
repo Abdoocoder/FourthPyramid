@@ -82,6 +82,11 @@ export default defineSchema({
     updatedAt: v.number(),
   }).index("by_slug", ["slug"]),
 
+  gallery: defineTable({
+    url: v.string(),
+    createdAt: v.number(),
+  }).index("by_created", ["createdAt"]),
+
   contacts: defineTable({
     name: v.string(),
     email: v.string(),
