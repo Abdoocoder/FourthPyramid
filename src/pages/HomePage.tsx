@@ -115,7 +115,7 @@ export function HomePage() {
             {(cats ?? []).map((cat, i) => (
               <Link key={cat.slug} to={`/products?category=${cat.slug}`} className={`block group hover-lift ${i === 0 ? "md:col-span-2" : ""}`}>
                 <Card
-                  className={`border-2 border-outline-variant hover:border-primary bg-surface transition-all duration-300 flex flex-col sm:flex-row ${i === 0 ? "md:flex-row" : ""}`}
+                  className={`border-2 border-outline-variant hover:border-primary bg-surface transition-[border-color] duration-300 ease-out-strong flex flex-col sm:flex-row ${i === 0 ? "md:flex-row" : ""}`}
                   hover={false}
                 >
                   <div className={`${i === 0 ? "md:w-2/5" : "sm:w-1/3"} bg-surface-container p-8 md:p-10 flex items-center justify-center border-b sm:border-b-0 sm:border-r border-outline-variant`}>
@@ -153,7 +153,7 @@ export function HomePage() {
             ].map((s, i) => (
               <div
                 key={s.titleKey}
-                className="border border-outline rounded-2xl p-8 md:p-10 flex flex-col gap-6 hover:border-primary-fixed-dim/40 transition-colors duration-200 hover-lift"
+                className="border border-outline rounded-2xl p-8 md:p-10 flex flex-col gap-6 hover:border-primary-fixed-dim/40 transition-colors duration-200 ease-out-strong hover-lift"
               >
                 <span className="font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-primary-fixed-dim leading-none">
                   {s.stat}

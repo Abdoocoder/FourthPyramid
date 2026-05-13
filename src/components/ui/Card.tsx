@@ -16,8 +16,8 @@ export function Card({ children, className = "", hover = true, onClick }: CardPr
       onKeyDown={onClick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } } : undefined}
       className={`
         bg-surface border border-outline-variant rounded-xl
-        ${hover ? "transition-shadow duration-300 ease-out hover:shadow-card-hover" : ""}
-        ${onClick ? "cursor-pointer active:scale-[0.99]" : ""}
+        ${hover ? "transition-shadow duration-300 ease-out-strong hover:shadow-card-hover" : ""}
+        ${onClick ? "cursor-pointer" : ""}
         ${className}
       `}
     >

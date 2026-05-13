@@ -34,7 +34,7 @@
 
   --color-surface: #ffffff;
   --color-on-surface: #1E1E1E;
-  --color-on-surface-variant: #7A7A7A;
+  --color-on-surface-variant: #5E5E5E;
   --color-surface-dim: #d8dae0;
   --color-surface-bright: #ffffff;
   --color-surface-container-lowest: #ffffff;
@@ -78,6 +78,13 @@
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --text-display-lg: 3.5rem;
+  --text-headline-md: 1.5rem;
+  --text-body-lg: 1.125rem;
+  --text-body-sm: 0.875rem;
+  --text-button-label: 0.875rem;
+  --text-data-mono: 0.75rem;
 }
 
 body {
@@ -154,6 +161,7 @@ html {
 
 .stagger-item {
   opacity: 0;
+  will-change: transform, opacity;
   animation: staggerFadeIn 400ms var(--ease-out-strong) forwards;
 }
 

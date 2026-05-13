@@ -42,7 +42,7 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const base = "inline-flex items-center justify-center gap-2 rounded-lg font-button-label cursor-pointer border-none select-none active:scale-[0.97] motion-reduce:active:scale-100 transition-[transform,background-color,color,box-shadow] duration-150 ease-out";
+  const base = "inline-flex items-center justify-center gap-2 rounded-lg font-button-label cursor-pointer border-none select-none motion-reduce:active:scale-100 transition-[background-color,color,box-shadow] duration-150 ease-out";
   const classes = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (as === "a" && href) {
