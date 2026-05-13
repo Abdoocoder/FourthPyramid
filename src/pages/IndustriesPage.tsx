@@ -59,7 +59,7 @@ export function IndustriesPage() {
                     <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                     <Button as="a" href="/products" variant="tertiary">
-                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:mr-1 ltr:ml-1" />
+                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:rotate-180 rtl:mr-1 ltr:ml-1" />
                     </Button>
                   </div>
                 </>
@@ -70,7 +70,7 @@ export function IndustriesPage() {
                     <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                     <Button as="a" href="/products" variant="tertiary">
-                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:mr-1 ltr:ml-1" />
+                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:rotate-180 rtl:mr-1 ltr:ml-1" />
                     </Button>
                   </div>
                   <div className="md:col-span-7 order-1 md:order-2 mb-8 md:mb-0">

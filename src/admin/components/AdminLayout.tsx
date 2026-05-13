@@ -44,7 +44,7 @@ export function AdminLayout() {
             <span className="font-headline-md text-lg font-semibold">{t("admin.title")}</span>
           </Link>
           <button
-            className="md:hidden text-on-surface-variant hover:text-on-surface p-1"
+            className="md:hidden text-on-surface-variant hover:text-on-surface p-2"
             onClick={() => setSidebarOpen(false)}
             aria-label="Close sidebar"
           >
@@ -96,7 +96,7 @@ export function AdminLayout() {
           <button
             onClick={() => setSidebarOpen(true)}
             aria-label="Open sidebar"
-            className="text-on-surface-variant hover:text-on-surface p-1"
+            className="text-on-surface-variant hover:text-on-surface p-2"
           >
             <Menu className="w-5 h-5" />
           </button>

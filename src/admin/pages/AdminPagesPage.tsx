@@ -136,7 +136,7 @@ export function AdminPagesPage() {
                           )}
                           <Textarea label="" id={`block-${i}`} value={block.content} onChange={(e) => updateBlock(blocks, setBlocks, i, "content", e.target.value)} />
                         </div>
-                        <button onClick={() => removeBlock(blocks, setBlocks, i)} className="p-1 text-on-surface-variant hover:text-error transition-colors flex-shrink-0 mt-2">
+                        <button onClick={() => removeBlock(blocks, setBlocks, i)} className="p-2 text-on-surface-variant hover:text-error transition-colors flex-shrink-0 mt-2 rounded-lg">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -168,7 +168,7 @@ export function AdminPagesPage() {
                           )}
                           <Textarea label="" id={`block-ar-${i}`} value={block.content} onChange={(e) => updateBlock(blocksAr, setBlocksAr, i, "content", e.target.value)} />
                         </div>
-                        <button onClick={() => removeBlock(blocksAr, setBlocksAr, i)} className="p-1 text-on-surface-variant hover:text-error transition-colors flex-shrink-0 mt-2">
+                        <button onClick={() => removeBlock(blocksAr, setBlocksAr, i)} className="p-2 text-on-surface-variant hover:text-error transition-colors flex-shrink-0 mt-2 rounded-lg">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

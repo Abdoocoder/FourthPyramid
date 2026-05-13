@@ -52,7 +52,7 @@ export function Header() {
             {t("nav.requestQuote")}
           </Button>
           <button
-            className="md:hidden text-on-surface p-2"
+            className="md:hidden text-on-surface p-3"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle navigation"
           >
@@ -69,7 +69,7 @@ export function Header() {
                 key={link.href}
                 to={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`font-body-lg text-body-lg py-2 ${
+                className={`font-body-lg text-body-lg py-3 ${
                   pathname === link.href ? "text-primary font-semibold" : "text-on-surface-variant"
                 }`}
               >
@@ -78,7 +78,7 @@ export function Header() {
             ))}
             <button
               onClick={() => { toggleLang(); setMobileOpen(false); }}
-              className="flex items-center gap-1.5 text-on-surface-variant py-2 font-body-lg text-body-lg"
+              className="flex items-center gap-1.5 text-on-surface-variant py-3 font-body-lg text-body-lg"
             >
               <Globe className="w-4 h-4" />
               {t("nav.language")}

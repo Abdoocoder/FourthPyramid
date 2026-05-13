@@ -55,7 +55,7 @@ export function ProductDetailsPage() {
 
   return (
     <div className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
-      <div className="md:col-span-12 flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6">
+      <div className="md:col-span-12 flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6 flex-wrap">
         <Link to="/products" className="hover:text-primary transition-colors">{t("nav.products")}</Link>
         <span className="text-outline-variant">/</span>
         <Link to={`/products?category=${product.categorySlug}`} className="hover:text-primary transition-colors">
@@ -77,7 +77,7 @@ export function ProductDetailsPage() {
             {localizedArray(product.certifications, product.certifications_ar)[0]}
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
           {product.images.slice(0, 3).map((img, i) => (
             <div key={i} className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden cursor-pointer">
               <img src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")} alt={`${localized(product, "name")} view ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />

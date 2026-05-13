@@ -28,8 +28,8 @@ const variantStyles: Record<Variant, string> = {
 };
 
 const sizeStyles: Record<Size, string> = {
-  sm: "px-4 py-2 text-[13px]",
-  md: "px-6 py-3 text-button-label",
+  sm: "px-5 py-3 text-[13px]",
+  md: "px-6 py-4 text-button-label",
   lg: "px-8 py-4 text-button-label",
 };
 

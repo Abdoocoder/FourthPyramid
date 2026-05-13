@@ -40,7 +40,7 @@ export function AdminQuotesPage() {
         ))}
       </div>
 
-      <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+      <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container-low">
@@ -55,7 +55,7 @@ export function AdminQuotesPage() {
             {(quotesData ?? []).map((q) => (
               <tr key={q._id} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
                 <td className="px-6 py-4">
-                  <span className="font-body-sm text-body-sm font-medium text-on-surface">{q.companyName}</span>
+                  <span className="font-body-sm text-body-sm font-medium text-on-surface block truncate max-w-[180px]">{q.companyName}</span>
                 </td>
                 <td className="px-6 py-4 hidden md:table-cell">
                   <span className="font-body-sm text-body-sm text-on-surface-variant">{q.contactName}</span>
@@ -69,7 +69,7 @@ export function AdminQuotesPage() {
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <button className="p-2 text-on-surface-variant hover:text-primary transition-colors" title={t("admin.view")}>
+                  <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.view")}>
                     <Eye className="w-4 h-4" />
                   </button>
                 </td>

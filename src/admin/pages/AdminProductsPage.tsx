@@ -33,7 +33,7 @@ export function AdminProductsPage() {
         />
       </div>
 
-      <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden">
+      <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container-low">
@@ -47,7 +47,7 @@ export function AdminProductsPage() {
             {(productsData ?? []).map((p) => (
               <tr key={p._id} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
                 <td className="px-6 py-4">
-                  <span className="font-body-sm text-body-sm font-medium text-on-surface">{localized(p, "name")}</span>
+                  <span className="font-body-sm text-body-sm font-medium text-on-surface truncate max-w-[200px] block">{localized(p, "name")}</span>
                 </td>
                 <td className="px-6 py-4 hidden md:table-cell">
                   <span className="font-body-sm text-body-sm text-on-surface-variant">{localized(p, "category")}</span>
@@ -57,10 +57,10 @@ export function AdminProductsPage() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
-                    <button className="p-2 text-on-surface-variant hover:text-primary transition-colors" title={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
+                    <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
                       <Edit className="w-4 h-4" />
                     </button>
-                    <button className="p-2 text-on-surface-variant hover:text-error transition-colors" title={t("admin.delete")}>
+                    <button className="p-2.5 text-on-surface-variant hover:text-error transition-colors rounded-lg" title={t("admin.delete")}>
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
