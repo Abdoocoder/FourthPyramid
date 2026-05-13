@@ -20,6 +20,12 @@ export function Footer() {
           <p className="font-data-mono text-data-mono text-on-surface-variant mt-2">
             {siteConfig.copyright}
           </p>
+          <p className="font-data-mono text-data-mono text-on-surface-variant/60 text-[11px]">
+            {t("footer.designedBy")}{" "}
+            <a href="https://www.abdoocoder.dev" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors underline underline-offset-2">
+              Abdoo Coder
+            </a>
+          </p>
         </div>
         <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
           <nav aria-label={t("footer.navigation")} className="flex flex-col gap-3">
