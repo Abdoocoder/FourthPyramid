@@ -68,45 +68,45 @@ export function ContactPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
         <div className="md:col-span-5 space-y-6">
-          <div className="flex items-center gap-4 p-6 bg-surface-container border border-outline-variant rounded-xl">
-            <div className="w-12 h-12 rounded-full bg-primary-container text-primary flex items-center justify-center flex-shrink-0">
-              <Phone className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("contact.phone")}</p>
-              <a href={`tel:${siteConfig.phone}`} className="font-body-lg text-body-lg text-primary hover:underline">{siteConfig.phone}</a>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 p-6 bg-surface-container border border-outline-variant rounded-xl">
-            <div className="w-12 h-12 rounded-full bg-primary-container text-primary flex items-center justify-center flex-shrink-0">
-              <Mail className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("contact.email")}</p>
-              <a href={`mailto:${siteConfig.email}`} className="font-body-lg text-body-lg text-primary hover:underline">{siteConfig.email}</a>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 p-6 bg-surface-container border border-outline-variant rounded-xl">
-            <div className="w-12 h-12 rounded-full bg-primary-container text-primary flex items-center justify-center flex-shrink-0">
-              <MessageCircle className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("contact.whatsapp")}</p>
-              <a href={`https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`} className="font-body-lg text-body-lg text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                {siteConfig.whatsapp}
-              </a>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 p-6 bg-surface-container border border-outline-variant rounded-xl">
-            <div className="w-12 h-12 rounded-full bg-primary-container text-primary flex items-center justify-center flex-shrink-0">
-              <MapPin className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("contact.address")}</p>
-              <p className="font-body-lg text-body-lg text-on-surface-variant">{siteConfig.address}</p>
+          <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden divide-y divide-outline-variant">
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+            >
+              <Phone className="w-4 h-4 text-primary shrink-0" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.phone")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface font-medium">{siteConfig.phone}</span>
+              </div>
+            </a>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+            >
+              <Mail className="w-4 h-4 text-primary shrink-0" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.email")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface font-medium">{siteConfig.email}</span>
+              </div>
+            </a>
+            <a
+              href={`https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+            >
+              <MessageCircle className="w-4 h-4 text-primary shrink-0" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.whatsapp")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface font-medium">{siteConfig.whatsapp}</span>
+              </div>
+            </a>
+            <div className="flex items-start gap-4 px-6 py-5">
+              <MapPin className="w-4 h-4 text-on-surface-variant shrink-0 mt-0.5" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.address")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface-variant">{siteConfig.address}</span>
+              </div>
             </div>
           </div>
 

@@ -42,19 +42,37 @@ export function ProductDetailsPage() {
 
   if (product === undefined) {
     return (
-      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap text-center">
-        <div className="animate-pulse text-on-surface-variant">{t("productDetails.loading")}</div>
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter animate-pulse">
+          <div className="md:col-span-7">
+            <div className="aspect-[4/3] bg-surface-container rounded-xl" />
+            <div className="grid grid-cols-4 gap-2 mt-4">
+              {[0,1,2,3].map(i => <div key={i} className="aspect-square bg-surface-container rounded-xl" />)}
+            </div>
+          </div>
+          <div className="md:col-span-5 flex flex-col gap-4">
+            <div className="h-4 bg-surface-container rounded w-1/3" />
+            <div className="h-8 bg-surface-container rounded w-3/4" />
+            <div className="h-4 bg-surface-container rounded w-full" />
+            <div className="h-4 bg-surface-container rounded w-5/6" />
+          </div>
+        </div>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap text-center">
-        <h1 className="font-headline-md text-headline-md text-on-surface mb-4">{t("productDetails.productNotFound")}</h1>
-        <Button as="a" href="/products" variant="primary">
-          <ArrowLeft className="w-4 h-4" /> {t("productDetails.backToProducts")}
-        </Button>
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap">
+        <div className="max-w-md">
+          <p className="font-data-mono text-data-mono text-on-surface-variant uppercase tracking-wider mb-4">404</p>
+          <h1 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface mb-4 leading-[1.1]">
+            {t("productDetails.productNotFound")}
+          </h1>
+          <Button as="a" href="/products" variant="primary">
+            <ArrowLeft className="w-4 h-4" /> {t("productDetails.backToProducts")}
+          </Button>
+        </div>
       </div>
     );
   }

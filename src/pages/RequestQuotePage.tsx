@@ -90,24 +90,24 @@ export function RequestQuotePage() {
           )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input label={t("quote.companyName")} id="companyName" placeholder={t("quote.companyNamePlaceholder")} required />
-              <Input label={t("quote.contactName")} id="contactName" placeholder={t("quote.contactNamePlaceholder")} required />
+              <Input label={t("quote.companyName")} id="companyName" name="companyName" placeholder={t("quote.companyNamePlaceholder")} required />
+              <Input label={t("quote.contactName")} id="contactName" name="contactName" placeholder={t("quote.contactNamePlaceholder")} required />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input label={t("quote.businessEmail")} id="email" type="email" placeholder={t("quote.businessEmailPlaceholder")} required />
-              <Input label={t("quote.phoneNumber")} id="phone" type="tel" placeholder={t("quote.phoneNumberPlaceholder")} required />
+              <Input label={t("quote.businessEmail")} id="email" name="email" type="email" placeholder={t("quote.businessEmailPlaceholder")} required />
+              <Input label={t("quote.phoneNumber")} id="phone" name="phone" type="tel" placeholder={t("quote.phoneNumberPlaceholder")} required />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Select label={t("quote.productType")} id="productType" required>
-                <option disabled selected value="">{t("quote.productTypePlaceholder")}</option>
+              <Select label={t("quote.productType")} id="productType" name="productType" defaultValue="" required>
+                <option disabled value="">{t("quote.productTypePlaceholder")}</option>
                 <option value="injection">{t("quote.productOptionInjection")}</option>
                 <option value="blow">{t("quote.productOptionBlow")}</option>
                 <option value="extrusion">{t("quote.productOptionExtrusion")}</option>
                 <option value="custom">{t("quote.productOptionCustom")}</option>
               </Select>
-              <Input label={t("quote.estimatedQuantity")} id="quantity" placeholder={t("quote.estimatedQuantityPlaceholder")} />
+              <Input label={t("quote.estimatedQuantity")} id="quantity" name="quantity" placeholder={t("quote.estimatedQuantityPlaceholder")} />
             </div>
-            <Textarea label={t("quote.projectDetails")} id="message" placeholder={t("quote.projectDetailsPlaceholder")} />
+            <Textarea label={t("quote.projectDetails")} id="message" name="message" placeholder={t("quote.projectDetailsPlaceholder")} />
             <div className="pt-4 border-t border-outline-variant">
               <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center">
                 {t("quote.submitButton")} <ArrowRight className="w-4 h-4" />

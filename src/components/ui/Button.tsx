@@ -8,6 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: Size;
   as?: "button" | "a";
   href?: string;
+  target?: string;
+  rel?: string;
 }
 
 const variantStyles: Record<Variant, string> = {
@@ -38,6 +40,8 @@ export function Button({
   size = "md",
   as = "button",
   href,
+  target,
+  rel,
   className = "",
   children,
   ...props
@@ -46,12 +50,14 @@ export function Button({
   const classes = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (as === "a" && href) {
+    const isExternal = href.startsWith("http");
     return (
       <a
         href={href}
         className={classes}
         role="button"
-        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        target={target ?? (isExternal ? "_blank" : undefined)}
+        rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
       >
         {children}
       </a>

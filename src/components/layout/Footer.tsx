@@ -1,9 +1,20 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Phone, Mail, MapPin, ArrowUp, ShieldCheck } from "lucide-react";
 import { navLinks, siteConfig } from "../../lib/constants";
 
 function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!visible) return null;
+
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
