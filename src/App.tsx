@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./i18n/config";
@@ -10,14 +10,8 @@ import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { IndustriesPage } from "./pages/IndustriesPage";
 import { RequestQuotePage } from "./pages/RequestQuotePage";
 import { ContactPage } from "./pages/ContactPage";
-import { ProtectedRoute } from "./admin/components/ProtectedRoute";
-import { AdminLayout } from "./admin/components/AdminLayout";
-import { DashboardPage } from "./admin/pages/DashboardPage";
-import { AdminProductsPage } from "./admin/pages/AdminProductsPage";
-import { AdminProductFormPage } from "./admin/pages/AdminProductFormPage";
-import { AdminPagesPage } from "./admin/pages/AdminPagesPage";
-import { AdminQuotesPage } from "./admin/pages/AdminQuotesPage";
-import { AdminImagesPage } from "./admin/pages/AdminImagesPage";
+
+const AdminShell = lazy(() => import("./admin/components/AdminShell"));
 
 function DirectionSetter() {
   const { i18n } = useTranslation();
@@ -43,22 +37,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
         </Route>
 
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<DashboardPage />} />
-          <Route path="products" element={<AdminProductsPage />} />
-          <Route path="products/new" element={<AdminProductFormPage />} />
-          <Route path="products/edit/:id" element={<AdminProductFormPage />} />
-          <Route path="pages" element={<AdminPagesPage />} />
-          <Route path="quotes" element={<AdminQuotesPage />} />
-          <Route path="images" element={<AdminImagesPage />} />
-        </Route>
+        <Route path="/admin/*" element={<AdminShell />} />
       </Routes>
     </BrowserRouter>
   );

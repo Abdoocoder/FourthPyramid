@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { useState, type ReactNode } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser, SignOutButton } from "@clerk/clerk-react";
 import { LayoutDashboard, Package, MessageSquare, Image, FileText, LogOut, Factory, Menu, X } from "lucide-react";
@@ -12,7 +12,11 @@ const navItems = [
   { label: "images", href: "/admin/images", icon: Image },
 ];
 
-export function AdminLayout() {
+interface AdminLayoutProps {
+  children?: ReactNode;
+}
+
+export function AdminLayout({ children }: AdminLayoutProps) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const { user } = useUser();
@@ -103,7 +107,7 @@ export function AdminLayout() {
           <span className="font-headline-md text-base font-semibold text-on-surface">{t("admin.title")}</span>
         </div>
         <div className="p-4 md:p-8 max-w-6xl mx-auto">
-          <Outlet />
+          {children}
         </div>
       </main>
     </div>

@@ -1,30 +1,17 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ClerkProvider } from "@clerk/clerk-react";
 import { convexClient, ConvexProvider } from "./lib/convex";
 import "./index.css";
 import App from "./App";
 
-const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-export function Providers({ children }: { children: React.ReactNode }) {
-  let content = children;
-
-  if (clerkKey) {
-    content = <ClerkProvider publishableKey={clerkKey}>{content}</ClerkProvider>;
-  }
-
-  if (convexClient) {
-    content = <ConvexProvider client={convexClient}>{content}</ConvexProvider>;
-  }
-
-  return content;
-}
-
-createRoot(document.getElementById("root")!).render(
+const root = (
   <StrictMode>
-    <Providers>
-      <App />
-    </Providers>
+    <App />
   </StrictMode>
 );
+
+const wrapped = convexClient ? (
+  <ConvexProvider client={convexClient}>{root}</ConvexProvider>
+) : root;
+
+createRoot(document.getElementById("root")!).render(wrapped);
