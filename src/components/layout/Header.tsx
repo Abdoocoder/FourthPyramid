@@ -80,7 +80,7 @@ export function Header() {
       </div>
 
       <div
-        className={`md:hidden bg-surface border-t border-outline-variant overflow-hidden transition-all duration-300 ease-out-strong ${
+        className={`md:hidden bg-surface border-t border-outline-variant overflow-hidden transition-[max-height,opacity] duration-300 ease-out-strong ${
           mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
