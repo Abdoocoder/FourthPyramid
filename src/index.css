@@ -298,3 +298,12 @@ html {
 [dir="rtl"] .text-left { text-align: right; }
 [dir="rtl"] .text-right { text-align: left; }
 [dir="rtl"] .sm\:text-left { text-align: right; }
+
+[dir="rtl"] {
+  --font-display-lg: Cairo, system-ui, sans-serif;
+  --font-headline-md: Cairo, system-ui, sans-serif;
+  --font-button-label: Cairo, system-ui, sans-serif;
+  --font-body-lg: Cairo, system-ui, sans-serif;
+  --font-body-sm: Cairo, system-ui, sans-serif;
+  --font-data-mono: Cairo, ui-monospace, monospace;
+}
