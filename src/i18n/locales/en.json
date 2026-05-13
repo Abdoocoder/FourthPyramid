@@ -238,6 +238,9 @@
     "addBlock": "Add Block",
     "savePage": "Save Page",
     "selectPageHint": "Select a page from the sidebar to edit its content",
+    "noProducts": "No products yet. Add your first product.",
+    "noQuotes": "No quotes received yet.",
+    "totalQuotes": "Total Quotes",
     "saveError": "Failed to save. Please try again.",
     "pasteImageUrl": "Paste image URL..."
   },

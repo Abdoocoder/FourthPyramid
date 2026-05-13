@@ -1,17 +1,39 @@
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Phone, Mail, MessageCircle, MapPin, CheckCircle, Send } from "lucide-react";
+import { useMutation } from "convex/react";
+import { Phone, Mail, MessageCircle, MapPin, CheckCircle, Send, Loader } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input, Textarea } from "../components/ui/Input";
 import { siteConfig } from "../lib/constants";
+import { api } from "@convex/_generated/api";
 
 export function ContactPage() {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+  const createContact = useMutation(api.contacts.create);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!formRef.current) return;
+    const data = new FormData(formRef.current);
+    const name = data.get("contact-name") as string;
+    const email = data.get("contact-email") as string;
+    const subject = data.get("subject") as string;
+    const message = data.get("contact-message") as string;
+    if (!name || !email || !subject || !message) return;
+    setSending(true);
+    setError("");
+    try {
+      await createContact({ name, email, subject, message });
+      setSubmitted(true);
+    } catch {
+      setError(t("contact.error"));
+    } finally {
+      setSending(false);
+    }
   };
 
   if (submitted) {
@@ -105,16 +127,22 @@ export function ContactPage() {
         <div className="md:col-span-7">
           <div className="bg-surface p-6 md:p-10 rounded-xl border border-outline-variant shadow-sm">
             <h2 className="font-headline-md text-headline-md text-on-surface mb-6">{t("contact.formTitle")}</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input label={t("contact.yourName")} id="contact-name" placeholder={t("contact.yourNamePlaceholder")} required />
-                <Input label={t("contact.yourEmail")} id="contact-email" type="email" placeholder={t("contact.yourEmailPlaceholder")} required />
+                <Input label={t("contact.yourName")} id="contact-name" name="contact-name" placeholder={t("contact.yourNamePlaceholder")} required />
+                <Input label={t("contact.yourEmail")} id="contact-email" name="contact-email" type="email" placeholder={t("contact.yourEmailPlaceholder")} required />
               </div>
-              <Input label={t("contact.subject")} id="subject" placeholder={t("contact.subjectPlaceholder")} required />
-              <Textarea label={t("contact.message")} id="contact-message" placeholder={t("contact.messagePlaceholder")} />
+              <Input label={t("contact.subject")} id="subject" name="subject" placeholder={t("contact.subjectPlaceholder")} required />
+              <Textarea label={t("contact.message")} id="contact-message" name="contact-message" placeholder={t("contact.messagePlaceholder")} required />
+              {error && (
+                <div className="bg-error-container text-on-error-container px-4 py-3 rounded-lg font-body-sm text-body-sm">
+                  {error}
+                </div>
+              )}
               <div className="pt-4 border-t border-outline-variant">
-                <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center">
-                  <Send className="w-4 h-4" /> {t("contact.sendButton")}
+                <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center" disabled={sending}>
+                  {sending ? <Loader className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {t("contact.sendButton")}
                 </Button>
               </div>
             </form>

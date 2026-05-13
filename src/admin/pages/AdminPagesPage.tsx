@@ -89,7 +89,9 @@ export function AdminPagesPage() {
               {slug.charAt(0).toUpperCase() + slug.slice(1)}
             </button>
           ))}
-          {pagesData && pagesData.filter((p) => !["home", "about", "industries"].includes(p.slug)).map((p) => (
+          {pagesData === undefined ? (
+            <div className="font-body-sm text-body-sm text-on-surface-variant animate-pulse pt-4">{t("products.loading")}</div>
+          ) : pagesData.filter((p) => !["home", "about", "industries"].includes(p.slug)).map((p) => (
             <button
               key={p._id}
               onClick={() => loadPage(p.slug)}

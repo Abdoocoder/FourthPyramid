@@ -53,7 +53,8 @@ export function ProductsPage() {
           <div className="flex overflow-x-auto pb-2 gap-3">
             <button
               onClick={() => setActiveCategory("all")}
-              className={`flex-shrink-0 px-4 py-2 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+              aria-pressed={activeCategory === "all"}
+              className={`flex-shrink-0 px-4 py-3 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
                 activeCategory === "all"
                   ? "bg-primary text-on-primary"
                   : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
@@ -65,7 +66,8 @@ export function ProductsPage() {
               <button
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
-                className={`flex-shrink-0 px-4 py-2 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+                aria-pressed={activeCategory === cat.slug}
+                className={`flex-shrink-0 px-4 py-3 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
                   activeCategory === cat.slug
                     ? "bg-primary text-on-primary"
                     : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Save, X, Loader } from "lucide-react";
+import { ArrowLeft, Save, X, Loader, Link } from "lucide-react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
 import type { Id } from "@convex/_generated/dataModel";
@@ -29,6 +29,7 @@ export function AdminProductFormPage() {
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -103,6 +104,13 @@ export function AdminProductFormPage() {
     setUploading(true);
     update("images", [...form.images, url]);
     setUploading(false);
+  };
+
+  const addUrlImage = () => {
+    const url = imageUrl.trim();
+    if (!url) return;
+    update("images", [...form.images, url]);
+    setImageUrl("");
   };
 
   const removeImage = (idx: number) =>
@@ -185,6 +193,9 @@ export function AdminProductFormPage() {
         </h1>
       </div>
 
+      {isEdit && existingProduct === undefined ? (
+        <div className="animate-pulse text-on-surface-variant font-body-lg py-20 text-center">{t("products.loading")}</div>
+      ) : (
       <form onSubmit={handleSubmit} className="space-y-10 max-w-4xl">
         <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6">
           <h2 className="font-headline-md text-headline-md text-on-surface pb-2 border-b border-outline-variant">{t("admin.basicInfo")}</h2>
@@ -217,12 +228,24 @@ export function AdminProductFormPage() {
             {form.images.map((url, i) => (
               <div key={i} className="relative w-28 h-28 rounded-lg border border-outline-variant overflow-hidden group">
                 <img src={url} alt="" className="w-full h-full object-cover" />
-                <button type="button" onClick={() => removeImage(i)} className="absolute top-1 right-1 p-1 bg-error text-on-error rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <button type="button" onClick={() => removeImage(i)} aria-label={`Remove image ${i + 1}`} className="absolute top-1 right-1 p-1.5 bg-error text-on-error rounded-full opacity-60 hover:opacity-100 transition-opacity">
                   <X className="w-3 h-3" />
                 </button>
               </div>
             ))}
             <CloudinaryUpload onUpload={handleUpload} disabled={uploading} />
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="url"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              placeholder={t("admin.pasteImageUrl")}
+              className="flex-1 px-4 py-3 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm"
+            />
+            <button type="button" onClick={addUrlImage} disabled={!imageUrl.trim()} className="px-4 py-3 bg-primary text-on-primary rounded-lg font-button-label text-button-label hover:bg-primary-container hover:text-on-primary-container transition-colors disabled:opacity-50">
+              <Link className="w-4 h-4" />
+            </button>
           </div>
         </section>
 
@@ -262,6 +285,7 @@ export function AdminProductFormPage() {
           </Button>
         </div>
       </form>
+      )}
     </div>
   );
 }

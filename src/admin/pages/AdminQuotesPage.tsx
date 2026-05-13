@@ -52,7 +52,12 @@ export function AdminQuotesPage() {
             </tr>
           </thead>
           <tbody>
-            {(quotesData ?? []).map((q) => (
+            {quotesData === undefined ? (
+              <tr><td colSpan={5} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse">{t("products.loading")}</td></tr>
+            ) : quotesData.length === 0 ? (
+              <tr><td colSpan={5} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noQuotes")}</td></tr>
+            ) : (
+              quotesData.map((q) => (
               <tr key={q._id} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
                 <td className="px-6 py-4">
                   <span className="font-body-sm text-body-sm font-medium text-on-surface block truncate max-w-[180px]">{q.companyName}</span>
@@ -74,7 +79,7 @@ export function AdminQuotesPage() {
                   </button>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>

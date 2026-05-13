@@ -8,10 +8,12 @@ export function DashboardPage() {
   const productsData = useQuery(api.products.list, {});
   const pendingQuotes = useQuery(api.quotes.list, { status: "pending" });
 
+  const totalQuotes = useQuery(api.quotes.list, {});
+
   const stats = [
     { label: t("admin.products"), value: String(productsData?.length ?? "—"), icon: Package, color: "text-primary bg-primary-container" },
     { label: t("admin.pending"), value: String(pendingQuotes?.length ?? "—"), icon: MessageSquare, color: "text-tertiary bg-tertiary-container" },
-    { label: "This Month", value: "+18%", icon: TrendingUp, color: "text-secondary bg-secondary-container" },
+    { label: t("admin.totalQuotes"), value: String(totalQuotes?.length ?? "—"), icon: TrendingUp, color: "text-secondary bg-secondary-container" },
   ];
 
   return (

@@ -82,6 +82,13 @@ export default defineSchema({
     updatedAt: v.number(),
   }).index("by_slug", ["slug"]),
 
+  contacts: defineTable({
+    name: v.string(),
+    email: v.string(),
+    subject: v.string(),
+    message: v.string(),
+  }),
+
   admins: defineTable({
     clerkId: v.string(),
     email: v.string(),

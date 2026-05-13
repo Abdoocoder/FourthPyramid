@@ -44,7 +44,12 @@ export function AdminProductsPage() {
             </tr>
           </thead>
           <tbody>
-            {(productsData ?? []).map((p) => (
+            {productsData === undefined ? (
+              <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse">{t("products.loading")}</td></tr>
+            ) : productsData.length === 0 ? (
+              <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noProducts")}</td></tr>
+            ) : (
+              productsData.map((p) => (
               <tr key={p._id} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
                 <td className="px-6 py-4">
                   <span className="font-body-sm text-body-sm font-medium text-on-surface truncate max-w-[200px] block">{localized(p, "name")}</span>
@@ -66,7 +71,7 @@ export function AdminProductsPage() {
                   </div>
                 </td>
               </tr>
-            ))}
+            )))}
           </tbody>
         </table>
       </div>

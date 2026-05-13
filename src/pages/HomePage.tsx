@@ -92,8 +92,8 @@ export function HomePage() {
                 {t(`home.${m.key}`)}
               </span>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
       </section>
 
       <section className="bg-surface text-on-surface py-section-gap">
@@ -112,7 +112,12 @@ export function HomePage() {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-            {(cats ?? []).map((cat, i) => (
+            {cats === undefined ? (
+              <div className="col-span-full text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse py-10">{t("products.loading")}</div>
+            ) : cats.length === 0 ? (
+              <div className="col-span-full text-center font-body-sm text-body-sm text-on-surface-variant py-10">{t("products.noResults")}</div>
+            ) : (
+            cats.map((cat, i) => (
               <Link key={cat.slug} to={`/products?category=${cat.slug}`} className={`block group hover-lift ${i === 0 ? "md:col-span-2" : ""}`}>
                 <Card
                   className={`border-2 border-outline-variant hover:border-primary bg-surface transition-[border-color] duration-300 ease-out-strong flex flex-col sm:flex-row ${i === 0 ? "md:flex-row" : ""}`}
@@ -132,7 +137,7 @@ export function HomePage() {
                   </div>
                 </Card>
               </Link>
-            ))}
+            )))}
           </div>
         </div>
       </section>
