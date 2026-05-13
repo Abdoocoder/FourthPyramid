@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Package, MessageSquare, ArrowRight, Plus, FileText, Image } from "lucide-react";
+import { MessageSquare, ArrowRight, Plus, FileText, Image } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { Link } from "react-router-dom";
