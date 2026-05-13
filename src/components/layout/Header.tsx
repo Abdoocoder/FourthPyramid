@@ -48,6 +48,12 @@ export function Header() {
             <Globe className="w-4 h-4" />
             {t("nav.language")}
           </button>
+          <Link
+            to="/admin"
+            className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors py-2 hidden md:inline"
+          >
+            {t("nav.adminLogin")}
+          </Link>
           <Button as="a" href="/request-quote" size="sm" variant="tertiary">
             {t("nav.requestQuote")}
           </Button>
@@ -83,6 +89,13 @@ export function Header() {
               <Globe className="w-4 h-4" />
               {t("nav.language")}
             </button>
+            <Link
+              to="/admin"
+              onClick={() => setMobileOpen(false)}
+              className="font-body-lg text-body-lg py-3 text-on-surface-variant"
+            >
+              {t("nav.adminLogin")}
+            </Link>
             <Button as="a" href="/request-quote" size="md" variant="tertiary" className="mt-2">
               {t("nav.requestQuote")}
             </Button>

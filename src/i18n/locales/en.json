@@ -8,7 +8,8 @@
     "requestQuote": "Request Quote",
     "language": "العربية",
     "distributorPortal": "Distributor Portal",
-    "downloadCatalog": "Download Catalog"
+    "downloadCatalog": "Download Catalog",
+    "adminLogin": "Log In"
   },
   "footer": {
     "description": "Precision engineering for the plastics industry. High-quality plastic manufacturing solutions based in Amman, Jordan.",
@@ -236,7 +237,8 @@
     "addBlock": "Add Block",
     "savePage": "Save Page",
     "selectPageHint": "Select a page from the sidebar to edit its content",
-    "saveError": "Failed to save. Please try again."
+    "saveError": "Failed to save. Please try again.",
+    "pasteImageUrl": "Paste image URL..."
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

@@ -8,7 +8,8 @@
     "requestQuote": "طلب عرض سعر",
     "language": "English",
     "distributorPortal": "بوابة الموزعين",
-    "downloadCatalog": "تحميل الكتالوج"
+    "downloadCatalog": "تحميل الكتالوج",
+    "adminLogin": "تسجيل الدخول"
   },
   "footer": {
     "description": "هندسة دقيقة لصناعة البلاستيك. حلول تصنيع بلاستيك عالية الجودة من عمان، الأردن.",
@@ -236,7 +237,8 @@
     "addBlock": "إضافة مكون",
     "savePage": "حفظ الصفحة",
     "selectPageHint": "اختر صفحة من القائمة الجانبية لتعديل محتواها",
-    "saveError": "فشل الحفظ. حاول مرة أخرى."
+    "saveError": "فشل الحفظ. حاول مرة أخرى.",
+    "pasteImageUrl": "الصق رابط الصورة..."
   },
   "common": {
     "isoBadge": "ISO 9001:2015"
