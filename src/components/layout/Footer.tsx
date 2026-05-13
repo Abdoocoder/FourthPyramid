@@ -8,7 +8,7 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className="fixed bottom-6 right-6 z-40 w-11 h-11 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200"
+      className="fixed bottom-6 ltr:right-6 rtl:left-6 z-40 w-11 h-11 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200"
     >
       <ArrowUp className="w-5 h-5" />
     </button>
@@ -23,7 +23,7 @@ export function Footer() {
       <BackToTop />
       <footer className="bg-surface-container-highest border-t border-outline-variant w-full">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-gutter">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-gutter">
             <div className="md:col-span-4 flex flex-col gap-5">
               <Link to="/" aria-label="Home" className="flex items-center gap-2.5 text-on-surface">
                 <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
@@ -34,9 +34,9 @@ export function Footer() {
               <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                 {t("footer.description")}
               </p>
-              <div className="flex items-center gap-2 text-primary-fixed-dim">
+              <div className="flex items-center gap-2 text-primary">
                 <ShieldCheck className="w-4 h-4" />
-                <span className="font-data-mono text-data-mono text-[11px] uppercase tracking-wider">{t("common.isoBadge")}</span>
+                <span className="font-data-mono text-data-mono uppercase tracking-wider">{t("common.isoBadge")}</span>
               </div>
               <div className="flex flex-col gap-2 mt-1">
                 <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">
@@ -94,10 +94,10 @@ export function Footer() {
           </div>
 
           <div className="mt-12 pt-6 border-t border-outline-variant flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="font-data-mono text-data-mono text-on-surface-variant/60 text-[11px] text-center md:text-left">
+            <p className="font-body-sm text-body-sm text-on-surface-variant/80 text-center md:text-left">
               {siteConfig.copyright}
             </p>
-            <p className="font-data-mono text-data-mono text-on-surface-variant/60 text-[11px]">
+            <p className="font-body-sm text-body-sm text-on-surface-variant/80">
               {t("footer.designedBy")}{" "}
               <a href="https://www.abdoocoder.dev" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors underline underline-offset-2">
                 Abdoo Coder
