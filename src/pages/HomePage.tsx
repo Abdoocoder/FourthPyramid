@@ -148,7 +148,7 @@ export function HomePage() {
                 <Link
                   key={cat.slug}
                   to={`/products?category=${cat.slug}`}
-                  className={`cap-card group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface hover:border-primary transition-colors duration-300 ${i === 0 ? "md:col-span-2 md:row-span-1" : ""}`}
+                  className={`cap-card hover-lift group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface hover:border-primary transition-colors duration-300 ${i === 0 ? "md:col-span-2 md:row-span-1" : ""}`}
                 >
                   <div className={`flex flex-col ${i === 0 ? "md:flex-row" : ""} h-full`}>
                     <div className={`${i === 0 ? "md:w-2/5 md:border-r" : ""} bg-surface-container p-8 md:p-10 flex items-center justify-center border-b border-outline-variant md:border-b-0`}>
@@ -184,7 +184,7 @@ export function HomePage() {
             ].map((s, i) => (
               <div
                 key={s.titleKey}
-                className="group relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300"
+                className="hover-lift group relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300"
               >
                 <div className="flex flex-col gap-6">
                   <span className="font-display-lg text-[clamp(2.5rem,4vw,4rem)] text-primary leading-none">

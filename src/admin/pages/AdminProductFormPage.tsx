@@ -241,7 +241,7 @@ export function AdminProductFormPage() {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               placeholder={t("admin.pasteImageUrl")}
-              className="flex-1 px-4 py-3 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm"
+              className="flex-1 px-4 py-3 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-[16px]"
             />
             <button type="button" onClick={addUrlImage} disabled={!imageUrl.trim()} className="px-4 py-3 bg-primary text-on-primary rounded-lg font-button-label text-button-label hover:bg-primary-container hover:text-on-primary-container transition-colors disabled:opacity-50">
               <Link className="w-4 h-4" />

@@ -63,18 +63,18 @@ export function AdminImagesPage() {
             <div key={img._id} className="relative bg-surface-container-highest border border-outline-variant rounded-xl overflow-hidden aspect-square group">
               <img src={img.url} alt={t("admin.galleryImage", { index: images.indexOf(img) + 1 })} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-on-background/0 group-hover:bg-on-background/30 transition-colors" />
-              <div className="absolute bottom-2 right-2 flex items-center gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity">
-                <button
-                  className="p-2 bg-surface rounded-lg text-on-surface hover:text-primary transition-colors shadow-sm"
+            <div className="absolute bottom-2 right-2 flex items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+              <button
+                className="p-2.5 bg-surface rounded-lg text-on-surface hover:text-primary transition-colors shadow-sm"
                   title={t("admin.copyUrl")}
                   aria-label={t("admin.copyUrl")}
                   onClick={() => handleCopy(img.url, img._id)}
                 >
                   {copiedId === img._id ? <span className="w-4 h-4 text-[10px] font-semibold">OK</span> : <Copy className="w-4 h-4" />}
                 </button>
-                <button
-                  className="p-2 bg-surface rounded-lg text-on-surface hover:text-error transition-colors shadow-sm"
-                  title={t("admin.delete")}
+              <button
+                className="p-2.5 bg-surface rounded-lg text-on-surface hover:text-error transition-colors shadow-sm"
+                title={t("admin.delete")}
                   aria-label={t("admin.delete")}
                   onClick={() => handleDelete(img._id)}
                 >

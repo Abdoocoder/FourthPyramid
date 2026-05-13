@@ -84,7 +84,7 @@ export function Header() {
           mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="flex flex-col px-margin-mobile py-4 gap-1">
+        <nav className="flex flex-col px-margin-mobile py-4 gap-2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
