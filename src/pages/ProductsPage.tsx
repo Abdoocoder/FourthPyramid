@@ -94,7 +94,7 @@ export function ProductsPage() {
             <Card key={product._id} hover={false} className="stagger-item flex flex-col overflow-hidden group">
               <Link to={`/products/${product.slug}`} className="aspect-[4/3] bg-surface-container-highest relative overflow-hidden block">
                 <img
-                  src={cldTransform(product.images[0], "w_400,q_auto,f_auto")}
+                  src={cldTransform(product.images?.[0], "w_400,q_auto,f_auto")}
                   alt={localized(product, "name")}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
                   loading="lazy"

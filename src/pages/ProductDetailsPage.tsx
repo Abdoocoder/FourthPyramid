@@ -68,7 +68,7 @@ export function ProductDetailsPage() {
       <div className="md:col-span-7 flex flex-col gap-4">
         <div className="bg-surface-container-lowest border border-outline-variant rounded-xl relative overflow-hidden">
           <img
-            src={cldTransform(product.images[0], "w_800,q_auto,f_auto")}
+            src={cldTransform(product.images?.[0], "w_800,q_auto,f_auto")}
             alt={localized(product, "name")}
             className="w-full aspect-[4/3] object-cover"
           />
@@ -80,7 +80,7 @@ export function ProductDetailsPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
           {product.images.slice(0, 3).map((img, i) => (
             <div key={i} className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden cursor-pointer">
-              <img src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")} alt={`${localized(product, "name")} view ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+              <img src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")} alt={`${localized(product, "name")} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
             </div>
           ))}
           <div className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden cursor-pointer flex items-center justify-center bg-surface-container-high">
