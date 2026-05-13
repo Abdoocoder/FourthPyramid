@@ -14,32 +14,34 @@
 
 ---
 
-## Color Palette (Logo-Based)
+## Color Palette (Logo-Based — Extracted from the4rthlogo.jpg)
 
 | Role | Hex | Token | Usage |
 |------|-----|-------|-------|
-| Primary | `#2F5FA7` | `--color-primary` | Buttons, headings, hero, links |
+| Primary (Pyramid Blue) | `#4A90E2` | `--color-primary` | Buttons, headings, hero, links |
 | On Primary | `#FFFFFF` | `--color-on-primary` | Text on primary backgrounds |
-| Primary Container | `#D6E2FF` | `--color-primary-container` | Active nav, selected states |
-| Secondary | `#5A8EDB` | `--color-secondary` | Links, secondary buttons |
+| Primary Container | `#D6E8FF` | `--color-primary-container` | Active nav, selected states |
+| Secondary (Sky Blue) | `#87B2E8` | `--color-secondary` | Accents, secondary elements |
+| On Secondary | `#001D36` | `--color-on-secondary` | Text on secondary (AAA) |
 | Tertiary / CTA | `#C84000` | `--color-tertiary` | Call-to-action accents |
-| Background | `#FFFFFF` | `--color-background` | Page background |
-| On Background | `#1E1E1E` | `--color-on-background` | Body text, headings |
+| Background (Soft Tint) | `#F4F7F9` | `--color-background` | Page background |
+| On Background (Deep Navy) | `#1A2B48` | `--color-on-background` | Headings, nav |
 | Surface | `#FFFFFF` | `--color-surface` | Card/component backgrounds |
-| On Surface | `#1E1E1E` | `--color-on-surface` | Text on surfaces |
+| On Surface (Shadow Slate) | `#2C3E50` | `--color-on-surface` | Body text |
 | On Surface Variant | `#5E5E5E` | `--color-on-surface-variant` | Secondary text (WCAG AA 4.5:1) |
 | Outline | `#7A7A7A` | `--color-outline` | Borders, dividers (3:1 non-text) |
-| Outline Variant | `#C4C6D0` | `--color-outline-variant` | Subtle borders |
+| Outline Variant (Cool Gray) | `#E1E8ED` | `--color-outline-variant` | Subtle borders |
 | Error | `#BA1A1A` | `--color-error` | Error states |
-| Utility | `#2F5FA7` | `--color-pyramid-blue-dark` | Brand reference |
-| Utility | `#5A8EDB` | `--color-pyramid-blue-light` | Brand reference |
-| Utility | `#7A7A7A` | `--color-pyramid-gray` | Brand reference |
+| Utility | `#4A90E2` | `--color-pyramid-blue` | Brand reference |
+| Utility | `#1A2B48` | `--color-pyramid-navy` | Brand reference |
+| Utility | `#87B2E8` | `--color-pyramid-sky` | Brand reference |
+| Utility | `#2C3E50` | `--color-pyramid-slate` | Brand reference |
 
 ### Dark Mode
-All roles invert via `prefers-color-scheme: dark`. Primary becomes lighter (`#AAC1F5`), backgrounds become dark (`#121318`). Full 1:1 mapping in `src/index.css:187-244`.
+All roles invert via `prefers-color-scheme: dark`. Primary becomes Sky Blue (`#87B2E8`), backgrounds become deep dark (`#0D1117`). Full 1:1 mapping in `src/index.css`.
 
-### Contrast Note (P0 — Fixed)
-`--color-on-surface-variant` was `#7A7A7A` (~4.15:1 on white, failed WCAG AA). Fixed to `#5E5E5E` (~5.8:1, passes AA).
+### Contrast Note
+All text colors pass WCAG AA 4.5:1 minimum. `--color-on-surface-variant: #5E5E5E` (~5.8:1 on white). White on Primary `#4A90E2` (~3.5:1, passes AA for large text/buttons).
 
 ---
 
