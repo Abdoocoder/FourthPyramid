@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 820"
+     width="800" height="820" shape-rendering="geometricPrecision">
+  <defs>
+    <!-- Front face gradients (blue) -->
+    <linearGradient id="f1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ecde8"/>
+      <stop offset="100%" stop-color="#3a7ab8"/>
+    </linearGradient>
+    <linearGradient id="f2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8ac0e0"/>
+      <stop offset="100%" stop-color="#3574b0"/>
+    </linearGradient>
+    <linearGradient id="f3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78b8dc"/>
+      <stop offset="100%" stop-color="#2e6ca8"/>
+    </linearGradient>
+    <linearGradient id="f4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6ab0d8"/>
+      <stop offset="100%" stop-color="#2a64a0"/>
+    </linearGradient>
+    <!-- Right-side face gradients (dark blue/steel) -->
+    <linearGradient id="r1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3f60"/>
+      <stop offset="100%" stop-color="#0e2438"/>
+    </linearGradient>
+    <linearGradient id="r2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3f60"/>
+      <stop offset="100%" stop-color="#0e2438"/>
+    </linearGradient>
+    <linearGradient id="r3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#203a5a"/>
+      <stop offset="100%" stop-color="#102030"/>
+    </linearGradient>
+    <linearGradient id="r4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e3858"/>
+      <stop offset="100%" stop-color="#0e1e30"/>
+    </linearGradient>
+    <!-- Metallic separator -->
+    <linearGradient id="sep" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c8d4de"/>
+      <stop offset="40%" stop-color="#e8eef4"/>
+      <stop offset="100%" stop-color="#8898a8"/>
+    </linearGradient>
+    <!-- Separator right face -->
+    <linearGradient id="sepr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6878888"/>
+      <stop offset="100%" stop-color="#3a4858"/>
+    </linearGradient>
+    <!-- Circle badge -->
+    <radialGradient id="circ" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="80%" stop-color="#eef0f4"/>
+      <stop offset="100%" stop-color="#d8dce4"/>
+    </radialGradient>
+    <linearGradient id="circBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#708090"/>
+      <stop offset="50%" stop-color="#303c48"/>
+      <stop offset="100%" stop-color="#708090"/>
+    </linearGradient>
+    <!-- F.P.P.I text -->
+    <linearGradient id="fppi" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a8ab8"/>
+      <stop offset="50%" stop-color="#3a6898"/>
+      <stop offset="100%" stop-color="#5888b4"/>
+    </linearGradient>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="3" dy="8"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cshadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7"/>
+      <feOffset dx="0" dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.28"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Ground shadow -->
+    <radialGradient id="gnd" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#6070808" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#607080" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!--
+    PYRAMID — center x=448, apex y=132, base y=462
+    Right-face depth offset: dx=+42, dy=-14
+    Tier widths grow downward; separators mark tier boundaries.
+
+    Key Y levels:
+      apex:       y=132,  x=448
+      tier1 bot:  y=204,  L=410, R=480
+      sep1 bot:   y=218,  L=394, R=498
+      tier2 bot:  y=292,  L=348, R=542
+      sep2 bot:   y=306,  L=330, R=562
+      tier3 bot:  y=374,  L=282, R=584
+      sep3 bot:   y=390,  L=262, R=606
+      base:       y=462,  L=210, R=628
+  -->
+
+  <g id="pyramid" filter="url(#shadow)">
+
+    <!-- ── TIER 1 FRONT (triangle) ── -->
+    <polygon points="448,132 410,204 480,204" fill="url(#f1)"/>
+    <!-- TIER 1 RIGHT FACE -->
+    <polygon points="448,132 480,204 522,190 490,118" fill="url(#r1)"/>
+
+    <!-- ── SEPARATOR 1 ── -->
+    <!-- front ledge -->
+    <polygon points="394,204 480,204 498,218 394,218" fill="url(#sep)"/>
+    <!-- right face of separator -->
+    <polygon points="480,204 522,190 540,204 498,218" fill="#4a5a6a" opacity="0.85"/>
+
+    <!-- ── TIER 2 FRONT ── -->
+    <polygon points="394,218 348,292 542,292 498,218" fill="url(#f2)"/>
+    <!-- TIER 2 RIGHT FACE -->
+    <polygon points="498,218 542,292 584,278 540,204" fill="url(#r2)"/>
+
+    <!-- ── SEPARATOR 2 ── -->
+    <polygon points="330,292 542,292 562,306 330,306" fill="url(#sep)"/>
+    <polygon points="542,292 584,278 604,292 562,306" fill="#4a5a6a" opacity="0.85"/>
+
+    <!-- ── TIER 3 FRONT ── -->
+    <polygon points="330,306 282,374 584,374 562,306" fill="url(#f3)"/>
+    <!-- TIER 3 RIGHT FACE -->
+    <polygon points="562,306 584,374 626,360 604,292" fill="url(#r3)"/>
+
+    <!-- ── SEPARATOR 3 ── -->
+    <polygon points="262,374 584,374 606,390 262,390" fill="url(#sep)"/>
+    <polygon points="584,374 626,360 648,374 606,390" fill="#4a5a6a" opacity="0.85"/>
+
+    <!-- ── TIER 4 FRONT ── -->
+    <polygon points="262,390 210,462 628,462 606,390" fill="url(#f4)"/>
+    <!-- TIER 4 RIGHT FACE -->
+    <polygon points="606,390 628,462 670,448 648,374" fill="url(#r4)"/>
+
+    <!-- Base line -->
+    <line x1="210" y1="462" x2="628" y2="462" stroke="#5a7090" stroke-width="1.5" opacity="0.5"/>
+    <line x1="628" y1="462" x2="670" y2="448" stroke="#3a4858" stroke-width="1.5" opacity="0.5"/>
+
+  </g>
+
+  <!-- Ground shadow ellipse -->
+  <ellipse cx="430" cy="470" rx="235" ry="14" fill="url(#gnd)"/>
+
+  <!-- ══════════════════════════════════
+       CIRCLE BADGE — overlaps left side
+       center: (288, 298), radius 96
+       ══════════════════════════════════ -->
+  <g id="badge" filter="url(#cshadow)">
+    <!-- Outer ring -->
+    <circle cx="288" cy="298" r="100" fill="url(#circBorder)"/>
+    <!-- White face -->
+    <circle cx="288" cy="298" r="90" fill="url(#circ)"/>
+    <!-- Inner thin ring -->
+    <circle cx="288" cy="298" r="85" fill="none" stroke="#c8cdd6" stroke-width="1.5"/>
+
+    <!-- Big "P" -->
+    <text x="282" y="332"
+          font-family="Georgia,'Times New Roman',serif"
+          font-size="96" font-weight="700"
+          fill="#1e2c3c" text-anchor="middle">P</text>
+
+    <!-- Smaller "S" top-right -->
+    <text x="326" y="262"
+          font-family="Georgia,'Times New Roman',serif"
+          font-size="44" font-weight="600"
+          fill="#2a4060" text-anchor="middle">S</text>
+  </g>
+
+  <!-- ══════════════════════════════════
+       TEXT SECTION
+       ══════════════════════════════════ -->
+
+  <!-- Arabic -->
+  <text x="420" y="558"
+        font-family="'Arial','Tahoma',sans-serif"
+        font-size="25" font-weight="400"
+        fill="#1a2535" text-anchor="middle"
+        direction="rtl">شركـــة الهرم الرابع للصناعات البلاستيكية</text>
+
+  <!-- Divider -->
+  <line x1="190" y1="576" x2="650" y2="576" stroke="#7a8898" stroke-width="0.8" opacity="0.55"/>
+
+  <!-- English -->
+  <text x="420" y="608"
+        font-family="'Arial','Helvetica Neue',sans-serif"
+        font-size="21.5" font-weight="700"
+        fill="#111e2c" text-anchor="middle"
+        letter-spacing="0.6">Fourth Pyramid Plastic Industries Co.</text>
+
+  <!-- Divider -->
+  <line x1="240" y1="626" x2="600" y2="626" stroke="#7a8898" stroke-width="0.8" opacity="0.45"/>
+
+  <!-- F.P.P.I -->
+  <text x="420" y="716"
+        font-family="'Palatino Linotype','Palatino','Book Antiqua',Georgia,serif"
+        font-size="72" font-weight="400"
+        fill="url(#fppi)" text-anchor="middle"
+        letter-spacing="6"
+        font-style="italic">F.P.P.I</text>
+
+</svg>
