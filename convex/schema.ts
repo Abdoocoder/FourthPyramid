@@ -65,10 +65,27 @@ export default defineSchema({
     ),
   }).index("by_status", ["status"]),
 
+  pages: defineTable({
+    slug: v.string(),
+    title: v.string(),
+    title_ar: v.optional(v.string()),
+    blocks: v.array(v.object({
+      type: v.string(),
+      content: v.string(),
+      level: v.optional(v.number()),
+    })),
+    blocks_ar: v.optional(v.array(v.object({
+      type: v.string(),
+      content: v.string(),
+      level: v.optional(v.number()),
+    }))),
+    updatedAt: v.number(),
+  }).index("by_slug", ["slug"]),
+
   admins: defineTable({
     clerkId: v.string(),
     email: v.string(),
     name: v.string(),
-    role: v.union(v.literal("admin"), v.literal("superadmin")),
+    role: v.union(v.literal("admin"), v.literal("superadmin"), v.literal("editor")),
   }).index("by_clerk_id", ["clerkId"]),
 });

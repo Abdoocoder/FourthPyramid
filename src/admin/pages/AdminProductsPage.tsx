@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Plus, Edit, Trash2, Search } from "lucide-react";
 import { Button } from "../../components/ui/Button";
@@ -8,6 +9,7 @@ import { localized, localizedSpecs } from "../../lib/localized";
 
 export function AdminProductsPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const productsData = useQuery(api.products.list, { searchQuery: search || undefined });
 
@@ -15,7 +17,7 @@ export function AdminProductsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="font-headline-md text-headline-md text-on-surface">{t("admin.products")}</h1>
-        <Button size="sm">
+        <Button size="sm" onClick={() => navigate("/admin/products/new")}>
           <Plus className="w-4 h-4" /> {t("admin.addProduct")}
         </Button>
       </div>
@@ -55,7 +57,7 @@ export function AdminProductsPage() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
-                    <button className="p-2 text-on-surface-variant hover:text-primary transition-colors" title={t("admin.edit")}>
+                    <button className="p-2 text-on-surface-variant hover:text-primary transition-colors" title={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
                       <Edit className="w-4 h-4" />
                     </button>
                     <button className="p-2 text-on-surface-variant hover:text-error transition-colors" title={t("admin.delete")}>

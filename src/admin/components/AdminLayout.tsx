@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser, SignOutButton } from "@clerk/clerk-react";
-import { LayoutDashboard, Package, MessageSquare, Image, LogOut, Factory, Menu, X } from "lucide-react";
+import { LayoutDashboard, Package, MessageSquare, Image, FileText, LogOut, Factory, Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "products", href: "/admin/products", icon: Package },
+  { label: "pages", href: "/admin/pages", icon: FileText },
   { label: "quotes", href: "/admin/quotes", icon: MessageSquare },
   { label: "images", href: "/admin/images", icon: Image },
 ];

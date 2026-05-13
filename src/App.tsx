@@ -14,6 +14,8 @@ import { ProtectedRoute } from "./admin/components/ProtectedRoute";
 import { AdminLayout } from "./admin/components/AdminLayout";
 import { DashboardPage } from "./admin/pages/DashboardPage";
 import { AdminProductsPage } from "./admin/pages/AdminProductsPage";
+import { AdminProductFormPage } from "./admin/pages/AdminProductFormPage";
+import { AdminPagesPage } from "./admin/pages/AdminPagesPage";
 import { AdminQuotesPage } from "./admin/pages/AdminQuotesPage";
 import { AdminImagesPage } from "./admin/pages/AdminImagesPage";
 
@@ -51,6 +53,9 @@ function App() {
         >
           <Route index element={<DashboardPage />} />
           <Route path="products" element={<AdminProductsPage />} />
+          <Route path="products/new" element={<AdminProductFormPage />} />
+          <Route path="products/edit/:id" element={<AdminProductFormPage />} />
+          <Route path="pages" element={<AdminPagesPage />} />
           <Route path="quotes" element={<AdminQuotesPage />} />
           <Route path="images" element={<AdminImagesPage />} />
         </Route>

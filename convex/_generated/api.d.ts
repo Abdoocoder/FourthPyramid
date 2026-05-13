@@ -10,7 +10,9 @@
 
 import type * as admins from "../admins.js";
 import type * as categories from "../categories.js";
+import type * as images from "../images.js";
 import type * as migrate_ar from "../migrate_ar.js";
+import type * as pages from "../pages.js";
 import type * as products from "../products.js";
 import type * as quotes from "../quotes.js";
 import type * as seed from "../seed.js";
@@ -24,7 +26,9 @@ import type {
 declare const fullApi: ApiFromModules<{
   admins: typeof admins;
   categories: typeof categories;
+  images: typeof images;
   migrate_ar: typeof migrate_ar;
+  pages: typeof pages;
   products: typeof products;
   quotes: typeof quotes;
   seed: typeof seed;
