@@ -1,73 +1,116 @@
-# React + TypeScript + Vite
+# Fourth Pyramid Plastic Industries
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Corporate website for Fourth Pyramid Plastic Industries — a Jordan-based manufacturer of plastic packaging, industrial containers, chemical jerrycans, and commercial bottles.
 
-Currently, two official plugins are available:
+Built with React 19, Vite 8, Tailwind CSS 4, and Convex for the backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19, TypeScript 6, Vite 8 |
+| Styling | Tailwind CSS 4, MD3 color system |
+| Backend | Convex (realtime, edge-deployed) |
+| Auth | Clerk (admin dashboard) |
+| i18n | react-i18next (English / Arabic) |
+| Icons | Lucide React |
+| Hosting | Vercel (frontend) + Convex Cloud (backend) |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **Bilingual support** — Full English + Arabic with RTL layout via react-i18next
+- **MD3 color system** — Material Design 3 palette with dark mode
+- **Admin dashboard** — Clerk-protected admin panel for managing products, quotes, and images
+- **Product catalog** — Browse, search, and filter by category
+- **Quote requests** — In-app quote form with Convex persistence
+- **Responsive** — Mobile-first design with touch-aware interactions
+- **Accessible** — Skip link, keyboard navigation, WCAG AA contrast, reduced-motion support
+- **Performance** — CSS-only stagger animations, custom easing curves, transform/opacity-only transitions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start the dev server
+npx convex dev
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The Convex dev server runs locally and watches your `convex/` functions. Vite dev server runs concurrently.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Environment Variables
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create `.env.local`:
+
 ```
+VITE_CONVEX_URL=https://your-project.convex.cloud
+VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
+```
+
+## Project Structure
+
+```
+src/
+├── admin/          # Admin dashboard pages + components
+│   ├── components/ # AdminLayout, ProtectedRoute
+│   └── pages/      # DashboardPage, AdminProductsPage, AdminQuotesPage, AdminImagesPage
+├── components/
+│   ├── layout/     # Header, Footer, Layout
+│   └── ui/         # Button, Card, Badge, Input, SpecTable
+├── i18n/
+│   ├── config.ts   # i18next setup
+│   └── locales/    # en.json, ar.json
+├── lib/            # Convex client config, helpers, constants
+├── pages/          # HomePage, AboutPage, ProductsPage, ProductDetailsPage,
+│                   # IndustriesPage, ContactPage, RequestQuotePage
+├── App.tsx         # Router + direction setter
+├── index.css       # Global styles, MD3 tokens, RTL overrides
+└── main.tsx        # Entry point
+
+convex/
+├── schema.ts       # Database schema (products, categories, quotes, admins)
+├── products.ts     # Product queries + mutations
+├── categories.ts   # Category queries + mutations
+├── quotes.ts       # Quote queries + mutations
+├── admins.ts       # Admin queries
+└── seed.ts         # Seed data
+```
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | TypeScript check + production build |
+| `npm run preview` | Preview production build |
+| `npx convex dev` | Start Convex local dev server |
+| `npx convex deploy` | Deploy Convex functions to production |
+| `npx convex run` | Run a Convex function (query/mutation) |
+
+## Deployment
+
+Frontend is deployed to Vercel. Backend runs on Convex Cloud.
+
+```bash
+# Deploy Convex functions
+npx convex deploy
+
+# Deploy frontend (requires Vercel CLI)
+npx vercel deploy --prod
+```
+
+Convex production URL and Clerk publishable key are set as Vercel environment variables.
+
+## Design System
+
+- **Primary**: `#004ccd` (blue)
+- **Tertiary / CTA**: `#c84000` (orange)
+- **Fonts**: Inter (headlines), IBM Plex Sans (body), IBM Plex Mono (data)
+- **Easing**: Custom cubic-bezier curves (expo-out, strong-out)
+- **Dark mode**: Inverted MD3 palette via `prefers-color-scheme: dark`
+
+## License
+
+All rights reserved. Fourth Pyramid Plastic Industries.
