@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Globe } from "lucide-react";
+import { Globe, ArrowUpRight } from "lucide-react";
 import { navLinks, siteConfig } from "../../lib/constants";
-import { Button } from "../ui/Button";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -17,17 +16,10 @@ export function Header() {
     setMobileOpen(false);
   }
 
-  const toggleLang = () => {
-    const next = i18n.language === "ar" ? "en" : "ar";
-    i18n.changeLanguage(next);
-  };
+  const toggleLang = () => i18n.changeLanguage(i18n.language === "ar" ? "en" : "ar");
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
@@ -38,104 +30,212 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinkClass = (href: string) =>
-    `font-body-sm text-body-sm font-medium transition-colors duration-150 py-2.5 px-3 min-h-11 flex items-center rounded-lg ${
-      pathname === href
-        ? "bg-primary-container text-on-primary-container font-semibold"
-        : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
-    }`;
-
   return (
-    <header className={`bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant transition-shadow duration-200 ${scrolled ? "shadow-sm" : ""}`}>
-      <div className="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
-        <Link to="/" aria-label="Home" className="flex items-center gap-2.5 text-on-surface hover:text-primary transition-colors duration-200">
-          <img src="/logo.svg" alt="Fourth Pyramid" className="h-9 w-auto" />
-          <span className="font-headline-md text-headline-md tracking-tight font-bold hidden sm:inline">{siteConfig.name}</span>
+    <header
+      className="fixed top-0 w-full z-50 bg-pyramid-navy transition-shadow duration-300"
+      style={{
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        boxShadow: scrolled ? "0 4px 32px rgba(0,0,0,0.4)" : "none",
+      }}
+    >
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-20 flex items-center gap-6">
+
+        {/* Brand */}
+        <Link
+          to="/"
+          aria-label={`${siteConfig.name} — ${t("nav.home")}`}
+          className="flex items-center gap-3 shrink-0"
+        >
+          <img
+            src="/logo.svg"
+            alt={siteConfig.name}
+            className="h-8 w-auto"
+            style={{ filter: "brightness(0) invert(1)" }}
+          />
+          <div className="hidden sm:flex flex-col leading-none gap-0.5">
+            <span className="text-white text-[0.9375rem] font-bold tracking-tight">
+              Fourth Pyramid
+            </span>
+            <span className="text-white/30 text-[0.5625rem] font-medium uppercase tracking-[0.18em]">
+              Plastic Industries
+            </span>
+          </div>
         </Link>
 
-        <nav aria-label={t("nav.primary")} className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link key={link.href} to={link.href} className={navLinkClass(link.href)}>
-              {t(`nav.${link.label.toLowerCase()}`)}
-            </Link>
-          ))}
+        {/* Divider */}
+        <div
+          className="hidden md:block h-6 w-px shrink-0"
+          style={{ background: "rgba(255,255,255,0.1)" }}
+          aria-hidden="true"
+        />
+
+        {/* Desktop nav */}
+        <nav
+          aria-label={t("nav.primary")}
+          className="hidden md:flex items-center gap-0.5 flex-1"
+        >
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`relative flex items-center px-3 min-h-11 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                  isActive
+                    ? "text-white"
+                    : "text-white/50 hover:text-white/85 hover:bg-white/5"
+                }`}
+                style={{ transitionTimingFunction: "var(--ease-out-strong)" }}
+              >
+                {t(`nav.${link.label.toLowerCase()}`)}
+                {isActive && (
+                  <span
+                    className="absolute bottom-0 inset-x-3 h-[2px] bg-primary rounded-t-full"
+                    aria-hidden="true"
+                  />
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* Spacer for mobile */}
+        <div className="flex-1 md:hidden" />
+
+        {/* Actions */}
+        <div className="flex items-center gap-1.5">
+
+          {/* Language */}
           <button
             onClick={toggleLang}
-            className="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors font-body-sm text-body-sm font-medium py-2.5 px-2 min-h-11 rounded-lg hover:bg-surface-container"
             aria-label={i18n.language === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+            className="hidden sm:flex items-center gap-1.5 min-h-11 px-3 rounded-lg text-white/40 hover:text-white/75 hover:bg-white/5 transition-colors duration-200 text-[0.6875rem] font-semibold uppercase tracking-widest"
           >
-            <Globe className="w-4 h-4" />
-            <span className="hidden sm:inline">{t("nav.language")}</span>
+            <Globe className="w-3.5 h-3.5" />
+            {i18n.language === "ar" ? "EN" : "AR"}
           </button>
+
+          {/* CTA */}
           <Link
-            to="/admin"
-            className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors py-2.5 px-2 min-h-11 rounded-lg hover:bg-surface-container hidden md:inline-flex items-center"
+            to="/request-quote"
+            className="hidden md:flex items-center gap-1.5 min-h-11 px-4 rounded-xl text-sm font-semibold bg-white hover:bg-white/90 active:scale-[0.97] transition-all duration-200"
+            style={{
+              color: "var(--color-pyramid-navy)",
+              transitionTimingFunction: "var(--ease-out-strong)",
+            }}
           >
-            {t("nav.adminLogin")}
-          </Link>
-          <Button as="a" href="/request-quote" size="sm" variant="tertiary">
             {t("nav.requestQuote")}
-          </Button>
+            <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
+
+          {/* Hamburger */}
           <button
-            className="md:hidden text-on-surface p-2.5 rounded-lg hover:bg-surface-container transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle navigation"
+            className="md:hidden flex items-center justify-center w-11 h-11 rounded-lg text-white/65 hover:text-white hover:bg-white/8 transition-colors duration-200"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
           >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <span className="flex flex-col items-center justify-center gap-[5px] w-5" aria-hidden="true">
+              <span
+                className="block w-5 h-px bg-current rounded-full transition-all duration-200"
+                style={{
+                  transform: mobileOpen ? "translateY(6px) rotate(45deg)" : "none",
+                  transitionTimingFunction: "var(--ease-out-strong)",
+                }}
+              />
+              <span
+                className="block w-5 h-px bg-current rounded-full transition-all duration-200"
+                style={{
+                  opacity: mobileOpen ? 0 : 1,
+                  transform: mobileOpen ? "scaleX(0)" : "scaleX(1)",
+                  transitionTimingFunction: "var(--ease-out-strong)",
+                }}
+              />
+              <span
+                className="block w-5 h-px bg-current rounded-full transition-all duration-200"
+                style={{
+                  transform: mobileOpen ? "translateY(-6px) rotate(-45deg)" : "none",
+                  transitionTimingFunction: "var(--ease-out-strong)",
+                }}
+              />
+            </span>
           </button>
         </div>
       </div>
 
+      {/* Mobile menu */}
       <div
         id="mobile-nav"
-        className={`md:hidden bg-surface border-t border-outline-variant overflow-hidden transition-[max-height,opacity] duration-300 ease-out-strong ${
-          mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-        style={{ "--item-count": navLinks.length + 3 } as React.CSSProperties}
+        className="md:hidden overflow-hidden transition-[max-height,opacity] duration-300"
+        style={{
+          maxHeight: mobileOpen ? "600px" : "0px",
+          opacity: mobileOpen ? 1 : 0,
+          borderTop: mobileOpen ? "1px solid rgba(255,255,255,0.07)" : "1px solid transparent",
+          transitionTimingFunction: "var(--ease-out-strong)",
+        }}
+        aria-hidden={!mobileOpen}
       >
-        <nav className="flex flex-col px-margin-mobile py-4 gap-2">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className={`nav-stagger font-body-lg text-body-lg py-3 px-4 rounded-lg transition-colors duration-150 ${
-                pathname === link.href
-                  ? "bg-primary-container text-on-primary-container font-semibold"
-                  : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
-              }`}
-              style={{ "--i": i } as React.CSSProperties}
-            >
-              {t(`nav.${link.label.toLowerCase()}`)}
-            </Link>
-          ))}
-          <div className="h-px bg-outline-variant my-2 mx-4" />
+        <nav
+          className="flex flex-col px-margin-mobile pt-4 pb-6 gap-1"
+          aria-label={t("nav.primary")}
+        >
+          {navLinks.map((link, i) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                to={link.href}
+                aria-current={isActive ? "page" : undefined}
+                className={`nav-stagger flex items-center text-[1.0625rem] font-medium py-3 px-4 rounded-xl transition-colors duration-150 ${
+                  isActive
+                    ? "text-white bg-white/[0.08]"
+                    : "text-white/55 hover:text-white hover:bg-white/[0.05]"
+                }`}
+                style={{ "--i": i } as React.CSSProperties}
+              >
+                {t(`nav.${link.label.toLowerCase()}`)}
+                {isActive && (
+                  <span
+                    className="ltr:ml-auto rtl:mr-auto w-1.5 h-1.5 rounded-full bg-primary shrink-0"
+                    aria-hidden="true"
+                  />
+                )}
+              </Link>
+            );
+          })}
+
+          <div
+            className="nav-stagger my-3 mx-4 h-px"
+            style={{
+              "--i": navLinks.length,
+              background: "rgba(255,255,255,0.06)",
+            } as React.CSSProperties}
+            aria-hidden="true"
+          />
+
           <button
-            onClick={() => { toggleLang(); }}
-            className="nav-stagger flex items-center gap-2 text-on-surface-variant py-3 px-4 rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors font-body-lg text-body-lg"
-            style={{ "--i": navLinks.length } as React.CSSProperties}
-          >
-            <Globe className="w-4 h-4" />
-            {t("nav.language")}
-          </button>
-          <Link
-            to="/admin"
-            className="nav-stagger font-body-lg text-body-lg py-3 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+            onClick={toggleLang}
+            className="nav-stagger flex items-center gap-3 text-white/45 hover:text-white/75 text-sm font-medium py-3 px-4 rounded-xl hover:bg-white/[0.05] transition-colors duration-150 w-full text-start"
             style={{ "--i": navLinks.length + 1 } as React.CSSProperties}
           >
-            {t("nav.adminLogin")}
-          </Link>
+            <Globe className="w-4 h-4 shrink-0" />
+            {i18n.language === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+          </button>
+
           <div
-            className="nav-stagger px-4 mt-2"
+            className="nav-stagger px-4 pt-2"
             style={{ "--i": navLinks.length + 2 } as React.CSSProperties}
           >
-            <Button as="a" href="/request-quote" size="md" variant="tertiary" className="w-full justify-center">
+            <Link
+              to="/request-quote"
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-sm font-semibold bg-white hover:bg-white/90 active:scale-[0.98] transition-all duration-200"
+              style={{ color: "var(--color-pyramid-navy)" }}
+            >
               {t("nav.requestQuote")}
-            </Button>
+              <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
           </div>
         </nav>
       </div>
