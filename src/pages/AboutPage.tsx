@@ -47,6 +47,7 @@ export function AboutPage() {
   usePageEntrance(heroRef, ".reveal", { stagger: 0.13, delay: 0.05 });
   useScrollReveal(metricsRef, ".metric-box");
   useScrollReveal(capabilitiesRef, ".cap-box");
+  useScrollReveal(qualityRef, ".reveal");
   useScrollReveal(ctaRef, ".cta-reveal", 0.15);
   useImageReveal(qualityRef, ".img-reveal", 0.2);
 
@@ -112,7 +113,7 @@ export function AboutPage() {
       </section>
 
       <section ref={qualityRef} className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
-        <div className="reveal h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest img-reveal">
+        <div className="h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest img-reveal">
           <img
             className="w-full h-full object-cover opacity-60 dark:opacity-30"
             src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80&auto=format"

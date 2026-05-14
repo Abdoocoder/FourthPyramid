@@ -9,7 +9,8 @@
     "language": "العربية",
     "distributorPortal": "Distributor Portal",
     "downloadCatalog": "Download Catalog",
-    "adminLogin": "Log In"
+    "adminLogin": "Log In",
+    "primary": "Main navigation"
   },
   "footer": {
     "description": "Precision engineering for the plastics industry. High-quality plastic manufacturing solutions based in Amman, Jordan.",
@@ -20,7 +21,8 @@
     "industries": "Industries",
     "contactUs": "Contact",
     "support": "Support",
-    "designedBy": "Designed & developed by"
+    "designedBy": "Designed & developed by",
+    "backToTop": "Back to top"
   },
   "home": {
     "heroEyebrow": "Jordan's Industrial Plastics Leader",

@@ -5,6 +5,7 @@ import { Phone, Mail, MapPin, ArrowUp, ShieldCheck } from "lucide-react";
 import { navLinks, siteConfig } from "../../lib/constants";
 
 function BackToTop() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Back to top"
+      aria-label={t("footer.backToTop")}
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       className="fixed bottom-6 ltr:right-6 rtl:left-6 z-40 w-11 h-11 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200"
@@ -33,7 +34,7 @@ function BackToTop() {
 }
 
 export function Footer() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <>
@@ -64,7 +65,7 @@ export function Footer() {
                 </a>
                 <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant min-h-11 py-1">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                  {siteConfig.address}
+                  {i18n.language === "ar" ? siteConfig.address_ar : siteConfig.address}
                 </span>
               </div>
             </div>

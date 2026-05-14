@@ -9,7 +9,8 @@
     "language": "English",
     "distributorPortal": "بوابة الموزعين",
     "downloadCatalog": "تحميل الكتالوج",
-    "adminLogin": "تسجيل الدخول"
+    "adminLogin": "تسجيل الدخول",
+    "primary": "التنقل الرئيسي"
   },
   "footer": {
     "description": "هندسة دقيقة لصناعة البلاستيك. حلول تصنيع بلاستيك عالية الجودة من عمان، الأردن.",
@@ -20,7 +21,8 @@
     "industries": "القطاعات",
     "contactUs": "اتصل بنا",
     "support": "الدعم",
-    "designedBy": "تصميم وتطوير بواسطة"
+    "designedBy": "تصميم وتطوير بواسطة",
+    "backToTop": "العودة إلى الأعلى"
   },
   "home": {
     "heroEyebrow": "شركة رائدة في صناعة البلاستيك في الأردن",
