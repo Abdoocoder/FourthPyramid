@@ -70,7 +70,7 @@ export function AdminProductsPage() {
                 <td className="px-6 py-4 hidden sm:table-cell">
                   <span className="font-body-sm text-body-sm text-on-surface-variant">{localizedSpecs(p.specs, p.specs_ar).material}</span>
                 </td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-6 py-4 text-end">
                   <div className="flex items-center justify-end gap-2">
                     <button className="p-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.edit")} aria-label={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
                       <Edit className="w-4 h-4" />

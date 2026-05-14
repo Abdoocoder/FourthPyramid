@@ -158,7 +158,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         aria-modal={sidebarOpen || undefined}
         aria-label={t("admin.sidebarNav")}
         className={`
-          fixed md:static inset-y-0 left-0 z-40 w-64 flex flex-col
+          fixed md:static inset-y-0 start-0 z-40 w-64 flex flex-col
           bg-pyramid-navy
           transition-transform duration-250 ease-out-strong
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
@@ -212,7 +212,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 style={{ transitionDelay: sidebarOpen ? `${80 + i * 40}ms` : "0ms" }}
               >
                 <span
-                  className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-white
+                  className={`absolute start-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-e-full bg-white
                     transition-all duration-200 ease-out
                     ${active ? "opacity-100" : "opacity-0 group-hover:opacity-50"}`}
                   aria-hidden="true"

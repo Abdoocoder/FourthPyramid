@@ -73,7 +73,7 @@ export function AdminQuotesPage() {
                     {t(`admin.${q.status}`)}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-6 py-4 text-end">
                   <button className="p-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.view")} aria-label={t("admin.view")}>
                     <Eye className="w-4 h-4" />
                   </button>
