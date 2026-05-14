@@ -30,7 +30,7 @@ function SuccessView() {
 }
 
 export function ContactPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   usePageTitle(t("nav.contact"));
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
