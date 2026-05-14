@@ -2,13 +2,14 @@ import { useState, useRef, useEffect, useCallback, type ReactNode } from "react"
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser, SignOutButton } from "@clerk/clerk-react";
-import { LayoutDashboard, Package, MessageSquare, Image, FileText, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, MessageSquare, Mail, Image, FileText, LogOut } from "lucide-react";
 
 const navItems = [
   { label: "dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "products", href: "/admin/products", icon: Package },
   { label: "pages", href: "/admin/pages", icon: FileText },
   { label: "quotes", href: "/admin/quotes", icon: MessageSquare },
+  { label: "contacts", href: "/admin/contacts", icon: Mail },
   { label: "images", href: "/admin/images", icon: Image },
 ];
 
@@ -17,6 +18,7 @@ const navLabelMap: Record<string, string> = {
   "/admin/products": "products",
   "/admin/pages": "pages",
   "/admin/quotes": "quotes",
+  "/admin/contacts": "contacts",
   "/admin/images": "images",
 };
 

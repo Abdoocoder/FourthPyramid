@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { MessageSquare, ArrowRight, Plus, FileText, Image } from "lucide-react";
+import { MessageSquare, ArrowRight, Plus, FileText, Image, Mail } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { Link } from "react-router-dom";
@@ -78,7 +78,7 @@ export function DashboardPage() {
 
           {pendingQuotes === undefined ? (
             <div className="px-5 py-10 text-center text-sm text-on-surface-variant animate-pulse">
-              {t("products.loading")}
+              {t("admin.loading")}
             </div>
           ) : pendingQuotes.length === 0 ? (
             <div className="px-5 py-10 text-center">
@@ -142,6 +142,15 @@ export function DashboardPage() {
                 <FileText className="w-3.5 h-3.5 text-on-secondary-container" />
               </div>
               <span className="font-medium">{t("admin.pages")}</span>
+            </Link>
+            <Link
+              to="/admin/contacts"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-on-surface hover:bg-surface-container transition-colors duration-150"
+            >
+              <div className="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
+                <Mail className="w-3.5 h-3.5 text-on-surface-variant" />
+              </div>
+              <span className="font-medium">{t("admin.contacts")}</span>
             </Link>
             <Link
               to="/admin/images"

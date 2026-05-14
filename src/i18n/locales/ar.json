@@ -167,6 +167,7 @@
     "submittedDesc": "شكراً لاهتمامك. سيراجع فريق المبيعات الفني متطلباتك وسيعود إليك خلال 24 ساعة.",
     "returnHome": "العودة للرئيسية",
     "error": "فشل الإرسال. حاول مرة أخرى.",
+    "prefilledPrefix": "استفسار بخصوص:",
     "productOptionInjection": "حقن البلاستيك",
     "productOptionBlow": "نفخ البلاستيك",
     "productOptionExtrusion": "بثق البلاستيك",
@@ -265,7 +266,10 @@
     "confirmDelete": "حذف \"{{name}}\"؟ لا يمكن التراجع عن هذا الإجراء.",
     "confirmDeleteImage": "حذف هذه الصورة؟ لا يمكن التراجع عن هذا الإجراء.",
     "loading": "جاري التحميل...",
-    "noPendingQuotes": "لا توجد طلبات قيد الانتظار."
+    "noPendingQuotes": "لا توجد طلبات قيد الانتظار.",
+    "contacts": "رسائل التواصل",
+    "noContacts": "لا توجد رسائل تواصل بعد.",
+    "name": "الاسم"
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

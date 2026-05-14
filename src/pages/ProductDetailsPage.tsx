@@ -205,7 +205,13 @@ export function ProductDetailsPage() {
         </div>
 
         <div className="pd-panel-item flex flex-col gap-4 mt-auto">
-          <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="w-full justify-center">
+          <Button
+            as="a"
+            href={`/request-quote?product=${encodeURIComponent(localized(product, "name"))}`}
+            size="lg"
+            variant="tertiary"
+            className="w-full justify-center"
+          >
             <FileText className="w-4 h-4" />
             {t("productDetails.requestBulkQuote")}
           </Button>

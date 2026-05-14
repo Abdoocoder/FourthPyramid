@@ -142,43 +142,53 @@ export function HomePage() {
 
   return (
     <div className="overflow-x-hidden w-full max-w-full">
-      <section className="relative min-h-[90dvh] flex items-center justify-center overflow-hidden bg-hero-surface">
+
+      {/* ── Hero: split-screen, content start-aligned ── */}
+      <section className="relative min-h-[90dvh] bg-hero-surface overflow-hidden flex items-center">
+        {/* Full-bleed image, gradient fades from start (dark) to end (visible) */}
         <div className="absolute inset-0">
           <img
             src={HERO_IMAGE}
             alt=""
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-45"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-hero-surface/60 via-hero-surface/40 to-hero-surface" />
+          {/* Logical gradient: dark on content side, image bleeds through on the other */}
+          <div className="absolute inset-0 bg-gradient-to-e from-hero-surface from-[38%] via-hero-surface/75 to-hero-surface/15" />
+          {/* Bottom darkening for both orientations */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-hero-surface to-transparent" />
         </div>
-        <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-24 md:py-0 text-center">
-          <span className="hero-eyebrow font-data-mono text-data-mono text-primary/80 uppercase tracking-[0.2em] text-[11px] mb-8 block">
-            {t("home.heroEyebrow")}
-          </span>
-          <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6 max-w-5xl mx-auto">
-            {t("home.heroTitle") + " "}
-            <span
-              className="inline-block w-16 h-8 md:w-24 md:h-12 rounded-full align-middle mx-2 bg-cover bg-center"
-              style={{ backgroundImage: `url(${HERO_IMAGE.replace("w=1920", "w=200")}&h=200&fit=crop)` }}
-            />
-            {" "}
-            <span className="text-primary">{t("home.heroTitleAccent")}</span>
-          </h1>
-          <p className="font-body-lg text-body-lg text-inverse-on-surface/70 max-w-2xl mx-auto mb-12 leading-relaxed">
-            {t("home.heroDesc")}
-          </p>
-          <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="px-10 py-4">
-              {t("home.requestQuote")} <ArrowRight className="w-4 h-4" />
-            </Button>
-            <Button as="a" href="/products" variant="dark" size="lg" className="px-10 py-4">
-              {t("home.viewProducts")}
-            </Button>
+
+        <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-32 md:py-0">
+          <div className="flex flex-col max-w-2xl">
+            <span className="hero-eyebrow font-data-mono text-data-mono text-primary/80 uppercase tracking-[0.2em] text-[11px] mb-8 block">
+              {t("home.heroEyebrow")}
+            </span>
+            <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6">
+              {t("home.heroTitle") + " "}
+              <span
+                className="inline-block w-16 h-8 md:w-24 md:h-12 rounded-full align-middle mx-2 bg-cover bg-center"
+                style={{ backgroundImage: `url(${HERO_IMAGE.replace("w=1920", "w=200")}&h=200&fit=crop)` }}
+              />
+              {" "}
+              <span className="text-primary">{t("home.heroTitleAccent")}</span>
+            </h1>
+            <p className="font-body-lg text-body-lg text-inverse-on-surface/70 max-w-xl mb-12 leading-relaxed">
+              {t("home.heroDesc")}
+            </p>
+            <div className="hero-cta flex flex-col sm:flex-row items-start gap-4">
+              <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="px-10 py-4">
+                {t("home.requestQuote")} <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button as="a" href="/products" variant="dark" size="lg" className="px-10 py-4">
+                {t("home.viewProducts")}
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* ── Metrics ── */}
       <section ref={metricsRef} className="py-24 md:py-32 bg-surface border-b border-outline-variant">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
@@ -211,15 +221,24 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── Capabilities ── */}
       <section ref={capabilitiesRef} className="py-24 md:py-32 bg-surface-container-low">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
-              {t("home.capabilitiesTitle")}
-            </h2>
-            <p className="reveal font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mt-4 leading-relaxed">
-              {t("home.capabilitiesDesc")}
-            </p>
+          {/* Left-aligned section opener */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16">
+            <div className="md:col-span-7">
+              <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
+                {t("home.capabilitiesEyebrow")}
+              </span>
+              <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em]">
+                {t("home.capabilitiesTitle")}
+              </h2>
+            </div>
+            <div className="md:col-span-5 flex items-end">
+              <p className="reveal font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                {t("home.capabilitiesDesc")}
+              </p>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
             {cats === undefined ? (
@@ -234,7 +253,7 @@ export function HomePage() {
                   className={`cap-card hover-lift group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface hover:border-primary transition-colors duration-300 ${i === 0 ? "md:col-span-2 md:row-span-1" : ""}`}
                 >
                   <div className={`flex flex-col ${i === 0 ? "md:flex-row" : ""} h-full`}>
-                    <div className={`${i === 0 ? "md:w-2/5 md:border-r" : ""} bg-surface-container p-8 md:p-10 flex items-center justify-center border-b border-outline-variant md:border-b-0`}>
+                    <div className={`${i === 0 ? "md:w-2/5 md:border-e" : ""} bg-surface-container p-8 md:p-10 flex items-center justify-center border-b border-outline-variant md:border-b-0`}>
                       <div className="text-primary scale-[1.5]">{iconMap[cat.icon]}</div>
                     </div>
                     <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
@@ -252,10 +271,15 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── Why Fourth Pyramid ── */}
       <section ref={whyRef} className="py-24 md:py-32 bg-surface">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
+          {/* Left-aligned opener */}
+          <div className="mb-16">
+            <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
+              {t("home.whyEyebrow")}
+            </span>
+            <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-2xl">
               {t("home.whyTitle")}
             </h2>
           </div>
@@ -304,6 +328,7 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── Marquee ── */}
       <section
         ref={marqueeRef}
         aria-label={t("home.certificationsBadges")}
@@ -337,25 +362,38 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* ── CTA: left-aligned, split layout ── */}
       <section ref={ctaRef} className="py-32 md:py-48 bg-hero-surface relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary blur-[120px]" />
+          <div className="absolute top-1/2 start-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary blur-[120px]" />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <div className="cta-item">
-            <h2 className="font-display-lg text-[clamp(2rem,5vw,4rem)] text-inverse-on-surface mb-6 leading-[1.05] tracking-[-0.02em]">
-              {t("home.ctaTitle")}
-            </h2>
-          </div>
-          <div className="cta-item">
-            <p className="font-body-lg text-body-lg text-inverse-on-surface/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-              {t("home.ctaDesc")}
-            </p>
-          </div>
-          <div className="cta-item">
-            <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="px-12 py-4 text-lg">
-              {t("home.ctaButton")} <ArrowRight className="w-5 h-5" />
-            </Button>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+            <div className="md:col-span-7">
+              <div className="cta-item">
+                <h2 className="font-display-lg text-[clamp(2rem,5vw,4rem)] text-inverse-on-surface mb-6 leading-[1.05] tracking-[-0.02em]">
+                  {t("home.ctaTitle")}
+                </h2>
+              </div>
+              <div className="cta-item">
+                <p className="font-body-lg text-body-lg text-inverse-on-surface/70 mb-10 max-w-xl leading-relaxed">
+                  {t("home.ctaDesc")}
+                </p>
+              </div>
+              <div className="cta-item">
+                <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="px-12 py-4 text-lg">
+                  {t("home.ctaButton")} <ArrowRight className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+            <div className="cta-item md:col-span-5 flex flex-col justify-center gap-0 md:ps-8">
+              {[t("about.quality1Title"), t("about.quality2Title"), t("about.quality3Title")].map((cred) => (
+                <div key={cred} className="flex items-center gap-3 py-4 border-b border-white/10 first:pt-0 last:border-0 last:pb-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden="true" />
+                  <span className="font-body-sm text-body-sm text-inverse-on-surface/55">{cred}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

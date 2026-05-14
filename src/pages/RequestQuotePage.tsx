@@ -1,4 +1,5 @@
 import { useState, useRef, type FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { Globe, CheckCircle, ArrowRight, Loader } from "lucide-react";
@@ -32,6 +33,8 @@ function SuccessView() {
 
 export function RequestQuotePage() {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const prefilledProduct = searchParams.get("product") ?? "";
   usePageTitle(t("nav.requestQuote"));
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -127,7 +130,13 @@ export function RequestQuotePage() {
                 </Select>
                 <Input label={t("quote.estimatedQuantity")} id="quantity" name="quantity" placeholder={t("quote.estimatedQuantityPlaceholder")} />
               </div>
-              <Textarea label={t("quote.projectDetails")} id="message" name="message" placeholder={t("quote.projectDetailsPlaceholder")} />
+              <Textarea
+                label={t("quote.projectDetails")}
+                id="message"
+                name="message"
+                placeholder={t("quote.projectDetailsPlaceholder")}
+                defaultValue={prefilledProduct ? `${t("quote.prefilledPrefix")} ${prefilledProduct}\n\n` : undefined}
+              />
               <div className="pt-4 border-t border-outline-variant">
                 <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center" disabled={submitting}>
                   {submitting ? <Loader className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
