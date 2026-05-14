@@ -44,11 +44,11 @@ export function AdminQuotesPage() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container-low">
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.company")}</th>
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden md:table-cell">{t("admin.contact")}</th>
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden sm:table-cell">{t("admin.productType")}</th>
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.status")}</th>
-              <th className="text-right px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.actions")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.company")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden md:table-cell">{t("admin.contact")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden sm:table-cell">{t("admin.productType")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.status")}</th>
+              <th className="text-end px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.actions")}</th>
             </tr>
           </thead>
           <tbody>

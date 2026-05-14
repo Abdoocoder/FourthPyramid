@@ -66,7 +66,7 @@ export function IndustriesPage() {
                       />
                     </div>
                   </div>
-                  <div className="reveal md:col-span-5 md:pl-8">
+                  <div className="reveal md:col-span-5 md:ps-8">
                     <Badge variant="primary" className="mb-4">{eyebrow}</Badge>
                     <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>

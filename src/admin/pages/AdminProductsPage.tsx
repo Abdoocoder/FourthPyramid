@@ -32,14 +32,14 @@ export function AdminProductsPage() {
       </div>
 
       <div className="relative max-w-md mb-6">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
         <input
           type="text"
           placeholder={t("admin.searchProducts")}
           aria-label={t("admin.searchProducts")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px]"
+          className="w-full ps-10 pe-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px]"
         />
       </div>
 
@@ -47,10 +47,10 @@ export function AdminProductsPage() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container-low">
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.product")}</th>
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden md:table-cell">{t("admin.category")}</th>
-              <th className="text-left px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden sm:table-cell">{t("admin.material")}</th>
-              <th className="text-right px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.actions")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.product")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden md:table-cell">{t("admin.category")}</th>
+              <th className="text-start px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase hidden sm:table-cell">{t("admin.material")}</th>
+              <th className="text-end px-6 py-4 font-data-mono text-data-mono text-on-surface-variant uppercase">{t("admin.actions")}</th>
             </tr>
           </thead>
           <tbody>

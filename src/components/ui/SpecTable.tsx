@@ -15,8 +15,8 @@ export function SpecTable({ specs, label }: SpecTableProps) {
         <tbody>
           {specs.map((spec) => (
             <tr key={spec.label} className="border-b border-surface-container-highest">
-              <th scope="row" className="text-on-surface-variant uppercase tracking-wider py-3 pr-4 text-left font-data-mono text-data-mono font-normal">{spec.label}</th>
-              <td className="text-on-background font-medium text-right py-3">{spec.value}</td>
+              <th scope="row" className="text-on-surface-variant uppercase tracking-wider py-3 pe-4 text-start font-data-mono text-data-mono font-normal">{spec.label}</th>
+              <td className="text-on-background font-medium text-end py-3">{spec.value}</td>
             </tr>
           ))}
         </tbody>

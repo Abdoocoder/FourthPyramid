@@ -118,7 +118,7 @@ export function AboutPage() {
             loading="lazy"
           />
         </div>
-        <div className="reveal space-y-6 md:pl-8">
+        <div className="reveal space-y-6 md:ps-8">
           <span className="font-data-mono text-data-mono text-tertiary uppercase tracking-widest block">{t("about.qualityEyebrow")}</span>
           <h2 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface leading-[1.1]">{t("about.qualityTitle")}</h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant">

@@ -47,7 +47,7 @@ export function ProductsPage() {
 
         <div className="flex flex-col gap-6">
           <div className="relative max-w-md w-full">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
               <Search className="w-5 h-5 text-on-surface-variant" />
             </div>
             <input
@@ -56,7 +56,7 @@ export function ProductsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               aria-label={t("products.searchPlaceholder")}
-              className="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded-xl bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-shadow"
+              className="block w-full ps-10 pe-3 py-3 border border-outline-variant rounded-xl bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-shadow"
             />
           </div>
 
@@ -118,7 +118,7 @@ export function ProductsPage() {
                     <ImageOff className="w-8 h-8 text-outline opacity-30" />
                   </div>
                 )}
-                <div className="absolute top-2 left-2">
+                <div className="absolute top-2 start-2">
                   <Badge variant="secondary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
                 </div>
               </Link>

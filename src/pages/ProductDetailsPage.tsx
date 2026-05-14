@@ -135,7 +135,7 @@ export function ProductDetailsPage() {
             sizes="(max-width: 768px) 100vw, 58vw"
             className="w-full aspect-[4/3] object-cover"
           />
-          <div className="absolute top-4 left-4 bg-on-background text-surface px-3 py-1 rounded-sm font-data-mono text-data-mono uppercase flex items-center gap-1.5 shadow-sm">
+          <div className="absolute top-4 start-4 bg-on-background text-surface px-3 py-1 rounded-sm font-data-mono text-data-mono uppercase flex items-center gap-1.5 shadow-sm">
             <Verified className="w-3.5 h-3.5" />
             {localizedArray(product.certifications, product.certifications_ar)[0]}
           </div>

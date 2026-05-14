@@ -109,7 +109,7 @@ export function Footer() {
           </div>
 
           <div className="mt-12 pt-6 border-t border-outline-variant flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="font-body-sm text-body-sm text-on-surface-variant/80 text-center md:text-left">
+            <p className="font-body-sm text-body-sm text-on-surface-variant/80 text-center md:text-start">
               {siteConfig.copyright}
             </p>
             <p className="font-body-sm text-body-sm text-on-surface-variant/80">

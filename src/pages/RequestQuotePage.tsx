@@ -73,7 +73,7 @@ export function RequestQuotePage() {
   return (
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
-        <div ref={leftPanelRef} className="md:col-span-5 md:sticky md:top-32 pr-0 md:pr-8 mb-12 md:mb-0">
+        <div ref={leftPanelRef} className="md:col-span-5 md:sticky md:top-32 pe-0 md:pe-8 mb-12 md:mb-0">
           <h1 className="entrance font-display-lg text-[clamp(1.6rem,4vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
             {t("quote.pageTitle")}
           </h1>

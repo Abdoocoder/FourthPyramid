@@ -82,7 +82,7 @@ export function AdminPagesPage() {
             <button
               key={slug}
               onClick={() => loadPage(slug)}
-              className={`w-full text-left px-4 py-2 rounded-lg font-body-sm text-body-sm transition-colors ${
+              className={`w-full text-start px-4 py-2 rounded-lg font-body-sm text-body-sm transition-colors ${
                 selectedSlug === slug ? "bg-primary text-on-primary" : "bg-surface text-on-surface hover:bg-surface-container border border-outline-variant"
               }`}
             >
@@ -95,7 +95,7 @@ export function AdminPagesPage() {
             <button
               key={p._id}
               onClick={() => loadPage(p.slug)}
-              className={`w-full text-left px-4 py-2 rounded-lg font-body-sm text-body-sm transition-colors ${
+              className={`w-full text-start px-4 py-2 rounded-lg font-body-sm text-body-sm transition-colors ${
                 selectedSlug === p.slug ? "bg-primary text-on-primary" : "bg-surface text-on-surface hover:bg-surface-container border border-outline-variant"
               }`}
             >
