@@ -14,6 +14,7 @@ const AdminPagesPage = lazy(() => import("../pages/AdminPagesPage").then((m) => 
 const AdminQuotesPage = lazy(() => import("../pages/AdminQuotesPage").then((m) => ({ default: m.AdminQuotesPage })));
 const AdminImagesPage = lazy(() => import("../pages/AdminImagesPage").then((m) => ({ default: m.AdminImagesPage })));
 const AdminContactsPage = lazy(() => import("../pages/AdminContactsPage").then((m) => ({ default: m.AdminContactsPage })));
+const AdminSettingsPage = lazy(() => import("../pages/AdminSettingsPage").then((m) => ({ default: m.AdminSettingsPage })));
 
 const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const convexUrl = import.meta.env.VITE_CONVEX_URL;
@@ -35,6 +36,7 @@ function AdminRoutes() {
         <Route path="quotes" element={<AdminQuotesPage />} />
         <Route path="images" element={<AdminImagesPage />} />
         <Route path="contacts" element={<AdminContactsPage />} />
+        <Route path="settings" element={<AdminSettingsPage />} />
       </Routes>
     </Suspense>
   );

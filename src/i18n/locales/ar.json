@@ -269,7 +269,22 @@
     "noPendingQuotes": "لا توجد طلبات قيد الانتظار.",
     "contacts": "رسائل التواصل",
     "noContacts": "لا توجد رسائل تواصل بعد.",
-    "name": "الاسم"
+    "name": "الاسم",
+    "settings": "الإعدادات",
+    "saveSettings": "حفظ الإعدادات",
+    "saved": "تم الحفظ",
+    "settingsContact": "معلومات التواصل",
+    "settingsPhone": "الهاتف",
+    "settingsMobile": "الجوال",
+    "settingsWhatsapp": "واتساب",
+    "settingsFax": "الفاكس",
+    "settingsEmail": "البريد الإلكتروني",
+    "settingsAddress": "العنوان (إنجليزي)",
+    "settingsAddressAr": "العنوان (عربي)",
+    "settingsSeo": "تحسين محركات البحث",
+    "settingsSiteTitle": "عنوان الموقع",
+    "settingsMetaDescription": "وصف الصفحة",
+    "removeBlock": "حذف الكتلة"
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

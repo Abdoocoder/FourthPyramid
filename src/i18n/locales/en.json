@@ -270,7 +270,22 @@
     "noPendingQuotes": "No pending quotes.",
     "contacts": "Contacts",
     "noContacts": "No contact messages yet.",
-    "name": "Name"
+    "name": "Name",
+    "settings": "Settings",
+    "saveSettings": "Save Settings",
+    "saved": "Saved",
+    "settingsContact": "Contact Information",
+    "settingsPhone": "Phone",
+    "settingsMobile": "Mobile",
+    "settingsWhatsapp": "WhatsApp",
+    "settingsFax": "Fax",
+    "settingsEmail": "Email",
+    "settingsAddress": "Address (EN)",
+    "settingsAddressAr": "Address (AR)",
+    "settingsSeo": "SEO",
+    "settingsSiteTitle": "Site Title",
+    "settingsMetaDescription": "Meta Description",
+    "removeBlock": "Remove block"
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

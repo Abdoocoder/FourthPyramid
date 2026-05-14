@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback, type ReactNode } from "react"
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser, SignOutButton } from "@clerk/clerk-react";
-import { LayoutDashboard, Package, MessageSquare, Mail, Image, FileText, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, MessageSquare, Mail, Image, FileText, Settings, LogOut } from "lucide-react";
 
 const navItems = [
   { label: "dashboard", href: "/admin", icon: LayoutDashboard },
@@ -11,6 +11,7 @@ const navItems = [
   { label: "quotes", href: "/admin/quotes", icon: MessageSquare },
   { label: "contacts", href: "/admin/contacts", icon: Mail },
   { label: "images", href: "/admin/images", icon: Image },
+  { label: "settings", href: "/admin/settings", icon: Settings },
 ];
 
 const navLabelMap: Record<string, string> = {
@@ -20,6 +21,7 @@ const navLabelMap: Record<string, string> = {
   "/admin/quotes": "quotes",
   "/admin/contacts": "contacts",
   "/admin/images": "images",
+  "/admin/settings": "settings",
 };
 
 interface AdminLayoutProps {

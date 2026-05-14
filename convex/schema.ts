@@ -100,4 +100,9 @@ export default defineSchema({
     name: v.string(),
     role: v.union(v.literal("admin"), v.literal("superadmin"), v.literal("editor")),
   }).index("by_clerk_id", ["clerkId"]),
+
+  settings: defineTable({
+    key: v.string(),
+    value: v.string(),
+  }).index("by_key", ["key"]),
 });

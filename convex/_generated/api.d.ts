@@ -19,6 +19,7 @@ import type * as pages from "../pages.js";
 import type * as products from "../products.js";
 import type * as quotes from "../quotes.js";
 import type * as seed from "../seed.js";
+import type * as settings from "../settings.js";
 
 import type {
   ApiFromModules,
@@ -38,6 +39,7 @@ declare const fullApi: ApiFromModules<{
   products: typeof products;
   quotes: typeof quotes;
   seed: typeof seed;
+  settings: typeof settings;
 }>;
 
 /**

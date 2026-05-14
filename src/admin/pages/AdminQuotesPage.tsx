@@ -130,6 +130,11 @@ function QuoteRow({ q, expanded, onToggle }: {
   );
 }
 
+function csvEscape(value: string | undefined): string {
+  const s = (value ?? "").replace(/"/g, '""');
+  return `"${s}"`;
+}
+
 export function AdminQuotesPage() {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<Status | undefined>(undefined);
@@ -138,11 +143,39 @@ export function AdminQuotesPage() {
 
   const toggle = (id: string) => setExpandedId((prev) => (prev === id ? null : id));
 
+  const handleExport = () => {
+    if (!quotesData || quotesData.length === 0) return;
+    const headers = ["Company", "Contact Name", "Email", "Phone", "Product Type", "Quantity", "Message", "Status"];
+    const rows = quotesData.map((q) => [
+      csvEscape(q.companyName),
+      csvEscape(q.contactName),
+      csvEscape(q.email),
+      csvEscape(q.phone),
+      csvEscape(q.productType),
+      csvEscape(q.quantity),
+      csvEscape(q.message),
+      csvEscape(q.status),
+    ].join(","));
+    // UTF-8 BOM so Excel opens Arabic text correctly
+    const csv = "﻿" + [headers.map(csvEscape).join(","), ...rows].join("\r\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `quotes-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="font-headline-md text-headline-md text-on-surface">{t("admin.quotes")}</h1>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors text-sm">
+        <button
+          onClick={handleExport}
+          disabled={!quotesData || quotesData.length === 0}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+        >
           <Download className="w-4 h-4" /> {t("admin.exportCsv")}
         </button>
       </div>
