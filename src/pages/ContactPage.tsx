@@ -7,7 +7,7 @@ import { Button } from "../components/ui/Button";
 import { Input, Textarea } from "../components/ui/Input";
 import { siteConfig } from "../lib/constants";
 import { api } from "@convex/_generated/api";
-import { usePageEntrance, useScrollReveal } from "../lib/animations";
+import { usePageEntrance } from "../lib/animations";
 
 function SuccessView() {
   const { t } = useTranslation();
@@ -41,7 +41,6 @@ export function ContactPage() {
   const createContact = useMutation(api.contacts.create);
 
   usePageEntrance(pageHeaderRef, ".entrance", { stagger: 0.13, delay: 0.05 });
-  useScrollReveal(gridRef, ".grid-reveal", 0.18);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

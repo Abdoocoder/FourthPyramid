@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { ScrollProgress } from "../ScrollProgress";
 
 export function Layout() {
   return (
     <div className="bg-background text-on-background min-h-screen flex flex-col">
+      <ScrollProgress />
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

@@ -91,7 +91,8 @@
     "usage": "Usage:",
     "requestQuote": "Request Quote",
     "notFoundTitle": "Product Not Found",
-    "backToProducts": "Back to Products"
+    "backToProducts": "Back to Products",
+    "productList": "Product list"
   },
   "productDetails": {
     "backToProducts": "Back to Products",
@@ -254,7 +255,9 @@
     "sidebarNav": "Admin sidebar",
     "navigation": "Admin navigation",
     "openSidebar": "Open sidebar",
-    "closeSidebar": "Close sidebar"
+    "closeSidebar": "Close sidebar",
+    "confirmDelete": "Delete \"{{name}}\"? This cannot be undone.",
+    "confirmDeleteImage": "Delete this image? This cannot be undone."
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

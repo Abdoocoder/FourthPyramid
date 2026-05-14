@@ -5,6 +5,7 @@ import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AdminLayout } from "./AdminLayout";
+import { AdminPageSkeleton } from "../../components/ui/Skeleton";
 
 const DashboardPage = lazy(() => import("../pages/DashboardPage").then((m) => ({ default: m.DashboardPage })));
 const AdminProductsPage = lazy(() => import("../pages/AdminProductsPage").then((m) => ({ default: m.AdminProductsPage })));
@@ -23,7 +24,7 @@ const adminConvexClient = new ConvexReactClient(convexUrl);
 
 function AdminRoutes() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center py-20"><div className="w-6 h-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" /></div>}>
+    <Suspense fallback={<div className="p-6"><AdminPageSkeleton /></div>}>
       <Routes>
         <Route index element={<DashboardPage />} />
         <Route path="products" element={<AdminProductsPage />} />

@@ -1,14 +1,30 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { MessageSquare, ArrowRight, Plus, FileText, Image } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { Link } from "react-router-dom";
+import { useInViewCountUp } from "../../lib/useCountUp";
+
+function StatValue({ value }: { value: number | null }) {
+  const { ref, formatted } = useInViewCountUp({
+    end: value ?? 0,
+    duration: 1200,
+    threshold: 0.3,
+  });
+  if (value === null) {
+    return <span className="text-outline-variant animate-pulse">—</span>;
+  }
+  return <span ref={ref} className="tabular-nums">{formatted}</span>;
+}
 
 export function DashboardPage() {
   const { t } = useTranslation();
-  const productsData = useQuery(api.products.list, {});
-  const pendingQuotes = useQuery(api.quotes.list, { status: "pending" });
-  const totalQuotes = useQuery(api.quotes.list, {});
+  const emptyArgs = useMemo(() => ({}), []);
+  const pendingArgs = useMemo(() => ({ status: "pending" as const }), []);
+  const productsData = useQuery(api.products.list, emptyArgs);
+  const pendingQuotes = useQuery(api.quotes.list, pendingArgs);
+  const totalQuotes = useQuery(api.quotes.list, emptyArgs);
 
   const stats = [
     { label: t("admin.products"), value: productsData?.length ?? null },
@@ -23,15 +39,11 @@ export function DashboardPage() {
         <p className="text-sm text-on-surface-variant mt-0.5">Fourth Pyramid Plastic Industries</p>
       </div>
 
-      <div className="grid grid-cols-3 divide-x divide-outline-variant border border-outline-variant rounded-xl bg-surface mb-6 overflow-hidden">
+      <div className="grid grid-cols-3 divide-x divide-outline-variant border border-outline-variant rounded-xl bg-surface mb-6 overflow-hidden" aria-live="polite">
         {stats.map((s) => (
           <div key={s.label} className="px-3 py-4 sm:px-6 sm:py-5 min-w-0">
-            <p className="text-xl sm:text-2xl font-semibold text-on-surface tabular-nums">
-              {s.value === null ? (
-                <span className="text-outline-variant animate-pulse">—</span>
-              ) : (
-                s.value
-              )}
+            <p className="text-xl sm:text-2xl font-semibold text-on-surface">
+              <StatValue value={s.value} />
             </p>
             <p className="text-[10px] sm:text-xs text-on-surface-variant mt-1 uppercase tracking-wide leading-snug">
               {s.label}

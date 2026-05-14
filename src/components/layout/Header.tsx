@@ -7,6 +7,7 @@ import { Button } from "../ui/Button";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [prevPathname, setPrevPathname] = useState("");
   const { pathname } = useLocation();
   const { t, i18n } = useTranslation();
@@ -30,6 +31,13 @@ export function Header() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const navLinkClass = (href: string) =>
     `font-body-sm text-body-sm font-medium transition-colors duration-150 py-2 px-3 rounded-lg ${
       pathname === href
@@ -38,7 +46,7 @@ export function Header() {
     }`;
 
   return (
-    <header className="bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant">
+    <header className={`bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant transition-shadow duration-200 ${scrolled ? "shadow-sm" : ""}`}>
       <div className="flex items-center justify-between px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
         <Link to="/" aria-label="Home" className="flex items-center gap-2.5 text-on-surface hover:text-primary transition-colors duration-200">
           <img src="/logo.svg" alt="Fourth Pyramid" className="h-9 w-auto" />
@@ -85,23 +93,19 @@ export function Header() {
         className={`md:hidden bg-surface border-t border-outline-variant overflow-hidden transition-[max-height,opacity] duration-300 ease-out-strong ${
           mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
+        style={{ "--item-count": navLinks.length + 3 } as React.CSSProperties}
       >
         <nav className="flex flex-col px-margin-mobile py-4 gap-2">
           {navLinks.map((link, i) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`font-body-lg text-body-lg py-3 px-4 rounded-lg transition-colors duration-150 ${
+              className={`nav-stagger font-body-lg text-body-lg py-3 px-4 rounded-lg transition-colors duration-150 ${
                 pathname === link.href
                   ? "bg-primary-container text-on-primary-container font-semibold"
                   : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
               }`}
-              style={{
-                opacity: mobileOpen ? 1 : 0,
-                transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
-                transitionDelay: mobileOpen ? `${i * 38}ms` : "0ms",
-                transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo), background-color 150ms, color 150ms",
-              }}
+              style={{ "--i": i } as React.CSSProperties}
             >
               {t(`nav.${link.label.toLowerCase()}`)}
             </Link>
@@ -109,37 +113,22 @@ export function Header() {
           <div className="h-px bg-outline-variant my-2 mx-4" />
           <button
             onClick={() => { toggleLang(); }}
-            className="flex items-center gap-2 text-on-surface-variant py-3 px-4 rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors font-body-lg text-body-lg"
-            style={{
-              opacity: mobileOpen ? 1 : 0,
-              transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
-              transitionDelay: mobileOpen ? `${navLinks.length * 38}ms` : "0ms",
-              transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo), background-color 150ms, color 150ms",
-            }}
+            className="nav-stagger flex items-center gap-2 text-on-surface-variant py-3 px-4 rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors font-body-lg text-body-lg"
+            style={{ "--i": navLinks.length } as React.CSSProperties}
           >
             <Globe className="w-4 h-4" />
             {t("nav.language")}
           </button>
           <Link
             to="/admin"
-            className="font-body-lg text-body-lg py-3 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
-            style={{
-              opacity: mobileOpen ? 1 : 0,
-              transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
-              transitionDelay: mobileOpen ? `${(navLinks.length + 1) * 38}ms` : "0ms",
-              transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo), background-color 150ms, color 150ms",
-            }}
+            className="nav-stagger font-body-lg text-body-lg py-3 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+            style={{ "--i": navLinks.length + 1 } as React.CSSProperties}
           >
             {t("nav.adminLogin")}
           </Link>
           <div
-            className="px-4 mt-2"
-            style={{
-              opacity: mobileOpen ? 1 : 0,
-              transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
-              transitionDelay: mobileOpen ? `${(navLinks.length + 2) * 38}ms` : "0ms",
-              transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo)",
-            }}
+            className="nav-stagger px-4 mt-2"
+            style={{ "--i": navLinks.length + 2 } as React.CSSProperties}
           >
             <Button as="a" href="/request-quote" size="md" variant="tertiary" className="w-full justify-center">
               {t("nav.requestQuote")}

@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Plus, Edit, Trash2, Search } from "lucide-react";
 import { Button } from "../../components/ui/Button";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
+import type { Id } from "@convex/_generated/dataModel";
 import { localized, localizedSpecs } from "../../lib/localized";
 
 export function AdminProductsPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
-  const productsData = useQuery(api.products.list, { searchQuery: search || undefined });
+  const queryArgs = useMemo(() => ({ searchQuery: search || undefined }), [search]);
+  const productsData = useQuery(api.products.list, queryArgs);
+  const deleteProduct = useMutation(api.products.remove);
+
+  const handleDelete = (id: Id<"products">, name: string) => {
+    if (window.confirm(t("admin.confirmDelete", { name }))) {
+      deleteProduct({ id });
+    }
+  };
 
   return (
     <div>
@@ -29,11 +38,11 @@ export function AdminProductsPage() {
           placeholder={t("admin.searchProducts")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px]"
+          className="w-full pl-10 pr-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px]"
         />
       </div>
 
-      <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto">
+      <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto" aria-live="polite">
         <table className="w-full">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container-low">
@@ -62,10 +71,10 @@ export function AdminProductsPage() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
-                    <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.edit")} aria-label={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
+                    <button className="p-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.edit")} aria-label={t("admin.edit")} onClick={() => navigate(`/admin/products/edit/${p._id}`)}>
                       <Edit className="w-4 h-4" />
                     </button>
-                    <button className="p-2.5 text-on-surface-variant hover:text-error transition-colors rounded-lg" title={t("admin.delete")} aria-label={t("admin.delete")}>
+                    <button className="p-3 text-on-surface-variant hover:text-error transition-colors rounded-lg" title={t("admin.delete")} aria-label={t("admin.delete")} onClick={() => handleDelete(p._id, localized(p, "name"))}>
                       <Trash2 className="w-4 h-4" />
                     </button>
                   </div>

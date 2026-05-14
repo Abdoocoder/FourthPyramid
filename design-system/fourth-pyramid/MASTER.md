@@ -28,7 +28,7 @@
 | On Background (Deep Navy) | `#1A2B48` | `--color-on-background` | Headings, nav |
 | Surface | `#FFFFFF` | `--color-surface` | Card/component backgrounds |
 | On Surface (Shadow Slate) | `#2C3E50` | `--color-on-surface` | Body text |
-| On Surface Variant | `#5E5E5E` | `--color-on-surface-variant` | Secondary text (WCAG AA 4.5:1) |
+| On Surface Variant | `#4B5563` | `--color-on-surface-variant` | Secondary text (WCAG AA 4.5:1) |
 | Outline | `#7A7A7A` | `--color-outline` | Borders, dividers (3:1 non-text) |
 | Outline Variant (Cool Gray) | `#E1E8ED` | `--color-outline-variant` | Subtle borders |
 | Error | `#BA1A1A` | `--color-error` | Error states |
@@ -41,7 +41,7 @@
 All roles invert via `prefers-color-scheme: dark`. Primary becomes Sky Blue (`#87B2E8`), backgrounds become deep dark (`#0D1117`). Full 1:1 mapping in `src/index.css`.
 
 ### Contrast Note
-All text colors pass WCAG AA 4.5:1 minimum. `--color-on-surface-variant: #5E5E5E` (~5.8:1 on white). White on Primary `#4A90E2` (~3.5:1, passes AA for large text/buttons).
+All text colors pass WCAG AA 4.5:1 minimum. `--color-on-surface-variant: #4B5563` (~7.6:1 on white). White on Primary `#4A90E2` (~3.5:1, passes AA for large text/buttons).
 
 ---
 
@@ -200,7 +200,7 @@ All animations disabled via `prefers-reduced-motion: reduce` with `0.01ms` durat
 ## Accessibility (WCAG AA Goal)
 
 - ✅ Skip link with keyboard focus
-- ✅ `:focus-visible` outline (2px solid primary, 2px offset)
+- ✅ `:focus-visible` outline (2px solid `--color-on-primary-fixed-variant`, 2px offset)
 - ✅ `prefers-reduced-motion` respected (0.01ms override)
 - ✅ Semantic landmarks (nav, main, footer, aside)
 - ✅ `label htmlFor` + `input id` on all forms
@@ -208,7 +208,7 @@ All animations disabled via `prefers-reduced-motion: reduce` with `0.01ms` durat
 - ✅ `role="button"` + keyboard handler on interactive cards
 - ✅ `<th scope="row">` in data tables
 - ✅ Color not sole indicator (text + icon combos)
-- ⚠️ `--color-on-surface-variant` fixed to `#5E5E5E` (WCAG AA 4.5:1)
+- ✅ `--color-on-surface-variant` set to `#4B5563` (WCAG AA 7.6:1 on white)
 - ⚠️ Search input on ProductsPage should add `aria-label` (placeholder only)
 - ⚠️ Cloudinary upload button needs `aria-label`
 

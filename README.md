@@ -155,11 +155,11 @@ VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
 
 ## Testing
 
-35 unit tests across 5 test files using Vitest + React Testing Library:
+39 unit tests across 5 test files using Vitest + React Testing Library:
 
 | File | Tests | What it covers |
 |------|-------|----------------|
-| `Button.test.tsx` | 8 | All variants, sizes, as prop, click handlers |
+| `Button.test.tsx` | 10 | All variants, sizes, as prop, click handlers |
 | `Badge.test.tsx` | 5 | All variants, custom className |
 | `cloudinary.test.ts` | 6 | URL transformation, edge cases |
 | `localized.test.ts` | 13 | Bilingual field helpers (EN/AR, arrays, specs) |
@@ -213,9 +213,9 @@ See `design-system/fourth-pyramid/MASTER.md` for the complete design system docu
 - **Tertiary / CTA**: `#C84000` (orange) — call-to-action accents
 - **Background**: `#F4F7F9`, Surface: `#FFFFFF`
 - **Text**: `#2C3E50` — body and headings
-- **Muted**: `#5E5E5E` — secondary text (WCAG AA 4.5:1 compliant)
+- **Muted**: `#4B5563` — secondary text
 - **Outline**: `#7A7A7A` — borders, dividers (3:1 non-text threshold)
-- **Fonts**: Inter (headlines/buttons), IBM Plex Sans (body), IBM Plex Mono (data). Arabic RTL auto-swap to Cairo.
+- **Fonts**: Outfit (headlines/buttons), IBM Plex Sans (body), IBM Plex Mono (data). Arabic RTL auto-swap to Cairo.
 - **Easing**: Custom cubic-bezier curves: `ease-out-expo` (0.19, 1, 0.22, 1), `ease-out-strong` (0.23, 1, 0.32, 1), `ease-in-out-strong` (0.77, 0, 0.175, 1)
 - **Button press**: `scale(0.97)` at 120ms with `ease-out-strong`
 - **Stagger entries**: translateY(8px) + opacity, 400ms, 60ms delay between items
@@ -225,7 +225,7 @@ See `design-system/fourth-pyramid/MASTER.md` for the complete design system docu
 
 This project includes 12 Claude Code design skills (`.agents/skills/`) covering brand identity, UI/UX design patterns, animation engineering, accessibility, and more. Skills are locked to specific versions via `skills-lock.json`.
 
-An additional OpenCode UI/UX Pro Max skill (`.opencode/skills/ui-ux-pro-max/`) provides a searchable database of 67 design styles, 96 color palettes, 57 font pairings, 99 UX guidelines, and 13 technology stacks with Python-powered search.
+The project also includes 3 OpenCode skills (`.opencode/skills/`): code-review (automated PR review), frontend-design (production-grade UI generation), and ui-ux-pro-max (searchable database of 67 design styles, 96 color palettes, 57 font pairings, 99 UX guidelines, and 13 technology stacks).
 
 ## Product Vision
 

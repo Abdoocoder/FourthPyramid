@@ -91,7 +91,8 @@
     "usage": "الاستخدام:",
     "requestQuote": "طلب عرض سعر",
     "notFoundTitle": "المنتج غير موجود",
-    "backToProducts": "العودة للمنتجات"
+    "backToProducts": "العودة للمنتجات",
+    "productList": "قائمة المنتجات"
   },
   "productDetails": {
     "backToProducts": "العودة للمنتجات",
@@ -253,7 +254,9 @@
     "sidebarNav": "الشريط الجانبي للإدارة",
     "navigation": "قائمة التنقل",
     "openSidebar": "فتح القائمة الجانبية",
-    "closeSidebar": "إغلاق القائمة الجانبية"
+    "closeSidebar": "إغلاق القائمة الجانبية",
+    "confirmDelete": "حذف \"{{name}}\"؟ لا يمكن التراجع عن هذا الإجراء.",
+    "confirmDeleteImage": "حذف هذه الصورة؟ لا يمكن التراجع عن هذا الإجراء."
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { CheckCircle, FlaskConical, Gauge, Wind, Settings } from "lucide-react";
 import { Button } from "../components/ui/Button";
-import { useScrollReveal } from "../lib/animations";
+import { useScrollReveal, useImageReveal } from "../lib/animations";
 
 const metricsData = [
   { value: "1998", key: "established" },
@@ -45,10 +45,8 @@ export function AboutPage() {
   const ctaRef = useRef<HTMLElement>(null);
 
   useScrollReveal(heroRef, ".reveal", 0.15);
-  useScrollReveal(metricsRef, ".metric-box", 0.12);
-  useScrollReveal(capabilitiesRef, ".cap-box", 0.14);
-  useScrollReveal(qualityRef, ".reveal", 0.14);
-  useScrollReveal(ctaRef, ".cta-reveal", 0.18);
+  useScrollReveal(ctaRef, ".cta-reveal", 0.15);
+  useImageReveal(qualityRef, ".img-reveal", 0.2);
 
   return (
     <>
@@ -112,11 +110,12 @@ export function AboutPage() {
       </section>
 
       <section ref={qualityRef} className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
-        <div className="reveal h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest">
+        <div className="reveal h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest img-reveal">
           <img
-          className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-70 dark:opacity-40"
-          src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80&auto=format"
+            className="w-full h-full object-cover opacity-60 dark:opacity-30"
+            src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80&auto=format"
             alt="Quality control laboratory"
+            loading="lazy"
           />
         </div>
         <div className="reveal space-y-6 md:pl-8">

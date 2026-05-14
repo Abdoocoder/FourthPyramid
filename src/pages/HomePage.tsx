@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized } from "../lib/localized";
+import { useScrollReveal } from "../lib/animations";
+import { useInViewCountUp } from "../lib/useCountUp";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useScrollReveal } from "../lib/animations";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +32,32 @@ const partners = [
   "ISO 9001:2015", "UN Certified", "FDA Approved", "HDPE Certified",
   "PET Certified", "Food Grade", "UV Stabilized", "Recycling Partner",
 ];
+
+function MetricValue({ metric }: { metric: { value: string; key: string } }) {
+  const countUpMap: Record<string, { end: number; suffix: string }> = {
+    established: { end: 1998, suffix: "" },
+    unitsPerYear: { end: 50, suffix: "M+" },
+    yearsExp: { end: 25, suffix: "+" },
+  };
+  const config = countUpMap[metric.key];
+  const { ref, formatted } = useInViewCountUp({
+    end: config?.end ?? 0,
+    suffix: config?.suffix ?? "",
+    threshold: 0.4,
+  });
+  if (config) {
+    return (
+      <span ref={ref} className="block font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-primary leading-none mb-3 tabular-nums">
+        {formatted}
+      </span>
+    );
+  }
+  return (
+    <span className="block font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-primary leading-none mb-3">
+      {metric.value}
+    </span>
+  );
+}
 
 function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
   useEffect(() => {
@@ -89,11 +116,11 @@ export function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  useScrollReveal(metricsRef, ".metric-card", 0.15);
-  useScrollReveal(capabilitiesRef, ".cap-card", 0.1);
-  useScrollReveal(whyRef, ".why-card", 0.15);
-  useScrollReveal(ctaRef, ".cta-item", 0.2);
   useMarquee(marqueeRef);
+  useScrollReveal(metricsRef, ".metric-card", 0.1);
+  useScrollReveal(capabilitiesRef, ".cap-card, .reveal", 0.12);
+  useScrollReveal(whyRef, ".why-card, .reveal", 0.12);
+  useScrollReveal(ctaRef, ".cta-item", 0.15);
 
   return (
     <main className="overflow-x-hidden w-full max-w-full">
@@ -136,9 +163,7 @@ export function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant border border-outline-variant rounded-2xl overflow-hidden">
             {metrics.map((m) => (
               <div key={m.key} className="metric-card bg-surface p-8 md:p-10 text-center">
-                <span className="block font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-primary leading-none mb-3">
-                  {m.value}
-                </span>
+                <MetricValue metric={m} />
                 <span className="font-data-mono text-data-mono text-on-surface-variant uppercase tracking-[0.15em] text-[11px]">
                   {t(`home.${m.key}`)}
                 </span>
@@ -151,10 +176,10 @@ export function HomePage() {
       <section ref={capabilitiesRef} className="py-24 md:py-32 bg-surface-container-low">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
+            <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
               {t("home.capabilitiesTitle")}
             </h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mt-4 leading-relaxed">
+            <p className="reveal font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mt-4 leading-relaxed">
               {t("home.capabilitiesDesc")}
             </p>
           </div>
@@ -192,7 +217,7 @@ export function HomePage() {
       <section ref={whyRef} className="py-24 md:py-32 bg-surface">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
+            <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
               {t("home.whyTitle")}
             </h2>
           </div>

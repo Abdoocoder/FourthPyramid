@@ -17,9 +17,7 @@ const industryImages = [
 ];
 
 function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLElement>(null);
-  useScrollReveal(ref, ".reveal", 0.16);
-  return <section ref={ref} className={className}>{children}</section>;
+  return <section className={className}>{children}</section>;
 }
 
 export function IndustriesPage() {
@@ -29,7 +27,6 @@ export function IndustriesPage() {
   const ctaRef = useRef<HTMLElement>(null);
 
   useScrollReveal(headerRef, ".reveal", 0.15);
-  useScrollReveal(ctaRef, ".reveal", 0.15);
 
   return (
     <>
@@ -64,7 +61,7 @@ export function IndustriesPage() {
                       <img
                         src={imgUrl}
                         alt={title}
-                        className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-85 dark:opacity-50"
+                        className="w-full h-full object-cover opacity-70 dark:opacity-40"
                         loading="lazy"
                       />
                     </div>
@@ -93,7 +90,7 @@ export function IndustriesPage() {
                       <img
                         src={imgUrl}
                         alt={title}
-                        className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-85 dark:opacity-50"
+                        className="w-full h-full object-cover opacity-70 dark:opacity-40"
                         loading="lazy"
                       />
                     </div>

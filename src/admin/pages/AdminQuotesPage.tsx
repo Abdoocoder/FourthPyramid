@@ -29,7 +29,7 @@ export function AdminQuotesPage() {
           <button
             key={s}
             onClick={() => setFilter(s === "all" ? undefined : s)}
-            className={`px-4 py-2 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+            className={`px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
               (filter === undefined && s === "all") || filter === s
                 ? "bg-primary text-on-primary"
                 : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
@@ -40,7 +40,7 @@ export function AdminQuotesPage() {
         ))}
       </div>
 
-      <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto">
+      <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto" aria-live="polite">
         <table className="w-full">
           <thead>
             <tr className="border-b border-outline-variant bg-surface-container-low">
@@ -74,7 +74,7 @@ export function AdminQuotesPage() {
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <button className="p-2.5 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.view")} aria-label={t("admin.view")}>
+                  <button className="p-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg" title={t("admin.view")} aria-label={t("admin.view")}>
                     <Eye className="w-4 h-4" />
                   </button>
                 </td>

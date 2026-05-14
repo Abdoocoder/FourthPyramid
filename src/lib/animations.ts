@@ -1,35 +1,85 @@
 import { useEffect, type RefObject } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function useScrollReveal(
   ref: RefObject<HTMLElement | null>,
   selector: string,
-  stagger = 0.12
+  _stagger = 0.12
 ) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const targets = el.querySelectorAll<Element>(selector);
     if (!targets.length) return;
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        targets,
-        { opacity: 0, y: 36 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.75,
-          stagger,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 82%" },
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      for (const target of targets) {
+        (target as HTMLElement).style.opacity = "1";
+        (target as HTMLElement).style.transform = "translateY(0)";
+      }
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).style.opacity = "1";
+            (entry.target as HTMLElement).style.transform = "translateY(0)";
+            observer.unobserve(entry.target);
+          }
         }
-      );
-    }, el);
-    return () => ctx.revert();
-  }, [ref, selector, stagger]);
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
+    );
+    for (const target of targets) {
+      (target as HTMLElement).style.opacity = "0";
+      (target as HTMLElement).style.transform = "translateY(24px)";
+      (target as HTMLElement).style.transition =
+        "opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1)";
+      observer.observe(target);
+    }
+    return () => observer.disconnect();
+  }, [ref, selector, _stagger]);
+}
+
+export function useImageReveal(
+  ref: RefObject<HTMLElement | null>,
+  selector = ".img-reveal",
+  threshold = 0.15
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const targets = el.querySelectorAll<HTMLElement>(selector);
+    if (!targets.length) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      for (const target of targets) {
+        target.style.clipPath = "inset(0)";
+        target.style.opacity = "1";
+      }
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).style.clipPath = "inset(0)";
+            (entry.target as HTMLElement).style.opacity = "1";
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold, rootMargin: "0px 0px -80px 0px" }
+    );
+    for (const target of targets) {
+      target.style.clipPath = "inset(0 100% 0 0)";
+      target.style.opacity = "0";
+      target.style.transition =
+        "clip-path 800ms cubic-bezier(0.23, 1, 0.32, 1), opacity 600ms cubic-bezier(0.23, 1, 0.32, 1)";
+      observer.observe(target);
+    }
+    return () => observer.disconnect();
+  }, [ref, selector, threshold]);
 }
 
 export function usePageEntrance(

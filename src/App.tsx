@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./i18n/config";
 import { Layout } from "./components/layout/Layout";
+import { PageSkeleton, AdminShellSkeleton } from "./components/ui/Skeleton";
 
 const HomePage = lazy(() => import("./pages/HomePage").then((m) => ({ default: m.HomePage })));
 const AboutPage = lazy(() => import("./pages/AboutPage").then((m) => ({ default: m.AboutPage })));
@@ -14,11 +15,7 @@ const ContactPage = lazy(() => import("./pages/ContactPage").then((m) => ({ defa
 const AdminShell = lazy(() => import("./admin/components/AdminShell"));
 
 function PageLoader() {
-  return (
-    <div className="flex items-center justify-center pt-32 pb-section-gap">
-      <div className="w-6 h-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
-    </div>
-  );
+  return <PageSkeleton />;
 }
 
 function Lazy({ children }: { children: React.ReactNode }) {
@@ -52,7 +49,7 @@ function App() {
         <Route
           path="/admin/*"
           element={
-            <Suspense fallback={<div className="min-h-screen bg-surface-container-low flex items-center justify-center"><div className="w-6 h-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" /></div>}>
+            <Suspense fallback={<AdminShellSkeleton />}>
               <AdminShell />
             </Suspense>
           }

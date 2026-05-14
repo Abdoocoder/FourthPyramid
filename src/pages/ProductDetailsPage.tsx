@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
@@ -22,7 +22,7 @@ import { cldTransform } from "../lib/cloudinary";
 import { useScrollReveal } from "../lib/animations";
 import gsap from "gsap";
 
-function ProductImage({ src, alt, className }: { src: string | undefined; alt: string; className?: string }) {
+function ProductImage({ src, alt, className, sizes }: { src: string | undefined; alt: string; className?: string; sizes?: string }) {
   if (!src) {
     return (
       <div className={`bg-surface-container-highest flex items-center justify-center ${className ?? ""}`}>
@@ -30,7 +30,7 @@ function ProductImage({ src, alt, className }: { src: string | undefined; alt: s
       </div>
     );
   }
-  return <img src={src} alt={alt} className={className ?? ""} />;
+  return <img src={src} alt={alt} sizes={sizes} loading="lazy" className={className ?? ""} />;
 }
 
 const useCaseIcons: Record<string, React.ReactNode> = {
@@ -42,7 +42,8 @@ const useCaseIcons: Record<string, React.ReactNode> = {
 export function ProductDetailsPage() {
   const { t } = useTranslation();
   const { slug } = useParams();
-  const product = useQuery(api.products.getBySlug, { slug: slug ?? "" });
+  const queryArgs = useMemo(() => ({ slug: slug ?? "" }), [slug]);
+  const product = useQuery(api.products.getBySlug, queryArgs);
   usePageTitle(product ? localized(product, "name") : t("nav.products"));
   const [activeImage, setActiveImage] = useState(0);
   const mainImageRef = useRef<HTMLDivElement>(null);
@@ -50,9 +51,8 @@ export function ProductDetailsPage() {
   const rightPanelRef = useRef<HTMLDivElement>(null);
   const specsRef = useRef<HTMLDivElement>(null);
 
-  useScrollReveal(breadcrumbRef, ".pd-breadcrumb", 0);
-  useScrollReveal(rightPanelRef, ".pd-panel-item", 0.1);
-  useScrollReveal(specsRef, ".pd-specs", 0);
+
+  useScrollReveal(rightPanelRef, ".pd-panel-item", 0.12);
 
   const handleThumbClick = (i: number) => {
     if (i === activeImage || !mainImageRef.current) return;
@@ -132,6 +132,7 @@ export function ProductDetailsPage() {
           <ProductImage
             src={cldTransform(images[activeImage], "w_800,q_auto,f_auto")}
             alt={localized(product, "name")}
+            sizes="(max-width: 768px) 100vw, 58vw"
             className="w-full aspect-[4/3] object-cover"
           />
           <div className="absolute top-4 left-4 bg-on-background text-surface px-3 py-1 rounded-sm font-data-mono text-data-mono uppercase flex items-center gap-1.5 shadow-sm">

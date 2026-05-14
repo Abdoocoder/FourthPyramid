@@ -25,6 +25,30 @@ export const create = mutation({
   },
 });
 
+export const createFirstAdmin = mutation({
+  args: {
+    clerkId: v.string(),
+    email: v.string(),
+    name: v.string(),
+    role: v.union(v.literal("admin"), v.literal("superadmin")),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Unauthenticated");
+
+    const existing = await ctx.db.query("admins").collect();
+    if (existing.length > 0) throw new Error("Admin already exists — use the create mutation instead");
+
+    const existingByClerkId = await ctx.db
+      .query("admins")
+      .withIndex("by_clerk_id", (q) => q.eq("clerkId", args.clerkId))
+      .first();
+    if (existingByClerkId) throw new Error("This user is already an admin");
+
+    return await ctx.db.insert("admins", args);
+  },
+});
+
 export const list = query({
   args: {},
   handler: async (ctx) => {

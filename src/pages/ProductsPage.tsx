@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
@@ -21,10 +21,14 @@ export function ProductsPage() {
 
   usePageEntrance(pageHeaderRef, ".entrance", { stagger: 0.13, delay: 0.05 });
 
-  const productsData = useQuery(api.products.list, {
-    searchQuery: searchQuery || undefined,
-    categorySlug: activeCategory !== "all" ? activeCategory : undefined,
-  });
+  const queryArgs = useMemo(
+    () => ({
+      searchQuery: searchQuery || undefined,
+      categorySlug: activeCategory !== "all" ? activeCategory : undefined,
+    }),
+    [searchQuery, activeCategory]
+  );
+  const productsData = useQuery(api.products.list, queryArgs);
   const categoriesData = useQuery(api.categories.list);
 
   const filtered = productsData ?? [];
@@ -60,7 +64,7 @@ export function ProductsPage() {
             <button
               onClick={() => setActiveCategory("all")}
               aria-pressed={activeCategory === "all"}
-              className={`flex-shrink-0 px-4 py-3 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+              className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
                 activeCategory === "all"
                   ? "bg-primary text-on-primary"
                   : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
@@ -73,7 +77,7 @@ export function ProductsPage() {
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
                 aria-pressed={activeCategory === cat.slug}
-                className={`flex-shrink-0 px-4 py-3 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+                className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
                   activeCategory === cat.slug
                     ? "bg-primary text-on-primary"
                     : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
@@ -85,7 +89,7 @@ export function ProductsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
           {filtered.length === 0 && productsData === undefined && (
             <div className="col-span-full py-20 text-center">
               <div className="animate-pulse text-on-surface-variant font-body-lg">{t("products.loading")}</div>
@@ -103,6 +107,7 @@ export function ProductsPage() {
                   <img
                     src={cldTransform(product.images[0], "w_400,q_auto,f_auto")}
                     alt={localized(product, "name")}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
                     loading="lazy"
                   />

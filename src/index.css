@@ -34,7 +34,7 @@
 
   --color-surface: #ffffff;
   --color-on-surface: #2C3E50;
-  --color-on-surface-variant: #5E5E5E;
+  --color-on-surface-variant: #4B5563;
   --color-surface-dim: #E1E8ED;
   --color-surface-bright: #ffffff;
   --color-surface-container-lowest: #ffffff;
@@ -118,7 +118,7 @@ body {
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-on-primary-fixed-variant);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -126,7 +126,7 @@ body {
 button:focus-visible,
 a:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-on-primary-fixed-variant);
   outline-offset: 2px;
 }
 
@@ -199,6 +199,31 @@ html {
   }
 }
 
+.nav-stagger {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: navStaggerIn 400ms var(--ease-out-strong) forwards;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes navStaggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-stagger {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 .success-enter > * {
   opacity: 0;
   transform: translateY(20px);
@@ -223,6 +248,14 @@ html {
     transform: none;
     animation: none;
   }
+}
+
+.select-chevron svg {
+  transition: transform 200ms var(--ease-out-strong);
+}
+
+select:focus ~ .select-chevron svg {
+  transform: rotate(180deg);
 }
 
 @media (prefers-color-scheme: dark) {

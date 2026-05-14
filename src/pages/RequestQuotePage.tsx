@@ -6,7 +6,7 @@ import { Button } from "../components/ui/Button";
 import { Input, Textarea, Select } from "../components/ui/Input";
 import { useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
-import { usePageEntrance, useScrollReveal } from "../lib/animations";
+import { usePageEntrance } from "../lib/animations";
 
 function SuccessView() {
   const { t } = useTranslation();
@@ -41,7 +41,6 @@ export function RequestQuotePage() {
   const createQuote = useMutation(api.quotes.create);
 
   usePageEntrance(leftPanelRef, ".entrance", { stagger: 0.13, delay: 0.05 });
-  useScrollReveal(formPanelRef, ".form-reveal", 0.1);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

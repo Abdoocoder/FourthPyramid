@@ -51,7 +51,7 @@ export function Select({ label, id, required, children, ...props }: SelectProps)
         <select id={id} className={`${inputBase} appearance-none cursor-pointer pr-10`} required={required} {...props}>
           {children}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center select-chevron">
           <ChevronDown className="w-4 h-4 text-on-surface-variant" />
         </div>
       </div>
