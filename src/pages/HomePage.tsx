@@ -250,30 +250,47 @@ export function HomePage() {
               {t("home.whyTitle")}
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { titleKey: "reason1Title", stat: "25+", descKey: "reason1Desc" },
-              { titleKey: "reason2Title", stat: "ISO", descKey: "reason2Desc" },
-              { titleKey: "reason3Title", stat: "100%", descKey: "reason3Desc" },
-            ].map((s, i) => (
-              <div
-                key={s.titleKey}
-                className="why-card hover-lift group relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300"
-              >
-                <div className="flex flex-col gap-6">
-                  <span className="font-display-lg text-[clamp(2.5rem,4vw,4rem)] text-primary leading-none">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div className="why-card hover-lift group md:col-span-7 relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300 flex flex-col justify-between gap-8 min-h-[280px]">
+              <div>
+                <span className="font-display-lg text-[clamp(3rem,6vw,5rem)] text-primary leading-none block mb-4">
+                  25+
+                </span>
+                <h3 className="font-headline-md text-xl font-bold text-on-surface mb-3">{t("home.reason1Title")}</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed max-w-[45ch]">
+                  {t("home.reason1Desc")}
+                </p>
+              </div>
+              <div className="flex items-center gap-4 pt-4 border-t border-outline-variant">
+                <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/40 uppercase tracking-widest">01</span>
+                <span className="w-6 h-px bg-outline-variant" />
+                <span className="font-data-mono text-data-mono text-[11px] text-primary uppercase tracking-widest">
+                  {t("home.established")} 1998
+                </span>
+              </div>
+            </div>
+            <div className="md:col-span-5 flex flex-col gap-6">
+              {[
+                { titleKey: "reason2Title", stat: "ISO", descKey: "reason2Desc", index: "02" },
+                { titleKey: "reason3Title", stat: "100%", descKey: "reason3Desc", index: "03" },
+              ].map((s) => (
+                <div
+                  key={s.titleKey}
+                  className="why-card hover-lift group relative bg-surface-container-low border border-outline-variant rounded-2xl p-6 md:p-8 hover:border-primary/30 transition-colors duration-300 flex flex-col gap-4 flex-1"
+                >
+                  <span className="font-display-lg text-[clamp(2rem,3vw,2.5rem)] text-primary leading-none">
                     {s.stat}
                   </span>
                   <div>
-                    <h3 className="font-headline-md text-xl font-bold text-on-surface mb-2">{t(`home.${s.titleKey}`)}</h3>
+                    <h3 className="font-headline-md text-lg font-bold text-on-surface mb-1">{t(`home.${s.titleKey}`)}</h3>
                     <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{t(`home.${s.descKey}`)}</p>
                   </div>
-                  <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/40 uppercase tracking-widest">
-                    {String(i + 1).padStart(2, "0")}
+                  <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/30 uppercase tracking-widest mt-auto">
+                    {s.index}
                   </span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
