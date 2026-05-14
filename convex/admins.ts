@@ -49,6 +49,24 @@ export const createFirstAdmin = mutation({
   },
 });
 
+export const bootstrapSelf = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Unauthenticated");
+
+    const existing = await ctx.db.query("admins").first();
+    if (existing) throw new Error("An admin already exists. Contact your superadmin.");
+
+    return await ctx.db.insert("admins", {
+      clerkId: identity.subject,
+      email: identity.email ?? "",
+      name: identity.name ?? "Admin",
+      role: "superadmin",
+    });
+  },
+});
+
 export const list = query({
   args: {},
   handler: async (ctx) => {
