@@ -120,7 +120,7 @@ export function HomePage() {
   useScrollReveal(ctaRef, ".cta-item", 0.15);
 
   return (
-    <main className="overflow-x-hidden w-full max-w-full">
+    <div className="overflow-x-hidden w-full max-w-full">
       <section className="relative min-h-[90dvh] flex items-center justify-center overflow-hidden bg-hero-surface">
         <div className="absolute inset-0">
           <img
@@ -278,6 +278,6 @@ export function HomePage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
