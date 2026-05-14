@@ -83,6 +83,8 @@ export function Header() {
             className="md:hidden text-on-surface p-2.5 rounded-lg hover:bg-surface-container transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle navigation"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -90,6 +92,7 @@ export function Header() {
       </div>
 
       <div
+        id="mobile-nav"
         className={`md:hidden bg-surface border-t border-outline-variant overflow-hidden transition-[max-height,opacity] duration-300 ease-out-strong ${
           mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
