@@ -1,4 +1,5 @@
-import { type ButtonHTMLAttributes } from "react";
+import { useRef, type ButtonHTMLAttributes } from "react";
+import { useMagneticButton } from "../../lib/animations";
 
 type Variant = "primary" | "secondary" | "ghost" | "tertiary" | "accent" | "dark" | "outline-light";
 type Size = "sm" | "md" | "lg";
@@ -49,6 +50,9 @@ export function Button({
   const base = "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg font-button-label cursor-pointer select-none motion-reduce:active:scale-100 hover-lift-btn transition-[background-color,color,border-color,box-shadow,transform] duration-200 ease-out-strong disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
   const classes = `${base} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
+  const btnRef = useRef<HTMLButtonElement>(null);
+  useMagneticButton(btnRef);
+
   if (as === "a" && href) {
     const isExternal = href.startsWith("http");
     return (
@@ -64,7 +68,7 @@ export function Button({
   }
 
   return (
-    <button className={classes} {...props}>
+    <button ref={btnRef} className={classes} {...props}>
       {children}
     </button>
   );

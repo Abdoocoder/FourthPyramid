@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized } from "../lib/localized";
-import { useScrollReveal } from "../lib/animations";
+import { useScrollReveal, useScramble, useTiltCard } from "../lib/animations";
 import { useInViewCountUp } from "../lib/useCountUp";
 import gsap from "gsap";
 
@@ -108,6 +108,12 @@ function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
   return { isPaused, toggle };
 }
 
+function TiltWrapper({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useTiltCard(ref, 10);
+  return <div ref={ref} className={className}>{children}</div>;
+}
+
 export function HomePage() {
   const { t } = useTranslation();
   usePageTitle(t("nav.home"));
@@ -147,6 +153,8 @@ export function HomePage() {
   useScrollReveal(whyRef, ".why-card, .reveal", 0.12);
   useScrollReveal(ctaRef, ".cta-item", 0.15);
 
+  const heroTitleRef = useScramble(t("home.heroTitle"));
+
   return (
     <div className="overflow-x-hidden w-full max-w-full">
 
@@ -172,7 +180,8 @@ export function HomePage() {
               {t("home.heroEyebrow")}
             </span>
             <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6">
-              {t("home.heroTitle") + " "}
+              <span ref={heroTitleRef}>{t("home.heroTitle")}</span>
+              {" "}
               <span
                 className="inline-block w-16 h-8 md:w-24 md:h-12 rounded-full align-middle mx-2 bg-cover bg-center"
                 style={{ backgroundImage: `url(${HERO_IMAGE.replace("w=1920", "w=200")}&h=200&fit=crop)` }}
@@ -270,10 +279,10 @@ export function HomePage() {
               <div className="col-span-full text-center py-20 text-on-surface-variant">{t("products.noResults")}</div>
             ) : (
               cats.map((cat, i) => (
+                <TiltWrapper key={cat.slug} className={capabilityLayouts[i] ?? "md:col-span-6"}>
                 <Link
-                  key={cat.slug}
                   to={`/products?category=${cat.slug}`}
-                  className={`cap-card hover-lift group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface shadow-[0_1px_0_rgba(26,43,72,0.03)] transition-[border-color,box-shadow,transform,background-color] duration-300 ease-out-strong hover:-translate-y-1 hover:border-primary/30 hover:shadow-card-hover motion-reduce:hover:translate-y-0 ${capabilityLayouts[i] ?? "md:col-span-6"}`}
+                  className="cap-card hover-lift group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface shadow-[0_1px_0_rgba(26,43,72,0.03)] transition-[border-color,box-shadow,transform,background-color] duration-300 ease-out-strong hover:-translate-y-1 hover:border-primary/30 hover:shadow-card-hover motion-reduce:hover:translate-y-0 block h-full"
                 >
                   <div
                     className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-out-strong group-hover:opacity-100 opacity-90"
@@ -337,6 +346,7 @@ export function HomePage() {
                     </div>
                   </div>
                 </Link>
+                </TiltWrapper>
               ))
             )}
           </div>

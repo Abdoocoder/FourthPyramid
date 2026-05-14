@@ -20,7 +20,7 @@ import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
-import { useScrollReveal, usePageEntrance } from "../lib/animations";
+import { useScrollReveal, usePageEntrance, useTiltCard } from "../lib/animations";
 import gsap from "gsap";
 
 function ProductImage({ src, alt, className, sizes }: { src: string | undefined; alt: string; className?: string; sizes?: string }) {
@@ -56,6 +56,7 @@ export function ProductDetailsPage() {
   usePageEntrance(breadcrumbRef, ".pd-breadcrumb", { stagger: 0, delay: 0.05 });
   useScrollReveal(rightPanelRef, ".pd-panel-item", 0.12);
   useScrollReveal(specsRef, ".pd-specs");
+  useTiltCard(mainImageRef, 6);
 
   const handleThumbClick = (i: number) => {
     if (i === activeImage || !mainImageRef.current) return;

@@ -3,6 +3,8 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { ScrollProgress } from "../ScrollProgress";
 import { siteConfig } from "../../lib/constants";
+import { MagneticCursor } from "../MagneticCursor";
+import { PageLoader } from "../PageLoader";
 
 function WhatsAppFab() {
   const number = siteConfig.whatsapp.replace(/\D/g, "");
@@ -24,6 +26,8 @@ function WhatsAppFab() {
 export function Layout() {
   return (
     <div className="bg-background text-on-background min-h-[100dvh] flex flex-col">
+      <PageLoader />
+      <MagneticCursor />
       <ScrollProgress />
       <a href="#main-content" className="skip-link">
         Skip to content

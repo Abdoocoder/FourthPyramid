@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { CheckCircle, FlaskConical, Gauge, Wind, Settings } from "lucide-react";
 import { Button } from "../components/ui/Button";
-import { useScrollReveal, useImageReveal, usePageEntrance } from "../lib/animations";
+import { useScrollReveal, useImageReveal, usePageEntrance, useScramble } from "../lib/animations";
 
 const metricsData = [
   { value: "1998", key: "established" },
@@ -45,6 +45,7 @@ export function AboutPage() {
   const ctaRef = useRef<HTMLElement>(null);
 
   usePageEntrance(heroRef, ".reveal", { stagger: 0.13, delay: 0.05 });
+  const heroTitleRef = useScramble(t("about.heroTitle"));
   useScrollReveal(metricsRef, ".metric-box");
   useScrollReveal(capabilitiesRef, ".cap-box");
   useScrollReveal(qualityRef, ".reveal");
@@ -60,7 +61,7 @@ export function AboutPage() {
           <div ref={heroRef} className="max-w-2xl py-16 sm:py-20">
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.heroEyebrow")}</span>
             <h1 className="reveal font-display-lg text-[clamp(2rem,5vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
-              {t("about.heroTitle")}
+              <span ref={heroTitleRef}>{t("about.heroTitle")}</span>
             </h1>
             <p className="reveal font-body-lg text-body-lg text-on-surface-variant">
               {t("about.heroDesc")}

@@ -1,4 +1,4 @@
-import { useEffect, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import gsap from "gsap";
 
 function prefersReduced() {
@@ -141,4 +141,114 @@ export function usePageEntrance(
     }, el);
     return () => ctx.revert();
   }, [ref, selector, stagger, delay]);
+}
+
+export function useMagneticButton(
+  ref: RefObject<HTMLElement | null>,
+  strength = 0.35
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReduced()) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    const onMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      gsap.to(el, { x: dx * strength, y: dy * strength, duration: 0.3, ease: "power2.out" });
+    };
+    const onLeave = () => {
+      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1,0.4)" });
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, [ref, strength]);
+}
+
+export function useTiltCard(
+  ref: RefObject<HTMLElement | null>,
+  maxDeg = 12
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReduced()) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    gsap.set(el, { transformPerspective: 900, transformStyle: "preserve-3d" });
+
+    const onMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      gsap.to(el, {
+        rotationY: x * maxDeg,
+        rotationX: -y * maxDeg,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    };
+    const onLeave = () => {
+      gsap.to(el, {
+        rotationY: 0,
+        rotationX: 0,
+        duration: 0.8,
+        ease: "elastic.out(1,0.4)",
+      });
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, [ref, maxDeg]);
+}
+
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZابجدهوزحطيكلمن0123456789";
+
+export function useScramble(
+  finalText: string,
+  trigger = true
+): RefObject<HTMLSpanElement | null> {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !trigger || prefersReduced()) {
+      if (el) el.textContent = finalText;
+      return;
+    }
+    const totalFrames = 50;
+    let frame = 0;
+    el.textContent = finalText;
+
+    const iv = setInterval(() => {
+      el.textContent = finalText
+        .split("")
+        .map((char, i) => {
+          if (char === " ") return " ";
+          if (frame / totalFrames > i / finalText.length) return char;
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        })
+        .join("");
+      if (++frame >= totalFrames) {
+        clearInterval(iv);
+        el.textContent = finalText;
+      }
+    }, 16);
+
+    return () => {
+      clearInterval(iv);
+      if (el) el.textContent = finalText;
+    };
+  }, [finalText, trigger]);
+
+  return ref;
 }

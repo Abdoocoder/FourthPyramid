@@ -10,7 +10,13 @@ import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
-import { usePageEntrance } from "../lib/animations";
+import { usePageEntrance, useTiltCard } from "../lib/animations";
+
+function TiltWrapper({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useTiltCard(ref, 8);
+  return <div ref={ref} className={className}>{children}</div>;
+}
 import { Skeleton } from "../components/ui/Skeleton";
 
 export function ProductsPage() {
@@ -113,10 +119,10 @@ export function ProductsPage() {
           {filtered.map((product, idx) => {
             const isFeatured = idx === 0 && searchQuery === "" && activeCategory === "all";
             return (
-              <Card 
-                key={product._id} 
-                hover={false} 
-                className={`stagger-item flex flex-col overflow-hidden group ${isFeatured ? "md:col-span-2 lg:flex-row" : ""}`}
+              <TiltWrapper key={product._id} className={isFeatured ? "md:col-span-2" : undefined}>
+              <Card
+                hover={false}
+                className={`stagger-item flex flex-col overflow-hidden group h-full ${isFeatured ? "lg:flex-row" : ""}`}
               >
                 <Link 
                   to={`/products/${product.slug}`} 
@@ -179,6 +185,7 @@ export function ProductsPage() {
                   </div>
                 </div>
               </Card>
+              </TiltWrapper>
             );
           })}
         </div>
