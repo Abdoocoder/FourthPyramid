@@ -1,7 +1,8 @@
 import { useState, useRef, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { usePageTitle } from "../lib/usePageTitle";
 import { useMutation } from "convex/react";
-import { Phone, Mail, MessageCircle, MapPin, CheckCircle, Send, Loader } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, CheckCircle, Send, Loader, Printer } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input, Textarea } from "../components/ui/Input";
 import { siteConfig } from "../lib/constants";
@@ -30,6 +31,7 @@ function SuccessView() {
 
 export function ContactPage() {
   const { t } = useTranslation();
+  usePageTitle(t("nav.contact"));
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -49,11 +51,12 @@ export function ContactPage() {
     const email = data.get("contact-email") as string;
     const subject = data.get("subject") as string;
     const message = data.get("contact-message") as string;
+    const honeypot = data.get("website") as string;
     if (!name || !email || !subject || !message) return;
     setSending(true);
     setError("");
     try {
-      await createContact({ name, email, subject, message });
+      await createContact({ name, email, subject, message, honeypot: honeypot || undefined });
       setSubmitted(true);
     } catch {
       setError(t("contact.error"));
@@ -79,15 +82,32 @@ export function ContactPage() {
         <div className="grid-reveal md:col-span-5 space-y-6">
           <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden divide-y divide-outline-variant">
             <a
-              href={`tel:${siteConfig.phone}`}
+              href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
               className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
             >
               <Phone className="w-4 h-4 text-primary shrink-0" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.phone")}</p>
-                <span className="font-body-sm text-body-sm text-on-surface font-medium">{siteConfig.phone}</span>
+                <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.phone}</span>
               </div>
             </a>
+            <a
+              href={`tel:${siteConfig.mobile.replace(/\D/g, "")}`}
+              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+            >
+              <Phone className="w-4 h-4 text-primary shrink-0" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.mobile")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.mobile}</span>
+              </div>
+            </a>
+            <div className="flex items-center gap-4 px-6 py-5">
+              <Printer className="w-4 h-4 text-on-surface-variant shrink-0" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.fax")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface-variant" dir="ltr">{siteConfig.fax}</span>
+              </div>
+            </div>
             <a
               href={`mailto:${siteConfig.email}`}
               className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
@@ -107,14 +127,16 @@ export function ContactPage() {
               <MessageCircle className="w-4 h-4 text-primary shrink-0" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.whatsapp")}</p>
-                <span className="font-body-sm text-body-sm text-on-surface font-medium">{siteConfig.whatsapp}</span>
+                <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.whatsapp}</span>
               </div>
             </a>
             <div className="flex items-start gap-4 px-6 py-5">
               <MapPin className="w-4 h-4 text-on-surface-variant shrink-0 mt-0.5" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.address")}</p>
-                <span className="font-body-sm text-body-sm text-on-surface-variant">{siteConfig.address}</span>
+                <span className="font-body-sm text-body-sm text-on-surface-variant">
+                  {i18n.language === "ar" ? siteConfig.address_ar : siteConfig.address}
+                </span>
               </div>
             </div>
           </div>
@@ -122,7 +144,7 @@ export function ContactPage() {
           <div className="h-[250px] bg-surface-container-highest border border-outline-variant rounded-xl overflow-hidden">
             <iframe
               title="Company Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.0!2d35.9!3d31.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDU3JzAwLjAiTiAzNcKwNTQnMDAuMCJF!5e0!3m2!1sen!2sjo!4v1"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent("Umm Butma Industrial Area, Al-Muwaqar, Amman, Jordan")}&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -137,6 +159,8 @@ export function ContactPage() {
           <div className="bg-surface p-6 md:p-10 rounded-xl border border-outline-variant shadow-sm">
             <h2 className="font-headline-md text-headline-md text-on-surface mb-6">{t("contact.formTitle")}</h2>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              {/* honeypot — hidden from users, filled by bots */}
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden opacity-0 pointer-events-none" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input label={t("contact.yourName")} id="contact-name" name="contact-name" placeholder={t("contact.yourNamePlaceholder")} required />
                 <Input label={t("contact.yourEmail")} id="contact-email" name="contact-email" type="email" placeholder={t("contact.yourEmailPlaceholder")} required />

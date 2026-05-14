@@ -184,7 +184,9 @@
     "submittedTitle": "Message Sent",
     "submittedDesc": "Thank you for reaching out. We'll respond within 24 hours.",
     "returnHome": "Return to Home",
-    "error": "Failed to send. Please try again."
+    "error": "Failed to send. Please try again.",
+    "fax": "Fax",
+    "mobile": "Mobile"
   },
   "admin": {
     "title": "Admin",
@@ -224,7 +226,6 @@
     "descriptionAr": "Description (AR)",
     "selectCategory": "Select a category",
     "featuredProduct": "Featured product",
-    "images": "Images",
     "specifications": "Specifications",
     "english": "English",
     "arabic": "Arabic",

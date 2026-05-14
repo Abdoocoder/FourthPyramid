@@ -183,7 +183,9 @@
     "sendButton": "إرسال الرسالة",
     "submittedTitle": "تم إرسال الرسالة",
     "submittedDesc": "شكراً لتواصلك. سنرد خلال 24 ساعة.",
-    "returnHome": "العودة للرئيسية"
+    "returnHome": "العودة للرئيسية",
+    "fax": "فاكس",
+    "mobile": "موبايل"
   },
   "admin": {
     "title": "لوحة التحكم",
@@ -223,7 +225,6 @@
     "descriptionAr": "الوصف (عربي)",
     "selectCategory": "اختر تصنيف",
     "featuredProduct": "منتج مميز",
-    "images": "الصور",
     "specifications": "المواصفات الفنية",
     "english": "إنجليزي",
     "arabic": "عربي",

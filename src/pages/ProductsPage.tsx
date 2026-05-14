@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { usePageTitle } from "../lib/usePageTitle";
 import { Search, ShoppingCart, ImageOff } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { Badge } from "../components/ui/Badge";
@@ -13,6 +14,7 @@ import { usePageEntrance } from "../lib/animations";
 
 export function ProductsPage() {
   const { t } = useTranslation();
+  usePageTitle(t("nav.products"));
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const pageHeaderRef = useRef<HTMLDivElement>(null);

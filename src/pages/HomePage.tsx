@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { usePageTitle } from "../lib/usePageTitle";
 import { ArrowRight, Factory, Package, FlaskConical, Fuel } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Link } from "react-router-dom";
@@ -38,16 +39,32 @@ function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
     const track = el.querySelector(".marquee-track") as HTMLElement;
     if (!track) return;
     const clone = track.cloneNode(true) as HTMLElement;
+    clone.setAttribute("aria-hidden", "true");
     el.appendChild(clone);
+    let animRef: gsap.core.Tween | null = null;
     const ctx = gsap.context(() => {
-      gsap.to([track, clone], { xPercent: -50, duration: 30, repeat: -1, ease: "none" });
+      animRef = gsap.to([track, clone], { xPercent: -50, duration: 30, repeat: -1, ease: "none" });
     }, el);
-    return () => ctx.revert();
+    const pause = () => animRef?.pause();
+    const resume = () => animRef?.play();
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+    el.addEventListener("focusin", pause);
+    el.addEventListener("focusout", resume);
+    return () => {
+      ctx.revert();
+      if (clone.parentNode === el) el.removeChild(clone);
+      el.removeEventListener("mouseenter", pause);
+      el.removeEventListener("mouseleave", resume);
+      el.removeEventListener("focusin", pause);
+      el.removeEventListener("focusout", resume);
+    };
   }, [ref]);
 }
 
 export function HomePage() {
   const { t } = useTranslation();
+  usePageTitle(t("nav.home"));
   const cats = useQuery(api.categories.list);
 
   const HERO_IMAGE = "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1920&q=80&auto=format";

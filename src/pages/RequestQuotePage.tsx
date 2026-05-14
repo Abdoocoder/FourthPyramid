@@ -1,6 +1,7 @@
 import { useState, useRef, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Globe, CheckCircle, ArrowRight } from "lucide-react";
+import { usePageTitle } from "../lib/usePageTitle";
+import { Globe, CheckCircle, ArrowRight, Loader } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input, Textarea, Select } from "../components/ui/Input";
 import { useMutation } from "convex/react";
@@ -31,7 +32,9 @@ function SuccessView() {
 
 export function RequestQuotePage() {
   const { t } = useTranslation();
+  usePageTitle(t("nav.requestQuote"));
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const leftPanelRef = useRef<HTMLDivElement>(null);
   const formPanelRef = useRef<HTMLDivElement>(null);
@@ -42,7 +45,9 @@ export function RequestQuotePage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
     setError(null);
+    setSubmitting(true);
     const form = e.currentTarget as HTMLFormElement;
     const data = new FormData(form);
     try {
@@ -52,12 +57,15 @@ export function RequestQuotePage() {
         email: data.get("email") as string,
         phone: data.get("phone") as string,
         productType: data.get("productType") as string,
-        quantity: data.get("quantity") as string || "",
-        message: data.get("message") as string || "",
+        quantity: (data.get("quantity") as string) || "",
+        message: (data.get("message") as string) || "",
+        honeypot: (data.get("website") as string) || undefined,
       });
       setSubmitted(true);
     } catch {
       setError(t("quote.error"));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -99,6 +107,8 @@ export function RequestQuotePage() {
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* honeypot — hidden from users, filled by bots */}
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden opacity-0 pointer-events-none" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input label={t("quote.companyName")} id="companyName" name="companyName" placeholder={t("quote.companyNamePlaceholder")} required />
                 <Input label={t("quote.contactName")} id="contactName" name="contactName" placeholder={t("quote.contactNamePlaceholder")} required />
@@ -119,8 +129,9 @@ export function RequestQuotePage() {
               </div>
               <Textarea label={t("quote.projectDetails")} id="message" name="message" placeholder={t("quote.projectDetailsPlaceholder")} />
               <div className="pt-4 border-t border-outline-variant">
-                <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center">
-                  {t("quote.submitButton")} <ArrowRight className="w-4 h-4" />
+                <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center" disabled={submitting}>
+                  {submitting ? <Loader className="w-4 h-4 animate-spin" /> : <ArrowRight className="w-4 h-4" />}
+                  {t("quote.submitButton")}
                 </Button>
               </div>
             </form>

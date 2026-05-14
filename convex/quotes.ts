@@ -5,6 +5,7 @@ import { requireAdmin } from "./lib/requireAdmin";
 export const list = query({
   args: { status: v.optional(v.union(v.literal("pending"), v.literal("contacted"), v.literal("closed"))) },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx);
     if (args.status) {
       return await ctx.db
         .query("quotes")
@@ -25,10 +26,18 @@ export const create = mutation({
     productType: v.string(),
     quantity: v.string(),
     message: v.string(),
+    honeypot: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    if (args.honeypot) return;
     return await ctx.db.insert("quotes", {
-      ...args,
+      companyName: args.companyName,
+      contactName: args.contactName,
+      email: args.email,
+      phone: args.phone,
+      productType: args.productType,
+      quantity: args.quantity,
+      message: args.message,
       status: "pending",
     });
   },

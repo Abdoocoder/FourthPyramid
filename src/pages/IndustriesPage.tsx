@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { usePageTitle } from "../lib/usePageTitle";
 import { ArrowRight } from "lucide-react";
 import { industries } from "../lib/constants";
 import { Badge } from "../components/ui/Badge";
@@ -23,6 +24,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 
 export function IndustriesPage() {
   const { t } = useTranslation();
+  usePageTitle(t("nav.industries"));
   const headerRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
 

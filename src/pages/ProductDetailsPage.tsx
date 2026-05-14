@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { usePageTitle } from "../lib/usePageTitle";
 import {
   ArrowLeft,
   Download,
@@ -42,6 +43,7 @@ export function ProductDetailsPage() {
   const { t } = useTranslation();
   const { slug } = useParams();
   const product = useQuery(api.products.getBySlug, { slug: slug ?? "" });
+  usePageTitle(product ? localized(product, "name") : t("nav.products"));
   const [activeImage, setActiveImage] = useState(0);
   const mainImageRef = useRef<HTMLDivElement>(null);
   const breadcrumbRef = useRef<HTMLDivElement>(null);

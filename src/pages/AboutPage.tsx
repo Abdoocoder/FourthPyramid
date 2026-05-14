@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { usePageTitle } from "../lib/usePageTitle";
 import { CheckCircle, FlaskConical, Gauge, Wind, Settings } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { useScrollReveal } from "../lib/animations";
@@ -36,6 +37,7 @@ const qualityPoints = [
 
 export function AboutPage() {
   const { t } = useTranslation();
+  usePageTitle(t("nav.about"));
   const heroRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<HTMLDivElement>(null);
   const capabilitiesRef = useRef<HTMLDivElement>(null);

@@ -6,8 +6,9 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface-container-low">
-        <div className="animate-pulse text-on-surface-variant">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-surface-container-low" role="status" aria-label="Loading">
+        <div className="w-6 h-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" aria-hidden="true" />
+        <span className="sr-only">Loading admin panel…</span>
       </div>
     );
   }
@@ -18,9 +19,7 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
         <SignIn
           routing="path"
           path="/admin"
-          signUpUrl="/admin/sign-up"
           afterSignInUrl="/admin"
-          afterSignUpUrl="/admin"
         />
       </div>
     );

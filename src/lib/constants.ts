@@ -3,9 +3,12 @@ export const siteConfig = {
   tagline: "Fourth Pyramid Plastic Industries",
   description: "High-quality plastic containers, bottles, and custom molds for industrial and commercial sectors.",
   email: "info@fourthpyramid.com",
-  phone: "+962 6 000 0000",
-  whatsapp: "+962 6 000 0000",
-  address: "Amman, Jordan",
+  phone: "+962 6 405 0070",
+  mobile: "+962 79 999 1790",
+  fax: "+962 6 405 0071",
+  whatsapp: "+962 79 999 1790",
+  address: "Umm Butma Industrial Area, Al-Muwaqar, Amman, Jordan",
+  address_ar: "عمان - الموقر - أم بطمة الصناعية",
   copyright: `© ${new Date().getFullYear()} Fourth Pyramid Plastic Industries. All rights reserved.`,
 };
 

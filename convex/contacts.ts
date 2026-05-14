@@ -7,8 +7,15 @@ export const create = mutation({
     email: v.string(),
     subject: v.string(),
     message: v.string(),
+    honeypot: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    await ctx.db.insert("contacts", args);
+    if (args.honeypot) return;
+    await ctx.db.insert("contacts", {
+      name: args.name,
+      email: args.email,
+      subject: args.subject,
+      message: args.message,
+    });
   },
 });
