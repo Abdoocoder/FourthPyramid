@@ -55,7 +55,7 @@ export function AdminProductsPage() {
           </thead>
           <tbody>
             {productsData === undefined ? (
-              <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse">{t("products.loading")}</td></tr>
+              <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse">{t("admin.loading")}</td></tr>
             ) : productsData.length === 0 ? (
               <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noProducts")}</td></tr>
             ) : (

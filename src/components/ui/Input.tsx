@@ -21,8 +21,8 @@ function RequiredMark() {
 
 export function Input({ label, id, required, ...props }: InputProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold">
+    <div className="input-group flex flex-col gap-2">
+      <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold transition-colors">
         {label}{required && <RequiredMark />}
       </label>
       <input id={id} className={inputBase} required={required} {...props} />
@@ -32,8 +32,8 @@ export function Input({ label, id, required, ...props }: InputProps) {
 
 export function Textarea({ label, id, required, ...props }: TextareaProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold">
+    <div className="input-group flex flex-col gap-2">
+      <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold transition-colors">
         {label}{required && <RequiredMark />}
       </label>
       <textarea id={id} className={`${inputBase} resize-y`} rows={5} required={required} {...props} />
@@ -43,8 +43,8 @@ export function Textarea({ label, id, required, ...props }: TextareaProps) {
 
 export function Select({ label, id, required, children, ...props }: SelectProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold">
+    <div className="input-group flex flex-col gap-2">
+      <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold transition-colors">
         {label}{required && <RequiredMark />}
       </label>
       <div className="relative">

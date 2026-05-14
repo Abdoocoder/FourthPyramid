@@ -325,10 +325,13 @@ export function HomePage() {
             </svg>
           )}
         </button>
-        <div className="flex marquee-track gap-12 items-center whitespace-nowrap">
+        <div className="flex marquee-track gap-0 items-center whitespace-nowrap">
           {partners.map((p, i) => (
-            <span key={i} className="font-data-mono text-data-mono text-on-surface-variant/50 uppercase tracking-[0.2em] text-sm flex-shrink-0">
-              {p}
+            <span key={i} className="inline-flex items-center gap-0 flex-shrink-0">
+              <span className="font-data-mono text-data-mono text-on-surface-variant/50 uppercase tracking-[0.2em] text-sm px-10">
+                {p}
+              </span>
+              <span className="text-primary/25 text-xs select-none" aria-hidden="true">◈</span>
             </span>
           ))}
         </div>

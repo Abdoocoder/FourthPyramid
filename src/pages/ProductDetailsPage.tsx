@@ -137,7 +137,7 @@ export function ProductDetailsPage() {
             sizes="(max-width: 768px) 100vw, 58vw"
             className="w-full aspect-[4/3] object-cover"
           />
-          <div className="absolute top-4 start-4 bg-on-background text-surface px-3 py-1 rounded-sm font-data-mono text-data-mono uppercase flex items-center gap-1.5 shadow-sm">
+          <div className="absolute top-4 start-4 bg-inverse-surface text-inverse-on-surface px-3 py-1 rounded-sm font-data-mono text-data-mono uppercase flex items-center gap-1.5 shadow-sm">
             <Verified className="w-3.5 h-3.5" />
             {localizedArray(product.certifications, product.certifications_ar)[0]}
           </div>
@@ -149,7 +149,7 @@ export function ProductDetailsPage() {
               <button
                 key={i}
                 onClick={() => handleThumbClick(i)}
-                aria-label={`View image ${i + 1}`}
+                aria-label={`${localized(product, "name")}, image ${i + 1}`}
                 className={`aspect-square bg-surface-container border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 ${
                   i === activeImage
                     ? "border-primary ring-2 ring-primary/30"

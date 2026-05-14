@@ -8,6 +8,7 @@ import { Button } from "../components/ui/Button";
 import { useScrollReveal } from "../lib/animations";
 
 const bgClasses = ["bg-surface-container", "bg-surface", "bg-surface-container", "bg-surface"];
+const badgeVariants = ["tertiary", "primary", "secondary", "outline"] as const;
 
 const industryImages = [
   "https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80&auto=format",
@@ -70,22 +71,22 @@ export function IndustriesPage() {
                     </div>
                   </div>
                   <div className="reveal md:col-span-5 md:ps-8">
-                    <Badge variant="primary" className="mb-4">{eyebrow}</Badge>
+                    <Badge variant={badgeVariants[i]} className="mb-4">{eyebrow}</Badge>
                     <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                     <Button as="a" href="/products" variant="tertiary">
-                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:rotate-180 rtl:mr-1 ltr:ml-1" />
+                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                     </Button>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="reveal md:col-span-5 order-2 md:order-1">
-                    <Badge variant="primary" className="mb-4">{eyebrow}</Badge>
+                    <Badge variant={badgeVariants[i]} className="mb-4">{eyebrow}</Badge>
                     <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                     <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                     <Button as="a" href="/products" variant="tertiary">
-                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:rotate-180 rtl:mr-1 ltr:ml-1" />
+                      {t("industries.viewProducts")} <ArrowRight className="w-4 h-4 rtl:rotate-180" />
                     </Button>
                   </div>
                   <div className="reveal md:col-span-7 order-1 md:order-2 mb-8 md:mb-0">

@@ -10,6 +10,12 @@ const statusStyles: Record<string, string> = {
   closed: "bg-surface-container-high text-on-surface-variant",
 };
 
+const statusDotColors: Record<string, string> = {
+  pending: "bg-tertiary",
+  contacted: "bg-primary",
+  closed: "bg-outline",
+};
+
 export function AdminQuotesPage() {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<string | undefined>(undefined);
@@ -53,7 +59,7 @@ export function AdminQuotesPage() {
           </thead>
           <tbody>
             {quotesData === undefined ? (
-              <tr><td colSpan={5} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse">{t("products.loading")}</td></tr>
+              <tr><td colSpan={5} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant animate-pulse">{t("admin.loading")}</td></tr>
             ) : quotesData.length === 0 ? (
               <tr><td colSpan={5} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noQuotes")}</td></tr>
             ) : (
@@ -69,7 +75,8 @@ export function AdminQuotesPage() {
                   <span className="font-body-sm text-body-sm text-on-surface-variant">{q.productType}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <span className={`inline-flex px-2.5 py-1 rounded text-[11px] font-data-mono uppercase tracking-wider ${statusStyles[q.status]}`}>
+                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] font-data-mono uppercase tracking-wider ${statusStyles[q.status]}`}>
+                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${statusDotColors[q.status]}`} aria-hidden="true" />
                     {t(`admin.${q.status}`)}
                   </span>
                 </td>

@@ -13,7 +13,7 @@ function SuccessView() {
   return (
     <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-section-gap">
       <div className="max-w-xl mx-auto text-center success-enter">
-        <div className="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto mb-6">
+        <div className="success-icon-ring relative w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto mb-8">
           <CheckCircle className="w-8 h-8" />
         </div>
         <h1 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface mb-4 leading-[1.1]">

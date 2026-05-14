@@ -6,7 +6,7 @@ import { api } from "@convex/_generated/api";
 import { Link } from "react-router-dom";
 import { useInViewCountUp } from "../../lib/useCountUp";
 
-function StatValue({ value }: { value: number | null }) {
+function StatValue({ value, accent }: { value: number | null; accent?: boolean }) {
   const { ref, formatted } = useInViewCountUp({
     end: value ?? 0,
     duration: 1200,
@@ -15,7 +15,11 @@ function StatValue({ value }: { value: number | null }) {
   if (value === null) {
     return <span className="text-outline-variant animate-pulse">—</span>;
   }
-  return <span ref={ref} className="tabular-nums">{formatted}</span>;
+  return (
+    <span ref={ref} className={`tabular-nums ${accent && value > 0 ? "text-tertiary" : ""}`}>
+      {formatted}
+    </span>
+  );
 }
 
 export function DashboardPage() {
@@ -27,9 +31,9 @@ export function DashboardPage() {
   const totalQuotes = useQuery(api.quotes.list, emptyArgs);
 
   const stats = [
-    { label: t("admin.products"), value: productsData?.length ?? null },
-    { label: t("admin.pending"), value: pendingQuotes?.length ?? null },
-    { label: t("admin.totalQuotes"), value: totalQuotes?.length ?? null },
+    { label: t("admin.products"), value: productsData?.length ?? null, accent: false },
+    { label: t("admin.pending"), value: pendingQuotes?.length ?? null, accent: true },
+    { label: t("admin.totalQuotes"), value: totalQuotes?.length ?? null, accent: false },
   ];
 
   return (
@@ -43,7 +47,7 @@ export function DashboardPage() {
         {stats.map((s) => (
           <div key={s.label} className="px-3 py-4 sm:px-6 sm:py-5 min-w-0">
             <p className="text-xl sm:text-2xl font-semibold text-on-surface">
-              <StatValue value={s.value} />
+              <StatValue value={s.value} accent={s.accent} />
             </p>
             <p className="text-[10px] sm:text-xs text-on-surface-variant mt-1 uppercase tracking-wide leading-snug">
               {s.label}
@@ -78,7 +82,7 @@ export function DashboardPage() {
             </div>
           ) : pendingQuotes.length === 0 ? (
             <div className="px-5 py-10 text-center">
-              <p className="text-sm text-on-surface-variant">{t("admin.connected")}</p>
+              <p className="text-sm text-on-surface-variant">{t("admin.noPendingQuotes")}</p>
             </div>
           ) : (
             <div className="divide-y divide-outline-variant">

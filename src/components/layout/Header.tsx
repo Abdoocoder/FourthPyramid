@@ -94,7 +94,7 @@ export function Header() {
       <div
         id="mobile-nav"
         className={`md:hidden bg-surface border-t border-outline-variant overflow-hidden transition-[max-height,opacity] duration-300 ease-out-strong ${
-          mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          mobileOpen ? "max-h-[640px] opacity-100" : "max-h-0 opacity-0"
         }`}
         style={{ "--item-count": navLinks.length + 3 } as React.CSSProperties}
       >

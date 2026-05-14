@@ -264,7 +264,9 @@
     "openSidebar": "Open sidebar",
     "closeSidebar": "Close sidebar",
     "confirmDelete": "Delete \"{{name}}\"? This cannot be undone.",
-    "confirmDeleteImage": "Delete this image? This cannot be undone."
+    "confirmDeleteImage": "Delete this image? This cannot be undone.",
+    "loading": "Loading...",
+    "noPendingQuotes": "No pending quotes."
   },
   "common": {
     "isoBadge": "ISO 9001:2015"
