@@ -144,7 +144,7 @@ export function HomePage() {
     <div className="overflow-x-hidden w-full max-w-full">
 
       {/* ── Hero: split-screen, content start-aligned ── */}
-      <section className="relative min-h-[90dvh] bg-hero-surface overflow-hidden flex items-center">
+      <section aria-label={t("home.heroTitle")} className="relative min-h-[90dvh] bg-hero-surface overflow-hidden flex items-center">
         {/* Full-bleed image, gradient fades from start (dark) to end (visible) */}
         <div className="absolute inset-0">
           <img
@@ -189,7 +189,7 @@ export function HomePage() {
       </section>
 
       {/* ── Metrics ── */}
-      <section ref={metricsRef} className="py-24 md:py-32 bg-surface border-b border-outline-variant">
+      <section ref={metricsRef} aria-label={t("home.metricsSection")} className="py-24 md:py-32 bg-surface border-b border-outline-variant">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div className="metric-card md:col-span-5 flex flex-col gap-4 border-e border-outline-variant md:pe-12">
@@ -207,12 +207,18 @@ export function HomePage() {
                 </span>
               </div>
             </div>
-            <div className="metric-card md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6 md:ps-4">
-              {[metrics[0], metrics[1], metrics[3]].map((m) => (
-                <div key={m.key} className="flex flex-col gap-2">
-                  <MetricValue metric={m} />
+            <div className="metric-card md:col-span-7 flex flex-col justify-center gap-0 md:ps-8 border-t md:border-t-0 pt-6 md:pt-0">
+              {[
+                { value: "50M+", labelKey: "unitsPerYear" },
+                { value: metrics[0].value, labelKey: "established" },
+                { value: "ISO 9001", labelKey: "certified" },
+              ].map((item) => (
+                <div key={item.labelKey} className="flex items-center gap-6 py-4 border-b border-outline-variant last:border-0">
+                  <span className="font-data-mono text-[0.9375rem] font-semibold text-primary tabular-nums w-16 shrink-0">
+                    {item.value}
+                  </span>
                   <span className="font-data-mono text-data-mono text-on-surface-variant uppercase tracking-[0.15em] text-[11px]">
-                    {t(`home.${m.key}`)}
+                    {t(`home.${item.labelKey}`)}
                   </span>
                 </div>
               ))}
@@ -222,7 +228,7 @@ export function HomePage() {
       </section>
 
       {/* ── Capabilities ── */}
-      <section ref={capabilitiesRef} className="py-24 md:py-32 bg-surface-container-low">
+      <section ref={capabilitiesRef} aria-labelledby="capabilities-heading" className="py-24 md:py-32 bg-surface-container-low">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           {/* Left-aligned section opener */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16">
@@ -230,7 +236,7 @@ export function HomePage() {
               <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
                 {t("home.capabilitiesEyebrow")}
               </span>
-              <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em]">
+              <h2 id="capabilities-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em]">
                 {t("home.capabilitiesTitle")}
               </h2>
             </div>
@@ -272,14 +278,14 @@ export function HomePage() {
       </section>
 
       {/* ── Why Fourth Pyramid ── */}
-      <section ref={whyRef} className="py-24 md:py-32 bg-surface">
+      <section ref={whyRef} aria-labelledby="why-heading" className="py-24 md:py-32 bg-surface">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           {/* Left-aligned opener */}
           <div className="mb-16">
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
               {t("home.whyEyebrow")}
             </span>
-            <h2 className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-2xl">
+            <h2 id="why-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-2xl">
               {t("home.whyTitle")}
             </h2>
           </div>
@@ -363,15 +369,15 @@ export function HomePage() {
       </section>
 
       {/* ── CTA: left-aligned, split layout ── */}
-      <section ref={ctaRef} className="py-32 md:py-48 bg-hero-surface relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/2 start-1/4 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary blur-[120px]" />
+      <section ref={ctaRef} aria-labelledby="cta-heading" className="py-32 md:py-48 bg-hero-surface relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-1/2 start-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, var(--color-primary) 0%, transparent 70%)" }} />
         </div>
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div className="md:col-span-7">
               <div className="cta-item">
-                <h2 className="font-display-lg text-[clamp(2rem,5vw,4rem)] text-inverse-on-surface mb-6 leading-[1.05] tracking-[-0.02em]">
+                <h2 id="cta-heading" className="font-display-lg text-[clamp(2rem,5vw,4rem)] text-inverse-on-surface mb-6 leading-[1.05] tracking-[-0.02em]">
                   {t("home.ctaTitle")}
                 </h2>
               </div>

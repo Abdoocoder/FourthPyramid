@@ -261,7 +261,7 @@ export function AdminPagesPage() {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("admin.contentBlocks")} (EN)</p>
-                    <button onClick={() => addBlock(blocks, setBlocks)} className="text-primary hover:text-primary-fixed-dim text-sm flex items-center gap-1">
+                    <button onClick={() => addBlock(blocks, setBlocks)} className="text-primary hover:text-primary-fixed-dim text-sm flex items-center gap-1 min-h-11 px-2 rounded-lg hover:bg-surface-container transition-colors">
                       <Plus className="w-3 h-3" /> {t("admin.addBlock")}
                     </button>
                   </div>
@@ -271,7 +271,7 @@ export function AdminPagesPage() {
                 <div className="pt-4 border-t border-outline-variant">
                   <div className="flex items-center justify-between mb-3">
                     <p className="font-body-sm text-body-sm font-semibold text-on-surface">{t("admin.contentBlocks")} (AR)</p>
-                    <button onClick={() => addBlock(blocksAr, setBlocksAr)} className="text-primary hover:text-primary-fixed-dim text-sm flex items-center gap-1">
+                    <button onClick={() => addBlock(blocksAr, setBlocksAr)} className="text-primary hover:text-primary-fixed-dim text-sm flex items-center gap-1 min-h-11 px-2 rounded-lg hover:bg-surface-container transition-colors">
                       <Plus className="w-3 h-3" /> {t("admin.addBlock")}
                     </button>
                   </div>

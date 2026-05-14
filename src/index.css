@@ -397,3 +397,12 @@ select:focus ~ .select-chevron svg {
   --font-body-sm: Cairo, system-ui, sans-serif;
   --font-data-mono: Cairo, ui-monospace, monospace;
 }
+
+/* ── Rich text editor content styles (replaces @tailwindcss/typography) ── */
+.rich-content strong { font-weight: 600; }
+.rich-content em { font-style: italic; }
+.rich-content ul { list-style-type: disc; padding-inline-start: 1.25rem; margin-block: 0.5rem; }
+.rich-content ol { list-style-type: decimal; padding-inline-start: 1.25rem; margin-block: 0.5rem; }
+.rich-content li { margin-bottom: 0.25rem; }
+.rich-content a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 2px; }
+.rich-content p + p { margin-top: 0.625rem; }
