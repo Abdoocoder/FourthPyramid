@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { ArrowRight, Factory, Package, FlaskConical, Fuel } from "lucide-react";
@@ -57,6 +57,9 @@ function MetricValue({ metric }: { metric: { value: string; key: string } }) {
 }
 
 function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
+  const [isPaused, setIsPaused] = useState(false);
+  const animRef = useRef<gsap.core.Tween | null>(null);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -65,12 +68,11 @@ function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
     const clone = track.cloneNode(true) as HTMLElement;
     clone.setAttribute("aria-hidden", "true");
     el.appendChild(clone);
-    let animRef: gsap.core.Tween | null = null;
     const ctx = gsap.context(() => {
-      animRef = gsap.to([track, clone], { xPercent: -50, duration: 30, repeat: -1, ease: "none" });
+      animRef.current = gsap.to([track, clone], { xPercent: -50, duration: 30, repeat: -1, ease: "none" });
     }, el);
-    const pause = () => animRef?.pause();
-    const resume = () => animRef?.play();
+    const pause = () => { animRef.current?.pause(); setIsPaused(true); };
+    const resume = () => { animRef.current?.play(); setIsPaused(false); };
     el.addEventListener("mouseenter", pause);
     el.addEventListener("mouseleave", resume);
     el.addEventListener("focusin", pause);
@@ -84,6 +86,19 @@ function useMarquee(ref: React.RefObject<HTMLDivElement | null>) {
       el.removeEventListener("focusout", resume);
     };
   }, [ref]);
+
+  const toggle = useCallback(() => {
+    if (!animRef.current) return;
+    if (animRef.current.paused()) {
+      animRef.current.play();
+      setIsPaused(false);
+    } else {
+      animRef.current.pause();
+      setIsPaused(true);
+    }
+  }, []);
+
+  return { isPaused, toggle };
 }
 
 export function HomePage() {
@@ -113,7 +128,7 @@ export function HomePage() {
     return () => ctx.revert();
   }, []);
 
-  useMarquee(marqueeRef);
+  const { isPaused: marqueePaused, toggle: toggleMarquee } = useMarquee(marqueeRef);
   useScrollReveal(metricsRef, ".metric-card", 0.1);
   useScrollReveal(capabilitiesRef, ".cap-card, .reveal", 0.12);
   useScrollReveal(whyRef, ".why-card, .reveal", 0.12);
@@ -246,7 +261,27 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={marqueeRef} className="py-16 md:py-20 bg-surface-container-highest overflow-hidden border-y border-outline-variant">
+      <section
+        ref={marqueeRef}
+        aria-label={t("home.certificationsBadges")}
+        className="py-16 md:py-20 bg-surface-container-highest overflow-hidden border-y border-outline-variant relative"
+      >
+        <button
+          onClick={toggleMarquee}
+          aria-label={marqueePaused ? t("home.resumeMarquee") : t("home.pauseMarquee")}
+          className="absolute end-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-surface/80 border border-outline-variant text-on-surface-variant hover:text-on-surface hover:bg-surface transition-colors"
+        >
+          {marqueePaused ? (
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+              <path d="M3 2l7 4-7 4V2z"/>
+            </svg>
+          ) : (
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+              <rect x="2" y="2" width="3" height="8"/>
+              <rect x="7" y="2" width="3" height="8"/>
+            </svg>
+          )}
+        </button>
         <div className="flex marquee-track gap-12 items-center whitespace-nowrap">
           {partners.map((p, i) => (
             <span key={i} className="font-data-mono text-data-mono text-on-surface-variant/50 uppercase tracking-[0.2em] text-sm flex-shrink-0">
