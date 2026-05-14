@@ -30,7 +30,9 @@ export function Layout() {
       </a>
       <Header />
       <main id="main-content" className="flex-1 pt-20" tabIndex={-1}>
-        <Outlet />
+        <div className="page-entrance">
+          <Outlet />
+        </div>
       </main>
       <Footer />
       <WhatsAppFab />

@@ -35,9 +35,9 @@ function StatusButton({
     <button
       onClick={() => !active && onUpdate(target)}
       disabled={active}
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-data-mono uppercase tracking-wider transition-colors duration-150 ${
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-data-mono uppercase tracking-wider transition-all duration-200 ${
         active
-          ? `${statusStyles[target]} opacity-100 cursor-default`
+          ? `${statusStyles[target]} opacity-100 cursor-default shadow-sm`
           : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high border border-outline-variant"
       }`}
     >
@@ -185,9 +185,9 @@ export function AdminQuotesPage() {
           <button
             key={s}
             onClick={() => setFilter(s === "all" ? undefined : s)}
-            className={`px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+            className={`px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-all duration-200 ${
               (filter === undefined && s === "all") || filter === s
-                ? "bg-primary text-on-primary"
+                ? "bg-primary text-on-primary shadow-[0_2px_8px_rgba(74,144,226,0.2)]"
                 : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
             }`}
           >
@@ -213,7 +213,7 @@ export function AdminQuotesPage() {
             ) : quotesData.length === 0 ? (
               <tr><td colSpan={5} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noQuotes")}</td></tr>
             ) : (
-              quotesData.map((q) => (
+              quotesData.map((q, _idx) => (
                 <QuoteRow
                   key={q._id}
                   q={q as Parameters<typeof QuoteRow>[0]["q"]}

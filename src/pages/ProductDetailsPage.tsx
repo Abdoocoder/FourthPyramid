@@ -150,7 +150,7 @@ export function ProductDetailsPage() {
                 key={i}
                 onClick={() => handleThumbClick(i)}
                 aria-label={`${localized(product, "name")}, image ${i + 1}`}
-                className={`aspect-square bg-surface-container border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 ${
+                className={`aspect-square bg-surface-container border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 hover-lift-card ${
                   i === activeImage
                     ? "border-primary ring-2 ring-primary/30"
                     : "border-outline-variant hover:border-primary/50"

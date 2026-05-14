@@ -31,7 +31,7 @@ export function ScrollProgress() {
       aria-label="Page scroll progress"
     >
       <div
-        className="h-full w-full bg-primary transition-transform duration-100 ease-out origin-left will-change-transform"
+        className="h-full w-full bg-primary transition-transform duration-100 ease-out origin-left will-change-transform shadow-[0_0_6px_rgba(74,144,226,0.5)]"
         style={{ transform: `scaleX(${progress})` }}
       />
     </div>

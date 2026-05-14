@@ -79,13 +79,13 @@ export function ContactPage() {
       </div>
 
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
-        <div className="grid-reveal md:col-span-5 space-y-6">
-          <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden divide-y divide-outline-variant">
+          <div className="grid-reveal md:col-span-5 space-y-6">
+            <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden divide-y divide-outline-variant grid-stagger">
             <a
               href={`tel:${siteConfig.phone.replace(/\D/g, "")}`}
-              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+              className="group flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-all duration-200"
             >
-              <Phone className="w-4 h-4 text-primary shrink-0" />
+              <Phone className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform duration-200" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.phone")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.phone}</span>
@@ -93,9 +93,9 @@ export function ContactPage() {
             </a>
             <a
               href={`tel:${siteConfig.mobile.replace(/\D/g, "")}`}
-              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+              className="group flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-all duration-200"
             >
-              <Phone className="w-4 h-4 text-primary shrink-0" />
+              <Phone className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform duration-200" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.mobile")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.mobile}</span>
@@ -110,9 +110,9 @@ export function ContactPage() {
             </div>
             <a
               href={`mailto:${siteConfig.email}`}
-              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+              className="group flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-all duration-200"
             >
-              <Mail className="w-4 h-4 text-primary shrink-0" />
+              <Mail className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform duration-200" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.email")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface font-medium">{siteConfig.email}</span>
@@ -122,9 +122,9 @@ export function ContactPage() {
               href={`https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-colors duration-150"
+              className="group flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-all duration-200"
             >
-              <MessageCircle className="w-4 h-4 text-primary shrink-0" />
+              <MessageCircle className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform duration-200" />
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.whatsapp")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.whatsapp}</span>

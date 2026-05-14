@@ -91,7 +91,7 @@ export function Header() {
                 {t(`nav.${link.label.toLowerCase()}`)}
                 {isActive && (
                   <span
-                    className="absolute bottom-0 inset-x-3 h-[2px] bg-primary rounded-t-full"
+                    className="absolute bottom-0 inset-x-3 h-[2px] bg-primary rounded-t-full active-indicator"
                     aria-hidden="true"
                   />
                 )}

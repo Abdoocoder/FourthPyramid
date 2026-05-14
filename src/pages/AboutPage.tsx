@@ -53,10 +53,11 @@ export function AboutPage() {
 
   return (
     <>
-      <section className="relative min-h-[450px] flex items-center border-b border-outline-variant">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80&auto=format')] bg-cover bg-center opacity-15" />
+      <section className="relative min-h-[450px] flex items-center border-b border-outline-variant bg-surface overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80&auto=format')] bg-cover bg-center opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-e from-surface via-surface/88 to-surface/35" aria-hidden="true" />
         <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <div ref={heroRef} className="max-w-2xl bg-surface/90 backdrop-blur-sm p-5 sm:p-8 border border-outline-variant rounded-xl">
+          <div ref={heroRef} className="max-w-2xl py-16 sm:py-20">
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.heroEyebrow")}</span>
             <h1 className="reveal font-display-lg text-[clamp(2rem,5vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
               {t("about.heroTitle")}
@@ -148,7 +149,7 @@ export function AboutPage() {
             {t("about.ctaDesc")}
           </p>
           <div className="cta-reveal">
-            <Button as="a" href="/request-quote" size="lg" variant="tertiary">
+            <Button as="a" href="/request-quote" size="lg" variant="outline-light">
               {t("about.ctaButton")}
             </Button>
           </div>

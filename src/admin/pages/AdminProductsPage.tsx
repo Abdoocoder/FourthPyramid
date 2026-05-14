@@ -39,7 +39,7 @@ export function AdminProductsPage() {
           aria-label={t("admin.searchProducts")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full ps-10 pe-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px]"
+          className="w-full ps-10 pe-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px] transition-[border-color,box-shadow,background-color] duration-200"
         />
       </div>
 
@@ -59,8 +59,8 @@ export function AdminProductsPage() {
             ) : productsData.length === 0 ? (
               <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noProducts")}</td></tr>
             ) : (
-              productsData.map((p) => (
-              <tr key={p._id} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+              productsData.map((p, idx) => (
+              <tr key={p._id} className="border-b border-outline-variant hover:bg-surface-container-low transition-colors table-row-enter" style={{ animationDelay: `${idx * 30}ms` }}>
                 <td className="px-6 py-4">
                   <span className="font-body-sm text-body-sm font-medium text-on-surface truncate max-w-[200px] block">{localized(p, "name")}</span>
                 </td>

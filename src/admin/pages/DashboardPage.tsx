@@ -43,7 +43,7 @@ export function DashboardPage() {
         <p className="text-sm text-on-surface-variant mt-0.5">Fourth Pyramid Plastic Industries</p>
       </div>
 
-      <div className="grid grid-cols-3 divide-x divide-outline-variant border border-outline-variant rounded-xl bg-surface mb-6 overflow-hidden" aria-live="polite">
+      <div className="grid grid-cols-3 divide-x divide-outline-variant border border-outline-variant rounded-xl bg-surface mb-6 overflow-hidden grid-stagger" aria-live="polite">
         {stats.map((s) => (
           <div key={s.label} className="px-3 py-4 sm:px-6 sm:py-5 min-w-0">
             <p className="text-xl sm:text-2xl font-semibold text-on-surface">
@@ -56,7 +56,7 @@ export function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 grid-stagger">
         <div className="md:col-span-2 bg-surface border border-outline-variant rounded-xl overflow-hidden">
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-outline-variant">
             <div className="flex items-center gap-2">

@@ -2,7 +2,7 @@
 
 @theme {
   --color-primary: #4A90E2;
-  --color-on-primary: #ffffff;
+  --color-on-primary: #F7FBFF;
   --color-primary-container: #D6E8FF;
   --color-on-primary-container: #001D36;
   --color-primary-fixed: #D6E8FF;
@@ -21,7 +21,7 @@
   --color-on-secondary-fixed-variant: #1960B0;
 
   --color-tertiary: #C84000;
-  --color-on-tertiary: #ffffff;
+  --color-on-tertiary: #FFF8F4;
   --color-tertiary-container: #FFD3C2;
   --color-on-tertiary-container: #441100;
   --color-tertiary-fixed: #FFD3C2;
@@ -32,12 +32,12 @@
   --color-background: #F4F7F9;
   --color-on-background: #1A2B48;
 
-  --color-surface: #ffffff;
+  --color-surface: #FBFCFE;
   --color-on-surface: #2C3E50;
   --color-on-surface-variant: #4B5563;
   --color-surface-dim: #E1E8ED;
-  --color-surface-bright: #ffffff;
-  --color-surface-container-lowest: #ffffff;
+  --color-surface-bright: #FBFCFE;
+  --color-surface-container-lowest: #FBFCFE;
   --color-surface-container-low: #F4F7F9;
   --color-surface-container: #ECEEF4;
   --color-surface-container-high: #E6E8EE;
@@ -52,7 +52,7 @@
   --color-outline-variant: #E1E8ED;
 
   --color-error: #BA1A1A;
-  --color-on-error: #ffffff;
+  --color-on-error: #FFF8F7;
   --color-error-container: #FFDAD6;
   --color-on-error-container: #93000A;
 
@@ -76,7 +76,7 @@
   --spacing-container-max: 1280px;
   --spacing-section-gap: 5rem;
 
-  --shadow-card-hover: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 16px 36px rgba(26, 43, 72, 0.08);
 
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
@@ -93,8 +93,15 @@
 body {
   margin: 0;
   font-family: var(--font-body-lg);
+  background: var(--color-background);
+  color: var(--color-on-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
 }
 
 .skip-link {
@@ -135,6 +142,11 @@ button:active,
 a:active {
   transform: scale(0.97);
   transition: transform 120ms var(--ease-out-strong);
+}
+
+img,
+svg {
+  flex-shrink: 0;
 }
 
 html {
@@ -302,6 +314,252 @@ select:focus ~ .select-chevron svg {
 @media (prefers-reduced-motion: reduce) {
   .detail-panel {
     transition: opacity 100ms linear;
+  }
+}
+
+/* Page entrance (route changes) */
+.page-entrance {
+  animation: pageEntrance 480ms var(--ease-out-expo) forwards;
+}
+
+@keyframes pageEntrance {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-entrance {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Active nav indicator */
+.active-indicator {
+  animation: indicatorEnter 350ms var(--ease-out-expo) forwards;
+  transform-origin: left;
+}
+
+[dir="rtl"] .active-indicator {
+  transform-origin: right;
+}
+
+@keyframes indicatorEnter {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .active-indicator {
+    animation: none;
+  }
+}
+
+/* Skeleton shimmer */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  animation: shimmerSweep 1.8s ease-in-out infinite;
+  transform: translateX(-100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .shimmer::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 100%
+    );
+  }
+}
+
+@keyframes shimmerSweep {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer::after {
+    animation: none;
+    display: none;
+  }
+}
+
+/* Button hover lift utility */
+.hover-lift-btn:hover {
+  transform: translateY(-1px);
+  transition: transform 200ms var(--ease-out-strong), box-shadow 200ms var(--ease-out-strong), background-color 200ms var(--ease-out-strong), color 200ms var(--ease-out-strong), border-color 200ms var(--ease-out-strong);
+}
+
+.hover-lift-btn:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift-btn:hover {
+    transform: none;
+  }
+}
+
+/* Card hover lift enhancement */
+.hover-lift-card:hover {
+  transform: translateY(-3px);
+  transition: transform 300ms var(--ease-out-strong), border-color 300ms var(--ease-out-strong), box-shadow 300ms var(--ease-out-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift-card:hover {
+    transform: none;
+  }
+}
+
+/* Image grid stagger entrance */
+.grid-stagger > * {
+  opacity: 0;
+  animation: gridStaggerIn 400ms var(--ease-out-strong) forwards;
+}
+
+.grid-stagger > *:nth-child(1)  { animation-delay: 0ms; }
+.grid-stagger > *:nth-child(2)  { animation-delay: 50ms; }
+.grid-stagger > *:nth-child(3)  { animation-delay: 100ms; }
+.grid-stagger > *:nth-child(4)  { animation-delay: 150ms; }
+.grid-stagger > *:nth-child(5)  { animation-delay: 200ms; }
+.grid-stagger > *:nth-child(6)  { animation-delay: 250ms; }
+.grid-stagger > *:nth-child(7)  { animation-delay: 300ms; }
+.grid-stagger > *:nth-child(8)  { animation-delay: 350ms; }
+.grid-stagger > *:nth-child(9)  { animation-delay: 400ms; }
+.grid-stagger > *:nth-child(10) { animation-delay: 450ms; }
+
+@keyframes gridStaggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-stagger > * {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* Save success bounce */
+@keyframes savePulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.save-success {
+  animation: savePulse 400ms var(--ease-out-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .save-success {
+    animation: none;
+  }
+}
+
+/* Table row subtle entrance */
+@keyframes rowEnter {
+  from { opacity: 0; background-color: transparent; }
+  to { opacity: 1; }
+}
+
+.table-row-enter {
+  animation: rowEnter 300ms var(--ease-out-expo) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-row-enter {
+    animation: none;
+  }
+}
+
+/* Back-to-top spring entrance */
+@keyframes backToTopIn {
+  0% { opacity: 0; transform: translateY(16px) scale(0.9); }
+  60% { opacity: 1; transform: translateY(-3px) scale(1.05); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.back-to-top-enter {
+  animation: backToTopIn 400ms var(--ease-out-expo) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top-enter {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Checkbox / toggle delight */
+.toggle-check:checked {
+  animation: checkPop 200ms var(--ease-out-strong);
+}
+
+@keyframes checkPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle-check:checked {
+    animation: none;
+  }
+}
+
+/* Shimmer pulse (lighter than animate-pulse) */
+@keyframes shimmerPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.shimmer-pulse {
+  animation: shimmerPulse 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-pulse {
+    animation: none;
+  }
+}
+
+/* Copy success toast */
+@keyframes copyFlash {
+  0% { background-color: var(--color-primary-container); }
+  100% { background-color: transparent; }
+}
+
+.copy-flash {
+  animation: copyFlash 600ms var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-flash {
+    animation: none;
   }
 }
 

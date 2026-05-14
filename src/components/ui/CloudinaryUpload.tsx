@@ -37,19 +37,19 @@ export function CloudinaryUpload({ onUpload, disabled }: CloudinaryUploadProps) 
         theme: "minimal",
         styles: {
           palette: {
-            window: "#ffffff",
-            windowBorder: "#c4c6d0",
-            tabIcon: "#2F5FA7",
-            menuIcons: "#2F5FA7",
-            textDark: "#1E1E1E",
-            textLight: "#ffffff",
-            link: "#2F5FA7",
-            action: "#2F5FA7",
+            window: "#FBFCFE",
+            windowBorder: "#E1E8ED",
+            tabIcon: "#4A90E2",
+            menuIcons: "#4A90E2",
+            textDark: "#1A2B48",
+            textLight: "#F7FBFF",
+            link: "#4A90E2",
+            action: "#4A90E2",
             inactiveTabIcon: "#7A7A7A",
-            error: "#ba1a1a",
-            inProgress: "#2F5FA7",
-            complete: "#2F5FA7",
-            sourceBg: "#f2f4f8",
+            error: "#BA1A1A",
+            inProgress: "#4A90E2",
+            complete: "#4A90E2",
+            sourceBg: "#F4F7F9",
           },
         },
       },
@@ -68,7 +68,7 @@ export function CloudinaryUpload({ onUpload, disabled }: CloudinaryUploadProps) 
       onClick={openWidget}
       disabled={disabled}
       aria-label="Upload image"
-      className="w-28 h-28 rounded-lg border-2 border-dashed border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors disabled:opacity-50"
+      className="w-28 h-28 rounded-lg border-2 border-dashed border-outline-variant bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary hover:bg-primary-container/25 transition-[background-color,border-color,color] duration-150 ease-out-strong disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {disabled ? <Loader className="w-5 h-5 animate-spin" /> : <Upload className="w-5 h-5" />}
     </button>

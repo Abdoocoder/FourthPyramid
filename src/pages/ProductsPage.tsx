@@ -56,7 +56,7 @@ export function ProductsPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               aria-label={t("products.searchPlaceholder")}
-              className="block w-full ps-10 pe-3 py-3 border border-outline-variant rounded-xl bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-shadow"
+              className="block w-full ps-10 pe-3 py-3 border border-outline-variant rounded-xl bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow,background-color] duration-200"
             />
           </div>
 
@@ -64,11 +64,11 @@ export function ProductsPage() {
             <button
               onClick={() => setActiveCategory("all")}
               aria-pressed={activeCategory === "all"}
-              className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
-                activeCategory === "all"
-                  ? "bg-primary text-on-primary"
-                  : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
-              }`}
+              className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-all duration-200 ${
+                  activeCategory === "all"
+                    ? "bg-primary text-on-primary shadow-[0_2px_8px_rgba(74,144,226,0.2)]"
+                    : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
+                }`}
             >
               {t("products.allProducts")}
             </button>
@@ -77,9 +77,9 @@ export function ProductsPage() {
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
                 aria-pressed={activeCategory === cat.slug}
-                className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-colors ${
+                className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-all duration-200 ${
                   activeCategory === cat.slug
-                    ? "bg-primary text-on-primary"
+                    ? "bg-primary text-on-primary shadow-[0_2px_8px_rgba(74,144,226,0.2)]"
                     : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
                 }`}
               >

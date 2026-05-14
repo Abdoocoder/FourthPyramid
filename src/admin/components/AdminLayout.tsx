@@ -231,15 +231,15 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                   will-change-transform
                   ${sidebarOpen ? "" : "max-md:ltr:-translate-x-3 max-md:rtl:translate-x-3 max-md:opacity-0"}
                   ${active
-                    ? "bg-primary text-white"
+                    ? "bg-primary text-on-primary shadow-[0_10px_24px_rgba(74,144,226,0.24)]"
                     : "text-white/55 hover:bg-white/10 hover:text-white/90"
                   }`}
                 style={{ transitionDelay: sidebarOpen ? `${80 + i * 40}ms` : "0ms" }}
               >
                 <span
-                  className={`absolute start-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-e-full bg-white
-                    transition-all duration-200 ease-out
-                    ${active ? "opacity-100" : "opacity-0 group-hover:opacity-50"}`}
+                  className={`absolute inset-1 rounded-md bg-white/10 transition-opacity duration-200 ease-out ${
+                    active ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                  }`}
                   aria-hidden="true"
                 />
                 <Icon className="w-4 h-4 shrink-0 relative" />
@@ -282,7 +282,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             {currentPageLabel ? t(`admin.${currentPageLabel}`) : t("admin.title")}
           </span>
         </div>
-        <div className="p-6 md:p-8 max-w-6xl mx-auto">
+        <div className="p-6 md:p-8 max-w-6xl mx-auto page-entrance">
           {children}
         </div>
       </main>

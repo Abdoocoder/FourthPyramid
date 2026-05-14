@@ -90,7 +90,7 @@ export function AdminSettingsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="font-headline-md text-headline-md text-on-surface">{t("admin.settings")}</h1>
-        <Button onClick={handleSave} disabled={saving || isLoading}>
+        <Button onClick={handleSave} disabled={saving || isLoading} className={saved ? "save-success" : ""}>
           <Save className="w-4 h-4" />
           {saved ? t("admin.saved") : t("admin.saveSettings")}
         </Button>
@@ -102,24 +102,28 @@ export function AdminSettingsPage() {
         </div>
       ) : (
         <div className="space-y-6 max-w-2xl">
-          <SettingsSection title={t("admin.settingsContact")}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Input label={t("admin.settingsPhone")} id="s-phone" value={values.phone} onChange={set("phone")} />
-              <Input label={t("admin.settingsMobile")} id="s-mobile" value={values.mobile} onChange={set("mobile")} />
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Input label={t("admin.settingsWhatsapp")} id="s-wa" value={values.whatsapp} onChange={set("whatsapp")} />
-              <Input label={t("admin.settingsFax")} id="s-fax" value={values.fax} onChange={set("fax")} />
-            </div>
-            <Input label={t("admin.settingsEmail")} id="s-email" value={values.email} onChange={set("email")} />
-            <Input label={t("admin.settingsAddress")} id="s-addr" value={values.address} onChange={set("address")} />
-            <Input label={t("admin.settingsAddressAr")} id="s-addr-ar" value={values.address_ar} onChange={set("address_ar")} dir="rtl" />
-          </SettingsSection>
+          <div className="stagger-item">
+            <SettingsSection title={t("admin.settingsContact")}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Input label={t("admin.settingsPhone")} id="s-phone" value={values.phone} onChange={set("phone")} />
+                <Input label={t("admin.settingsMobile")} id="s-mobile" value={values.mobile} onChange={set("mobile")} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Input label={t("admin.settingsWhatsapp")} id="s-wa" value={values.whatsapp} onChange={set("whatsapp")} />
+                <Input label={t("admin.settingsFax")} id="s-fax" value={values.fax} onChange={set("fax")} />
+              </div>
+              <Input label={t("admin.settingsEmail")} id="s-email" value={values.email} onChange={set("email")} />
+              <Input label={t("admin.settingsAddress")} id="s-addr" value={values.address} onChange={set("address")} />
+              <Input label={t("admin.settingsAddressAr")} id="s-addr-ar" value={values.address_ar} onChange={set("address_ar")} dir="rtl" />
+            </SettingsSection>
+          </div>
 
-          <SettingsSection title={t("admin.settingsSeo")}>
-            <Input label={t("admin.settingsSiteTitle")} id="s-title" value={values.siteTitle} onChange={set("siteTitle")} />
-            <Input label={t("admin.settingsMetaDescription")} id="s-meta" value={values.metaDescription} onChange={set("metaDescription")} />
-          </SettingsSection>
+          <div className="stagger-item">
+            <SettingsSection title={t("admin.settingsSeo")}>
+              <Input label={t("admin.settingsSiteTitle")} id="s-title" value={values.siteTitle} onChange={set("siteTitle")} />
+              <Input label={t("admin.settingsMetaDescription")} id="s-meta" value={values.metaDescription} onChange={set("metaDescription")} />
+            </SettingsSection>
+          </div>
         </div>
       )}
     </div>

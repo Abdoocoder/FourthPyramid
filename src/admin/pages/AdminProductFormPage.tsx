@@ -197,7 +197,7 @@ export function AdminProductFormPage() {
         <div className="animate-pulse text-on-surface-variant font-body-lg py-20 text-center">{t("products.loading")}</div>
       ) : (
       <form onSubmit={handleSubmit} className="space-y-10 max-w-4xl">
-        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6">
+        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6 stagger-item">
           <h2 className="font-headline-md text-headline-md text-on-surface pb-2 border-b border-outline-variant">{t("admin.basicInfo")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input label={t("admin.productName")} id="name" value={form.name} onChange={(e) => { update("name", e.target.value); if (!isEdit) update("slug", toSlug(e.target.value)); }} required />
@@ -216,13 +216,13 @@ export function AdminProductFormPage() {
               ))}
             </Select>
             <label className="flex items-center gap-3 pt-6">
-              <input type="checkbox" checked={form.featured} onChange={(e) => update("featured", e.target.checked)} className="w-4 h-4 accent-primary" />
+              <input type="checkbox" checked={form.featured} onChange={(e) => update("featured", e.target.checked)} className="w-4 h-4 accent-primary toggle-check" />
               <span className="font-body-sm text-body-sm text-on-surface">{t("admin.featuredProduct")}</span>
             </label>
           </div>
         </section>
 
-        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6">
+        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6 stagger-item">
           <h2 className="font-headline-md text-headline-md text-on-surface pb-2 border-b border-outline-variant">{t("admin.images")}</h2>
           <div className="flex flex-wrap gap-4">
             {form.images.map((url, i) => (
@@ -249,7 +249,7 @@ export function AdminProductFormPage() {
           </div>
         </section>
 
-        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6">
+        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6 stagger-item">
           <h2 className="font-headline-md text-headline-md text-on-surface pb-2 border-b border-outline-variant">{t("admin.specifications")}</h2>
           {renderSpecFields("", t("admin.english"))}
           <div className="pt-4 border-t border-outline-variant">
@@ -258,7 +258,7 @@ export function AdminProductFormPage() {
           </div>
         </section>
 
-        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6">
+        <section className="bg-surface border border-outline-variant rounded-xl p-6 md:p-8 space-y-6 stagger-item">
           <h2 className="font-headline-md text-headline-md text-on-surface pb-2 border-b border-outline-variant">{t("admin.useCasesCertifications")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input label={t("admin.useCases") + " (EN)"} id="useCases" value={form.useCases} onChange={(e) => update("useCases", e.target.value)} placeholder="Comma separated" />

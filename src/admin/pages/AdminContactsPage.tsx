@@ -99,7 +99,7 @@ export function AdminContactsPage() {
             ) : contacts.length === 0 ? (
               <tr><td colSpan={4} className="px-6 py-12 text-center font-body-sm text-body-sm text-on-surface-variant">{t("admin.noContacts")}</td></tr>
             ) : (
-              contacts.map((c) => (
+              contacts.map((c, _idx) => (
                 <ContactRow
                   key={c._id}
                   c={c as Parameters<typeof ContactRow>[0]["c"]}

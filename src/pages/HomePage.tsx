@@ -30,6 +30,13 @@ const partners = [
   "PET Certified", "Food Grade", "UV Stabilized", "Recycling Partner",
 ];
 
+const capabilityLayouts = [
+  "md:col-span-7 md:row-span-2",
+  "md:col-span-5",
+  "md:col-span-5",
+  "md:col-span-7",
+];
+
 function MetricValue({ metric }: { metric: { value: string; key: string } }) {
   const countUpMap: Record<string, { end: number; suffix: string }> = {
     established: { end: 1998, suffix: "" },
@@ -228,7 +235,17 @@ export function HomePage() {
       </section>
 
       {/* ── Capabilities ── */}
-      <section ref={capabilitiesRef} aria-labelledby="capabilities-heading" className="py-24 md:py-32 bg-surface-container-low">
+      <section ref={capabilitiesRef} aria-labelledby="capabilities-heading" className="relative overflow-hidden py-24 md:py-32 bg-surface-container-low">
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-full opacity-[0.16]"
+          aria-hidden="true"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 20%, rgba(74,144,226,0.16) 0, transparent 18%), radial-gradient(circle at 80% 10%, rgba(26,43,72,0.08) 0, transparent 14%), linear-gradient(rgba(26,43,72,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(26,43,72,0.03) 1px, transparent 1px)",
+            backgroundSize: "auto, auto, 28px 28px, 28px 28px",
+            backgroundPosition: "0 0, 0 0, 0 0, 0 0",
+          }}
+        />
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           {/* Left-aligned section opener */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16">
@@ -246,7 +263,7 @@ export function HomePage() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:auto-rows-[minmax(14rem,auto)] md:grid-flow-dense">
             {cats === undefined ? (
               <div className="col-span-full text-center py-20 animate-pulse text-on-surface-variant">{t("products.loading")}</div>
             ) : cats.length === 0 ? (
@@ -256,17 +273,66 @@ export function HomePage() {
                 <Link
                   key={cat.slug}
                   to={`/products?category=${cat.slug}`}
-                  className={`cap-card hover-lift group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface hover:border-primary transition-colors duration-300 ${i === 0 ? "md:col-span-2 md:row-span-1" : ""}`}
+                  className={`cap-card hover-lift group relative overflow-hidden rounded-2xl border border-outline-variant bg-surface shadow-[0_1px_0_rgba(26,43,72,0.03)] transition-[border-color,box-shadow,transform,background-color] duration-300 ease-out-strong hover:-translate-y-1 hover:border-primary/30 hover:shadow-card-hover motion-reduce:hover:translate-y-0 ${capabilityLayouts[i] ?? "md:col-span-6"}`}
                 >
-                  <div className={`flex flex-col ${i === 0 ? "md:flex-row" : ""} h-full`}>
-                    <div className={`${i === 0 ? "md:w-2/5 md:border-e" : ""} bg-surface-container p-8 md:p-10 flex items-center justify-center border-b border-outline-variant md:border-b-0`}>
-                      <div className="text-primary scale-[1.5]">{iconMap[cat.icon]}</div>
+                  <div
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-out-strong group-hover:opacity-100 opacity-90"
+                    aria-hidden="true"
+                    style={{
+                      background: "linear-gradient(180deg, rgba(255,255,255,0.82), rgba(244,247,249,0.18))",
+                    }}
+                  />
+                  <div className={`relative flex h-full flex-col ${i === 0 ? "md:flex-row" : ""}`}>
+                    <div className={`${i === 0 ? "md:w-[42%] md:border-e" : "md:h-36"} relative flex items-center justify-center border-b border-outline-variant bg-surface-container-low px-6 py-8 md:border-b-0 md:px-8`}>
+                      <div
+                        className="absolute inset-0 pointer-events-none opacity-60"
+                        aria-hidden="true"
+                        style={{
+                          background: "radial-gradient(circle at 50% 35%, rgba(74,144,226,0.18), transparent 60%)",
+                        }}
+                      />
+                      <span className="absolute start-5 top-4 font-data-mono text-[0.6875rem] uppercase tracking-[0.22em] text-on-surface-variant/45">
+                        0{i + 1}
+                      </span>
+                      <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-outline-variant bg-surface text-primary shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out-strong group-hover:scale-[1.04] group-hover:border-primary/30 group-hover:shadow-card-hover">
+                        <div className="scale-[1.35]">{iconMap[cat.icon]}</div>
+                      </div>
                     </div>
-                    <div className="flex-1 p-6 md:p-8 flex flex-col justify-center">
-                      <h3 className="font-headline-md text-xl font-bold text-on-surface mb-2">{localized(cat, "name")}</h3>
-                      <p className="font-body-sm text-body-sm text-on-surface-variant mb-4">{localized(cat, "description")}</p>
-                      <span className="font-data-mono text-data-mono text-primary uppercase tracking-wider text-[11px] group-hover:underline underline-offset-4">
-                        {t("home.exploreRange")} <ArrowRight className="w-3 h-3 inline" />
+                    <div className="relative flex flex-1 flex-col justify-between p-6 md:p-8">
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                          <span className="h-px w-8 bg-outline-variant" aria-hidden="true" />
+                          <span className="font-data-mono text-[0.625rem] uppercase tracking-[0.24em] text-on-surface-variant/60">
+                            {t("home.capabilitiesEyebrow")}
+                          </span>
+                        </div>
+                        <div className="max-w-[34ch]">
+                          <h3 className="text-[1.35rem] font-semibold leading-tight text-on-surface md:text-[1.5rem]">
+                            {localized(cat, "name")}
+                          </h3>
+                          <p className="mt-3 max-w-[32ch] font-body-sm text-body-sm leading-relaxed text-on-surface-variant">
+                            {localized(cat, "description")}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-5 flex items-center gap-2 opacity-70 transition-opacity duration-200 ease-out-strong group-hover:opacity-100">
+                        <span className="h-1.5 w-1.5 rounded-full bg-primary/70" aria-hidden="true" />
+                        <span className="h-px w-10 bg-outline-variant/70" aria-hidden="true" />
+                      </div>
+                      <div className="mt-6 flex items-center justify-between gap-4 border-t border-outline-variant pt-4">
+                        <span className="font-data-mono text-[0.6875rem] uppercase tracking-[0.22em] text-primary">
+                          0{i + 1} / 04
+                        </span>
+                        <span className="inline-flex items-center gap-2 text-sm font-medium text-on-surface-variant transition-[color,transform] duration-150 ease-out-strong group-hover:text-primary group-hover:translate-x-0.5">
+                          <span>{t("home.exploreRange")}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </span>
+                      </div>
+                      <span
+                        className="pointer-events-none absolute end-4 bottom-2 font-display-lg text-[clamp(3rem,8vw,6rem)] leading-none text-primary/6"
+                        aria-hidden="true"
+                      >
+                        0{i + 1}
                       </span>
                     </div>
                   </div>
@@ -371,7 +437,8 @@ export function HomePage() {
       {/* ── CTA: left-aligned, split layout ── */}
       <section ref={ctaRef} aria-labelledby="cta-heading" className="py-32 md:py-48 bg-hero-surface relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/2 start-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, var(--color-primary) 0%, transparent 70%)" }} />
+          <div className="absolute inset-x-0 top-0 h-px bg-primary/35" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-pyramid-navy/40 to-transparent" />
         </div>
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
