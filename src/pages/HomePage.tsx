@@ -251,7 +251,7 @@ export function HomePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="why-card hover-lift group md:col-span-7 relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300 flex flex-col justify-between gap-8 min-h-[280px]">
+            <div className="why-card hover-lift group md:col-span-7 relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300 flex flex-col justify-between gap-8 min-h-72">
               <div>
                 <span className="font-display-lg text-[clamp(3rem,6vw,5rem)] text-primary leading-none block mb-4">
                   25+

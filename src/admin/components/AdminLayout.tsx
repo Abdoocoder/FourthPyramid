@@ -161,7 +161,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           fixed md:static inset-y-0 start-0 z-40 w-64 flex flex-col
           bg-pyramid-navy
           transition-transform duration-250 ease-out-strong
-          ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+          ${sidebarOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full md:translate-x-0"}
         `}
       >
         <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
