@@ -4,13 +4,11 @@ import gsap from "gsap";
 export function PageLoader() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDone(true);
-      return;
-    }
     const tl = gsap.timeline({ onComplete: () => setDone(true) });
     tl.to([leftRef.current, rightRef.current], {
       scaleX: 0,
