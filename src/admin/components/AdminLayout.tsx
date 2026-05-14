@@ -161,7 +161,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           fixed md:static inset-y-0 start-0 z-40 w-64 flex flex-col
           bg-pyramid-navy
           transition-transform duration-250 ease-out-strong
-          ${sidebarOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full md:translate-x-0"}
+          ${sidebarOpen ? "" : "max-md:ltr:-translate-x-full max-md:rtl:translate-x-full"}
         `}
       >
         <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
@@ -204,7 +204,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 className={`group relative flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium min-h-11 overflow-hidden
                   transition-all duration-200 ease-out
                   will-change-transform
-                  ${sidebarOpen ? "translate-x-0 opacity-100" : "-translate-x-3 opacity-0"}
+                  ${sidebarOpen ? "opacity-100" : "ltr:-translate-x-3 rtl:translate-x-3 opacity-0"}
                   ${active
                     ? "bg-primary text-white"
                     : "text-white/55 hover:bg-white/10 hover:text-white/90"
