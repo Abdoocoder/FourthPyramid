@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Save, X, Loader, Link } from "lucide-react";
@@ -62,40 +62,40 @@ export function AdminProductFormPage() {
     images: [] as string[],
   });
 
-  useEffect(() => {
-    if (existingProduct) {
-      setForm({
-        name: existingProduct.name,
-        name_ar: existingProduct.name_ar ?? "",
-        slug: existingProduct.slug,
-        description: existingProduct.description,
-        description_ar: existingProduct.description_ar ?? "",
-        categoryId: existingProduct.categoryId,
-        featured: existingProduct.featured,
-        capacity: existingProduct.specs.capacity,
-        material: existingProduct.specs.material,
-        dimensions: existingProduct.specs.dimensions,
-        weight: existingProduct.specs.weight,
-        closureType: existingProduct.specs.closureType,
-        unCertification: existingProduct.specs.unCertification,
-        colorsAvailable: existingProduct.specs.colorsAvailable,
-        palletQuantity: existingProduct.specs.palletQuantity,
-        capacity_ar: existingProduct.specs_ar?.capacity ?? "",
-        material_ar: existingProduct.specs_ar?.material ?? "",
-        dimensions_ar: existingProduct.specs_ar?.dimensions ?? "",
-        weight_ar: existingProduct.specs_ar?.weight ?? "",
-        closureType_ar: existingProduct.specs_ar?.closureType ?? "",
-        unCertification_ar: existingProduct.specs_ar?.unCertification ?? "",
-        colorsAvailable_ar: existingProduct.specs_ar?.colorsAvailable ?? "",
-        palletQuantity_ar: existingProduct.specs_ar?.palletQuantity ?? "",
-        useCases: existingProduct.useCases.join(", "),
-        useCases_ar: (existingProduct.useCases_ar ?? []).join(", "),
-        certifications: existingProduct.certifications.join(", "),
-        certifications_ar: (existingProduct.certifications_ar ?? []).join(", "),
-        images: existingProduct.images,
-      });
-    }
-  }, [existingProduct]);
+  const [prevProductId, setPrevProductId] = useState<string | undefined>(undefined);
+  if (existingProduct && existingProduct._id !== prevProductId) {
+    setPrevProductId(existingProduct._id);
+    setForm({
+      name: existingProduct.name,
+      name_ar: existingProduct.name_ar ?? "",
+      slug: existingProduct.slug,
+      description: existingProduct.description,
+      description_ar: existingProduct.description_ar ?? "",
+      categoryId: existingProduct.categoryId,
+      featured: existingProduct.featured,
+      capacity: existingProduct.specs.capacity,
+      material: existingProduct.specs.material,
+      dimensions: existingProduct.specs.dimensions,
+      weight: existingProduct.specs.weight,
+      closureType: existingProduct.specs.closureType,
+      unCertification: existingProduct.specs.unCertification,
+      colorsAvailable: existingProduct.specs.colorsAvailable,
+      palletQuantity: existingProduct.specs.palletQuantity,
+      capacity_ar: existingProduct.specs_ar?.capacity ?? "",
+      material_ar: existingProduct.specs_ar?.material ?? "",
+      dimensions_ar: existingProduct.specs_ar?.dimensions ?? "",
+      weight_ar: existingProduct.specs_ar?.weight ?? "",
+      closureType_ar: existingProduct.specs_ar?.closureType ?? "",
+      unCertification_ar: existingProduct.specs_ar?.unCertification ?? "",
+      colorsAvailable_ar: existingProduct.specs_ar?.colorsAvailable ?? "",
+      palletQuantity_ar: existingProduct.specs_ar?.palletQuantity ?? "",
+      useCases: existingProduct.useCases.join(", "),
+      useCases_ar: (existingProduct.useCases_ar ?? []).join(", "),
+      certifications: existingProduct.certifications.join(", "),
+      certifications_ar: (existingProduct.certifications_ar ?? []).join(", "),
+      images: existingProduct.images,
+    });
+  }
 
   const update = (key: string, value: string | boolean | string[]) =>
     setForm((f) => ({ ...f, [key]: value }));
@@ -127,7 +127,7 @@ export function AdminProductFormPage() {
         description: form.description,
         description_ar: form.description_ar || undefined,
         images: form.images,
-        categoryId: form.categoryId as any,
+        categoryId: form.categoryId as Id<"categories">,
         specs: {
           capacity: form.capacity,
           material: form.material,
@@ -168,15 +168,15 @@ export function AdminProductFormPage() {
     }
   };
 
-  const renderSpecFields = (prefix: string, label: string) => (
+  const renderSpecFields = (suffix: string, label: string) => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {specKeys.map((key) => (
         <Input
-          key={`${prefix}${key}`}
+          key={`${key}${suffix}`}
           label={`${label} ${key.replace(/([A-Z])/g, " $1").trim()}`}
-          id={`${prefix}${key}`}
-          value={(form as any)[`${prefix}${key}`] ?? ""}
-          onChange={(e) => update(`${prefix}${key}`, e.target.value)}
+          id={`${key}${suffix}`}
+          value={(form[`${key}${suffix}` as keyof typeof form] as string) ?? ""}
+          onChange={(e) => update(`${key}${suffix}`, e.target.value)}
         />
       ))}
     </div>
@@ -254,7 +254,7 @@ export function AdminProductFormPage() {
           {renderSpecFields("", t("admin.english"))}
           <div className="pt-4 border-t border-outline-variant">
             <p className="font-body-sm text-body-sm text-on-surface-variant mb-4">{t("admin.arabic")}</p>
-            {renderSpecFields("", t("admin.arabic"))}
+            {renderSpecFields("_ar", t("admin.arabic"))}
           </div>
         </section>
 
@@ -275,7 +275,7 @@ export function AdminProductFormPage() {
             {error}
           </div>
         )}
-        <div className="flex items-center gap-4 pt-4 border-t border-outline-variant">
+        <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-outline-variant">
           <Button type="submit" disabled={saving}>
             {saving ? <Loader className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             {t("admin.saveProduct")}

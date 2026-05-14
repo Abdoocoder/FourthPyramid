@@ -61,9 +61,11 @@
   --color-pyramid-sky: #87B2E8;
   --color-pyramid-slate: #2C3E50;
 
-  --font-display-lg: Inter, system-ui, sans-serif;
-  --font-headline-md: Inter, system-ui, sans-serif;
-  --font-button-label: Inter, system-ui, sans-serif;
+  --color-hero-surface: #1A2B48;
+
+  --font-display-lg: Outfit, system-ui, sans-serif;
+  --font-headline-md: Outfit, system-ui, sans-serif;
+  --font-button-label: Outfit, system-ui, sans-serif;
   --font-body-lg: IBM Plex Sans, system-ui, sans-serif;
   --font-body-sm: IBM Plex Sans, system-ui, sans-serif;
   --font-data-mono: IBM Plex Mono, ui-monospace, monospace;
@@ -166,14 +168,18 @@ html {
   animation: staggerFadeIn 400ms var(--ease-out-strong) forwards;
 }
 
-.stagger-item:nth-child(1) { animation-delay: 0ms; }
-.stagger-item:nth-child(2) { animation-delay: 60ms; }
-.stagger-item:nth-child(3) { animation-delay: 120ms; }
-.stagger-item:nth-child(4) { animation-delay: 180ms; }
-.stagger-item:nth-child(5) { animation-delay: 240ms; }
-.stagger-item:nth-child(6) { animation-delay: 300ms; }
-.stagger-item:nth-child(7) { animation-delay: 360ms; }
-.stagger-item:nth-child(8) { animation-delay: 420ms; }
+.stagger-item:nth-child(1)  { animation-delay: 0ms; }
+.stagger-item:nth-child(2)  { animation-delay: 60ms; }
+.stagger-item:nth-child(3)  { animation-delay: 120ms; }
+.stagger-item:nth-child(4)  { animation-delay: 180ms; }
+.stagger-item:nth-child(5)  { animation-delay: 240ms; }
+.stagger-item:nth-child(6)  { animation-delay: 300ms; }
+.stagger-item:nth-child(7)  { animation-delay: 360ms; }
+.stagger-item:nth-child(8)  { animation-delay: 420ms; }
+.stagger-item:nth-child(9)  { animation-delay: 480ms; }
+.stagger-item:nth-child(10) { animation-delay: 540ms; }
+.stagger-item:nth-child(11) { animation-delay: 600ms; }
+.stagger-item:nth-child(12) { animation-delay: 660ms; }
 
 @keyframes staggerFadeIn {
   from {
@@ -189,6 +195,32 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .stagger-item {
     opacity: 1;
+    animation: none;
+  }
+}
+
+.success-enter > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: successItemIn 0.55s var(--ease-out-expo) forwards;
+}
+
+.success-enter > *:nth-child(1) { animation-delay: 0ms; }
+.success-enter > *:nth-child(2) { animation-delay: 100ms; }
+.success-enter > *:nth-child(3) { animation-delay: 180ms; }
+.success-enter > *:nth-child(4) { animation-delay: 250ms; }
+
+@keyframes successItemIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success-enter > * {
+    opacity: 1;
+    transform: none;
     animation: none;
   }
 }

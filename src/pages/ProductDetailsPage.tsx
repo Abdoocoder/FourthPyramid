@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -19,6 +19,7 @@ import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
 import { useScrollReveal } from "../lib/animations";
+import gsap from "gsap";
 
 function ProductImage({ src, alt, className }: { src: string | undefined; alt: string; className?: string }) {
   if (!src) {
@@ -41,8 +42,29 @@ export function ProductDetailsPage() {
   const { t } = useTranslation();
   const { slug } = useParams();
   const product = useQuery(api.products.getBySlug, { slug: slug ?? "" });
-  const contentRef = useRef<HTMLDivElement>(null);
-  useScrollReveal(contentRef, ".pd-reveal", 0.1);
+  const [activeImage, setActiveImage] = useState(0);
+  const mainImageRef = useRef<HTMLDivElement>(null);
+  const breadcrumbRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
+  const specsRef = useRef<HTMLDivElement>(null);
+
+  useScrollReveal(breadcrumbRef, ".pd-breadcrumb", 0);
+  useScrollReveal(rightPanelRef, ".pd-panel-item", 0.1);
+  useScrollReveal(specsRef, ".pd-specs", 0);
+
+  const handleThumbClick = (i: number) => {
+    if (i === activeImage || !mainImageRef.current) return;
+    const el = mainImageRef.current;
+    gsap.to(el, {
+      opacity: 0,
+      duration: 0.18,
+      ease: "power2.in",
+      onComplete: () => {
+        setActiveImage(i);
+        gsap.to(el, { opacity: 1, duration: 0.25, ease: "power2.out" });
+      },
+    });
+  };
 
   if (product === undefined) {
     return (
@@ -87,22 +109,26 @@ export function ProductDetailsPage() {
     value,
   }));
 
+  const images = product.images ?? [];
+
   return (
-    <div ref={contentRef} className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
-      <div className="pd-reveal md:col-span-12 flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6 flex-wrap">
-        <Link to="/products" className="hover:text-primary transition-colors">{t("nav.products")}</Link>
-        <span className="text-outline-variant">/</span>
-        <Link to={`/products?category=${product.categorySlug}`} className="hover:text-primary transition-colors">
-          {localized(product, "category")}
-        </Link>
-        <span className="text-outline-variant">/</span>
-        <span className="text-on-surface font-semibold">{localized(product, "name")}</span>
+    <div className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+      <div ref={breadcrumbRef} className="md:col-span-12">
+        <div className="pd-breadcrumb flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6 flex-wrap">
+          <Link to="/products" className="hover:text-primary transition-colors">{t("nav.products")}</Link>
+          <span className="text-outline-variant">/</span>
+          <Link to={`/products?category=${product.categorySlug}`} className="hover:text-primary transition-colors">
+            {localized(product, "category")}
+          </Link>
+          <span className="text-outline-variant">/</span>
+          <span className="text-on-surface font-semibold">{localized(product, "name")}</span>
+        </div>
       </div>
 
-      <div className="pd-reveal md:col-span-7 flex flex-col gap-4">
-        <div className="bg-surface-container-lowest border border-outline-variant rounded-xl relative overflow-hidden">
+      <div className="md:col-span-7 flex flex-col gap-4">
+        <div ref={mainImageRef} className="bg-surface-container-lowest border border-outline-variant rounded-xl relative overflow-hidden">
           <ProductImage
-            src={cldTransform(product.images?.[0], "w_800,q_auto,f_auto")}
+            src={cldTransform(images[activeImage], "w_800,q_auto,f_auto")}
             alt={localized(product, "name")}
             className="w-full aspect-[4/3] object-cover"
           />
@@ -111,25 +137,46 @@ export function ProductDetailsPage() {
             {localizedArray(product.certifications, product.certifications_ar)[0]}
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
-          {product.images && product.images.slice(0, 3).map((img, i) => (
-            <div key={i} className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden cursor-pointer">
-              <ProductImage src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")} alt={`${localized(product, "name")} ${i + 1}`} className="w-full h-full object-cover" />
-            </div>
-          ))}
-          {(!product.images || product.images.length === 0) && (
+
+        {images.length > 1 && (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
+            {images.slice(0, 4).map((img, i) => (
+              <button
+                key={i}
+                onClick={() => handleThumbClick(i)}
+                aria-label={`View image ${i + 1}`}
+                className={`aspect-square bg-surface-container border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 ${
+                  i === activeImage
+                    ? "border-primary ring-2 ring-primary/30"
+                    : "border-outline-variant hover:border-primary/50"
+                }`}
+              >
+                <ProductImage
+                  src={cldTransform(img, "w_200,h_200,c_fill,q_auto,f_auto")}
+                  alt={`${localized(product, "name")} ${i + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        )}
+
+        {images.length === 0 && (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
             <div className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden flex items-center justify-center bg-surface-container-high">
               <FileText className="w-8 h-8 text-outline" />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
-      <div className="pd-reveal md:col-span-5 flex flex-col gap-8">
-        <div className="flex flex-col gap-4 border-b border-outline-variant pb-6">
+      <div ref={rightPanelRef} className="md:col-span-5 flex flex-col gap-8">
+        <div className="pd-panel-item flex flex-col gap-4 border-b border-outline-variant pb-6">
           <div className="flex gap-2">
             <Badge variant="primary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
-            {localizedArray(product.certifications, product.certifications_ar)[1] && <Badge variant="outline">{localizedArray(product.certifications, product.certifications_ar)[1]}</Badge>}
+            {localizedArray(product.certifications, product.certifications_ar)[1] && (
+              <Badge variant="outline">{localizedArray(product.certifications, product.certifications_ar)[1]}</Badge>
+            )}
           </div>
           <h1 className="font-display-lg text-[clamp(1.6rem,4vw,3rem)] text-on-background tracking-tight leading-[1.1]">
             {localized(product, "name")}
@@ -137,22 +184,22 @@ export function ProductDetailsPage() {
           <p className="font-body-lg text-body-lg text-on-surface-variant">{localized(product, "description")}</p>
         </div>
 
-          <div className="flex flex-col gap-3">
-            <h3 className="font-headline-md text-xl text-on-background">{t("productDetails.industrialApplications")}</h3>
-            <div className="flex flex-wrap gap-2">
-              {localizedArray(product.useCases, product.useCases_ar).map((uc, idx) => (
-                <span
-                  key={idx}
-                  className="border border-outline-variant rounded-full px-4 py-1.5 font-body-sm text-body-sm text-on-surface flex items-center gap-2"
-                >
-                  {useCaseIcons[product.useCases[idx]] || <FlaskConical className="w-[18px] h-[18px] text-secondary" />}
-                  {uc}
-                </span>
-              ))}
-            </div>
+        <div className="pd-panel-item flex flex-col gap-3">
+          <h3 className="font-headline-md text-xl text-on-background">{t("productDetails.industrialApplications")}</h3>
+          <div className="flex flex-wrap gap-2">
+            {localizedArray(product.useCases, product.useCases_ar).map((uc, idx) => (
+              <span
+                key={idx}
+                className="border border-outline-variant rounded-full px-4 py-1.5 font-body-sm text-body-sm text-on-surface flex items-center gap-2"
+              >
+                {useCaseIcons[product.useCases[idx]] || <FlaskConical className="w-[18px] h-[18px] text-secondary" />}
+                {uc}
+              </span>
+            ))}
           </div>
+        </div>
 
-        <div className="flex flex-col gap-4 mt-auto">
+        <div className="pd-panel-item flex flex-col gap-4 mt-auto">
           <Button as="a" href="/request-quote" size="lg" variant="tertiary" className="w-full justify-center">
             <FileText className="w-4 h-4" />
             {t("productDetails.requestBulkQuote")}
@@ -164,11 +211,13 @@ export function ProductDetailsPage() {
         </div>
       </div>
 
-      <div className="pd-reveal md:col-span-12 mt-section-gap">
-        <h2 className="font-headline-md text-headline-md text-on-background mb-8 border-b border-outline-variant pb-4">
-          {t("productDetails.technicalSpecs")}
-        </h2>
-        <SpecTable specs={specItems} />
+      <div ref={specsRef} className="md:col-span-12 mt-section-gap">
+        <div className="pd-specs">
+          <h2 className="font-headline-md text-headline-md text-on-background mb-8 border-b border-outline-variant pb-4">
+            {t("productDetails.technicalSpecs")}
+          </h2>
+          <SpecTable specs={specItems} label={t("productDetails.technicalSpecs")} />
+        </div>
       </div>
     </div>
   );

@@ -2,13 +2,34 @@ import { useEffect, useRef, useCallback } from "react";
 import { Upload, Loader } from "lucide-react";
 import { cloudName, uploadPreset } from "../../lib/cloudinary";
 
+interface CloudinaryWidget {
+  open: () => void;
+  close: () => void;
+}
+
+interface CloudinaryResult {
+  event: string;
+  info: { secure_url: string };
+}
+
+declare global {
+  interface Window {
+    cloudinary?: {
+      createUploadWidget: (
+        options: Record<string, unknown>,
+        callback: (error: unknown, result: CloudinaryResult) => void
+      ) => CloudinaryWidget;
+    };
+  }
+}
+
 interface CloudinaryUploadProps {
   onUpload: (url: string) => void;
   disabled?: boolean;
 }
 
 export function CloudinaryUpload({ onUpload, disabled }: CloudinaryUploadProps) {
-  const widgetRef = useRef<any>(null);
+  const widgetRef = useRef<CloudinaryWidget | null>(null);
   const loaded = useRef(false);
 
   useEffect(() => {
@@ -53,7 +74,7 @@ export function CloudinaryUpload({ onUpload, disabled }: CloudinaryUploadProps) 
           },
         },
       },
-      (error: any, result: any) => {
+      (error: unknown, result: CloudinaryResult) => {
         if (!error && result && result.event === "success") {
           onUpload(result.info.secure_url);
         }

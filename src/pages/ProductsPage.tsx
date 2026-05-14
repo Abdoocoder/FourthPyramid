@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Search, ShoppingCart, ImageOff } from "lucide-react";
@@ -9,11 +9,15 @@ import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
+import { usePageEntrance } from "../lib/animations";
 
 export function ProductsPage() {
   const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const pageHeaderRef = useRef<HTMLDivElement>(null);
+
+  usePageEntrance(pageHeaderRef, ".entrance", { stagger: 0.13, delay: 0.05 });
 
   const productsData = useQuery(api.products.list, {
     searchQuery: searchQuery || undefined,
@@ -26,11 +30,11 @@ export function ProductsPage() {
   return (
     <>
       <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-section-gap flex flex-col gap-8">
-        <div className="flex flex-col gap-4 max-w-2xl">
-          <h1 className="font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-background leading-[1.1]">
+        <div ref={pageHeaderRef} className="flex flex-col gap-4 max-w-2xl">
+          <h1 className="entrance font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-background leading-[1.1]">
             {t("products.pageTitle")}
           </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant">
+          <p className="entrance font-body-lg text-body-lg text-on-surface-variant">
             {t("products.pageDesc")}
           </p>
         </div>

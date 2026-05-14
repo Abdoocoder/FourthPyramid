@@ -141,13 +141,13 @@
     "leaderTitle": "Jordan's Leading Plastic Manufacturer",
     "leaderDesc": "ISO Certified & Enterprise Grade.",
     "companyName": "Company Name",
-    "companyNamePlaceholder": "e.g. Acme Corp",
+    "companyNamePlaceholder": "e.g. Gulf Chemicals LLC",
     "contactName": "Contact Name",
-    "contactNamePlaceholder": "John Doe",
+    "contactNamePlaceholder": "Nour Al-Ahmad",
     "businessEmail": "Business Email",
-    "businessEmailPlaceholder": "john@company.com",
+    "businessEmailPlaceholder": "procurement@company.com",
     "phoneNumber": "Phone Number",
-    "phoneNumberPlaceholder": "+1 (555) 000-0000",
+    "phoneNumberPlaceholder": "+962 79 000 0000",
     "productType": "Product Type",
     "productTypePlaceholder": "Select a product category",
     "estimatedQuantity": "Estimated Quantity",
@@ -173,9 +173,9 @@
     "address": "Address",
     "formTitle": "Send us a Message",
     "yourName": "Your Name",
-    "yourNamePlaceholder": "John Doe",
+    "yourNamePlaceholder": "Nour Al-Ahmad",
     "yourEmail": "Your Email",
-    "yourEmailPlaceholder": "john@company.com",
+    "yourEmailPlaceholder": "nour@company.com",
     "subject": "Subject",
     "subjectPlaceholder": "How can we help you?",
     "message": "Message",
@@ -183,7 +183,8 @@
     "sendButton": "Send Message",
     "submittedTitle": "Message Sent",
     "submittedDesc": "Thank you for reaching out. We'll respond within 24 hours.",
-    "returnHome": "Return to Home"
+    "returnHome": "Return to Home",
+    "error": "Failed to send. Please try again."
   },
   "admin": {
     "title": "Admin",
@@ -246,7 +247,13 @@
     "galleryImage": "Gallery image {{index}}",
     "noImages": "No images uploaded yet.",
     "saveError": "Failed to save. Please try again.",
-    "pasteImageUrl": "Paste image URL..."
+    "pasteImageUrl": "Paste image URL...",
+    "quickActions": "Quick Actions",
+    "review": "Review",
+    "sidebarNav": "Admin sidebar",
+    "navigation": "Admin navigation",
+    "openSidebar": "Open sidebar",
+    "closeSidebar": "Close sidebar"
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

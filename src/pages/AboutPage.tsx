@@ -40,18 +40,20 @@ export function AboutPage() {
   const metricsRef = useRef<HTMLDivElement>(null);
   const capabilitiesRef = useRef<HTMLDivElement>(null);
   const qualityRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLElement>(null);
 
   useScrollReveal(heroRef, ".reveal", 0.15);
   useScrollReveal(metricsRef, ".metric-box", 0.12);
   useScrollReveal(capabilitiesRef, ".cap-box", 0.14);
   useScrollReveal(qualityRef, ".reveal", 0.14);
+  useScrollReveal(ctaRef, ".cta-reveal", 0.18);
 
   return (
     <>
       <section className="relative min-h-[450px] flex items-center border-b border-outline-variant">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80&auto=format')] bg-cover bg-center opacity-15" />
         <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <div ref={heroRef} className="max-w-2xl bg-surface/90 backdrop-blur-sm p-8 border border-outline-variant rounded-xl">
+          <div ref={heroRef} className="max-w-2xl bg-surface/90 backdrop-blur-sm p-5 sm:p-8 border border-outline-variant rounded-xl">
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.heroEyebrow")}</span>
             <h1 className="reveal font-display-lg text-[clamp(2rem,5vw,3rem)] md:text-display-lg text-on-surface mb-6 leading-[1.1]">
               {t("about.heroTitle")}
@@ -68,7 +70,7 @@ export function AboutPage() {
           <h2 className="font-headline-md text-headline-md text-on-surface sticky top-32">{t("about.introTitle")}</h2>
         </div>
         <div className="md:col-span-8 space-y-6">
-          <p className="font-body-lg text-body-lg text-on-surface-variant">
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[65ch]">
             {t("about.introDesc")}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
@@ -110,7 +112,7 @@ export function AboutPage() {
       <section ref={qualityRef} className="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
         <div className="reveal h-full min-h-[400px] border border-outline-variant rounded-xl overflow-hidden bg-surface-container-highest">
           <img
-          className="w-full h-full object-cover mix-blend-multiply opacity-70"
+          className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-70 dark:opacity-40"
           src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80&auto=format"
             alt="Quality control laboratory"
           />
@@ -135,15 +137,17 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-tertiary text-on-tertiary py-20 px-margin-mobile md:px-margin-desktop">
+      <section ref={ctaRef} className="bg-tertiary text-on-tertiary py-20 px-margin-mobile md:px-margin-desktop">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display-lg text-[clamp(1.8rem,4vw,3rem)] mb-6 leading-[1.1]">{t("about.ctaTitle")}</h2>
-          <p className="font-body-lg text-body-lg text-on-tertiary/80 mb-10 max-w-2xl mx-auto">
+          <h2 className="cta-reveal font-display-lg text-[clamp(1.8rem,4vw,3rem)] mb-6 leading-[1.1]">{t("about.ctaTitle")}</h2>
+          <p className="cta-reveal font-body-lg text-body-lg text-on-tertiary/80 mb-10 max-w-2xl mx-auto">
             {t("about.ctaDesc")}
           </p>
-          <Button as="a" href="/request-quote" size="lg" variant="tertiary">
-            {t("about.ctaButton")}
-          </Button>
+          <div className="cta-reveal">
+            <Button as="a" href="/request-quote" size="lg" variant="tertiary">
+              {t("about.ctaButton")}
+            </Button>
+          </div>
         </div>
       </section>
     </>

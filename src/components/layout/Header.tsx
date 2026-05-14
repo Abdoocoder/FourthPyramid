@@ -7,17 +7,19 @@ import { Button } from "../ui/Button";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState("");
   const { pathname } = useLocation();
   const { t, i18n } = useTranslation();
+
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setMobileOpen(false);
+  }
 
   const toggleLang = () => {
     const next = i18n.language === "ar" ? "en" : "ar";
     i18n.changeLanguage(next);
   };
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -85,7 +87,7 @@ export function Header() {
         }`}
       >
         <nav className="flex flex-col px-margin-mobile py-4 gap-2">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <Link
               key={link.href}
               to={link.href}
@@ -94,6 +96,12 @@ export function Header() {
                   ? "bg-primary-container text-on-primary-container font-semibold"
                   : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
               }`}
+              style={{
+                opacity: mobileOpen ? 1 : 0,
+                transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
+                transitionDelay: mobileOpen ? `${i * 38}ms` : "0ms",
+                transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo), background-color 150ms, color 150ms",
+              }}
             >
               {t(`nav.${link.label.toLowerCase()}`)}
             </Link>
@@ -102,6 +110,12 @@ export function Header() {
           <button
             onClick={() => { toggleLang(); }}
             className="flex items-center gap-2 text-on-surface-variant py-3 px-4 rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors font-body-lg text-body-lg"
+            style={{
+              opacity: mobileOpen ? 1 : 0,
+              transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
+              transitionDelay: mobileOpen ? `${navLinks.length * 38}ms` : "0ms",
+              transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo), background-color 150ms, color 150ms",
+            }}
           >
             <Globe className="w-4 h-4" />
             {t("nav.language")}
@@ -109,10 +123,24 @@ export function Header() {
           <Link
             to="/admin"
             className="font-body-lg text-body-lg py-3 px-4 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"
+            style={{
+              opacity: mobileOpen ? 1 : 0,
+              transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
+              transitionDelay: mobileOpen ? `${(navLinks.length + 1) * 38}ms` : "0ms",
+              transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo), background-color 150ms, color 150ms",
+            }}
           >
             {t("nav.adminLogin")}
           </Link>
-          <div className="px-4 mt-2">
+          <div
+            className="px-4 mt-2"
+            style={{
+              opacity: mobileOpen ? 1 : 0,
+              transform: mobileOpen ? "translateX(0)" : "translateX(-10px)",
+              transitionDelay: mobileOpen ? `${(navLinks.length + 2) * 38}ms` : "0ms",
+              transition: "opacity 260ms var(--ease-out-expo), transform 260ms var(--ease-out-expo)",
+            }}
+          >
             <Button as="a" href="/request-quote" size="md" variant="tertiary" className="w-full justify-center">
               {t("nav.requestQuote")}
             </Button>

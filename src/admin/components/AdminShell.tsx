@@ -23,7 +23,7 @@ const adminConvexClient = new ConvexReactClient(convexUrl);
 
 function AdminRoutes() {
   return (
-    <Suspense fallback={<div className="animate-pulse text-on-surface-variant p-8">Loading...</div>}>
+    <Suspense fallback={<div className="flex items-center justify-center py-20"><div className="w-6 h-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" /></div>}>
       <Routes>
         <Route index element={<DashboardPage />} />
         <Route path="products" element={<AdminProductsPage />} />

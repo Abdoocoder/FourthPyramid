@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUser, SignOutButton } from "@clerk/clerk-react";
@@ -22,12 +22,22 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const { user } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSidebarOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [sidebarOpen]);
+
   return (
     <div className="min-h-screen bg-surface-container-low flex">
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
         />
       )}
 
@@ -38,6 +48,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           transition-transform duration-200 ease-out
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
         `}
+        aria-label={t("admin.sidebarNav")}
       >
         <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
           <Link
@@ -58,13 +69,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           <button
             className="md:hidden text-white/40 hover:text-white p-1.5 rounded transition-colors"
             onClick={() => setSidebarOpen(false)}
-            aria-label="Close sidebar"
+            aria-label={t("admin.closeSidebar")}
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <nav className="flex-1 py-3 px-2 space-y-0.5">
+        <nav className="flex-1 py-3 px-2 space-y-0.5" aria-label={t("admin.navigation")}>
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = pathname === item.href;
@@ -73,6 +84,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 key={item.href}
                 to={item.href}
                 onClick={() => setSidebarOpen(false)}
+                aria-current={active ? "page" : undefined}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 ${
                   active
                     ? "bg-primary text-white"
@@ -109,11 +121,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         </div>
       </aside>
 
-      <main className="flex-1 overflow-auto min-w-0">
+      <main
+        className="flex-1 overflow-auto min-w-0"
+        inert={sidebarOpen || undefined}
+      >
         <div className="sticky top-0 z-20 md:hidden bg-pyramid-navy px-4 h-14 flex items-center gap-3 border-b border-white/10">
           <button
             onClick={() => setSidebarOpen(true)}
-            aria-label="Open sidebar"
+            aria-label={t("admin.openSidebar")}
             className="text-white/50 hover:text-white p-2 -ml-2 transition-colors"
           >
             <Menu className="w-5 h-5" />

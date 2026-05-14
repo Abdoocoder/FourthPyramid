@@ -62,7 +62,7 @@ export function IndustriesPage() {
                       <img
                         src={imgUrl}
                         alt={title}
-                        className="w-full h-full object-cover mix-blend-multiply opacity-85"
+                        className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-85 dark:opacity-50"
                         loading="lazy"
                       />
                     </div>
@@ -91,7 +91,7 @@ export function IndustriesPage() {
                       <img
                         src={imgUrl}
                         alt={title}
-                        className="w-full h-full object-cover mix-blend-multiply opacity-85"
+                        className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal opacity-85 dark:opacity-50"
                         loading="lazy"
                       />
                     </div>

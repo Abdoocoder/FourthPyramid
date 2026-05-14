@@ -6,6 +6,27 @@ import { Button } from "../components/ui/Button";
 import { Input, Textarea } from "../components/ui/Input";
 import { siteConfig } from "../lib/constants";
 import { api } from "@convex/_generated/api";
+import { usePageEntrance, useScrollReveal } from "../lib/animations";
+
+function SuccessView() {
+  const { t } = useTranslation();
+  return (
+    <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-section-gap">
+      <div className="max-w-xl mx-auto text-center success-enter">
+        <div className="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="w-8 h-8" />
+        </div>
+        <h1 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface mb-4 leading-[1.1]">
+          {t("contact.submittedTitle")}
+        </h1>
+        <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
+          {t("contact.submittedDesc")}
+        </p>
+        <Button as="a" href="/" variant="primary">{t("contact.returnHome")}</Button>
+      </div>
+    </div>
+  );
+}
 
 export function ContactPage() {
   const { t } = useTranslation();
@@ -13,7 +34,12 @@ export function ContactPage() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const pageHeaderRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const createContact = useMutation(api.contacts.create);
+
+  usePageEntrance(pageHeaderRef, ".entrance", { stagger: 0.13, delay: 0.05 });
+  useScrollReveal(gridRef, ".grid-reveal", 0.18);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,38 +62,21 @@ export function ContactPage() {
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-32 pb-section-gap">
-        <div className="max-w-xl mx-auto text-center">
-          <div className="w-16 h-16 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-8 h-8" />
-          </div>
-          <h1 className="font-display-lg text-[clamp(1.6rem,4vw,2.5rem)] text-on-surface mb-4 leading-[1.1]">
-            {t("contact.submittedTitle")}
-          </h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">
-            {t("contact.submittedDesc")}
-          </p>
-          <Button as="a" href="/" variant="primary">{t("contact.returnHome")}</Button>
-        </div>
-      </div>
-    );
-  }
+  if (submitted) return <SuccessView />;
 
   return (
     <div className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-      <div className="mb-12">
-        <h1 className="font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-surface mb-4 leading-[1.1]">
+      <div ref={pageHeaderRef} className="mb-12">
+        <h1 className="entrance font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-surface mb-4 leading-[1.1]">
           {t("contact.pageTitle")}
         </h1>
-        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+        <p className="entrance font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
           {t("contact.pageDesc")}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
-        <div className="md:col-span-5 space-y-6">
+      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+        <div className="grid-reveal md:col-span-5 space-y-6">
           <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden divide-y divide-outline-variant">
             <a
               href={`tel:${siteConfig.phone}`}
@@ -124,7 +133,7 @@ export function ContactPage() {
           </div>
         </div>
 
-        <div className="md:col-span-7">
+        <div className="grid-reveal md:col-span-7">
           <div className="bg-surface p-6 md:p-10 rounded-xl border border-outline-variant shadow-sm">
             <h2 className="font-headline-md text-headline-md text-on-surface mb-6">{t("contact.formTitle")}</h2>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">

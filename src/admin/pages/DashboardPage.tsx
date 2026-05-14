@@ -23,24 +23,24 @@ export function DashboardPage() {
         <p className="text-sm text-on-surface-variant mt-0.5">Fourth Pyramid Plastic Industries</p>
       </div>
 
-      {/* Stats strip — not cards, just numbers */}
       <div className="grid grid-cols-3 divide-x divide-outline-variant border border-outline-variant rounded-xl bg-surface mb-6 overflow-hidden">
         {stats.map((s) => (
-          <div key={s.label} className="px-6 py-5">
-            <p className="text-2xl font-semibold text-on-surface tabular-nums">
+          <div key={s.label} className="px-3 py-4 sm:px-6 sm:py-5 min-w-0">
+            <p className="text-xl sm:text-2xl font-semibold text-on-surface tabular-nums">
               {s.value === null ? (
                 <span className="text-outline-variant animate-pulse">—</span>
               ) : (
                 s.value
               )}
             </p>
-            <p className="text-xs text-on-surface-variant mt-1 uppercase tracking-wide">{s.label}</p>
+            <p className="text-[10px] sm:text-xs text-on-surface-variant mt-1 uppercase tracking-wide leading-snug">
+              {s.label}
+            </p>
           </div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {/* Pending quotes list */}
         <div className="md:col-span-2 bg-surface border border-outline-variant rounded-xl overflow-hidden">
           <div className="flex items-center justify-between px-5 py-3.5 border-b border-outline-variant">
             <div className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export function DashboardPage() {
 
           {pendingQuotes === undefined ? (
             <div className="px-5 py-10 text-center text-sm text-on-surface-variant animate-pulse">
-              {t("productDetails.loading")}
+              {t("products.loading")}
             </div>
           ) : pendingQuotes.length === 0 ? (
             <div className="px-5 py-10 text-center">
@@ -87,7 +87,7 @@ export function DashboardPage() {
                     to="/admin/quotes"
                     className="shrink-0 text-xs font-medium text-primary hover:text-on-primary-container transition-colors duration-150"
                   >
-                    Review
+                    {t("admin.review")}
                   </Link>
                 </div>
               ))}
@@ -95,10 +95,9 @@ export function DashboardPage() {
           )}
         </div>
 
-        {/* Quick actions */}
         <div className="bg-surface border border-outline-variant rounded-xl overflow-hidden">
           <div className="px-5 py-3.5 border-b border-outline-variant">
-            <span className="text-sm font-medium text-on-surface">Quick actions</span>
+            <span className="text-sm font-medium text-on-surface">{t("admin.quickActions")}</span>
           </div>
           <div className="p-3 space-y-1">
             <Link
@@ -108,7 +107,7 @@ export function DashboardPage() {
               <div className="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
                 <Plus className="w-3.5 h-3.5 text-on-primary-container" />
               </div>
-              <span className="font-medium">New product</span>
+              <span className="font-medium">{t("admin.addProduct")}</span>
             </Link>
             <Link
               to="/admin/quotes"
@@ -117,7 +116,7 @@ export function DashboardPage() {
               <div className="w-7 h-7 rounded-lg bg-tertiary-container flex items-center justify-center shrink-0">
                 <MessageSquare className="w-3.5 h-3.5 text-on-tertiary-container" />
               </div>
-              <span className="font-medium">Quote requests</span>
+              <span className="font-medium">{t("admin.quotes")}</span>
             </Link>
             <Link
               to="/admin/pages"
@@ -126,7 +125,7 @@ export function DashboardPage() {
               <div className="w-7 h-7 rounded-lg bg-secondary-container flex items-center justify-center shrink-0">
                 <FileText className="w-3.5 h-3.5 text-on-secondary-container" />
               </div>
-              <span className="font-medium">Edit pages</span>
+              <span className="font-medium">{t("admin.pages")}</span>
             </Link>
             <Link
               to="/admin/images"
@@ -135,7 +134,7 @@ export function DashboardPage() {
               <div className="w-7 h-7 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
                 <Image className="w-3.5 h-3.5 text-on-surface-variant" />
               </div>
-              <span className="font-medium">Gallery</span>
+              <span className="font-medium">{t("admin.images")}</span>
             </Link>
           </div>
         </div>

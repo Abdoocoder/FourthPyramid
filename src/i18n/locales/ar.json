@@ -246,7 +246,13 @@
     "galleryImage": "صورة المعرض {{index}}",
     "noImages": "لم يتم رفع أي صور بعد.",
     "saveError": "فشل الحفظ. حاول مرة أخرى.",
-    "pasteImageUrl": "الصق رابط الصورة..."
+    "pasteImageUrl": "الصق رابط الصورة...",
+    "quickActions": "إجراءات سريعة",
+    "review": "مراجعة",
+    "sidebarNav": "الشريط الجانبي للإدارة",
+    "navigation": "قائمة التنقل",
+    "openSidebar": "فتح القائمة الجانبية",
+    "closeSidebar": "إغلاق القائمة الجانبية"
   },
   "common": {
     "isoBadge": "ISO 9001:2015"

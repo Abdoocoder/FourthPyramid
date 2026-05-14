@@ -31,3 +31,24 @@ export function useScrollReveal(
     return () => ctx.revert();
   }, [ref, selector, stagger]);
 }
+
+export function usePageEntrance(
+  ref: RefObject<HTMLElement | null>,
+  selector: string,
+  { stagger = 0.14, delay = 0.08 }: { stagger?: number; delay?: number } = {}
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const targets = el.querySelectorAll<Element>(selector);
+    if (!targets.length) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        targets,
+        { opacity: 0, y: 28 },
+        { opacity: 1, y: 0, duration: 0.7, stagger, ease: "power3.out", delay }
+      );
+    }, el);
+    return () => ctx.revert();
+  }, [ref, selector, stagger, delay]);
+}

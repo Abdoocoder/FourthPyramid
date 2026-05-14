@@ -5,12 +5,13 @@ interface SpecItem {
 
 interface SpecTableProps {
   specs: SpecItem[];
+  label?: string;
 }
 
-export function SpecTable({ specs }: SpecTableProps) {
+export function SpecTable({ specs, label }: SpecTableProps) {
   return (
     <div className="font-data-mono text-data-mono">
-      <table className="w-full">
+      <table className="w-full" aria-label={label}>
         <tbody>
           {specs.map((spec) => (
             <tr key={spec.label} className="border-b border-surface-container-highest">

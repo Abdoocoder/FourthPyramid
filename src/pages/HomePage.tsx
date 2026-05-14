@@ -50,9 +50,11 @@ export function HomePage() {
   const { t } = useTranslation();
   const cats = useQuery(api.categories.list);
 
+  const HERO_IMAGE = "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1920&q=80&auto=format";
   const heroContentRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<HTMLDivElement>(null);
   const capabilitiesRef = useRef<HTMLDivElement>(null);
+  const whyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
@@ -72,27 +74,28 @@ export function HomePage() {
 
   useScrollReveal(metricsRef, ".metric-card", 0.15);
   useScrollReveal(capabilitiesRef, ".cap-card", 0.1);
+  useScrollReveal(whyRef, ".why-card", 0.15);
   useScrollReveal(ctaRef, ".cta-item", 0.2);
   useMarquee(marqueeRef);
 
   return (
     <main className="overflow-x-hidden w-full max-w-full">
-      <section className="relative min-h-[90dvh] flex items-center justify-center overflow-hidden bg-on-background">
+      <section className="relative min-h-[90dvh] flex items-center justify-center overflow-hidden bg-hero-surface">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1920&q=80&auto=format"
+            src={HERO_IMAGE}
             alt=""
             className="w-full h-full object-cover opacity-30"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-on-background/60 via-on-background/40 to-on-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-hero-surface/60 via-hero-surface/40 to-hero-surface" />
         </div>
         <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-24 md:py-0 text-center">
           <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6 max-w-5xl mx-auto">
             {t("home.heroTitle") + " "}
             <span
               className="inline-block w-16 h-8 md:w-24 md:h-12 rounded-full align-middle mx-2 bg-cover bg-center"
-              style={{ backgroundImage: "url(https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=200&h=200&fit=crop&auto=format)" }}
+              style={{ backgroundImage: `url(${HERO_IMAGE.replace("w=1920", "w=200")}&h=200&fit=crop)` }}
             />
             {" "}
             <span className="text-primary">{t("home.heroTitleAccent")}</span>
@@ -169,7 +172,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 md:py-32 bg-surface">
+      <section ref={whyRef} className="py-24 md:py-32 bg-surface">
         <div className="max-w-6xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
             <h2 className="font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-3xl mx-auto">
@@ -184,7 +187,7 @@ export function HomePage() {
             ].map((s, i) => (
               <div
                 key={s.titleKey}
-                className="hover-lift group relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300"
+                className="why-card hover-lift group relative bg-surface-container-low border border-outline-variant rounded-2xl p-8 md:p-10 hover:border-primary/30 transition-colors duration-300"
               >
                 <div className="flex flex-col gap-6">
                   <span className="font-display-lg text-[clamp(2.5rem,4vw,4rem)] text-primary leading-none">
@@ -214,7 +217,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section ref={ctaRef} className="py-32 md:py-48 bg-on-background relative overflow-hidden">
+      <section ref={ctaRef} className="py-32 md:py-48 bg-hero-surface relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary blur-[120px]" />
         </div>
