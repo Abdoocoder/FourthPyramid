@@ -2,27 +2,6 @@ import { useEffect, useRef, useCallback } from "react";
 import { Upload, Loader } from "lucide-react";
 import { cloudName, uploadPreset } from "../../lib/cloudinary";
 
-interface CloudinaryWidget {
-  open: () => void;
-  close: () => void;
-}
-
-interface CloudinaryResult {
-  event: string;
-  info: { secure_url: string };
-}
-
-declare global {
-  interface Window {
-    cloudinary?: {
-      createUploadWidget: (
-        options: Record<string, unknown>,
-        callback: (error: unknown, result: CloudinaryResult) => void
-      ) => CloudinaryWidget;
-    };
-  }
-}
-
 interface CloudinaryUploadProps {
   onUpload: (url: string) => void;
   disabled?: boolean;
@@ -74,7 +53,7 @@ export function CloudinaryUpload({ onUpload, disabled }: CloudinaryUploadProps) 
           },
         },
       },
-      (error: unknown, result: CloudinaryResult) => {
+      (error: unknown, result: CloudinaryWidgetResult) => {
         if (!error && result && result.event === "success") {
           onUpload(result.info.secure_url);
         }
