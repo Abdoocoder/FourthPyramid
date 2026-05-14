@@ -89,7 +89,9 @@ export function ProductsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
+        <div>
+          <h2 className="sr-only">{t("products.allProducts")}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
           {filtered.length === 0 && productsData === undefined && (
             <div className="col-span-full py-20 text-center">
               <div className="animate-pulse text-on-surface-variant font-body-lg">{t("products.loading")}</div>
@@ -149,6 +151,7 @@ export function ProductsPage() {
               </div>
             </Card>
           ))}
+        </div>
         </div>
       </section>
     </>

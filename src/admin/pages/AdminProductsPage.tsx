@@ -36,6 +36,7 @@ export function AdminProductsPage() {
         <input
           type="text"
           placeholder={t("admin.searchProducts")}
+          aria-label={t("admin.searchProducts")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full pl-10 pr-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px]"

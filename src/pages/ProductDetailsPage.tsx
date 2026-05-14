@@ -188,7 +188,7 @@ export function ProductDetailsPage() {
         </div>
 
         <div className="pd-panel-item flex flex-col gap-3">
-          <h3 className="font-headline-md text-xl text-on-background">{t("productDetails.industrialApplications")}</h3>
+          <h2 className="font-headline-md text-xl text-on-background">{t("productDetails.industrialApplications")}</h2>
           <div className="flex flex-wrap gap-2">
             {localizedArray(product.useCases, product.useCases_ar).map((uc, idx) => (
               <span

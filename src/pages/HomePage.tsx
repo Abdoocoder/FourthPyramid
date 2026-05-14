@@ -10,9 +10,6 @@ import { localized } from "../lib/localized";
 import { useScrollReveal } from "../lib/animations";
 import { useInViewCountUp } from "../lib/useCountUp";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const iconMap: Record<string, React.ReactNode> = {
   bottle: <Factory className="w-8 h-8" />,

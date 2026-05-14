@@ -185,7 +185,7 @@ export function AdminProductFormPage() {
   return (
     <div>
       <div className="flex items-center gap-4 mb-8">
-        <button onClick={() => navigate("/admin/products")} className="p-2 text-on-surface-variant hover:text-on-surface transition-colors">
+        <button onClick={() => navigate("/admin/products")} aria-label={t("admin.backToProducts")} className="p-2 text-on-surface-variant hover:text-on-surface transition-colors min-h-11">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <h1 className="font-headline-md text-headline-md text-on-surface">
@@ -228,8 +228,8 @@ export function AdminProductFormPage() {
             {form.images.map((url, i) => (
               <div key={i} className="relative w-28 h-28 rounded-lg border border-outline-variant overflow-hidden group">
                 <img src={url} alt="" className="w-full h-full object-cover" />
-                <button type="button" onClick={() => removeImage(i)} aria-label={`Remove image ${i + 1}`} className="absolute top-1 right-1 p-1.5 bg-error text-on-error rounded-full opacity-60 hover:opacity-100 transition-opacity">
-                  <X className="w-3 h-3" />
+                <button type="button" onClick={() => removeImage(i)} aria-label={`Remove image ${i + 1}`} className="absolute top-1 right-1 p-2 bg-error text-on-error rounded-full opacity-60 hover:opacity-100 transition-opacity min-h-11 min-w-11">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             ))}
@@ -243,7 +243,7 @@ export function AdminProductFormPage() {
               placeholder={t("admin.pasteImageUrl")}
               className="flex-1 px-4 py-3 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-[16px]"
             />
-            <button type="button" onClick={addUrlImage} disabled={!imageUrl.trim()} className="px-4 py-3 bg-primary text-on-primary rounded-lg font-button-label text-button-label hover:bg-primary-container hover:text-on-primary-container transition-colors disabled:opacity-50">
+            <button type="button" onClick={addUrlImage} disabled={!imageUrl.trim()} aria-label={t("admin.addImageUrl")} className="px-4 py-3 bg-primary text-on-primary rounded-lg font-button-label text-button-label hover:bg-primary-container hover:text-on-primary-container transition-colors disabled:opacity-50 min-h-11">
               <Link className="w-4 h-4" />
             </button>
           </div>

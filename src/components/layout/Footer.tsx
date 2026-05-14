@@ -54,15 +54,15 @@ export function Footer() {
                 <span className="font-data-mono text-data-mono uppercase tracking-wider">{t("common.isoBadge")}</span>
               </div>
               <div className="flex flex-col gap-2 mt-1">
-                <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">
+                <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 py-1">
                   <Phone className="w-3.5 h-3.5" />
                   {siteConfig.phone}
                 </a>
-                <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">
+                <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 py-1">
                   <Mail className="w-3.5 h-3.5" />
                   {siteConfig.email}
                 </a>
-                <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant">
+                <span className="flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant min-h-11 py-1">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                   {siteConfig.address}
                 </span>
@@ -77,7 +77,7 @@ export function Footer() {
                     <Link
                       key={link.href}
                       to={link.href}
-                      className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-150 w-fit"
+                      className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-150 w-fit min-h-11 flex items-center"
                     >
                       {t(`nav.${link.label.toLowerCase()}`)}
                     </Link>
@@ -88,19 +88,19 @@ export function Footer() {
               <nav aria-label={t("footer.company")} className="flex flex-col gap-4">
                 <h3 className="font-body-sm text-body-sm font-semibold text-on-surface uppercase tracking-wider">{t("footer.company")}</h3>
                 <div className="flex flex-col gap-3">
-                  <Link to="/about" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">{t("footer.aboutUs")}</Link>
-                  <Link to="/industries" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">{t("footer.industries")}</Link>
-                  <Link to="/contact" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">{t("footer.contactUs")}</Link>
-                  <Link to="/request-quote" className="font-body-sm text-body-sm text-primary font-medium hover:text-primary-fixed-dim transition-colors w-fit">{t("nav.requestQuote")}</Link>
+                  <Link to="/about" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 flex items-center">{t("footer.aboutUs")}</Link>
+                  <Link to="/industries" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 flex items-center">{t("footer.industries")}</Link>
+                  <Link to="/contact" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 flex items-center">{t("footer.contactUs")}</Link>
+                  <Link to="/request-quote" className="font-body-sm text-body-sm text-primary font-medium hover:text-primary-fixed-dim transition-colors w-fit min-h-11 flex items-center">{t("nav.requestQuote")}</Link>
                 </div>
               </nav>
 
               <div className="flex flex-col gap-4">
                 <h3 className="font-body-sm text-body-sm font-semibold text-on-surface uppercase tracking-wider">{t("footer.support")}</h3>
                 <div className="flex flex-col gap-3">
-                  <Link to="/products" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">{t("nav.products")}</Link>
-                  <Link to="/contact" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">{t("nav.contact")}</Link>
-                  <a href={`https://wa.me/${siteConfig.whatsapp.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit">
+                  <Link to="/products" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 flex items-center">{t("nav.products")}</Link>
+                  <Link to="/contact" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 flex items-center">{t("nav.contact")}</Link>
+                  <a href={`https://wa.me/${siteConfig.whatsapp.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors w-fit min-h-11 flex items-center">
                     WhatsApp
                   </a>
                 </div>

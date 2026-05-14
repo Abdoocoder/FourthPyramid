@@ -39,7 +39,7 @@ export function Header() {
   }, []);
 
   const navLinkClass = (href: string) =>
-    `font-body-sm text-body-sm font-medium transition-colors duration-150 py-2 px-3 rounded-lg ${
+    `font-body-sm text-body-sm font-medium transition-colors duration-150 py-2.5 px-3 min-h-11 flex items-center rounded-lg ${
       pathname === href
         ? "bg-primary-container text-on-primary-container font-semibold"
         : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
@@ -53,7 +53,7 @@ export function Header() {
           <span className="font-headline-md text-headline-md tracking-tight font-bold hidden sm:inline">{siteConfig.name}</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav aria-label={t("nav.primary")} className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link key={link.href} to={link.href} className={navLinkClass(link.href)}>
               {t(`nav.${link.label.toLowerCase()}`)}
@@ -64,7 +64,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggleLang}
-            className="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors font-body-sm text-body-sm font-medium py-2 px-2 rounded-lg hover:bg-surface-container"
+            className="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors font-body-sm text-body-sm font-medium py-2.5 px-2 min-h-11 rounded-lg hover:bg-surface-container"
             aria-label={i18n.language === "ar" ? "Switch to English" : "التبديل إلى العربية"}
           >
             <Globe className="w-4 h-4" />
@@ -72,7 +72,7 @@ export function Header() {
           </button>
           <Link
             to="/admin"
-            className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors py-2 px-2 rounded-lg hover:bg-surface-container hidden md:inline"
+            className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors py-2.5 px-2 min-h-11 rounded-lg hover:bg-surface-container hidden md:inline-flex items-center"
           >
             {t("nav.adminLogin")}
           </Link>

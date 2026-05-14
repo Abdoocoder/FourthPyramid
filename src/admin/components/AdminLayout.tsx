@@ -201,7 +201,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                 to={item.href}
                 onClick={closeSidebar}
                 aria-current={active ? "page" : undefined}
-                className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium overflow-hidden
+                className={`group relative flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium min-h-11 overflow-hidden
                   transition-all duration-200 ease-out
                   will-change-transform
                   ${sidebarOpen ? "translate-x-0 opacity-100" : "-translate-x-3 opacity-0"}
@@ -239,7 +239,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             </div>
           </div>
           <SignOutButton>
-            <button className="flex items-center gap-2 px-3 py-2 w-full text-white/40 hover:text-white/80 hover:bg-white/8 rounded-lg transition-colors duration-150 text-xs">
+            <button className="flex items-center gap-2 px-3 py-2 w-full text-white/40 hover:text-white/80 hover:bg-white/8 rounded-lg transition-colors duration-150 text-xs min-h-11">
               <LogOut className="w-3.5 h-3.5" />
               {t("admin.signOut")}
             </button>
