@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Save } from "lucide-react";
 import { useQuery, useMutation } from "convex/react";
@@ -49,25 +49,25 @@ export function AdminSettingsPage() {
   const savedSettings = useQuery(api.settings.getAll);
   const setMany = useMutation(api.settings.setMany);
 
-  const [values, setValues] = useState<Record<SettingKey, string>>(DEFAULTS);
+  const [localValues, setLocalValues] = useState<Partial<Record<SettingKey, string>>>({});
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    if (!savedSettings) return;
-    setValues((prev) => {
-      const merged = { ...prev };
+  const values = useMemo<Record<SettingKey, string>>(() => {
+    const merged = { ...DEFAULTS };
+    if (savedSettings) {
       for (const key of SETTING_KEYS) {
-        if (savedSettings[key] !== undefined) {
-          merged[key] = savedSettings[key];
-        }
+        if (savedSettings[key] !== undefined) merged[key] = savedSettings[key];
       }
-      return merged;
-    });
-  }, [savedSettings]);
+    }
+    for (const key of SETTING_KEYS) {
+      if (localValues[key] !== undefined) merged[key] = localValues[key]!;
+    }
+    return merged;
+  }, [savedSettings, localValues]);
 
   const set = (key: SettingKey) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setValues((prev) => ({ ...prev, [key]: e.target.value }));
+    setLocalValues((prev) => ({ ...prev, [key]: e.target.value }));
     setSaved(false);
   };
 
@@ -76,6 +76,7 @@ export function AdminSettingsPage() {
     try {
       const entries = SETTING_KEYS.map((key) => ({ key, value: values[key] }));
       await setMany({ entries });
+      setLocalValues({});
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
     } finally {
