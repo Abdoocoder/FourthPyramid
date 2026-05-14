@@ -1,4 +1,5 @@
 import { useEffect, type RefObject } from "react";
+import gsap from "gsap";
 
 export function useScrollReveal(
   ref: RefObject<HTMLElement | null>,
