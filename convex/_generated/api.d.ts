@@ -13,6 +13,7 @@ import type * as categories from "../categories.js";
 import type * as contacts from "../contacts.js";
 import type * as gallery from "../gallery.js";
 import type * as images from "../images.js";
+import type * as lib_requireAdmin from "../lib/requireAdmin.js";
 import type * as migrate_ar from "../migrate_ar.js";
 import type * as pages from "../pages.js";
 import type * as products from "../products.js";
@@ -31,6 +32,7 @@ declare const fullApi: ApiFromModules<{
   contacts: typeof contacts;
   gallery: typeof gallery;
   images: typeof images;
+  "lib/requireAdmin": typeof lib_requireAdmin;
   migrate_ar: typeof migrate_ar;
   pages: typeof pages;
   products: typeof products;
