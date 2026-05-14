@@ -143,7 +143,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const currentPageLabel = navLabelMap[pathname];
 
   return (
-    <div className="min-h-screen bg-surface-container-low flex">
+    <div className="min-h-[100dvh] bg-surface-container-low flex">
       <div
         className={`fixed inset-0 bg-black/40 z-30 md:hidden transition-opacity duration-250 ease-out-strong ${
           sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"

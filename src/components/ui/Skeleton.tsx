@@ -55,7 +55,7 @@ export function AdminPageSkeleton() {
 
 export function AdminShellSkeleton() {
   return (
-    <div className="min-h-screen bg-surface-container-low flex">
+    <div className="min-h-[100dvh] bg-surface-container-low flex">
       <div className="hidden md:flex w-64 flex-col gap-4 p-6 border-r border-outline-variant">
         <Skeleton className="h-8 w-32" />
         <div className="space-y-3 mt-8">
@@ -73,7 +73,7 @@ export function AdminShellSkeleton() {
 
 export function AuthSkeleton() {
   return (
-    <div className="min-h-screen bg-surface-container-low flex items-center justify-center">
+    <div className="min-h-[100dvh] bg-surface-container-low flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <Skeleton className="h-8 w-48" />
         <Skeleton className="h-10 w-64" />

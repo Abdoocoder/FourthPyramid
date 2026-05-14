@@ -5,7 +5,7 @@ import { ScrollProgress } from "../ScrollProgress";
 
 export function Layout() {
   return (
-    <div className="bg-background text-on-background min-h-screen flex flex-col">
+    <div className="bg-background text-on-background min-h-[100dvh] flex flex-col">
       <ScrollProgress />
       <a href="#main-content" className="skip-link">
         Skip to content

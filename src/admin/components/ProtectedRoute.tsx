@@ -11,7 +11,7 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
 
   if (!isSignedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface-container-low p-4">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-surface-container-low p-4">
         <SignIn
           routing="path"
           path="/admin"
