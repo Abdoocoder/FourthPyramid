@@ -88,6 +88,11 @@
   --text-body-sm: 0.875rem;
   --text-button-label: 0.875rem;
   --text-data-mono: 0.75rem;
+
+  --z-skip-link: 9999;
+  --z-header: 50;
+  --z-overlay: 40;
+  --z-fab: 30;
 }
 
 body {
@@ -99,6 +104,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 ::selection {
   background: var(--color-primary-container);
   color: var(--color-on-primary-container);
@@ -108,7 +117,7 @@ body {
   position: fixed;
   top: -100%;
   left: 1rem;
-  z-index: 9999;
+  z-index: var(--z-skip-link);
   padding: 0.5rem 1rem;
   background: var(--color-surface);
   color: var(--color-on-surface);
@@ -139,7 +148,8 @@ a:focus-visible,
 
 button:active,
 [role="button"]:active,
-a:active {
+a.hover-lift-btn:active,
+a.btn:active {
   transform: scale(0.97);
   transition: transform 120ms var(--ease-out-strong);
 }

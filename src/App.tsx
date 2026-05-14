@@ -12,6 +12,7 @@ const ProductDetailsPage = lazy(() => import("./pages/ProductDetailsPage").then(
 const IndustriesPage = lazy(() => import("./pages/IndustriesPage").then((m) => ({ default: m.IndustriesPage })));
 const RequestQuotePage = lazy(() => import("./pages/RequestQuotePage").then((m) => ({ default: m.RequestQuotePage })));
 const ContactPage = lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 const AdminShell = lazy(() => import("./admin/components/AdminShell"));
 
 function PageLoader() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/industries" element={<Lazy><IndustriesPage /></Lazy>} />
           <Route path="/request-quote" element={<Lazy><RequestQuotePage /></Lazy>} />
           <Route path="/contact" element={<Lazy><ContactPage /></Lazy>} />
+          <Route path="*" element={<Lazy><NotFoundPage /></Lazy>} />
         </Route>
 
         <Route

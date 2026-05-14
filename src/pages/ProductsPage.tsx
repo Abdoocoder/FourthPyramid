@@ -11,6 +11,7 @@ import { api } from "@convex/_generated/api";
 import { localized, localizedArray, localizedSpecs } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
 import { usePageEntrance } from "../lib/animations";
+import { Skeleton } from "../components/ui/Skeleton";
 
 export function ProductsPage() {
   const { t } = useTranslation();
@@ -91,10 +92,17 @@ export function ProductsPage() {
 
         <div>
           <h2 className="sr-only">{t("products.allProducts")}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
           {filtered.length === 0 && productsData === undefined && (
-            <div className="col-span-full py-20 text-center">
-              <div className="animate-pulse text-on-surface-variant font-body-lg">{t("products.loading")}</div>
+            <div className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="flex flex-col gap-4">
+                  <Skeleton className="aspect-[16/9] w-full" />
+                  <Skeleton className="h-6 w-3/4" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-10 w-full" />
+                </div>
+              ))}
             </div>
           )}
           {filtered.length === 0 && productsData !== undefined && (
@@ -102,55 +110,77 @@ export function ProductsPage() {
               <p className="font-body-lg text-body-lg text-on-surface-variant">{t("products.noResults")}</p>
             </div>
           )}
-          {filtered.map((product) => (
-            <Card key={product._id} hover={false} className="stagger-item flex flex-col overflow-hidden group">
-              <Link to={`/products/${product.slug}`} className="aspect-[4/3] bg-surface-container-highest relative overflow-hidden block">
-                {product.images?.[0] ? (
-                  <img
-                    src={cldTransform(product.images[0], "w_400,q_auto,f_auto")}
-                    alt={localized(product, "name")}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-surface-container-highest">
-                    <ImageOff className="w-8 h-8 text-outline opacity-30" />
+          {filtered.map((product, idx) => {
+            const isFeatured = idx === 0 && searchQuery === "" && activeCategory === "all";
+            return (
+              <Card 
+                key={product._id} 
+                hover={false} 
+                className={`stagger-item flex flex-col overflow-hidden group ${isFeatured ? "md:col-span-2 lg:flex-row" : ""}`}
+              >
+                <Link 
+                  to={`/products/${product.slug}`} 
+                  className={`${isFeatured ? "lg:w-1/2 aspect-video lg:aspect-auto" : "aspect-[4/3]"} bg-surface-container-highest relative overflow-hidden block`}
+                >
+                  {product.images?.[0] ? (
+                    <img
+                      src={cldTransform(product.images[0], isFeatured ? "w_800,q_auto,f_auto" : "w_400,q_auto,f_auto")}
+                      alt={localized(product, "name")}
+                      sizes={isFeatured ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 768px) 100vw, 50vw"}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-surface-container-highest">
+                      <ImageOff className="w-8 h-8 text-outline opacity-30" />
+                    </div>
+                  )}
+                  <div className="absolute top-2 start-2">
+                    <Badge variant="secondary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
                   </div>
-                )}
-                <div className="absolute top-2 start-2">
-                  <Badge variant="secondary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
-                </div>
-              </Link>
-              <div className="p-6 flex flex-col flex-grow justify-between gap-6">
-                <div className="flex flex-col gap-2">
-                  <Link to={`/products/${product.slug}`}>
-                    <h3 className="font-headline-md text-xl text-on-background hover:text-primary transition-colors">
-                      {localized(product, "name")}
-                    </h3>
-                  </Link>
-                  <div className="flex flex-col gap-1 mt-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.capacity")}</span>
-                      <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).capacity}</span>
+                </Link>
+                <div className={`p-6 flex flex-col flex-grow justify-between gap-6 ${isFeatured ? "lg:w-1/2 lg:p-10" : ""}`}>
+                  <div className="flex flex-col gap-2">
+                    <Link to={`/products/${product.slug}`}>
+                      <h3 className={`${isFeatured ? "text-2xl md:text-3xl" : "text-xl"} font-headline-md text-on-background hover:text-primary transition-colors`}>
+                        {localized(product, "name")}
+                      </h3>
+                    </Link>
+                    <div className="flex flex-col gap-1 mt-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.capacity")}</span>
+                        <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).capacity}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.material")}</span>
+                        <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).material}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.usage")}</span>
+                        <span className="font-body-sm text-body-sm text-on-background">{localizedArray(product.useCases, product.useCases_ar)[0]}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.material")}</span>
-                      <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).material}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.usage")}</span>
-                      <span className="font-body-sm text-body-sm text-on-background">{localizedArray(product.useCases, product.useCases_ar)[0]}</span>
-                    </div>
+                    {isFeatured && (
+                      <p className="font-body-lg text-body-lg text-on-surface-variant mt-4 line-clamp-3">
+                        {localized(product, "description")}
+                      </p>
+                    )}
+                  </div>
+                  <div className={`${isFeatured ? "flex flex-col sm:flex-row gap-4" : "w-full"}`}>
+                    <Button as="a" href={`/products/${product.slug}`} variant="tertiary" size="md" className="flex-1">
+                      <ShoppingCart className="w-4 h-4" />
+                      {t("products.requestQuote")}
+                    </Button>
+                    {isFeatured && (
+                      <Button as="a" href={`/products/${product.slug}`} variant="ghost" size="md" className="flex-1 border border-outline-variant">
+                        {t("products.backToProducts")}
+                      </Button>
+                    )}
                   </div>
                 </div>
-                <Button as="a" href={`/products/${product.slug}`} variant="tertiary" size="md" className="w-full">
-                  <ShoppingCart className="w-4 h-4" />
-                  {t("products.requestQuote")}
-                </Button>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
         </div>
       </section>

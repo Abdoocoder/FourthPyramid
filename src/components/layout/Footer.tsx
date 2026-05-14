@@ -211,7 +211,7 @@ export function Footer() {
                   </Link>
 
                   <p className="text-white/55 text-xs leading-relaxed">
-                    {t("footer.description")}
+                    ISO 9001:2015 certified manufacturer delivering excellence in plastic engineering.
                   </p>
                 </div>
               </div>
@@ -222,9 +222,19 @@ export function Footer() {
         {/* Bottom bar */}
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-5 flex flex-col md:flex-row items-center justify-between gap-2">
-            <p className="text-white/55 text-xs text-center md:text-start">
-              {siteConfig.copyright}
-            </p>
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+              <p className="text-white/55 text-xs text-center md:text-start">
+                {siteConfig.copyright}
+              </p>
+              <div className="flex items-center gap-4">
+                <Link to="/privacy" className="text-white/40 hover:text-white text-[10px] uppercase tracking-wider transition-colors">
+                  {t("footer.privacyPolicy")}
+                </Link>
+                <Link to="/terms" className="text-white/40 hover:text-white text-[10px] uppercase tracking-wider transition-colors">
+                  {t("footer.termsOfService")}
+                </Link>
+              </div>
+            </div>
             <p className="text-white/55 text-xs">
               {t("footer.designedBy")}{" "}
               <a

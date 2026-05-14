@@ -35,7 +35,7 @@ export function Header() {
       className="fixed top-0 w-full z-50 bg-pyramid-navy transition-shadow duration-300"
       style={{
         borderBottom: "1px solid rgba(255,255,255,0.07)",
-        boxShadow: scrolled ? "0 4px 32px rgba(0,0,0,0.4)" : "none",
+        boxShadow: scrolled ? "0 4px 32px rgba(26, 43, 72, 0.55)" : "none",
       }}
     >
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop h-20 flex items-center gap-6">

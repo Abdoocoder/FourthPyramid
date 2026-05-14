@@ -77,13 +77,21 @@ export function AboutPage() {
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[65ch]">
             {t("about.introDesc")}
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
-            {metricsData.map((m) => (
-              <div key={m.key} className="metric-box p-6 border border-outline-variant rounded-xl bg-surface">
-                <span className="font-display-lg text-3xl text-primary block mb-2">{m.value}</span>
-                <span className="font-data-mono text-data-mono text-on-surface-variant uppercase">{t(`about.${m.key}`)}</span>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-8">
+            {/* Featured Item */}
+            <div className="metric-box p-8 border border-primary/20 rounded-xl bg-primary/5 sm:col-span-2 lg:col-span-1 flex flex-col justify-center">
+              <span className="font-display-lg text-5xl text-primary block mb-3">{metricsData[0].value}</span>
+              <span className="font-data-mono text-data-mono text-on-surface uppercase tracking-wider">{t(`about.${metricsData[0].key}`)}</span>
+            </div>
+            {/* Secondary Items */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 sm:col-span-2 lg:col-span-2 gap-4">
+              {metricsData.slice(1).map((m) => (
+                <div key={m.key} className="metric-box p-6 border border-outline-variant rounded-xl bg-surface flex flex-col justify-center">
+                  <span className="font-display-lg text-3xl text-on-surface block mb-1">{m.value}</span>
+                  <span className="font-data-mono text-xs text-on-surface-variant uppercase tracking-wide">{t(`about.${m.key}`)}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -142,10 +150,10 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section ref={ctaRef} className="bg-tertiary text-on-tertiary py-20 px-margin-mobile md:px-margin-desktop">
+      <section ref={ctaRef} className="bg-hero-surface text-white py-20 px-margin-mobile md:px-margin-desktop">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="cta-reveal font-display-lg text-[clamp(1.8rem,4vw,3rem)] mb-6 leading-[1.1]">{t("about.ctaTitle")}</h2>
-          <p className="cta-reveal font-body-lg text-body-lg text-on-tertiary/80 mb-10 max-w-2xl mx-auto">
+          <p className="cta-reveal font-body-lg text-white/70 mb-10 max-w-2xl mx-auto">
             {t("about.ctaDesc")}
           </p>
           <div className="cta-reveal">

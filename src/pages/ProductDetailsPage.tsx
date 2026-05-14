@@ -13,6 +13,7 @@ import {
   ImageOff,
 } from "lucide-react";
 import { Badge } from "../components/ui/Badge";
+import { Skeleton } from "../components/ui/Skeleton";
 import { Button } from "../components/ui/Button";
 import { SpecTable } from "../components/ui/SpecTable";
 import { useQuery } from "convex/react";
@@ -73,18 +74,24 @@ export function ProductDetailsPage() {
   if (product === undefined) {
     return (
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-28 pb-section-gap">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter animate-pulse">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
           <div className="md:col-span-7">
-            <div className="aspect-[4/3] bg-surface-container rounded-xl" />
+            <Skeleton className="aspect-[4/3] w-full" />
             <div className="grid grid-cols-4 gap-2 mt-4">
-              {[0,1,2,3].map(i => <div key={i} className="aspect-square bg-surface-container rounded-xl" />)}
+              {[0, 1, 2, 3].map((i) => (
+                <Skeleton key={i} className="aspect-square" />
+              ))}
             </div>
           </div>
           <div className="md:col-span-5 flex flex-col gap-4">
-            <div className="h-4 bg-surface-container rounded w-1/3" />
-            <div className="h-8 bg-surface-container rounded w-3/4" />
-            <div className="h-4 bg-surface-container rounded w-full" />
-            <div className="h-4 bg-surface-container rounded w-5/6" />
+            <Skeleton className="h-4 w-1/3" />
+            <Skeleton className="h-8 w-3/4" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-5/6" />
+            <div className="mt-auto space-y-4">
+              <Skeleton className="h-14 w-full" />
+              <Skeleton className="h-10 w-full" />
+            </div>
           </div>
         </div>
       </div>
