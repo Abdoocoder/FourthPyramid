@@ -92,6 +92,22 @@ function useSwipeToClose(
   }, [ref, onClose, enabled]);
 }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 767px)").matches : false
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
+
 function MenuButton({ open, onClick }: { open: boolean; onClick: () => void }) {
   return (
     <button
@@ -127,6 +143,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const { user } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
   const toggleSidebar = useCallback(() => setSidebarOpen((p) => !p), []);
@@ -145,6 +162,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   }, [sidebarOpen, closeSidebar]);
 
   const currentPageLabel = navLabelMap[pathname];
+  const sidebarHidden = isMobile && !sidebarOpen;
 
   return (
     <div className="min-h-[100dvh] bg-surface-container-low flex">
@@ -158,9 +176,12 @@ export function AdminLayout({ children }: AdminLayoutProps) {
 
       <aside
         ref={sidebarRef}
+        data-testid="admin-sidebar"
         role="dialog"
         aria-modal={sidebarOpen || undefined}
+        aria-hidden={sidebarHidden ? true : undefined}
         aria-label={t("admin.sidebarNav")}
+        inert={sidebarHidden ? true : undefined}
         className={`
           fixed md:static inset-y-0 start-0 z-40 w-64 flex flex-col
           bg-pyramid-navy
@@ -185,7 +206,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             </span>
           </Link>
           <button
-            className="md:hidden text-white/40 hover:text-white p-1.5 rounded transition-colors"
+            className="md:hidden text-white/55 hover:text-white p-1.5 rounded transition-colors"
             onClick={closeSidebar}
             aria-label={t("admin.closeSidebar")}
           >
@@ -237,13 +258,13 @@ export function AdminLayout({ children }: AdminLayoutProps) {
               <p className="text-white/90 text-sm font-medium truncate">
                 {user?.fullName ?? t("admin.title")}
               </p>
-              <p className="text-white/35 text-xs truncate">
+              <p className="text-white/55 text-xs truncate">
                 {user?.primaryEmailAddress?.emailAddress}
               </p>
             </div>
           </div>
           <SignOutButton>
-            <button className="flex items-center gap-2 px-3 py-2 w-full text-white/40 hover:text-white/80 hover:bg-white/8 rounded-lg transition-colors duration-150 text-xs min-h-11">
+            <button className="flex items-center gap-2 px-3 py-2 w-full text-white/55 hover:text-white/85 hover:bg-white/8 rounded-lg transition-colors duration-150 text-xs min-h-11">
               <LogOut className="w-3.5 h-3.5" />
               {t("admin.signOut")}
             </button>

@@ -77,14 +77,14 @@ export function Footer() {
                     <p className="text-white font-bold text-[1.0625rem] leading-tight tracking-tight">
                       Fourth Pyramid
                     </p>
-                    <p className="text-white/35 text-[0.625rem] uppercase tracking-[0.18em]">
+                    <p className="text-white/55 text-[0.625rem] uppercase tracking-[0.18em]">
                       Plastic Industries
                     </p>
                   </div>
                 </Link>
               </div>
 
-              <p className="text-white/45 text-sm leading-relaxed max-w-[34ch] relative" style={{ zIndex: 1 }}>
+              <p className="text-white/60 text-sm leading-relaxed max-w-[34ch] relative" style={{ zIndex: 1 }}>
                 {t("footer.description")}
               </p>
 
@@ -108,7 +108,7 @@ export function Footer() {
               <div className="flex flex-col relative" style={{ zIndex: 1 }}>
                 <a
                   href={`tel:${siteConfig.phone}`}
-                  className="group flex items-center gap-3 py-3 text-white/45 hover:text-white/90 transition-colors duration-200"
+                  className="group flex items-center gap-3 py-3 text-white/60 hover:text-white/90 transition-colors duration-200"
                   style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
                 >
                   <Phone className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
@@ -116,7 +116,7 @@ export function Footer() {
                 </a>
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="group flex items-center gap-3 py-3 text-white/45 hover:text-white/90 transition-colors duration-200"
+                  className="group flex items-center gap-3 py-3 text-white/60 hover:text-white/90 transition-colors duration-200"
                   style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
                 >
                   <Mail className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
@@ -126,13 +126,13 @@ export function Footer() {
                   href={`https://wa.me/${siteConfig.whatsapp.replace(/[^0-9]/g, "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 py-3 text-white/45 hover:text-white/90 transition-colors duration-200"
+                  className="group flex items-center gap-3 py-3 text-white/60 hover:text-white/90 transition-colors duration-200"
                   style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
                 >
                   <MessageCircle className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
                   <span className="text-sm font-mono tracking-wide">{siteConfig.whatsapp}</span>
                 </a>
-                <div className="flex items-start gap-3 py-3 text-white/30">
+                <div className="flex items-start gap-3 py-3 text-white/55">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                   <span className="text-xs leading-relaxed">
                     {isAr ? siteConfig.address_ar : siteConfig.address}
@@ -146,7 +146,7 @@ export function Footer() {
 
               {/* Navigation */}
               <nav aria-label={t("footer.navigation")} className="flex flex-col gap-4">
-                <span className="text-white/20 text-[0.5625rem] font-semibold uppercase tracking-[0.18em]">
+                <span className="text-white/55 text-[0.5625rem] font-semibold uppercase tracking-[0.18em]">
                   {t("footer.navigation")}
                 </span>
                 <div className="flex flex-col">
@@ -165,7 +165,7 @@ export function Footer() {
 
               {/* Company */}
               <nav aria-label={t("footer.company")} className="flex flex-col gap-4">
-                <span className="text-white/20 text-[0.5625rem] font-semibold uppercase tracking-[0.18em]">
+                <span className="text-white/55 text-[0.5625rem] font-semibold uppercase tracking-[0.18em]">
                   {t("footer.company")}
                 </span>
                 <div className="flex flex-col">
@@ -184,7 +184,7 @@ export function Footer() {
 
               {/* CTA block */}
               <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
-                <span className="text-white/20 text-[0.5625rem] font-semibold uppercase tracking-[0.18em]">
+                <span className="text-white/55 text-[0.5625rem] font-semibold uppercase tracking-[0.18em]">
                   {t("footer.support")}
                 </span>
                 <div className="flex flex-col gap-3">
@@ -211,7 +211,7 @@ export function Footer() {
                     />
                   </Link>
 
-                  <p className="text-white/25 text-xs leading-relaxed">
+                  <p className="text-white/55 text-xs leading-relaxed">
                     {t("footer.description")}
                   </p>
                 </div>
@@ -223,16 +223,16 @@ export function Footer() {
         {/* Bottom bar */}
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-5 flex flex-col md:flex-row items-center justify-between gap-2">
-            <p className="text-white/25 text-xs text-center md:text-start">
+            <p className="text-white/55 text-xs text-center md:text-start">
               {siteConfig.copyright}
             </p>
-            <p className="text-white/25 text-xs">
+            <p className="text-white/55 text-xs">
               {t("footer.designedBy")}{" "}
               <a
                 href="https://www.abdoocoder.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/40 hover:text-primary transition-colors duration-200"
+                className="text-white/65 hover:text-primary transition-colors duration-200"
                 style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.15)", textUnderlineOffset: "3px" }}
               >
                 Abdoo Coder
