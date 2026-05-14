@@ -1,5 +1,5 @@
 import { useRef, type ButtonHTMLAttributes } from "react";
-import { useMagneticButton } from "../../lib/animations";
+import { useMagneticButton, useClickBurst } from "../../lib/animations";
 
 type Variant = "primary" | "secondary" | "ghost" | "tertiary" | "accent" | "dark" | "outline-light";
 type Size = "sm" | "md" | "lg";
@@ -52,6 +52,7 @@ export function Button({
 
   const btnRef = useRef<HTMLButtonElement>(null);
   useMagneticButton(btnRef);
+  useClickBurst(btnRef);
 
   if (as === "a" && href) {
     const isExternal = href.startsWith("http");

@@ -252,3 +252,134 @@ export function useScramble(
 
   return ref;
 }
+
+// Parallax: element moves at `speed` fraction of scroll delta
+// speed=0.3 → slow (background), speed=-0.2 → opposite direction
+export function useParallax(
+  ref: RefObject<HTMLElement | null>,
+  speed = 0.3
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReduced()) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    let lastY = window.scrollY;
+    let raf = 0;
+
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const delta = currentY - lastY;
+        lastY = currentY;
+        const current = gsap.getProperty(el, "y") as number;
+        gsap.to(el, {
+          y: current + delta * speed,
+          duration: 0.6,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [ref, speed]);
+}
+
+// Text split: splits element text into char spans and animates on intersect
+export function useTextSplit(
+  ref: RefObject<HTMLElement | null>,
+  { delay = 0, stagger = 0.025 }: { delay?: number; stagger?: number } = {}
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReduced()) return;
+
+    const originalText = el.textContent ?? "";
+    const chars = originalText.split("").map((ch) => {
+      const span = document.createElement("span");
+      span.textContent = ch === " " ? " " : ch;
+      span.style.display = "inline-block";
+      span.style.overflow = "hidden";
+      return span;
+    });
+
+    el.textContent = "";
+    chars.forEach((s) => el.appendChild(s));
+
+    const ctx = gsap.context(() => {
+      gsap.set(chars, { y: "110%", opacity: 0 });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            gsap.to(chars, {
+              y: "0%",
+              opacity: 1,
+              duration: 0.65,
+              stagger,
+              ease: "power3.out",
+              delay,
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(el);
+    }, el);
+
+    return () => {
+      ctx.revert();
+      el.textContent = originalText;
+    };
+  }, [ref, delay, stagger]);
+}
+
+// Click burst: particles explode from a button on click
+export function useClickBurst(ref: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || prefersReduced()) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    const burst = (e: MouseEvent) => {
+      const count = 8;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement("div");
+        const angle = (i / count) * Math.PI * 2;
+        const dist = 40 + Math.random() * 30;
+        Object.assign(p.style, {
+          position: "fixed",
+          left: `${e.clientX}px`,
+          top: `${e.clientY}px`,
+          width: "6px",
+          height: "6px",
+          borderRadius: "50%",
+          background: "var(--color-primary)",
+          pointerEvents: "none",
+          zIndex: "9998",
+          transform: "translate(-50%,-50%)",
+        });
+        document.body.appendChild(p);
+        gsap.to(p, {
+          x: Math.cos(angle) * dist,
+          y: Math.sin(angle) * dist,
+          opacity: 0,
+          scale: 0,
+          duration: 0.55,
+          ease: "power2.out",
+          onComplete: () => p.remove(),
+        });
+      }
+    };
+
+    el.addEventListener("click", burst);
+    return () => el.removeEventListener("click", burst);
+  }, [ref]);
+}

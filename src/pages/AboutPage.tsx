@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { CheckCircle, FlaskConical, Gauge, Wind, Settings } from "lucide-react";
 import { Button } from "../components/ui/Button";
-import { useScrollReveal, useImageReveal, usePageEntrance, useScramble } from "../lib/animations";
+import { useScrollReveal, useImageReveal, usePageEntrance, useScramble, useTextSplit } from "../lib/animations";
 
 const metricsData = [
   { value: "1998", key: "established" },
@@ -43,9 +43,11 @@ export function AboutPage() {
   const capabilitiesRef = useRef<HTMLDivElement>(null);
   const qualityRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
+  const capTitleRef = useRef<HTMLHeadingElement>(null);
 
   usePageEntrance(heroRef, ".reveal", { stagger: 0.13, delay: 0.05 });
   const heroTitleRef = useScramble(t("about.heroTitle"));
+  useTextSplit(capTitleRef, { stagger: 0.03 });
   useScrollReveal(metricsRef, ".metric-box");
   useScrollReveal(capabilitiesRef, ".cap-box");
   useScrollReveal(qualityRef, ".reveal");
@@ -101,7 +103,7 @@ export function AboutPage() {
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="mb-12">
             <span className="font-data-mono text-data-mono text-primary uppercase tracking-widest mb-4 block">{t("about.capabilitiesEyebrow")}</span>
-            <h2 className="font-headline-md text-headline-md text-on-surface">{t("about.capabilitiesTitle")}</h2>
+            <h2 ref={capTitleRef} className="font-headline-md text-headline-md text-on-surface">{t("about.capabilitiesTitle")}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
             {capabilitiesData.map((cap) => (

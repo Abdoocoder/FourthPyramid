@@ -178,6 +178,10 @@ html {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  html, *, *::before, *::after {
+    cursor: none !important;
+  }
+
   .hover-lift:hover {
     transform: translateY(-2px);
     transition: transform 200ms var(--ease-out-strong);

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { localized } from "../lib/localized";
-import { useScrollReveal, useScramble, useTiltCard } from "../lib/animations";
+import { useScrollReveal, useScramble, useTiltCard, useTextSplit, useParallax } from "../lib/animations";
 import { useInViewCountUp } from "../lib/useCountUp";
 import gsap from "gsap";
 
@@ -121,11 +121,14 @@ export function HomePage() {
 
   const HERO_IMAGE = "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=1920&q=80&auto=format";
   const heroContentRef = useRef<HTMLDivElement>(null);
+  const heroImageRef = useRef<HTMLDivElement>(null);
   const metricsRef = useRef<HTMLDivElement>(null);
   const capabilitiesRef = useRef<HTMLDivElement>(null);
   const whyRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const capHeadingRef = useRef<HTMLHeadingElement>(null);
+  const whyHeadingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const el = heroContentRef.current;
@@ -152,6 +155,9 @@ export function HomePage() {
   useScrollReveal(capabilitiesRef, ".cap-card, .reveal", 0.12);
   useScrollReveal(whyRef, ".why-card, .reveal", 0.12);
   useScrollReveal(ctaRef, ".cta-item", 0.15);
+  useParallax(heroImageRef, 0.25);
+  useTextSplit(capHeadingRef, { stagger: 0.03 });
+  useTextSplit(whyHeadingRef, { stagger: 0.03, delay: 0.1 });
 
   const heroTitleRef = useScramble(t("home.heroTitle"));
 
@@ -161,7 +167,7 @@ export function HomePage() {
       {/* ── Hero: split-screen, content start-aligned ── */}
       <section aria-label={t("home.heroTitle")} className="relative min-h-[90dvh] bg-hero-surface overflow-hidden flex items-center">
         {/* Full-bleed image, gradient fades from start (dark) to end (visible) */}
-        <div className="absolute inset-0">
+        <div ref={heroImageRef} className="absolute inset-0">
           <img
             src={HERO_IMAGE}
             alt=""
@@ -262,7 +268,7 @@ export function HomePage() {
               <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
                 {t("home.capabilitiesEyebrow")}
               </span>
-              <h2 id="capabilities-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em]">
+              <h2 ref={capHeadingRef} id="capabilities-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em]">
                 {t("home.capabilitiesTitle")}
               </h2>
             </div>
@@ -361,7 +367,7 @@ export function HomePage() {
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
               {t("home.whyEyebrow")}
             </span>
-            <h2 id="why-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-2xl">
+            <h2 ref={whyHeadingRef} id="why-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-2xl">
               {t("home.whyTitle")}
             </h2>
           </div>
