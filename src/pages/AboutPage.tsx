@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { CheckCircle, FlaskConical, Gauge, Wind, Settings } from "lucide-react";
 import { Button } from "../components/ui/Button";
-import { useScrollReveal, useImageReveal } from "../lib/animations";
+import { useScrollReveal, useImageReveal, usePageEntrance } from "../lib/animations";
 
 const metricsData = [
   { value: "1998", key: "established" },
@@ -44,7 +44,9 @@ export function AboutPage() {
   const qualityRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
 
-  useScrollReveal(heroRef, ".reveal", 0.15);
+  usePageEntrance(heroRef, ".reveal", { stagger: 0.13, delay: 0.05 });
+  useScrollReveal(metricsRef, ".metric-box");
+  useScrollReveal(capabilitiesRef, ".cap-box");
   useScrollReveal(ctaRef, ".cta-reveal", 0.15);
   useImageReveal(qualityRef, ".img-reveal", 0.2);
 

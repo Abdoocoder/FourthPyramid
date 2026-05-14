@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { ArrowRight } from "lucide-react";
@@ -16,8 +16,10 @@ const industryImages = [
   "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80&auto=format",
 ];
 
-function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <section className={className}>{children}</section>;
+function AnimatedSection({ children, className }: { children: ReactNode; className?: string }) {
+  const ref = useRef<HTMLElement>(null);
+  useScrollReveal(ref, ".reveal");
+  return <section ref={ref} className={className}>{children}</section>;
 }
 
 export function IndustriesPage() {
@@ -27,6 +29,7 @@ export function IndustriesPage() {
   const ctaRef = useRef<HTMLElement>(null);
 
   useScrollReveal(headerRef, ".reveal", 0.15);
+  useScrollReveal(ctaRef, ".reveal");
 
   return (
     <>

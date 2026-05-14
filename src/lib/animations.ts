@@ -1,6 +1,10 @@
 import { useEffect, type RefObject } from "react";
 import gsap from "gsap";
 
+function prefersReduced() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function useScrollReveal(
   ref: RefObject<HTMLElement | null>,
   selector: string,
@@ -11,8 +15,7 @@ export function useScrollReveal(
     if (!el) return;
     const targets = el.querySelectorAll<Element>(selector);
     if (!targets.length) return;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
+    if (prefersReduced()) {
       for (const target of targets) {
         (target as HTMLElement).style.opacity = "1";
         (target as HTMLElement).style.transform = "translateY(0)";
@@ -52,8 +55,7 @@ export function useImageReveal(
     if (!el) return;
     const targets = el.querySelectorAll<HTMLElement>(selector);
     if (!targets.length) return;
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) {
+    if (prefersReduced()) {
       for (const target of targets) {
         target.style.clipPath = "inset(0)";
         target.style.opacity = "1";
@@ -83,6 +85,42 @@ export function useImageReveal(
   }, [ref, selector, threshold]);
 }
 
+export function useScrollRevealGroup(
+  ref: RefObject<HTMLElement | null>,
+  selector: string,
+  { stagger = 0.08, delay = 0, y = 24 }: { stagger?: number; delay?: number; y?: number } = {}
+) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const targets = el.querySelectorAll<Element>(selector);
+    if (!targets.length) return;
+    if (prefersReduced()) return;
+    const ctx = gsap.context(() => {
+      gsap.set(targets, { opacity: 0, y });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            gsap.to(targets, {
+              opacity: 1,
+              y: 0,
+              duration: 0.65,
+              stagger,
+              ease: "power3.out",
+              delay,
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -60px 0px" }
+      );
+      observer.observe(el);
+    }, el);
+    return () => ctx.revert();
+  }, [ref, selector, stagger, delay, y]);
+}
+
 export function usePageEntrance(
   ref: RefObject<HTMLElement | null>,
   selector: string,
@@ -93,6 +131,7 @@ export function usePageEntrance(
     if (!el) return;
     const targets = el.querySelectorAll<Element>(selector);
     if (!targets.length) return;
+    if (prefersReduced()) return;
     const ctx = gsap.context(() => {
       gsap.fromTo(
         targets,

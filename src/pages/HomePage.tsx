@@ -117,12 +117,18 @@ export function HomePage() {
   useEffect(() => {
     const el = heroContentRef.current;
     if (!el) return;
-    const items = [el.querySelector("h1"), el.querySelector("p"), el.querySelector(".hero-cta")];
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const items = [
+      el.querySelector(".hero-eyebrow"),
+      el.querySelector("h1"),
+      el.querySelector("p"),
+      el.querySelector(".hero-cta"),
+    ].filter(Boolean);
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        items.filter(Boolean),
-        { opacity: 0, y: 52 },
-        { opacity: 1, y: 0, duration: 0.9, stagger: 0.18, ease: "power3.out", delay: 0.15 }
+        items,
+        { opacity: 0, y: 36 },
+        { opacity: 1, y: 0, duration: 0.85, stagger: 0.14, ease: "power4.out", delay: 0.1 }
       );
     }, el);
     return () => ctx.revert();
@@ -147,6 +153,9 @@ export function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-hero-surface/60 via-hero-surface/40 to-hero-surface" />
         </div>
         <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-24 md:py-0 text-center">
+          <span className="hero-eyebrow font-data-mono text-data-mono text-primary/80 uppercase tracking-[0.2em] text-[11px] mb-8 block">
+            {t("home.heroEyebrow")}
+          </span>
           <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6 max-w-5xl mx-auto">
             {t("home.heroTitle") + " "}
             <span
