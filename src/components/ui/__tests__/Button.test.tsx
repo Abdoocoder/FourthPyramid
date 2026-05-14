@@ -61,7 +61,7 @@ describe("Button", () => {
 
   it("applies size classes correctly", () => {
     const { rerender } = render(<Button size="sm">Small</Button>);
-    expect(screen.getByRole("button").className).toContain("text-[13px]");
+    expect(screen.getByRole("button").className).toContain("text-xs");
 
     rerender(<Button size="md">Medium</Button>);
     expect(screen.getByRole("button").className).toContain("text-button-label");
