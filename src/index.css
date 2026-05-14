@@ -283,11 +283,11 @@ select:focus ~ .select-chevron svg {
     --color-background: #0D1117;
     --color-on-background: #E1E8ED;
 
-    --color-surface: #0D1117;
+    --color-surface: #151A22;
     --color-on-surface: #E1E8ED;
     --color-on-surface-variant: #B0B8C0;
     --color-surface-dim: #080B10;
-    --color-surface-bright: #2C3E50;
+    --color-surface-bright: #1A2028;
     --color-surface-container-lowest: #05080C;
     --color-surface-container-low: #151A22;
     --color-surface-container: #1A2028;
