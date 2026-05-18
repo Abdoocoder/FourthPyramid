@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Phone, Mail, MapPin, ArrowUp, ShieldCheck, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowUp, ShieldCheck, MessageCircle, Facebook } from "lucide-react";
 import { navLinks, siteConfig } from "../../lib/constants";
 
 function BackToTop() {
@@ -130,6 +130,16 @@ export function Footer() {
                 >
                   <MessageCircle className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
                   <span className="text-sm font-mono tracking-wide">{siteConfig.whatsapp}</span>
+                </a>
+                <a
+                  href={siteConfig.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 py-3 text-white/60 hover:text-white/90 transition-colors duration-200"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                >
+                  <Facebook className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
+                  <span className="text-sm">{t("contact.facebook")}</span>
                 </a>
                 <div className="flex items-start gap-3 py-3 text-white/55">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />

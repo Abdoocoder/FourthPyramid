@@ -2,7 +2,7 @@ import { useState, useRef, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { useMutation } from "convex/react";
-import { Phone, Mail, MessageCircle, MapPin, CheckCircle, Send, Loader, Printer } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, CheckCircle, Send, Loader, Printer, Facebook } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input, Textarea } from "../components/ui/Input";
 import { siteConfig } from "../lib/constants";
@@ -128,6 +128,18 @@ export function ContactPage() {
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.whatsapp")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.whatsapp}</span>
+              </div>
+            </a>
+            <a
+              href={siteConfig.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 px-6 py-5 hover:bg-surface-container transition-all duration-200"
+            >
+              <Facebook className="w-4 h-4 text-primary shrink-0 group-hover:scale-110 transition-transform duration-200" />
+              <div>
+                <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.facebook")}</p>
+                <span className="font-body-sm text-body-sm text-on-surface-variant">Fourth Pyramid</span>
               </div>
             </a>
             <div className="flex items-start gap-4 px-6 py-5">
