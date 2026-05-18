@@ -67,7 +67,7 @@ function DesktopCursor() {
 
     const onLeaveLink = () => {
       isHovering.current = false;
-      gsap.to(ring, { scale: 1, borderColor: "var(--color-primary)", opacity: 1, duration: 0.4, ease: "elastic.out(1,0.5)" });
+      gsap.to(ring, { scale: 1, borderColor: "var(--color-primary)", opacity: 1, duration: 0.4, ease: "power4.out" });
       gsap.to(dot, { scale: 1, duration: 0.3 });
     };
 

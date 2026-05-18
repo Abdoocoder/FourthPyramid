@@ -8,7 +8,7 @@ function prefersReduced() {
 export function useScrollReveal(
   ref: RefObject<HTMLElement | null>,
   selector: string,
-  _stagger = 0.12
+  stagger = 0.12
 ) {
   useEffect(() => {
     const el = ref.current;
@@ -37,12 +37,13 @@ export function useScrollReveal(
     for (const target of targets) {
       (target as HTMLElement).style.opacity = "0";
       (target as HTMLElement).style.transform = "translateY(24px)";
+      (target as HTMLElement).style.willChange = "transform, opacity";
       (target as HTMLElement).style.transition =
         "opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1)";
       observer.observe(target);
     }
     return () => observer.disconnect();
-  }, [ref, selector, _stagger]);
+  }, [ref, selector, stagger]);
 }
 
 export function useImageReveal(
@@ -152,6 +153,8 @@ export function useMagneticButton(
     if (!el || prefersReduced()) return;
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    el.style.willChange = "transform";
+
     const onMove = (e: MouseEvent) => {
       const r = el.getBoundingClientRect();
       const dx = e.clientX - (r.left + r.width / 2);
@@ -159,7 +162,7 @@ export function useMagneticButton(
       gsap.to(el, { x: dx * strength, y: dy * strength, duration: 0.3, ease: "power2.out" });
     };
     const onLeave = () => {
-      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1,0.4)" });
+      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "power4.out" });
     };
 
     el.addEventListener("mousemove", onMove);
@@ -180,6 +183,7 @@ export function useTiltCard(
     if (!el || prefersReduced()) return;
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    el.style.willChange = "transform";
     gsap.set(el, { transformPerspective: 900, transformStyle: "preserve-3d" });
 
     const onMove = (e: MouseEvent) => {
@@ -198,7 +202,7 @@ export function useTiltCard(
         rotationY: 0,
         rotationX: 0,
         duration: 0.8,
-        ease: "elastic.out(1,0.4)",
+        ease: "power4.out",
       });
     };
 
@@ -263,6 +267,8 @@ export function useParallax(
     const el = ref.current;
     if (!el || prefersReduced()) return;
     if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    el.style.willChange = "transform";
 
     let lastY = window.scrollY;
     let raf = 0;

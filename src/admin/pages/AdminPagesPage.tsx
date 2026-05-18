@@ -111,7 +111,7 @@ function SortableBlock({
           />
         ) : (
           <Textarea
-            label=""
+            label={block.type === "heading" ? `Heading (${block.level ?? 2})` : "Content"}
             id={`block-${idPrefix}-${i}`}
             value={block.content}
             onChange={(e) => updateField("content", e.target.value)}

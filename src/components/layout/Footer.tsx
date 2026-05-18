@@ -187,23 +187,15 @@ export function Footer() {
                   {t("footer.support")}
                 </span>
                 <div className="flex flex-col gap-3">
-                  <Link
-                    to="/request-quote"
-                    className="group flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all duration-250"
-                    style={{
-                      border: "1px solid rgba(74,144,226,0.25)",
-                      background: "rgba(74,144,226,0.06)",
-                      transitionTimingFunction: "var(--ease-out-strong)",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(74,144,226,0.12)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(74,144,226,0.45)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.background = "rgba(74,144,226,0.06)";
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(74,144,226,0.25)";
-                    }}
-                  >
+              <Link
+                to="/request-quote"
+                className="group flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all duration-250
+                  border-2 border-primary/25 bg-primary/[0.06]
+                  hover:bg-primary/[0.12] hover:border-primary/45"
+                style={{
+                  transitionTimingFunction: "var(--ease-out-strong)",
+                }}
+              >
                     <span className="text-white text-sm font-medium">{t("nav.requestQuote")}</span>
                     <ArrowUp
                       className="w-3.5 h-3.5 text-primary flex-shrink-0 ltr:rotate-[45deg] rtl:rotate-[-45deg] ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
@@ -227,10 +219,10 @@ export function Footer() {
                 {siteConfig.copyright}
               </p>
               <div className="flex items-center gap-4">
-                <Link to="/privacy" className="text-white/40 hover:text-white text-[10px] uppercase tracking-wider transition-colors">
+                <Link to="/privacy" className="text-white/55 hover:text-white text-[11px] uppercase tracking-wider transition-colors">
                   {t("footer.privacyPolicy")}
                 </Link>
-                <Link to="/terms" className="text-white/40 hover:text-white text-[10px] uppercase tracking-wider transition-colors">
+                <Link to="/terms" className="text-white/55 hover:text-white text-[11px] uppercase tracking-wider transition-colors">
                   {t("footer.termsOfService")}
                 </Link>
               </div>

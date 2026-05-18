@@ -105,11 +105,11 @@ export function RequestQuotePage() {
         <div ref={formPanelRef} className="md:col-span-7">
           <div className="form-reveal bg-surface p-6 md:p-10 rounded-xl border border-outline-variant shadow-sm">
             {error && (
-              <div className="mb-4 p-3 rounded-lg bg-error-container text-on-error-container text-sm font-body-sm">
+              <div id="form-error" className="mb-4 p-3 rounded-lg bg-error-container text-on-error-container text-sm font-body-sm" role="alert">
                 {error}
               </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" aria-describedby={error ? "form-error" : undefined}>
               {/* honeypot — hidden from users, filled by bots */}
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden opacity-0 pointer-events-none" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

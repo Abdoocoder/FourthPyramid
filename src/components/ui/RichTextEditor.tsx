@@ -33,7 +33,7 @@ function ToolbarButton({
       disabled={disabled}
       aria-label={label}
       aria-pressed={active}
-      className={`p-2.5 rounded transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center ${
+      className={`p-2.5 rounded transition-colors min-w-11 min-h-11 flex items-center justify-center ${
         active
           ? "bg-primary/10 text-primary"
           : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"

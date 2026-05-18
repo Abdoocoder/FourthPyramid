@@ -180,7 +180,7 @@ export function HomePage() {
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-hero-surface to-transparent" />
         </div>
 
-        <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-8 py-32 md:py-0">
+        <div ref={heroContentRef} className="relative z-10 w-full max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop py-32 md:py-0">
           <div className="flex flex-col max-w-2xl">
             <span className="hero-eyebrow font-data-mono text-data-mono text-primary/80 uppercase tracking-[0.2em] text-[11px] mb-8 block">
               {t("home.heroEyebrow")}
@@ -212,7 +212,7 @@ export function HomePage() {
 
       {/* ── Metrics ── */}
       <section ref={metricsRef} aria-label={t("home.metricsSection")} className="py-24 md:py-32 bg-surface border-b border-outline-variant">
-        <div className="max-w-6xl mx-auto px-6 md:px-8">
+        <div className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div className="metric-card md:col-span-5 flex flex-col gap-4 border-e border-outline-variant md:pe-12">
               <MetricValue metric={metrics[2]} />
@@ -261,7 +261,7 @@ export function HomePage() {
             backgroundPosition: "0 0, 0 0, 0 0, 0 0",
           }}
         />
-        <div className="max-w-6xl mx-auto px-6 md:px-8">
+        <div className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop">
           {/* Left-aligned section opener */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 mb-16">
             <div className="md:col-span-7">
@@ -306,7 +306,7 @@ export function HomePage() {
                           background: "radial-gradient(circle at 50% 35%, rgba(74,144,226,0.18), transparent 60%)",
                         }}
                       />
-                      <span className="absolute start-5 top-4 font-data-mono text-[0.6875rem] uppercase tracking-[0.22em] text-on-surface-variant/45">
+                      <span className="absolute start-5 top-4 font-data-mono text-[0.6875rem] uppercase tracking-[0.22em] text-on-surface-variant/60">
                         0{i + 1}
                       </span>
                       <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-outline-variant bg-surface text-primary shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-out-strong group-hover:scale-[1.04] group-hover:border-primary/30 group-hover:shadow-card-hover">
@@ -361,7 +361,7 @@ export function HomePage() {
 
       {/* ── Why Fourth Pyramid ── */}
       <section ref={whyRef} aria-labelledby="why-heading" className="py-24 md:py-32 bg-surface">
-        <div className="max-w-6xl mx-auto px-6 md:px-8">
+        <div className="max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop">
           {/* Left-aligned opener */}
           <div className="mb-16">
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
@@ -383,7 +383,7 @@ export function HomePage() {
                 </p>
               </div>
               <div className="flex items-center gap-4 pt-4 border-t border-outline-variant">
-                <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/40 uppercase tracking-widest">01</span>
+                <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/60 uppercase tracking-widest">01</span>
                 <span className="w-6 h-px bg-outline-variant" />
                 <span className="font-data-mono text-data-mono text-[11px] text-primary uppercase tracking-widest">
                   {t("home.established")} 1998
@@ -406,7 +406,7 @@ export function HomePage() {
                     <h3 className="font-headline-md text-lg font-bold text-on-surface mb-1">{t(`home.${s.titleKey}`)}</h3>
                     <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{t(`home.${s.descKey}`)}</p>
                   </div>
-                  <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/30 uppercase tracking-widest mt-auto">
+                  <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/60 uppercase tracking-widest mt-auto">
                     {s.index}
                   </span>
                 </div>
@@ -456,7 +456,7 @@ export function HomePage() {
           <div className="absolute inset-x-0 top-0 h-px bg-primary/35" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-pyramid-navy/40 to-transparent" />
         </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-8">
+        <div className="relative z-10 max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div className="md:col-span-7">
               <div className="cta-item">

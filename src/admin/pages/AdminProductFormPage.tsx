@@ -227,7 +227,7 @@ export function AdminProductFormPage() {
           <div className="flex flex-wrap gap-4">
             {form.images.map((url, i) => (
               <div key={i} className="relative w-28 h-28 rounded-lg border border-outline-variant overflow-hidden group">
-                <img src={url} alt="" className="w-full h-full object-cover" />
+                <img src={url} alt="" loading="lazy" className="w-full h-full object-cover" />
                 <button type="button" onClick={() => removeImage(i)} aria-label={`Remove image ${i + 1}`} className="absolute top-1 right-1 p-2 bg-error text-on-error rounded-full opacity-60 hover:opacity-100 transition-opacity min-h-11 min-w-11">
                   <X className="w-4 h-4" />
                 </button>
@@ -271,11 +271,11 @@ export function AdminProductFormPage() {
         </section>
 
         {error && (
-          <div className="bg-error-container text-on-error-container px-6 py-3 rounded-lg font-body-sm text-body-sm">
+          <div id="form-error" className="bg-error-container text-on-error-container px-6 py-3 rounded-lg font-body-sm text-body-sm" role="alert">
             {error}
           </div>
         )}
-        <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-outline-variant">
+        <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-outline-variant" aria-describedby={error ? "form-error" : undefined}>
           <Button type="submit" disabled={saving}>
             {saving ? <Loader className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             {t("admin.saveProduct")}

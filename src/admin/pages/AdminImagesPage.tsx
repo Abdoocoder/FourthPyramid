@@ -63,7 +63,7 @@ export function AdminImagesPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 grid-stagger">
           {images.map((img) => (
             <div key={img._id} className={`relative bg-surface-container-highest border border-outline-variant rounded-xl overflow-hidden aspect-square group ${copiedId === img._id ? "copy-flash" : ""}`}>
-              <img src={img.url} alt={t("admin.galleryImage", { index: images.indexOf(img) + 1 })} className="w-full h-full object-cover" />
+              <img src={img.url} alt={t("admin.galleryImage", { index: images.indexOf(img) + 1 })} loading="lazy" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-on-background/0 group-hover:bg-on-background/30 transition-colors" />
             <div className="absolute bottom-2 right-2 flex items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
               <button

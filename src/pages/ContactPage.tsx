@@ -168,12 +168,12 @@ export function ContactPage() {
               <Input label={t("contact.subject")} id="subject" name="subject" placeholder={t("contact.subjectPlaceholder")} required />
               <Textarea label={t("contact.message")} id="contact-message" name="contact-message" placeholder={t("contact.messagePlaceholder")} required />
               {error && (
-                <div className="bg-error-container text-on-error-container px-4 py-3 rounded-lg font-body-sm text-body-sm">
+                <div id="form-error" className="bg-error-container text-on-error-container px-4 py-3 rounded-lg font-body-sm text-body-sm" role="alert">
                   {error}
                 </div>
               )}
               <div className="pt-4 border-t border-outline-variant">
-                <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center" disabled={sending}>
+                <Button type="submit" size="lg" variant="tertiary" className="w-full justify-center" disabled={sending} aria-describedby={error ? "form-error" : undefined}>
                   {sending ? <Loader className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                   {t("contact.sendButton")}
                 </Button>

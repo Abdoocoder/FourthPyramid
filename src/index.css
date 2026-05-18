@@ -178,8 +178,9 @@ html {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  html, *, *::before, *::after {
-    cursor: none !important;
+  /* Custom cursor: keep native cursor visible for accessibility (low-vision users) */
+  .custom-cursor-active html, .custom-cursor-active *, .custom-cursor-active *::before, .custom-cursor-active *::after {
+    cursor: none;
   }
 
   .hover-lift:hover {
@@ -416,7 +417,7 @@ select:focus ~ .select-chevron svg {
 /* Button hover lift utility */
 .hover-lift-btn:hover {
   transform: translateY(-1px);
-  transition: transform 200ms var(--ease-out-strong), box-shadow 200ms var(--ease-out-strong), background-color 200ms var(--ease-out-strong), color 200ms var(--ease-out-strong), border-color 200ms var(--ease-out-strong);
+  transition: transform 200ms var(--ease-out-strong), box-shadow 200ms var(--ease-out-strong);
 }
 
 .hover-lift-btn:active {
@@ -432,7 +433,7 @@ select:focus ~ .select-chevron svg {
 /* Card hover lift enhancement */
 .hover-lift-card:hover {
   transform: translateY(-3px);
-  transition: transform 300ms var(--ease-out-strong), border-color 300ms var(--ease-out-strong), box-shadow 300ms var(--ease-out-strong);
+  transition: transform 300ms var(--ease-out-strong), box-shadow 300ms var(--ease-out-strong);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -618,11 +619,19 @@ select:focus ~ .select-chevron svg {
     --color-on-secondary: #001D36;
     --color-secondary-container: #1960B0;
     --color-on-secondary-container: #D6E8FF;
+    --color-secondary-fixed: #B8D4F0;
+    --color-secondary-fixed-dim: #87B2E8;
+    --color-on-secondary-fixed: #001D36;
+    --color-on-secondary-fixed-variant: #002856;
 
     --color-tertiary: #FFA07A;
     --color-on-tertiary: #441100;
     --color-tertiary-container: #8A2B00;
     --color-on-tertiary-container: #FFD3C2;
+    --color-tertiary-fixed: #FFA07A;
+    --color-tertiary-fixed-dim: #C84000;
+    --color-on-tertiary-fixed: #441100;
+    --color-on-tertiary-fixed-variant: #663300;
 
     --color-background: #0D1117;
     --color-on-background: #E1E8ED;
@@ -650,6 +659,10 @@ select:focus ~ .select-chevron svg {
     --color-on-error: #690005;
     --color-error-container: #93000A;
     --color-on-error-container: #FFDAD6;
+
+    --color-hero-surface: #05080C;
+
+    --shadow-card-hover: 0 16px 36px rgba(0, 0, 0, 0.4);
   }
 
   body {
