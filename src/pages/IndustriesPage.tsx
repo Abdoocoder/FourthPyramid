@@ -7,7 +7,7 @@ import { api } from "@convex/_generated/api";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { useScrollReveal } from "../lib/animations";
-
+import { localized } from "../lib/localized";
 
 const bgClasses = ["bg-surface-container", "bg-surface", "bg-surface-container", "bg-surface"];
 const badgeVariants = ["tertiary", "primary", "secondary", "outline"] as const;
@@ -78,7 +78,7 @@ export function IndustriesPage() {
                       </div>
                     </div>
                     <div className="reveal md:col-span-5 md:ps-8">
-                      <Badge variant={badgeVariants[i % badgeVariants.length]} className="mb-4">{cat.slug}</Badge>
+                      <Badge variant={badgeVariants[i % badgeVariants.length]} className="mb-4">{localized(cat, "name")}</Badge>
                       <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                       <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                       <Button as="a" href={`/products?category=${cat.slug}`} variant="tertiary">
@@ -89,7 +89,7 @@ export function IndustriesPage() {
                 ) : (
                   <>
                     <div className="reveal md:col-span-5 order-2 md:order-1">
-                      <Badge variant={badgeVariants[i % badgeVariants.length]} className="mb-4">{cat.slug}</Badge>
+                      <Badge variant={badgeVariants[i % badgeVariants.length]} className="mb-4">{localized(cat, "name")}</Badge>
                       <h2 className="font-headline-md text-headline-md text-on-surface mb-4">{title}</h2>
                       <p className="font-body-lg text-body-lg text-on-surface-variant mb-8">{description}</p>
                       <Button as="a" href={`/products?category=${cat.slug}`} variant="tertiary">

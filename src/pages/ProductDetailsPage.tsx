@@ -24,7 +24,7 @@ import { cldTransform } from "../lib/cloudinary";
 import { useScrollReveal, usePageEntrance, useTiltCard } from "../lib/animations";
 import gsap from "gsap";
 
-function ProductImage({ src, alt, className, sizes }: { src: string | undefined; alt: string; className?: string; sizes?: string }) {
+function ProductImage({ src, alt, className, sizes, ...rest }: { src: string | undefined; alt: string; className?: string; sizes?: string } & React.ImgHTMLAttributes<HTMLImageElement>) {
   if (!src) {
     return (
       <div className={`bg-surface-container-highest flex items-center justify-center ${className ?? ""}`}>
@@ -32,7 +32,7 @@ function ProductImage({ src, alt, className, sizes }: { src: string | undefined;
       </div>
     );
   }
-  return <img src={src} alt={alt} sizes={sizes} loading="lazy" className={className ?? ""} />;
+  return <img src={src} alt={alt} sizes={sizes} loading="lazy" className={className ?? ""} {...rest} />;
 }
 
 const useCaseIcons: Record<string, React.ReactNode> = {
@@ -117,7 +117,10 @@ export function ProductDetailsPage() {
 
   const activeSpecs = localizedSpecs(product.specs, product.specs_ar);
   const specItems = Object.entries(activeSpecs).map(([key, value]) => ({
-    label: key.replace(/([A-Z])/g, " $1").trim(),
+    label: key
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^u n /i, "UN ")
+      .trim(),
     value,
   }));
 
@@ -125,7 +128,7 @@ export function ProductDetailsPage() {
 
   return (
     <div className="pt-28 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-      <div ref={breadcrumbRef} className="">
+      <div ref={breadcrumbRef}>
         <nav aria-label="Breadcrumb" className="pd-breadcrumb flex items-center gap-2 font-body-sm text-body-sm text-on-surface-variant mb-8 flex-wrap">
           <Link to="/products" className="hover:text-primary transition-colors">{t("nav.products")}</Link>
           <ChevronRight className="w-3.5 h-3.5 text-outline-variant rtl:rotate-180" />
@@ -145,6 +148,7 @@ export function ProductDetailsPage() {
               alt={localized(product, "name")}
               sizes="(max-width: 768px) 100vw, 58vw"
               className="w-full aspect-[4/3] object-cover"
+              loading="eager"
             />
             <div className="absolute top-4 start-4 bg-inverse-surface/90 text-inverse-on-surface px-3 py-1.5 rounded-md font-data-mono text-[11px] uppercase flex items-center gap-1.5 shadow-sm backdrop-blur-sm">
               <Verified className="w-3.5 h-3.5" />
@@ -229,7 +233,7 @@ export function ProductDetailsPage() {
               <FileText className="w-4 h-4" />
               {t("productDetails.requestBulkQuote")}
             </Button>
-            <Button variant="secondary" size="md" className="w-full justify-center" disabled aria-disabled="true">
+            <Button variant="secondary" size="md" className="w-full justify-center opacity-50 cursor-not-allowed" disabled aria-disabled="true">
               <Download className="w-4 h-4" />
               {t("productDetails.downloadSpecSheet")}
             </Button>

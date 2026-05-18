@@ -39,8 +39,7 @@ export function ProductsPage() {
   const filtered = productsData ?? [];
 
   return (
-    <>
-      <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-section-gap">
+    <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-section-gap">
         <div ref={pageHeaderRef} className="flex flex-col gap-4 mb-10">
           <h1 className="entrance font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-background leading-[1.1]">
             {t("products.pageTitle")}
@@ -169,6 +168,5 @@ export function ProductsPage() {
           ))}
         </div>
       </section>
-    </>
   );
 }
