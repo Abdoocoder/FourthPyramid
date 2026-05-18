@@ -35,6 +35,24 @@ export const create = mutation({
   },
 });
 
+export const update = mutation({
+  args: {
+    id: v.id("categories"),
+    name: v.optional(v.string()),
+    name_ar: v.optional(v.string()),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
+    description_ar: v.optional(v.string()),
+    icon: v.optional(v.string()),
+    image: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    await requireAdmin(ctx);
+    const { id, ...fields } = args;
+    await ctx.db.patch(id, fields);
+  },
+});
+
 export const remove = mutation({
   args: { id: v.id("categories") },
   handler: async (ctx, args) => {
