@@ -8,8 +8,8 @@ export const siteConfig = {
   fax: "+962 6 405 0071",
   whatsapp: "+962 79 999 1790",
   facebook: "https://web.facebook.com/sayelpl",
-  address: "Umm Butma Industrial Area, Al-Muwaqar, Amman, Jordan",
-  address_ar: "عمان - الموقر - أم بطمة الصناعية",
+  address: "Al Nuqayrah, Amman, Jordan",
+  address_ar: "النقيرة، عمان",
   copyright: `© ${new Date().getFullYear()} Fourth Pyramid Plastic Industries. All rights reserved.`,
 };
 
