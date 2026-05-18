@@ -4,20 +4,18 @@ import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
 import { Search, ShoppingCart, ImageOff } from "lucide-react";
 import { Card } from "../components/ui/Card";
-import { Badge } from "../components/ui/Badge";
-import { Button } from "../components/ui/Button";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
-import { localized, localizedArray, localizedSpecs } from "../lib/localized";
+import { localized } from "../lib/localized";
 import { cldTransform } from "../lib/cloudinary";
 import { usePageEntrance, useTiltCard } from "../lib/animations";
+import { Skeleton } from "../components/ui/Skeleton";
 
 function TiltWrapper({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useTiltCard(ref, 8);
   return <div ref={ref} className={className}>{children}</div>;
 }
-import { Skeleton } from "../components/ui/Skeleton";
 
 export function ProductsPage() {
   const { t } = useTranslation();
@@ -42,40 +40,38 @@ export function ProductsPage() {
 
   return (
     <>
-      <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-section-gap flex flex-col gap-8">
-        <div ref={pageHeaderRef} className="flex flex-col gap-4 max-w-2xl">
+      <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-section-gap">
+        <div ref={pageHeaderRef} className="flex flex-col gap-4 mb-10">
           <h1 className="entrance font-display-lg text-[clamp(1.8rem,4vw,3rem)] md:text-display-lg text-on-background leading-[1.1]">
             {t("products.pageTitle")}
           </h1>
-          <p className="entrance font-body-lg text-body-lg text-on-surface-variant">
+          <p className="entrance font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
             {t("products.pageDesc")}
           </p>
         </div>
 
-        <div className="flex flex-col gap-6">
-          <div className="relative max-w-md w-full">
-            <div className="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-on-surface-variant" />
-            </div>
+        <div className="flex flex-col gap-6 mb-10">
+          <div className="relative max-w-sm">
+            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none" />
             <input
               type="text"
               placeholder={t("products.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               aria-label={t("products.searchPlaceholder")}
-              className="block w-full ps-10 pe-3 py-3 border border-outline-variant rounded-xl bg-surface text-on-surface placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow,background-color] duration-200"
+              className="block w-full ps-10 pe-4 py-2.5 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow] duration-200"
             />
           </div>
 
-          <div className="flex overflow-x-auto pb-2 gap-3">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setActiveCategory("all")}
               aria-pressed={activeCategory === "all"}
-              className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-all duration-200 ${
-                  activeCategory === "all"
-                    ? "bg-primary text-on-primary shadow-[0_2px_8px_rgba(74,144,226,0.2)]"
-                    : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
-                }`}
+              className={`px-4 py-2 min-h-11 rounded-full font-body-sm text-body-sm border transition-all duration-200 ${
+                activeCategory === "all"
+                  ? "bg-primary/10 text-primary border-primary/30 font-semibold"
+                  : "bg-surface text-on-surface-variant border-outline-variant hover:border-primary/30 hover:text-on-surface"
+              }`}
             >
               {t("products.allProducts")}
             </button>
@@ -84,10 +80,10 @@ export function ProductsPage() {
                 key={cat.slug}
                 onClick={() => setActiveCategory(cat.slug)}
                 aria-pressed={activeCategory === cat.slug}
-                className={`flex-shrink-0 px-5 py-3 min-h-11 rounded-lg font-button-label text-button-label whitespace-nowrap transition-all duration-200 ${
+                className={`px-4 py-2 min-h-11 rounded-full font-body-sm text-body-sm border transition-all duration-200 ${
                   activeCategory === cat.slug
-                    ? "bg-primary text-on-primary shadow-[0_2px_8px_rgba(74,144,226,0.2)]"
-                    : "bg-surface-variant text-on-background border border-outline-variant hover:bg-outline-variant"
+                    ? "bg-primary/10 text-primary border-primary/30 font-semibold"
+                    : "bg-surface text-on-surface-variant border-outline-variant hover:border-primary/30 hover:text-on-surface"
                 }`}
               >
                 {localized(cat, "name")}
@@ -96,99 +92,81 @@ export function ProductsPage() {
           </div>
         </div>
 
-        <div>
-          <h2 className="sr-only">{t("products.allProducts")}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter" aria-live="polite" aria-label={t("products.productList")}>
           {filtered.length === 0 && productsData === undefined && (
-            <div className="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-gutter">
+            <>
               {[0, 1, 2, 3].map((i) => (
-                <div key={i} className="flex flex-col gap-4">
-                  <Skeleton className="aspect-[16/9] w-full" />
-                  <Skeleton className="h-6 w-3/4" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-10 w-full" />
+                <div key={i} className="flex gap-4 p-4 border border-outline-variant rounded-xl">
+                  <Skeleton className="w-28 h-28 shrink-0 rounded-lg" />
+                  <div className="flex flex-col gap-2 flex-1">
+                    <Skeleton className="h-5 w-3/4" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-1/2" />
+                    <Skeleton className="h-9 w-full mt-auto" />
+                  </div>
                 </div>
               ))}
-            </div>
+            </>
           )}
           {filtered.length === 0 && productsData !== undefined && (
             <div className="col-span-full py-20 text-center">
               <p className="font-body-lg text-body-lg text-on-surface-variant">{t("products.noResults")}</p>
             </div>
           )}
-          {filtered.map((product, idx) => {
-            const isFeatured = idx === 0 && searchQuery === "" && activeCategory === "all";
-            return (
-              <TiltWrapper key={product._id} className={isFeatured ? "md:col-span-2" : undefined}>
+          {filtered.map((product) => (
+            <TiltWrapper key={product._id}>
               <Card
-                hover={false}
-                className={`stagger-item flex flex-col overflow-hidden group h-full ${isFeatured ? "lg:flex-row" : ""}`}
+                hover
+                className="flex gap-0 overflow-hidden group h-full"
               >
-                <Link 
-                  to={`/products/${product.slug}`} 
-                  className={`${isFeatured ? "lg:w-1/2 aspect-video lg:aspect-auto" : "aspect-[4/3]"} bg-surface-container-highest relative overflow-hidden block`}
+                <Link
+                  to={`/products/${product.slug}`}
+                  className="w-28 md:w-32 shrink-0 bg-surface-container-highest relative overflow-hidden"
                 >
                   {product.images?.[0] ? (
                     <img
-                      src={cldTransform(product.images[0], isFeatured ? "w_800,q_auto,f_auto" : "w_400,q_auto,f_auto")}
+                      src={cldTransform(product.images[0], "w_240,h_240,c_fill,q_auto,f_auto")}
                       alt={localized(product, "name")}
-                      sizes={isFeatured ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 768px) 100vw, 50vw"}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out-strong"
+                      className="w-full h-full object-cover transition-transform duration-300 ease-out-strong group-hover:scale-105"
                       loading="lazy"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-surface-container-highest">
-                      <ImageOff className="w-8 h-8 text-outline opacity-30" />
+                      <ImageOff className="w-6 h-6 text-outline opacity-30" />
                     </div>
                   )}
-                  <div className="absolute top-2 start-2">
-                    <Badge variant="secondary">{localizedArray(product.certifications, product.certifications_ar)[0]}</Badge>
-                  </div>
                 </Link>
-                <div className={`p-6 flex flex-col flex-grow justify-between gap-6 ${isFeatured ? "lg:w-1/2 lg:p-10" : ""}`}>
-                  <div className="flex flex-col gap-2">
-                    <Link to={`/products/${product.slug}`}>
-                      <h3 className={`${isFeatured ? "text-2xl md:text-3xl" : "text-xl"} font-headline-md text-on-background hover:text-primary transition-colors`}>
-                        {localized(product, "name")}
-                      </h3>
-                    </Link>
-                    <div className="flex flex-col gap-1 mt-2">
-                      <div className="flex items-center gap-2">
-                        <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.capacity")}</span>
-                        <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).capacity}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.material")}</span>
-                        <span className="font-body-sm text-body-sm text-on-background">{localizedSpecs(product.specs, product.specs_ar).material}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-data-mono text-data-mono text-on-surface-variant uppercase w-24">{t("products.usage")}</span>
-                        <span className="font-body-sm text-body-sm text-on-background">{localizedArray(product.useCases, product.useCases_ar)[0]}</span>
-                      </div>
-                    </div>
-                    {isFeatured && (
-                      <p className="font-body-lg text-body-lg text-on-surface-variant mt-4 line-clamp-3">
-                        {localized(product, "description")}
-                      </p>
-                    )}
+                <div className="flex flex-col flex-1 p-4 gap-2 min-w-0">
+                  <Link to={`/products/${product.slug}`}>
+                    <h3 className="font-headline-md text-sm md:text-base text-on-background hover:text-primary transition-colors line-clamp-1">
+                      {localized(product, "name")}
+                    </h3>
+                  </Link>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                    {localized(product, "description")}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container-low font-data-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
+                      {localized(product, "category")}
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container-low font-data-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
+                      {product.specs.material}
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-surface-container-low font-data-mono text-[10px] text-on-surface-variant uppercase tracking-wider">
+                      {product.specs.capacity}
+                    </span>
                   </div>
-                  <div className={`${isFeatured ? "flex flex-col sm:flex-row gap-4" : "w-full"}`}>
-                    <Button as="a" href={`/products/${product.slug}`} variant="tertiary" size="md" className="flex-1">
-                      <ShoppingCart className="w-4 h-4" />
-                      {t("products.requestQuote")}
-                    </Button>
-                    {isFeatured && (
-                      <Button as="a" href={`/products/${product.slug}`} variant="ghost" size="md" className="flex-1 border border-outline-variant">
-                        {t("products.backToProducts")}
-                      </Button>
-                    )}
-                  </div>
+                  <Link
+                    to={`/products/${product.slug}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors mt-1"
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5" />
+                    {t("products.requestQuote")}
+                  </Link>
                 </div>
               </Card>
-              </TiltWrapper>
-            );
-          })}
-        </div>
+            </TiltWrapper>
+          ))}
         </div>
       </section>
     </>

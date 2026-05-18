@@ -10,13 +10,17 @@ interface SpecTableProps {
 
 export function SpecTable({ specs, label }: SpecTableProps) {
   return (
-    <div className="font-data-mono text-data-mono overflow-x-auto">
-      <table className="w-full" aria-label={label}>
+    <div className="overflow-hidden rounded-xl border border-outline-variant">
+      <table className="w-full font-data-mono text-data-mono" aria-label={label}>
         <tbody>
           {specs.map((spec, i) => (
-            <tr key={spec.label} className={`border-b border-surface-container-highest table-row-enter ${i % 2 === 0 ? "" : "bg-surface-container-low/50"}`} style={{ animationDelay: `${i * 40}ms` }}>
-              <th scope="row" className="text-on-surface-variant uppercase tracking-wider py-3 pe-4 text-start font-data-mono text-data-mono font-normal w-1/2 align-top">{spec.label}</th>
-              <td className="text-on-background font-medium text-end py-3 w-1/2 break-words">{spec.value}</td>
+            <tr key={spec.label} className={`border-b border-surface-container-highest last:border-b-0 ${i % 2 === 0 ? "bg-surface" : "bg-surface-container-low/50"}`}>
+              <th scope="row" className="text-on-surface-variant uppercase tracking-wider py-3.5 px-5 text-start font-data-mono text-[11px] font-normal w-[40%] align-top">
+                {spec.label}
+              </th>
+              <td className="text-on-background font-medium py-3.5 px-5 text-end text-[13px] break-words">
+                {spec.value}
+              </td>
             </tr>
           ))}
         </tbody>
