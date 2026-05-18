@@ -223,7 +223,7 @@ export function Header() {
             style={{ "--i": navLinks.length + 1 } as React.CSSProperties}
           >
             <Globe className="w-4 h-4 shrink-0" />
-            {i18n.language === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+            {t("nav.language")}
           </button>
 
           <div

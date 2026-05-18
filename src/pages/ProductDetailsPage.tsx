@@ -179,13 +179,6 @@ export function ProductDetailsPage() {
             </div>
           )}
 
-          {images.length === 0 && (
-            <div className="grid grid-cols-4 gap-3">
-              <div className="aspect-square bg-surface-container border border-outline-variant rounded-xl overflow-hidden flex items-center justify-center">
-                <FileText className="w-8 h-8 text-outline" />
-              </div>
-            </div>
-          )}
         </div>
 
         <div ref={rightPanelRef} className="md:col-span-5 flex flex-col gap-8">

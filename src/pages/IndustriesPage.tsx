@@ -6,6 +6,7 @@ import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
+import { Skeleton } from "../components/ui/Skeleton";
 import { useScrollReveal } from "../lib/animations";
 import { localized } from "../lib/localized";
 
@@ -50,7 +51,24 @@ export function IndustriesPage() {
       </section>
 
       {categories === undefined ? (
-        <div className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center py-20 animate-pulse text-on-surface-variant">{t("products.loading")}</div>
+        <div className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto space-y-8 py-12">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className={`py-16 md:py-20 ${bgClasses[i % bgClasses.length]} rounded-xl`}>
+              <div className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+                <div className="md:col-span-5 flex flex-col gap-4">
+                  <Skeleton className="h-6 w-24" />
+                  <Skeleton className="h-8 w-3/4" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-10 w-36 mt-2" />
+                </div>
+                <div className="md:col-span-7">
+                  <Skeleton className="aspect-[4/3] w-full rounded-xl" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : categories.length === 0 ? (
         <div className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center py-20 text-on-surface-variant">{t("products.noResults")}</div>
       ) : (
@@ -69,12 +87,16 @@ export function IndustriesPage() {
                   <>
                     <div className="reveal md:col-span-7 mb-8 md:mb-0">
                       <div className="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container border border-outline-variant relative">
-                        <img
-                          src={imgUrl}
-                          alt={title}
-                          className="w-full h-full object-cover opacity-70 dark:opacity-40"
-                          loading="lazy"
-                        />
+                        {imgUrl ? (
+                          <img
+                            src={imgUrl}
+                            alt={title}
+                            className="w-full h-full object-cover opacity-70 dark:opacity-40"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-surface-container-highest" />
+                        )}
                       </div>
                     </div>
                     <div className="reveal md:col-span-5 md:ps-8">
@@ -98,12 +120,16 @@ export function IndustriesPage() {
                     </div>
                     <div className="reveal md:col-span-7 order-1 md:order-2 mb-8 md:mb-0">
                       <div className="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container border border-outline-variant relative">
-                        <img
-                          src={imgUrl}
-                          alt={title}
-                          className="w-full h-full object-cover opacity-70 dark:opacity-40"
-                          loading="lazy"
-                        />
+                        {imgUrl ? (
+                          <img
+                            src={imgUrl}
+                            alt={title}
+                            className="w-full h-full object-cover opacity-70 dark:opacity-40"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-surface-container-highest" />
+                        )}
                       </div>
                     </div>
                   </>

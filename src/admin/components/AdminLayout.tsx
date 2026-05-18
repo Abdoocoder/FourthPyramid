@@ -167,7 +167,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <div className="min-h-[100dvh] bg-surface-container-low flex">
       <div
-        className={`fixed inset-0 bg-inverse-surface/50 z-30 md:hidden transition-opacity duration-250 ease-out-strong ${
+        className={`fixed inset-0 bg-inverse-surface/50 z-30 md:hidden transition-opacity duration-300 ease-out-strong ${
           sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={closeSidebar}
@@ -185,7 +185,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         className={`
           fixed md:static inset-y-0 start-0 z-40 w-64 flex flex-col
           bg-pyramid-navy
-          transition-transform duration-250 ease-out-strong
+          transition-transform duration-300 ease-out-strong
           ${sidebarOpen ? "" : "max-md:ltr:-translate-x-full max-md:rtl:translate-x-full"}
         `}
       >

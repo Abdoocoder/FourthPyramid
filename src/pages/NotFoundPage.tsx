@@ -42,7 +42,7 @@ export function NotFoundPage() {
 
         <Link
           to="/"
-          className="entrance-item inline-flex items-center gap-3 px-8 py-4 bg-primary text-on-primary rounded-xl font-medium hover-lift-btn transition-all duration-250 shadow-sm"
+          className="entrance-item inline-flex items-center gap-3 px-8 py-4 bg-primary text-on-primary rounded-xl font-medium hover-lift-btn transition-all duration-200 shadow-sm"
         >
           {isAr ? <MoveRight className="w-5 h-5" /> : <MoveLeft className="w-5 h-5" />}
           <span>{isAr ? "العودة للرئيسية" : "Return to Home"}</span>

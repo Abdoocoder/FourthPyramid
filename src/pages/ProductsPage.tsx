@@ -108,8 +108,16 @@ export function ProductsPage() {
             </>
           )}
           {filtered.length === 0 && productsData !== undefined && (
-            <div className="col-span-full py-20 text-center">
+            <div className="col-span-full py-20 text-center flex flex-col items-center gap-4">
               <p className="font-body-lg text-body-lg text-on-surface-variant">{t("products.noResults")}</p>
+              {(searchQuery || activeCategory !== "all") && (
+                <button
+                  onClick={() => { setSearchQuery(""); setActiveCategory("all"); }}
+                  className="font-body-sm text-body-sm text-primary hover:text-primary/80 underline underline-offset-4 transition-colors duration-200"
+                >
+                  {t("products.clearFilters")}
+                </button>
+              )}
             </div>
           )}
           {filtered.map((product) => (

@@ -24,7 +24,8 @@
     "designedBy": "تصميم وتطوير بواسطة",
     "backToTop": "العودة إلى الأعلى",
     "privacyPolicy": "سياسة الخصوصية",
-    "termsOfService": "شروط الخدمة"
+    "termsOfService": "شروط الخدمة",
+    "isoTagline": "مصنع معتمد ISO 9001:2015."
   },
   "home": {
     "heroEyebrow": "شركة رائدة في صناعة البلاستيك في الأردن",
@@ -96,6 +97,7 @@
     "allProducts": "جميع المنتجات",
     "loading": "جاري تحميل المنتجات...",
     "noResults": "لا توجد منتجات تطابق معايير البحث.",
+    "clearFilters": "مسح الفلاتر",
     "capacity": "السعة:",
     "material": "المادة:",
     "usage": "الاستخدام:",

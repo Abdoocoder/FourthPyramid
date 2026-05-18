@@ -24,7 +24,8 @@
     "designedBy": "Designed & developed by",
     "backToTop": "Back to top",
     "privacyPolicy": "Privacy Policy",
-    "termsOfService": "Terms of Service"
+    "termsOfService": "Terms of Service",
+    "isoTagline": "ISO 9001:2015 certified manufacturer."
   },
   "home": {
     "heroEyebrow": "Jordan's Industrial Plastics Leader",
@@ -96,6 +97,7 @@
     "allProducts": "All Products",
     "loading": "Loading products...",
     "noResults": "No products found matching your criteria.",
+    "clearFilters": "Clear filters",
     "capacity": "Capacity:",
     "material": "Material:",
     "usage": "Usage:",

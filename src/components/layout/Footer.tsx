@@ -199,7 +199,7 @@ export function Footer() {
                 <div className="flex flex-col gap-3">
               <Link
                 to="/request-quote"
-                className="group flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all duration-250
+                className="group flex items-center justify-between gap-4 px-4 py-3 rounded-xl transition-all duration-200
                   border-2 border-primary/25 bg-primary/[0.06]
                   hover:bg-primary/[0.12] hover:border-primary/45"
                 style={{
@@ -213,7 +213,7 @@ export function Footer() {
                   </Link>
 
                   <p className="text-white/55 text-xs leading-relaxed">
-                    ISO 9001:2015 certified manufacturer delivering excellence in plastic engineering.
+                    {t("footer.isoTagline")}
                   </p>
                 </div>
               </div>
