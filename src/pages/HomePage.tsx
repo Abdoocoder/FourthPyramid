@@ -21,7 +21,7 @@ const iconMap: Record<string, React.ReactNode> = {
 const metrics = [
   { value: "2016", key: "established" },
   { value: "50M+", key: "unitsPerYear" },
-  { value: "25+", key: "yearsExp" },
+  { value: "10+", key: "yearsExp" },
   { value: "ISO", key: "certified" },
 ];
 
@@ -41,7 +41,7 @@ function MetricValue({ metric }: { metric: { value: string; key: string } }) {
   const countUpMap: Record<string, { end: number; suffix: string }> = {
     established: { end: 2016, suffix: "" },
     unitsPerYear: { end: 50, suffix: "M+" },
-    yearsExp: { end: 25, suffix: "+" },
+    yearsExp: { end: 10, suffix: "+" },
   };
   const config = countUpMap[metric.key];
   const { ref, formatted } = useInViewCountUp({
