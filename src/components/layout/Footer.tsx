@@ -61,7 +61,7 @@ export function Footer() {
                 className="absolute ltr:-right-6 rtl:-left-6 -top-2 text-[8rem] md:text-[11rem] font-black leading-none select-none pointer-events-none"
                 style={{ color: "rgba(255,255,255,0.025)", fontVariantNumeric: "tabular-nums", zIndex: 0 }}
               >
-                1998
+                2016
               </span>
 
               <div className="relative" style={{ zIndex: 1 }}>

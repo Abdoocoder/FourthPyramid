@@ -19,7 +19,7 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const metrics = [
-  { value: "1998", key: "established" },
+  { value: "2016", key: "established" },
   { value: "50M+", key: "unitsPerYear" },
   { value: "25+", key: "yearsExp" },
   { value: "ISO", key: "certified" },
@@ -39,7 +39,7 @@ const capabilityLayouts = [
 
 function MetricValue({ metric }: { metric: { value: string; key: string } }) {
   const countUpMap: Record<string, { end: number; suffix: string }> = {
-    established: { end: 1998, suffix: "" },
+    established: { end: 2016, suffix: "" },
     unitsPerYear: { end: 50, suffix: "M+" },
     yearsExp: { end: 25, suffix: "+" },
   };
@@ -386,7 +386,7 @@ export function HomePage() {
                 <span className="font-data-mono text-data-mono text-[11px] text-on-surface-variant/60 uppercase tracking-widest">01</span>
                 <span className="w-6 h-px bg-outline-variant" />
                 <span className="font-data-mono text-data-mono text-[11px] text-primary uppercase tracking-widest">
-                  {t("home.established")} 1998
+                  {t("home.established")} 2016
                 </span>
               </div>
             </div>

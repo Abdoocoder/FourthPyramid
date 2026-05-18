@@ -6,7 +6,7 @@ import { Button } from "../components/ui/Button";
 import { useScrollReveal, useImageReveal, usePageEntrance, useScramble, useTextSplit } from "../lib/animations";
 
 const metricsData = [
-  { value: "1998", key: "established" },
+  { value: "2016", key: "established" },
   { value: "50M+", key: "unitsYear" },
   { value: "ISO", key: "certified" },
   { value: "24/7", key: "operations" },
