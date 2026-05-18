@@ -185,7 +185,7 @@ export function HomePage() {
             <span className="hero-eyebrow font-data-mono text-data-mono text-primary/80 uppercase tracking-[0.2em] text-[11px] mb-8 block">
               {t("home.heroEyebrow")}
             </span>
-            <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] tracking-[-0.02em] mb-6">
+            <h1 className="font-display-lg text-[clamp(2.5rem,5vw,4.5rem)] text-inverse-on-surface leading-[1.05] ltr:tracking-[-0.02em] mb-6">
               <span ref={heroTitleRef}>{t("home.heroTitle")}</span>
               {" "}
               <span
@@ -268,7 +268,7 @@ export function HomePage() {
               <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
                 {t("home.capabilitiesEyebrow")}
               </span>
-              <h2 ref={capHeadingRef} id="capabilities-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em]">
+              <h2 ref={capHeadingRef} id="capabilities-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] ltr:tracking-[-0.02em]">
                 {t("home.capabilitiesTitle")}
               </h2>
             </div>
@@ -367,7 +367,7 @@ export function HomePage() {
             <span className="reveal font-data-mono text-data-mono text-primary uppercase tracking-[0.2em] text-[11px] block mb-4">
               {t("home.whyEyebrow")}
             </span>
-            <h2 ref={whyHeadingRef} id="why-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] tracking-[-0.02em] max-w-2xl">
+            <h2 ref={whyHeadingRef} id="why-heading" className="reveal font-display-lg text-[clamp(2rem,4vw,3.5rem)] text-on-surface leading-[1.05] ltr:tracking-[-0.02em] max-w-2xl">
               {t("home.whyTitle")}
             </h2>
           </div>
@@ -460,7 +460,7 @@ export function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
             <div className="md:col-span-7">
               <div className="cta-item">
-                <h2 id="cta-heading" className="font-display-lg text-[clamp(2rem,5vw,4rem)] text-inverse-on-surface mb-6 leading-[1.05] tracking-[-0.02em]">
+                <h2 id="cta-heading" className="font-display-lg text-[clamp(2rem,5vw,4rem)] text-inverse-on-surface mb-6 leading-[1.05] ltr:tracking-[-0.02em]">
                   {t("home.ctaTitle")}
                 </h2>
               </div>

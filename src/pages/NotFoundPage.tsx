@@ -30,7 +30,7 @@ export function NotFoundPage() {
         </div>
 
         <div className="entrance-item flex flex-col gap-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-on-background tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-bold text-on-background ltr:tracking-tight">
             {isAr ? "الصفحة غير موجودة" : "Page Not Found"}
           </h1>
           <p className="text-on-surface-variant text-lg max-w-[45ch] mx-auto leading-relaxed">

@@ -191,7 +191,7 @@ export function ProductDetailsPage() {
               <Badge variant="outline">{localizedArray(product.certifications, product.certifications_ar)[1]}</Badge>
             )}
           </div>
-          <h1 className="font-display-lg text-[clamp(1.6rem,4vw,3rem)] text-on-background tracking-tight leading-[1.1]">
+          <h1 className="font-display-lg text-[clamp(1.6rem,4vw,3rem)] text-on-background ltr:tracking-tight leading-[1.1]">
             {localized(product, "name")}
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant">{localized(product, "description")}</p>
