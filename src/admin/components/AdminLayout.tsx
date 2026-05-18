@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useUser, SignOutButton } from "@clerk/clerk-react";
+import { useUser, SignOutButton } from "@clerk/react";
 import { LayoutDashboard, Package, MessageSquare, Mail, Image, FileText, Settings, LogOut } from "lucide-react";
 
 const navItems = [

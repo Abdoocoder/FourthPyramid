@@ -6,7 +6,7 @@ import { Footer } from "../Footer";
 import { AdminLayout } from "../../../admin/components/AdminLayout";
 import "../../../i18n/config";
 
-vi.mock("@clerk/clerk-react", () => ({
+vi.mock("@clerk/react", () => ({
   useUser: () => ({
     user: {
       firstName: "Admin",
