@@ -156,7 +156,7 @@ export function ContactPage() {
           <div className="h-[250px] bg-surface-container-highest border border-outline-variant rounded-xl overflow-hidden">
             <iframe
               title="Company Location"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent("Umm Butma Industrial Area, Al-Muwaqar, Amman, Jordan")}&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent("مصنع الهرم الرابع للصناعات البلاستيكية، النقيرة، Amman")}&output=embed`}
               width="100%"
               height="100%"
               style={{ border: 0 }}
