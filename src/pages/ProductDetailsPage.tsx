@@ -42,12 +42,13 @@ const useCaseIcons: Record<string, React.ReactNode> = {
 };
 
 export function ProductDetailsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { slug } = useParams();
   const queryArgs = useMemo(() => ({ slug: slug ?? "" }), [slug]);
   const product = useQuery(api.products.getBySlug, queryArgs);
   usePageTitle(product ? localized(product, "name") : t("nav.products"));
   const [activeImage, setActiveImage] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
   const mainImageRef = useRef<HTMLDivElement>(null);
   const breadcrumbRef = useRef<HTMLDivElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
@@ -57,6 +58,146 @@ export function ProductDetailsPage() {
   useScrollReveal(rightPanelRef, ".pd-panel-item", 0.12);
   useScrollReveal(specsRef, ".pd-specs");
   useTiltCard(mainImageRef, 6);
+
+  const handleDownloadSpecSheet = async () => {
+    if (!product) return;
+    setIsDownloading(true);
+    try {
+      const { jsPDF } = await import("jspdf");
+      const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const isAr = i18n.language.startsWith("ar");
+      const productName = isAr && product.name_ar ? product.name_ar : product.name;
+      const productDesc = isAr && product.description_ar ? product.description_ar : product.description;
+      const specs = isAr && product.specs_ar ? product.specs_ar : product.specs;
+      const certs = isAr && product.certifications_ar?.length ? product.certifications_ar : product.certifications;
+      const uses = isAr && product.useCases_ar?.length ? product.useCases_ar : product.useCases;
+
+      const pageW = doc.internal.pageSize.getWidth();
+      const margin = 18;
+      const contentW = pageW - margin * 2;
+      let y = 0;
+
+      // Header bar
+      doc.setFillColor(22, 78, 99);
+      doc.rect(0, 0, pageW, 28, "F");
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(16);
+      doc.text("FOURTH PYRAMID", margin, 12);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.text("Product Specification Sheet", margin, 19);
+      const dateStr = new Date().toLocaleDateString("en-GB");
+      doc.text(dateStr, pageW - margin, 12, { align: "right" });
+      doc.text("www.fourthpyramid.com", pageW - margin, 19, { align: "right" });
+
+      y = 38;
+
+      // Product name
+      doc.setTextColor(15, 23, 42);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
+      doc.text(productName, margin, y);
+      y += 8;
+
+      // Description
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(71, 85, 105);
+      const descLines = doc.splitTextToSize(productDesc, contentW);
+      doc.text(descLines, margin, y);
+      y += descLines.length * 5 + 8;
+
+      // Divider
+      doc.setDrawColor(203, 213, 225);
+      doc.line(margin, y, pageW - margin, y);
+      y += 8;
+
+      // Technical Specifications
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.setTextColor(22, 78, 99);
+      doc.text("TECHNICAL SPECIFICATIONS", margin, y);
+      y += 6;
+
+      const specLabels: Record<string, string> = {
+        capacity: "Capacity",
+        material: "Material",
+        dimensions: "Dimensions",
+        weight: "Weight",
+        closureType: "Closure Type",
+        unCertification: "UN Certification",
+        colorsAvailable: "Colors Available",
+        palletQuantity: "Pallet Quantity",
+      };
+
+      doc.setFontSize(10);
+      let rowIndex = 0;
+      for (const [key, value] of Object.entries(specs)) {
+        const label = specLabels[key] ?? key.replace(/([A-Z])/g, " $1").trim();
+        const rowY = y + rowIndex * 9;
+        if (rowIndex % 2 === 0) {
+          doc.setFillColor(241, 245, 249);
+          doc.rect(margin, rowY - 4, contentW, 9, "F");
+        }
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(15, 23, 42);
+        doc.text(label, margin + 2, rowY + 1);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(71, 85, 105);
+        doc.text(String(value), margin + contentW / 2, rowY + 1);
+        rowIndex++;
+      }
+      y += rowIndex * 9 + 10;
+
+      // Divider
+      doc.setDrawColor(203, 213, 225);
+      doc.line(margin, y, pageW - margin, y);
+      y += 8;
+
+      // Certifications
+      if (certs.length > 0) {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(22, 78, 99);
+        doc.text("CERTIFICATIONS", margin, y);
+        y += 6;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(15, 23, 42);
+        doc.text(certs.join("  |  "), margin, y);
+        y += 10;
+      }
+
+      // Use Cases
+      if (uses.length > 0) {
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(22, 78, 99);
+        doc.text("INDUSTRIAL APPLICATIONS", margin, y);
+        y += 6;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(15, 23, 42);
+        doc.text(uses.join("  •  "), margin, y);
+        y += 10;
+      }
+
+      // Footer bar
+      const pageH = doc.internal.pageSize.getHeight();
+      doc.setFillColor(241, 245, 249);
+      doc.rect(0, pageH - 14, pageW, 14, "F");
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(100, 116, 139);
+      doc.text("© Fourth Pyramid for Plastics — All specifications subject to change without notice.", margin, pageH - 5);
+
+      const fileName = `${product.name.toLowerCase().replace(/\s+/g, "-")}-spec-sheet.pdf`;
+      doc.save(fileName);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   const handleThumbClick = (i: number) => {
     if (i === activeImage || !mainImageRef.current) return;
@@ -226,9 +367,9 @@ export function ProductDetailsPage() {
               <FileText className="w-4 h-4" />
               {t("productDetails.requestBulkQuote")}
             </Button>
-            <Button variant="secondary" size="md" className="w-full justify-center opacity-50 cursor-not-allowed" disabled aria-disabled="true">
-              <Download className="w-4 h-4" />
-              {t("productDetails.downloadSpecSheet")}
+            <Button variant="secondary" size="md" className="w-full justify-center" onClick={handleDownloadSpecSheet} disabled={isDownloading}>
+              <Download className={`w-4 h-4 ${isDownloading ? "animate-spin" : ""}`} />
+              {isDownloading ? t("common.downloading") : t("productDetails.downloadSpecSheet")}
             </Button>
           </div>
         </div>

@@ -271,6 +271,7 @@
     "removeBlock": "حذف الكتلة"
   },
   "common": {
-    "isoBadge": "ISO 9001:2015"
+    "isoBadge": "ISO 9001:2015",
+    "downloading": "جاري التحميل..."
   }
 }
