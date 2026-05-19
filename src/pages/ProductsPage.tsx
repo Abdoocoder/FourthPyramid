@@ -1,8 +1,8 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
-import { Search, ShoppingCart, ImageOff } from "lucide-react";
+import { Search, ShoppingCart, ImageOff, X } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
@@ -22,9 +22,22 @@ export function ProductsPage() {
   usePageTitle(t("nav.products"));
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const pageHeaderRef = useRef<HTMLDivElement>(null);
 
   usePageEntrance(pageHeaderRef, ".entrance", { stagger: 0.13, delay: 0.05 });
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "/" && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName ?? "")) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const queryArgs = useMemo(
     () => ({
@@ -50,16 +63,34 @@ export function ProductsPage() {
         </div>
 
         <div className="flex flex-col gap-6 mb-10">
-          <div className="relative max-w-sm">
-            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none" />
+          <div className="relative max-w-sm group">
+            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none transition-colors group-focus-within:text-primary" />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder={t("products.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               aria-label={t("products.searchPlaceholder")}
-              className="block w-full ps-10 pe-4 py-2.5 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow] duration-200"
+              className="block w-full ps-10 pe-10 py-2.5 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow] duration-200"
             />
+            {searchQuery ? (
+              <button
+                onClick={() => { setSearchQuery(""); searchInputRef.current?.focus(); }}
+                className="absolute end-2 top-1/2 -translate-y-1/2 p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-md transition-colors"
+                aria-label={t("products.clearSearch")}
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            ) : (
+              !isFocused && (
+                <kbd className="absolute end-3 top-1/2 -translate-y-1/2 pointer-events-none hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border border-outline-variant bg-surface-container-low px-1.5 font-mono text-[10px] font-medium text-on-surface-variant opacity-100" title={t("products.searchHint")}>
+                  /
+                </kbd>
+              )
+            )}
           </div>
 
           <div className="flex flex-wrap gap-2">
