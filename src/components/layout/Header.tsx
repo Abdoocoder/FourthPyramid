@@ -176,6 +176,7 @@ export function Header() {
           borderTop: mobileOpen ? "1px solid rgba(255,255,255,0.07)" : "1px solid transparent",
           transitionTimingFunction: "var(--ease-out-strong)",
         }}
+        aria-hidden={!mobileOpen}
         inert={!mobileOpen ? true : undefined}
       >
         <nav
