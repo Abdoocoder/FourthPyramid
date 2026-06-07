@@ -273,6 +273,7 @@
   },
   "common": {
     "isoBadge": "ISO 9001:2015",
-    "downloading": "Downloading..."
+    "downloading": "Downloading...",
+    "clearSearch": "Clear search"
   }
 }
