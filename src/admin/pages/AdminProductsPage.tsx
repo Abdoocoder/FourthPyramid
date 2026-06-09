@@ -1,7 +1,7 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Plus, Edit, Trash2, Search } from "lucide-react";
+import { Plus, Edit, Trash2, Search, X } from "lucide-react";
 import { Button } from "../../components/ui/Button";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@convex/_generated/api";
@@ -12,9 +12,29 @@ export function AdminProductsPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const queryArgs = useMemo(() => ({ searchQuery: search || undefined }), [search]);
   const productsData = useQuery(api.products.list, queryArgs);
   const deleteProduct = useMutation(api.products.remove);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const target = e.target as HTMLElement;
+        if (
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable
+        ) {
+          return;
+        }
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const handleDelete = (id: Id<"products">, name: string) => {
     if (window.confirm(t("admin.confirmDelete", { name }))) {
@@ -31,16 +51,36 @@ export function AdminProductsPage() {
         </Button>
       </div>
 
-      <div className="relative max-w-md mb-6">
-        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" />
+      <div className="relative max-w-md mb-6 group">
+        <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant transition-colors duration-200 group-focus-within:text-primary" />
         <input
+          ref={searchInputRef}
           type="text"
           placeholder={t("admin.searchProducts")}
           aria-label={t("admin.searchProducts")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full ps-10 pe-4 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px] transition-[border-color,box-shadow,background-color] duration-200"
+          className="w-full ps-10 pe-10 py-3 min-h-11 border border-outline-variant rounded-lg bg-surface text-on-surface focus:outline-none focus:ring-2 focus:ring-primary font-body-sm text-[16px] transition-[border-color,box-shadow,background-color] duration-200"
         />
+        <div className="absolute end-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+          {search ? (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch("");
+                searchInputRef.current?.focus();
+              }}
+              className="p-1 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors"
+              aria-label={t("common.clearSearch")}
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          ) : (
+            <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border border-outline-variant bg-surface-container-low px-1.5 font-data-mono text-[10px] font-medium text-on-surface-variant opacity-100">
+              /
+            </kbd>
+          )}
+        </div>
       </div>
 
       <div className="bg-surface border border-outline-variant rounded-xl overflow-x-auto" aria-live="polite">
