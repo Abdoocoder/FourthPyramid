@@ -169,6 +169,7 @@ export function Header() {
       <div
         id="mobile-nav"
         data-testid="mobile-nav-panel"
+        aria-hidden={!mobileOpen}
         className="md:hidden overflow-hidden transition-[max-height,opacity] duration-300"
         style={{
           maxHeight: mobileOpen ? "600px" : "0px",
