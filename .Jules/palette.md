@@ -1,0 +1,3 @@
+## 2025-05-14 - Enhanced Search UX & Accessibility
+**Learning:** Standardizing search input behavior with keyboard shortcuts ('/') and a clear button significantly improves the navigation flow. Additionally, ensuring mobile navigation panels are explicitly hidden from screen readers using `aria-hidden` when closed is crucial for a clean accessibility tree, especially when combined with the `inert` attribute.
+**Action:** Always implement a keyboard shortcut hint and a clear button for search inputs. Ensure that all mobile drawers and overlays have both `inert` and `aria-hidden` attributes synced with their open state.
