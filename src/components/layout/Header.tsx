@@ -176,7 +176,8 @@ export function Header() {
           borderTop: mobileOpen ? "1px solid rgba(255,255,255,0.07)" : "1px solid transparent",
           transitionTimingFunction: "var(--ease-out-strong)",
         }}
-        inert={!mobileOpen ? true : undefined}
+        aria-hidden={!mobileOpen ? "true" : undefined}
+        inert={!mobileOpen}
       >
         <nav
           className="flex flex-col px-margin-mobile pt-4 pb-6 gap-1"
