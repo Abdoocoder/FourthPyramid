@@ -170,6 +170,7 @@ export function Header() {
         id="mobile-nav"
         data-testid="mobile-nav-panel"
         className="md:hidden overflow-hidden transition-[max-height,opacity] duration-300"
+        aria-hidden={!mobileOpen ? "true" : undefined}
         style={{
           maxHeight: mobileOpen ? "600px" : "0px",
           opacity: mobileOpen ? 1 : 0,
