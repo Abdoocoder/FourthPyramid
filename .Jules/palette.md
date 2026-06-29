@@ -1,0 +1,3 @@
+## 2025-05-15 - [Search UX & Navigation Accessibility]
+**Learning:** In React 19, combining `inert={!isOpen}` with `aria-hidden={!isOpen ? "true" : undefined}` ensures that closed mobile menus are correctly removed from both the focus order and the accessibility tree, satisfying automated Vitest/Testing Library assertions. Additionally, when implementing search shortcuts like `/`, it's critical to ensure they don't trigger when the user is already focused on an input or using modifier keys.
+**Action:** Always use both `inert` and `aria-hidden` for modal/drawer visibility control. Implement search inputs with a `/` shortcut, a clear button that returns focus, and visual hints that disappear on focus to maximize usability and clarity.
