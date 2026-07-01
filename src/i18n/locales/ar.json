@@ -272,6 +272,8 @@
   },
   "common": {
     "isoBadge": "ISO 9001:2015",
-    "downloading": "جاري التحميل..."
+    "downloading": "جاري التحميل...",
+    "clearSearch": "مسح البحث",
+    "searchShortcut": "/"
   }
 }
