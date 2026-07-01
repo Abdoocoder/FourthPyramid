@@ -177,6 +177,7 @@ export function Header() {
           transitionTimingFunction: "var(--ease-out-strong)",
         }}
         inert={!mobileOpen ? true : undefined}
+        aria-hidden={!mobileOpen ? "true" : undefined}
       >
         <nav
           className="flex flex-col px-margin-mobile pt-4 pb-6 gap-1"
