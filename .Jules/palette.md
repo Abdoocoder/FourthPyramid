@@ -1,0 +1,3 @@
+## 2025-05-14 - [Mobile Menu Accessibility & Animation Testing]
+**Learning:** In React 19, using the `inert` prop is excellent for removing elements from the focus order, but Vitest/Testing Library assertions for `aria-hidden` still require explicit `aria-hidden` attributes to pass accessibility tree checks in JSDOM. Additionally, components using GSAP or other animation libraries often depend on `window.matchMedia` (including its legacy `addListener` methods) which must be mocked in the test setup to prevent `TypeError`.
+**Action:** Always combine `inert={!isOpen}` with `aria-hidden={!isOpen ? "true" : undefined}` on mobile overlays, and ensure the `matchMedia` mock in `src/test/setup.ts` includes both modern `addEventListener` and legacy `addListener` methods.
