@@ -1,0 +1,3 @@
+## 2025-05-15 - [Search UX & Nav Accessibility]
+**Learning:** Combining `inert` with `aria-hidden` is essential for ensuring elements are correctly removed from the accessibility tree across all testing environments (e.g., Vitest/JSDOM) and screen readers, even in React 19. Additionally, keyboard shortcuts like `/` require robust guardrails (checking `activeElement` and `isContentEditable`) to prevent interference with other user interactions.
+**Action:** Always pair `inert` with explicit `aria-hidden` for hidden overlays, and use a centralized utility or standard guard pattern for global keyboard listeners.
