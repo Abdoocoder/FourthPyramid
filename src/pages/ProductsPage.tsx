@@ -1,8 +1,8 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { usePageTitle } from "../lib/usePageTitle";
-import { Search, ShoppingCart, ImageOff } from "lucide-react";
+import { Search, ShoppingCart, ImageOff, X } from "lucide-react";
 import { Card } from "../components/ui/Card";
 import { useQuery } from "convex/react";
 import { api } from "@convex/_generated/api";
@@ -23,6 +23,21 @@ export function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const pageHeaderRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const shortcut = t("common.searchShortcut");
+      if (e.key === shortcut && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)) {
+        if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          searchInputRef.current?.focus();
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [t]);
 
   usePageEntrance(pageHeaderRef, ".entrance", { stagger: 0.13, delay: 0.05 });
 
@@ -50,16 +65,36 @@ export function ProductsPage() {
         </div>
 
         <div className="flex flex-col gap-6 mb-10">
-          <div className="relative max-w-sm">
-            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant pointer-events-none" />
+          <div className="relative max-w-sm group">
+            <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant group-focus-within:text-secondary pointer-events-none transition-colors duration-200" />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder={t("products.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               aria-label={t("products.searchPlaceholder")}
-              className="block w-full ps-10 pe-4 py-2.5 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow] duration-200"
+              className="block w-full ps-10 pe-12 py-2.5 border border-outline-variant rounded-lg bg-surface text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary font-body-sm text-[16px] transition-[border-color,box-shadow] duration-200"
             />
+            <div className="absolute end-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+              {searchQuery ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery("");
+                    searchInputRef.current?.focus();
+                  }}
+                  className="p-1 hover:bg-surface-container rounded-md text-on-surface-variant transition-colors"
+                  aria-label={t("common.clearSearch")}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              ) : (
+                <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border border-outline-variant bg-surface-container-low px-1.5 font-data-mono text-[10px] font-medium text-on-surface-variant opacity-100 group-focus-within:opacity-0 transition-opacity pointer-events-none">
+                  {t("common.searchShortcut")}
+                </kbd>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
