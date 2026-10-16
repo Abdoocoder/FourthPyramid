@@ -104,4 +104,11 @@ describe("layout navigation accessibility", () => {
 
     expect(matches).toEqual([]);
   });
+
+  it("provides localized aria-labels for language switcher buttons", () => {
+    renderWithRouter(<Header />);
+
+    const switchButtons = screen.getAllByRole("button", { name: "Switch to Arabic" });
+    expect(switchButtons.length).toBeGreaterThan(0);
+  });
 });

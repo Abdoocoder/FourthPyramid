@@ -109,7 +109,7 @@ export function Header() {
           {/* Language */}
           <button
             onClick={toggleLang}
-            aria-label={i18n.language === "ar" ? "Switch to English" : "التبديل إلى العربية"}
+            aria-label={t("nav.switchLanguage")}
             className="hidden sm:flex items-center gap-1.5 min-h-11 px-3 rounded-lg text-white/55 hover:text-white/85 hover:bg-white/5 transition-colors duration-200 text-[0.6875rem] font-semibold uppercase tracking-widest"
           >
             <Globe className="w-3.5 h-3.5" />
@@ -219,6 +219,7 @@ export function Header() {
 
           <button
             onClick={toggleLang}
+            aria-label={t("nav.switchLanguage")}
             className="nav-stagger flex items-center gap-3 text-white/55 hover:text-white/85 text-sm font-medium py-3 px-4 rounded-xl hover:bg-white/[0.05] transition-colors duration-150 w-full text-start"
             style={{ "--i": navLinks.length + 1 } as React.CSSProperties}
           >
