@@ -304,7 +304,8 @@ export function ProductDetailsPage() {
                   key={i}
                   onClick={() => handleThumbClick(i)}
                   aria-label={`${localized(product, "name")}, image ${i + 1}`}
-                  className={`aspect-square bg-surface-container border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 ${
+                  aria-current={i === activeImage ? "true" : undefined}
+                  className={`aspect-square bg-surface-container border rounded-xl overflow-hidden cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 ${
                     i === activeImage
                       ? "border-primary ring-2 ring-primary/30"
                       : "border-outline-variant hover:border-primary/50"
