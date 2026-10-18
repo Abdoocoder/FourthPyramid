@@ -20,7 +20,7 @@ function BackToTop() {
       aria-label={t("footer.backToTop")}
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`fixed bottom-6 ltr:right-6 rtl:left-6 z-40 w-11 h-11 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg ${visible ? "back-to-top-enter" : ""}`}
+      className={`fixed bottom-6 ltr:right-6 rtl:left-6 z-40 w-11 h-11 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-pyramid-navy ${visible ? "back-to-top-enter" : ""}`}
       style={{
         opacity: visible ? 1 : 0,
         pointerEvents: visible ? "auto" : "none",
