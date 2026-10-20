@@ -25,7 +25,7 @@ export function Input({ label, id, required, ...props }: InputProps) {
       <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold transition-colors">
         {label}{required && <RequiredMark />}
       </label>
-      <input id={id} className={inputBase} required={required} {...props} />
+      <input id={id} className={inputBase} required={required} aria-required={required ? "true" : undefined} {...props} />
     </div>
   );
 }
@@ -36,7 +36,7 @@ export function Textarea({ label, id, required, ...props }: TextareaProps) {
       <label htmlFor={id} className="font-body-sm text-body-sm text-on-surface font-semibold transition-colors">
         {label}{required && <RequiredMark />}
       </label>
-      <textarea id={id} className={`${inputBase} resize-y`} rows={5} required={required} {...props} />
+      <textarea id={id} className={`${inputBase} resize-y`} rows={5} required={required} aria-required={required ? "true" : undefined} {...props} />
     </div>
   );
 }
@@ -48,7 +48,7 @@ export function Select({ label, id, required, children, ...props }: SelectProps)
         {label}{required && <RequiredMark />}
       </label>
       <div className="relative">
-        <select id={id} className={`${inputBase} appearance-none cursor-pointer pe-10`} required={required} {...props}>
+        <select id={id} className={`${inputBase} appearance-none cursor-pointer pe-10`} required={required} aria-required={required ? "true" : undefined} {...props}>
           {children}
         </select>
         <div className="pointer-events-none absolute inset-y-0 end-3 flex items-center select-chevron">
