@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { ScrollProgress } from "../ScrollProgress";
@@ -7,13 +8,14 @@ import { MagneticCursor } from "../MagneticCursor";
 import { PageLoader } from "../PageLoader";
 
 function WhatsAppFab() {
+  const { t } = useTranslation();
   const number = siteConfig.whatsapp.replace(/\D/g, "");
   return (
     <a
       href={`https://wa.me/${number}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
+      aria-label={`Chat with us on WhatsApp ${t("common.opensInNewTab")}`}
       className="whatsapp-fab fixed bottom-6 start-6 z-40 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7" aria-hidden="true">

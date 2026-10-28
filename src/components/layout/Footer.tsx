@@ -130,6 +130,7 @@ export function Footer() {
                 >
                   <MessageCircle className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
                   <span className="text-sm font-mono tracking-wide">{siteConfig.whatsapp}</span>
+                  <span className="sr-only"> {t("common.opensInNewTab")}</span>
                 </a>
                 <a
                   href={siteConfig.facebook}
@@ -140,6 +141,7 @@ export function Footer() {
                 >
                   <Facebook className="w-3.5 h-3.5 flex-shrink-0 text-primary/50 group-hover:text-primary transition-colors duration-200" />
                   <span className="text-sm">{t("contact.facebook")}</span>
+                  <span className="sr-only"> {t("common.opensInNewTab")}</span>
                 </a>
                 <div className="flex items-start gap-3 py-3 text-white/55">
                   <MapPin className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
@@ -247,6 +249,7 @@ export function Footer() {
                 style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.15)", textUnderlineOffset: "3px" }}
               >
                 Abdoo Coder
+                <span className="sr-only"> {t("common.opensInNewTab")}</span>
               </a>
             </p>
           </div>

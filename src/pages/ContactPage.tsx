@@ -128,6 +128,7 @@ export function ContactPage() {
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.whatsapp")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface font-medium" dir="ltr">{siteConfig.whatsapp}</span>
+                <span className="sr-only"> {t("common.opensInNewTab")}</span>
               </div>
             </a>
             <a
@@ -140,6 +141,7 @@ export function ContactPage() {
               <div>
                 <p className="font-data-mono text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t("contact.facebook")}</p>
                 <span className="font-body-sm text-body-sm text-on-surface-variant">{siteConfig.name}</span>
+                <span className="sr-only"> {t("common.opensInNewTab")}</span>
               </div>
             </a>
             <div className="flex items-start gap-4 px-6 py-5">

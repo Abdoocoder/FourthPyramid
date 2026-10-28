@@ -84,6 +84,19 @@ describe("layout navigation accessibility", () => {
     expect(sidebar).not.toHaveAttribute("aria-hidden");
   });
 
+  it("includes screen reader accessible text on external links opening in a new tab in Footer", () => {
+    renderWithRouter(<Footer />);
+
+    const externalLinks = screen.getAllByRole("link").filter(
+      (link) => link.getAttribute("target") === "_blank"
+    );
+
+    expect(externalLinks.length).toBeGreaterThan(0);
+    externalLinks.forEach((link) => {
+      expect(link.textContent).toMatch(/\(opens in a new tab\)/i);
+    });
+  });
+
   it("does not use sub-AA white opacity text on dark layout chrome", () => {
     const rendered = [
       renderWithRouter(<Header />).container,

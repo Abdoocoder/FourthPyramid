@@ -275,6 +275,7 @@
     "isoBadge": "ISO 9001:2015",
     "downloading": "Downloading...",
     "searchShortcut": "/",
-    "clearSearch": "Clear search"
+    "clearSearch": "Clear search",
+    "opensInNewTab": "(opens in a new tab)"
   }
 }
